@@ -1,0 +1,53 @@
+association.export_personsformaps:
+  path: '/association/export_personsformaps'
+  defaults:
+    _controller: '\Drupal\association\Controller\MembersAndPersonsController::export_personsformaps'
+  requirements:
+    _permission: 'add member entities'
+
+association.import_members:
+  path: '/association/import_members'
+  defaults:
+    _form: '\Drupal\association\Form\MemberImportStatus'
+    _title: 'MemberImportStatus'
+  requirements:
+    _permission: 'add member entities'
+
+association.member_and_person:
+  path: '/association/member_and_person'
+  defaults:
+    _form: '\Drupal\association\Form\MemberAndPerson'
+    _title: 'MemberAndPerson'
+  requirements:
+    _access: 'TRUE'
+
+#association.membership_download:
+#  path: '/association/membership/download/{member}'
+#  defaults:
+#    _controller: '\Drupal\association\Controller\MembershipController::download'
+#  requirements:
+#    _permission: 'renew membership'
+#
+association.membership_settings:
+  path: '/association/membership/settings'
+  defaults:
+    _form: '\Drupal\association\Form\MembershipSettings'
+    _title: 'Membership'
+  requirements:
+    _permission: 'administer membership'
+
+association.membership0:
+  path: '/association/membership0'
+  defaults:
+    _form: '\Drupal\association\Form\MembershipStep0'
+    _title: 'Membership'
+  requirements:
+    _access: 'TRUE'
+
+association.membership4:
+  path: '/association/membership4'
+  defaults:
+    _form: '\Drupal\association\Form\MembershipStep4'
+    _title: 'Membership - Online Payment'
+  requirements:
+    _access: 'TRUE'

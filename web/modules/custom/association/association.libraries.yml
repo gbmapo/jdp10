@@ -1,0 +1,30 @@
+LoM:
+  version: 1.x
+  header: true
+  css:
+    theme:
+      css/ahover.css: {}
+      css/datatable.css: {}
+  js:
+    js/LoM.js: {}
+  dependencies:
+    - core/jquery
+    - shared/shared
+
+LoP:
+  version: 1.x
+  header: true
+  css:
+    theme:
+      css/ahover.css: {}
+      css/datatable.css: {}
+  js:
+    js/LoP.js: {}
+  dependencies:
+    - core/jquery
+    - shared/shared
+
+membership:
+  version: 1.x
+  js:
+    js/membership.js: {}

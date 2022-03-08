@@ -1,0 +1,18 @@
+[24-Feb-2022 07:47:05 Europe/Paris] Uncaught PHP Exception Symfony\Component\Mime\Exception\RfcComplianceException: "Email " " does not comply with addr-spec of RFC 2822." at /home/wghm7504/jdp9/vendor/symfony/mime/Address.php line 56
+[24-Feb-2022 07:47:29 Europe/Paris] Uncaught PHP Exception Symfony\Component\Mime\Exception\RfcComplianceException: "Email " " does not comply with addr-spec of RFC 2822." at /home/wghm7504/jdp9/vendor/symfony/mime/Address.php line 56
+[24-Feb-2022 07:48:07 Europe/Paris] Uncaught PHP Exception Symfony\Component\Mime\Exception\RfcComplianceException: "Email " " does not comply with addr-spec of RFC 2822." at /home/wghm7504/jdp9/vendor/symfony/mime/Address.php line 56
+[03-Mar-2022 09:44:41 Europe/Paris] Uncaught PHP Exception Symfony\Component\Mime\Exception\RfcComplianceException: "Email " " does not comply with addr-spec of RFC 2822." at /home/wghm7504/jdp9/vendor/symfony/mime/Address.php line 56
+[03-Mar-2022 10:04:20 Europe/Paris] Uncaught PHP Exception Symfony\Component\Mime\Exception\RfcComplianceException: "Email " " does not comply with addr-spec of RFC 2822." at /home/wghm7504/jdp9/vendor/symfony/mime/Address.php line 56
+[03-Mar-2022 10:54:27 Europe/Paris] Uncaught PHP Exception Symfony\Component\Mime\Exception\RfcComplianceException: "Email " " does not comply with addr-spec of RFC 2822." at /home/wghm7504/jdp9/vendor/symfony/mime/Address.php line 56
+[03-Mar-2022 15:34:47 Europe/Paris] ParseError: syntax error, unexpected '<<' (T_SL) in /home/wghm7504/jdp9/web/modules/custom/shared/shared.module on line 84 #0 /home/wghm7504/jdp9/web/core/lib/Drupal/Core/Extension/ModuleHandler.php(128): Drupal\Core\Extension\Extension->load()
+#1 /home/wghm7504/jdp9/web/core/lib/Drupal/Core/Extension/ModuleHandler.php(141): Drupal\Core\Extension\ModuleHandler->load('shared')
+#2 /home/wghm7504/jdp9/web/core/lib/Drupal/Core/DrupalKernel.php(586): Drupal\Core\Extension\ModuleHandler->loadAll()
+#3 /home/wghm7504/jdp9/web/core/lib/Drupal/Core/StackMiddleware/KernelPreHandle.php(46): Drupal\Core\DrupalKernel->preHandle(Object(Symfony\Component\HttpFoundation\Request))
+#4 /home/wghm7504/jdp9/web/core/modules/page_cache/src/StackMiddleware/PageCache.php(106): Drupal\Core\StackMiddleware\KernelPreHandle->handle(Object(Symfony\Component\HttpFoundation\Request), 1, true)
+#5 /home/wghm7504/jdp9/web/core/modules/page_cache/src/StackMiddleware/PageCache.php(85): Drupal\page_cache\StackMiddleware\PageCache->pass(Object(Symfony\Component\HttpFoundation\Request), 1, true)
+#6 /home/wghm7504/jdp9/web/core/lib/Drupal/Core/StackMiddleware/ReverseProxyMiddleware.php(48): Drupal\page_cache\StackMiddleware\PageCache->handle(Object(Symfony\Component\HttpFoundation\Request), 1, true)
+#7 /home/wghm7504/jdp9/web/core/lib/Drupal/Core/StackMiddleware/NegotiationMiddleware.php(51): Drupal\Core\StackMiddleware\ReverseProxyMiddleware->handle(Object(Symfony\Component\HttpFoundation\Request), 1, true)
+#8 /home/wghm7504/jdp9/vendor/stack/builder/src/Stack/StackedHttpKernel.php(23): Drupal\Core\StackMiddleware\NegotiationMiddleware->handle(Object(Symfony\Component\HttpFoundation\Request), 1, true)
+#9 /home/wghm7504/jdp9/web/core/lib/Drupal/Core/DrupalKernel.php(708): Stack\StackedHttpKernel->handle(Object(Symfony\Component\HttpFoundation\Request), 1, true)
+#10 /home/wghm7504/jdp9/web/index.php(19): Drupal\Core\DrupalKernel->handle(Object(Symfony\Component\HttpFoundation\Request))
+#11 {main}
