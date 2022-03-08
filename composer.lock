@@ -3913,31 +3913,31 @@
         },
         {
             "name": "drupal/migrate_source_csv",
-            "version": "3.4.0",
+            "version": "3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/migrate_source_csv.git",
-                "reference": "8.x-3.4"
+                "reference": "8.x-3.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/migrate_source_csv-8.x-3.4.zip",
-                "reference": "8.x-3.4",
-                "shasum": "12990ad8c3b99e16c1b2a1be955aaa28581e5d1c"
+                "url": "https://ftp.drupal.org/files/projects/migrate_source_csv-8.x-3.5.zip",
+                "reference": "8.x-3.5",
+                "shasum": "ddddba22fa7b4a54f05a606db33986b23b1a69ea"
             },
             "require": {
-                "drupal/core": "^8.7 || ^9.0",
+                "drupal/core": ">=9.1",
                 "league/csv": "^9.1",
                 "php": ">=7.1"
             },
             "require-dev": {
-                "drupal/migrate_plus": "5.x-dev"
+                "drupal/migrate_plus": ">=5.0"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-3.4",
-                    "datestamp": "1588260548",
+                    "version": "8.x-3.5",
+                    "datestamp": "1645538421",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3959,8 +3959,7 @@
             "homepage": "https://www.drupal.org/project/migrate_source_csv",
             "support": {
                 "source": "https://cgit.drupalcode.org/migrate_source_csv",
-                "issues": "https://www.drupal.org/project/issues/migrate_source_csv",
-                "irc": "irc://irc.freenode.org/drupal-migrate"
+                "issues": "https://www.drupal.org/project/issues/migrate_source_csv"
             }
         },
         {
@@ -6225,12 +6224,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "League\\Csv\\": "src"
-                },
                 "files": [
                     "src/functions_include.php"
-                ]
+                ],
+                "psr-4": {
+                    "League\\Csv\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
