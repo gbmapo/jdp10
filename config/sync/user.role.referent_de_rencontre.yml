@@ -1,0 +1,17 @@
+uuid: e4484b46-ceaa-417a-a18a-64f338818242
+langcode: fr
+status: true
+dependencies:
+  config:
+    - filter.format.restricted_html
+  module:
+    - filter
+    - views_send
+id: referent_de_rencontre
+label: 'Référent de Rencontre'
+weight: -4
+is_admin: null
+permissions:
+  - 'attachments with views_send'
+  - 'mass mailing with views_send'
+  - 'use text format restricted_html'

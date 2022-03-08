@@ -1,0 +1,47 @@
+uuid: b7628713-7737-4dff-becb-01a8c1c6f27a
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.forum
+  module:
+    - amap
+    - association
+    - comment
+    - contact
+    - node
+    - poll
+    - search
+    - sel
+    - shortcut
+    - system
+_core:
+  default_config_hash: btW6TFHajhy7Eo6YUvdFiPh4TcPggo8GBXYctjV6zag
+id: authenticated
+label: 'Utilisateur authentifié'
+weight: -9
+is_admin: false
+permissions:
+  - 'access comments'
+  - 'access content'
+  - 'access polls'
+  - 'access shortcuts'
+  - 'access site-wide contact form'
+  - 'access user contact forms'
+  - 'add distribution inscription entities'
+  - 'cancel own vote'
+  - 'create forum content'
+  - 'delete distribution inscription entities'
+  - 'delete own forum content'
+  - 'edit distribution inscription entities'
+  - 'edit own forum content'
+  - 'post comments'
+  - 'search content'
+  - 'skip comment approval'
+  - 'view contract entities'
+  - 'view contract type entities'
+  - 'view distribution date entities'
+  - 'view distribution inscription entities'
+  - 'view member entities'
+  - 'view person entities'
+  - 'view service category entities'

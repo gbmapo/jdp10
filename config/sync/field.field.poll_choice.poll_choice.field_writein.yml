@@ -1,0 +1,26 @@
+uuid: dd654f0d-07d8-467d-bb4a-d47f44dcc95c
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.poll_choice.field_writein
+  module:
+    - poll
+_core:
+  default_config_hash: 1ZPsbod34UuE-OK4XFLvdfTWyK9XUjNfEJsLslU_CXM
+id: poll_choice.poll_choice.field_writein
+field_name: field_writein
+entity_type: poll_choice
+bundle: poll_choice
+label: 'Is write-in'
+description: 'It is a write in choice.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Oui
+  off_label: Non
+field_type: boolean

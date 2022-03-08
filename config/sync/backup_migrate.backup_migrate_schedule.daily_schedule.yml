@@ -1,0 +1,13 @@
+uuid: ecf88f0e-fd7a-4b76-a168-905bd2da39f2
+langcode: fr
+status: true
+dependencies: {  }
+id: daily_schedule
+label: 'Daily  Schedule'
+enabled: true
+keep: 14
+period: 86400
+cron: null
+source_id: default_db
+destination_id: database_for_daily_schedule
+settings_profile_id: database_for_daily_schedule

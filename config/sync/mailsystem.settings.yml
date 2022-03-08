@@ -1,0 +1,34 @@
+_core:
+  default_config_hash: IhwTepsVwtbtbcT5GzQKhCXDCRvbk3MNkWqPiuiZ10s
+langcode: fr
+theme: mayo
+defaults:
+  sender: php_mail
+  formatter: mime_mail
+modules:
+  swiftmailer: {  }
+  association:
+    membershipfirstemail:
+      formatter: mime_mail
+    membershipreminderemail:
+      formatter: mime_mail
+  user:
+    none:
+      formatter: mime_mail
+  views_send:
+    direct:
+      formatter: mime_mail
+  amap:
+    emailforstupids:
+      formatter: mime_mail
+  sel:
+    emailfordeactivatedservices:
+      formatter: mime_mail
+    emailforexchange:
+      formatter: mime_mail
+    emailfornewservices:
+      formatter: mime_mail
+    emailforservicespercategory:
+      formatter: mime_mail
+    emailforurgentservice:
+      formatter: mime_mail

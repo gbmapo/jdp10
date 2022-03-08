@@ -1,0 +1,12 @@
+uuid: d874addb-d96b-411b-8115-cb195604df4b
+langcode: fr
+status: true
+dependencies:
+  module:
+    - association
+id: member
+label: Adhérent
+weight: 1
+is_admin: null
+permissions:
+  - 'renew membership'

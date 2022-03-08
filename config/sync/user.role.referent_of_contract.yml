@@ -1,0 +1,33 @@
+uuid: 8b1f9cb2-7aea-431b-8be6-c931ed48d873
+langcode: fr
+status: true
+dependencies:
+  config:
+    - filter.format.restricted_html
+  module:
+    - amap
+    - filter
+    - views_send
+  enforced:
+    module:
+      - amap
+_core:
+  default_config_hash: 6DrPsy3hNSd-85yNmMVIZ1IlLsLckD6VWDSYQhX-dy8
+id: referent_of_contract
+label: 'Référent de contrat'
+weight: -3
+is_admin: false
+permissions:
+  - 'add contract entities'
+  - 'add contract subscription entities'
+  - 'attachments with views_send'
+  - 'delete contract entities'
+  - 'delete contract subscription entities'
+  - 'edit contract entities'
+  - 'edit contract subscription entities'
+  - 'edit distribution date entities'
+  - 'mass mailing with views_send'
+  - 'use text format restricted_html'
+  - 'view contract entities'
+  - 'view contract subscription entities'
+  - 'view contract type entities'

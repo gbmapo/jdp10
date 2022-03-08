@@ -1,0 +1,7 @@
+_core:
+  default_config_hash: K-CsbDCpdo87etSfdahl1iomaod_-AfrRo-6I8RbTQA
+langcode: fr
+name: 'Le Jardin de Poissy'
+mail: contact@lejardindepoissy.org
+linkonly: false
+format: full_html
