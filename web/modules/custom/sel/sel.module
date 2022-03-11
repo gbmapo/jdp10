@@ -239,7 +239,6 @@ function sel_mail($key, &$message, $aParams)
   $sFrom = 'sel@lejardindepoissy.org';
   $message['from'] = $sFrom;
   $message['headers'] = [
-    'Content-Type' => 'text/html',
     'bcc'          => $aParams[0],
     'From'         => $sFrom,
     'Sender'       => $sFrom,

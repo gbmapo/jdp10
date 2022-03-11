@@ -551,7 +551,6 @@ function amap_mail($key, &$message, $params)
   $sFrom = 'amap@lejardindepoissy.org';
   $message['from'] = $sFrom;
   $message['headers'] = [
-    'Content-Type' => 'text/html',
     'bcc'          => $sFrom,
     'From'         => $sFrom,
     'Sender'       => $sFrom,

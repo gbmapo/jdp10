@@ -96,6 +96,19 @@ function shared_mail_alter(&$message)
 
   switch ($message['id']) {
 
+    case "association_membershipfirstemail":
+    case "association_membershipreminderemail":
+    case "amap_emailforstupids":
+    case "sel_emailfordeactivatedservices":
+    case "sel_emailforexchange":
+    case "sel_emailfornewservices":
+    case "sel_emailforservicespercategory":
+    case "sel_emailforurgentservice":
+      $message['headers']['MIME-Version'] = "1.0";
+      $message['headers']['Content-Type'] = "text/html; charset=UTF-8";
+      $message['headers']['Content-Transfer-Encoding'] = "8Bit";
+      $message['headers']['X-Mailer'] = "Drupal";
+      break;
     case "contact_page_mail":
       $contact_message = $message['params']['contact_message'];
       $recipient = $contact_message->get('field_recipient')->getString();
