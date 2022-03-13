@@ -268,6 +268,7 @@ function sel_mail($key, &$message, $aParams)
       break;
     case 'emailfordeactivatedservices':
       $message['subject'] = '[Le Grenier à SÉL] Au moins un de vos services vient d\'être désactivé...';
+      $message['body'][] = 'Cher S&Eacute;Liste,<br>';
       break;
   }
 }
