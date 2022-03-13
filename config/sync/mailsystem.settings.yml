@@ -6,7 +6,6 @@ defaults:
   sender: php_mail
   formatter: mime_mail
 modules:
-  swiftmailer: {  }
   association:
     membershipfirstemail:
       formatter: mime_mail
@@ -22,8 +21,6 @@ modules:
     emailforstupids:
       formatter: mime_mail
   sel:
-    emailfordeactivatedservices:
-      formatter: mime_mail
     emailforexchange:
       formatter: mime_mail
     emailfornewservices:
@@ -31,4 +28,6 @@ modules:
     emailforservicespercategory:
       formatter: mime_mail
     emailforurgentservice:
+      formatter: mime_mail
+    emailfordeactivatedservices:
       formatter: mime_mail
