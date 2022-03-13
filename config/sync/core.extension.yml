@@ -41,6 +41,7 @@ module:
   language: 0
   link: 0
   locale: 0
+  mail_safety: 0
   mailsystem: 0
   menu_ui: 0
   migrate: 0
