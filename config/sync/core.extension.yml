@@ -24,8 +24,6 @@ module:
   csv_serialization: 0
   datetime: 0
   dblog: 0
-  devel: 0
-  devel_kint_extras: 0
   dynamic_page_cache: 0
   editor: 0
   field: 0
@@ -43,7 +41,6 @@ module:
   language: 0
   link: 0
   locale: 0
-  mail_safety: 0
   mailsystem: 0
   menu_ui: 0
   migrate: 0
