@@ -1,16 +1,13 @@
-uuid: a1b17029-4fba-46c2-8790-4cebd6f2a16e
+uuid: 455aea2e-7f71-40c8-9931-96c56ad23848
 langcode: fr
 status: false
 dependencies: {  }
-id: split_dvlp
-label: 'Split Dvlp'
+id: split_prod
+label: 'Split Prod'
 description: ''
 weight: 0
-folder: ../config/split_dvlp
-module:
-  devel: 0
-  devel_kint_extras: 0
-  mail_safety: 0
+folder: ../config/split_prod
+module: {  }
 theme: {  }
 blacklist:
   - system.logging
