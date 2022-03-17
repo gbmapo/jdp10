@@ -60,4 +60,8 @@
 # Ignore .DS_Store files as they are MacOs only
 **/.DS_Store
 
+# Ignore as specific to o2switch
+/web/error_log
+
+# Ignore as specific to nozlaf
 /web/modules/custom/zonfal/
