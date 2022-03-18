@@ -17,8 +17,7 @@ use Drupal\views\Plugin\views\query\QueryPluginBase;
 use Drupal\views\ViewExecutable;
 use Drupal\views\Views;
 
-function association_help($route_name, RouteMatchInterface $route_match)
-{
+function association_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
     // Main module help for the association module.
     case 'help.page.association':
@@ -31,8 +30,7 @@ function association_help($route_name, RouteMatchInterface $route_match)
   }
 }
 
-function association_theme()
-{
+function association_theme() {
   return [
     'association' => [
       'render element' => 'children',
@@ -40,14 +38,14 @@ function association_theme()
 
     'membership_step0' => [
       'render element' => 'form',
-      'template'       => 'membership-step0',
+      'template' => 'membership-step0',
     ],
   ];
 }
 
-function association_allowed_values_function(FieldStorageDefinitionInterface $definition, FieldableEntityInterface $entity = NULL, &$cacheable = TRUE)
-{
-  \Drupal::moduleHandler()->loadInclude('association', 'inc', 'association.allowed.values');
+function association_allowed_values_function(FieldStorageDefinitionInterface $definition, FieldableEntityInterface $entity = NULL, &$cacheable = TRUE) {
+  \Drupal::moduleHandler()
+    ->loadInclude('association', 'inc', 'association.allowed.values');
 
   if ($definition['entity_type'] == 'member') {
     switch ($definition['field_name']) {
@@ -63,8 +61,7 @@ function association_allowed_values_function(FieldStorageDefinitionInterface $de
   }
 }
 
-function association_entity_delete(EntityInterface $entity)
-{
+function association_entity_delete(EntityInterface $entity) {
   $mode = 'delete';
   $entityType = $entity->getEntityType()->id();
   switch ($entityType) {
@@ -93,8 +90,7 @@ function association_entity_delete(EntityInterface $entity)
   _export_association($entityType);
 }
 
-function association_entity_insert(EntityInterface $entity)
-{
+function association_entity_insert(EntityInterface $entity) {
   $mode = 'insert';
   $entityType = $entity->getEntityType()->id();
   switch ($entityType) {
@@ -107,22 +103,21 @@ function association_entity_insert(EntityInterface $entity)
   _export_association($entityType);
 }
 
-function association_entity_presave(EntityInterface $entity)
-{
+function association_entity_presave(EntityInterface $entity) {
   $entityType = $entity->getEntityType()->id();
   switch ($entityType) {
     case "member":
       if ($entity->status->value == -1) {
         $entity->designation = t('Member') . sprintf("%03d", $entity->id->value);
-        $entity->addresssupplement = null;
-        $entity->street = null;
-        $entity->city = null;
-        $entity->country = null;
-        $entity->telephone = null;
+        $entity->addresssupplement = NULL;
+        $entity->street = NULL;
+        $entity->city = NULL;
+        $entity->country = NULL;
+        $entity->telephone = NULL;
         $entity->status = 0;
-        $entity->contact_id = null;
-        $entity->comment = null;
-        $entity->owner_id = null;
+        $entity->contact_id = NULL;
+        $entity->comment = NULL;
+        $entity->owner_id = NULL;
         _deletePersonsOfMember($entity);
       }
       break;
@@ -130,8 +125,7 @@ function association_entity_presave(EntityInterface $entity)
   }
 }
 
-function association_entity_update(EntityInterface $entity)
-{
+function association_entity_update(EntityInterface $entity) {
   $mode = 'update';
   $entityType = $entity->getEntityType()->id();
   switch ($entityType) {
@@ -177,16 +171,15 @@ function association_entity_update(EntityInterface $entity)
   _export_association($entityType);
 }
 
-function association_mail($key, &$message, $aParams)
-{
+function association_mail($key, &$message, $aParams) {
   $sFrom = Drupal::config('system.site')->get('mail');
 
   $message['from'] = $sFrom;
   $message['headers'] = [
-    'bcc'          => $aParams[0],
-    'From'         => $sFrom,
-    'Sender'       => $sFrom,
-    'Return-Path'  => $sFrom,
+    'bcc' => $aParams[0],
+    'From' => $sFrom,
+    'Sender' => $sFrom,
+    'Return-Path' => $sFrom,
   ];
   switch ($key) {
     case 'membershipfirstemail':
@@ -202,8 +195,7 @@ function association_mail($key, &$message, $aParams)
   }
 }
 
-function association_menu_local_tasks_alter(&$data, $route_name)
-{
+function association_menu_local_tasks_alter(&$data, $route_name) {
   $oCurrentUser = Drupal::currentUser();
   switch ($route_name) {
     case 'view.association_members_and_persons.page_1':
@@ -211,10 +203,10 @@ function association_menu_local_tasks_alter(&$data, $route_name)
     case 'view.association_persons.page_1':
       if ($oCurrentUser->hasPermission('administer users')) {
         $data['tabs'][0]['association.people'] = [
-          '#theme'  => 'menu_local_task',
-          '#link'   => [
+          '#theme' => 'menu_local_task',
+          '#link' => [
             'title' => t('Users'),
-            'url'   => Url::fromRoute('entity.user.collection'),
+            'url' => Url::fromRoute('entity.user.collection'),
           ],
           '#weight' => 4,
         ];
@@ -224,8 +216,7 @@ function association_menu_local_tasks_alter(&$data, $route_name)
   }
 }
 
-function association_views_pre_render(ViewExecutable $view)
-{
+function association_views_pre_render(ViewExecutable $view) {
   switch ($view->id()) {
     case 'association_members':
       switch ($view->current_display) {
@@ -247,8 +238,7 @@ function association_views_pre_render(ViewExecutable $view)
   }
 }
 
-function association_views_query_alter(ViewExecutable $view, QueryPluginBase $query)
-{
+function association_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
   switch ($view->id()) {
     case 'association_persons':
       if ($view->current_display == 'page_2') {
@@ -268,8 +258,7 @@ function association_views_query_alter(ViewExecutable $view, QueryPluginBase $qu
   }
 }
 
-function _deletePersonsOfMember($entity)
-{
+function _deletePersonsOfMember($entity) {
   // List all Persons for this Member
   $id = $entity->id->value;
   $database = Drupal::database();
@@ -285,17 +274,16 @@ function _deletePersonsOfMember($entity)
   }
 }
 
-function _export_association_CSV($view, $page)
-{
+function _export_association_CSV($view, $page) {
   $view = Views::getView($view);
   $view->setDisplay($page);
   $path = $view->getPath();
   $data = $view->preview($page)['#markup'];
-  \Drupal::service('file_system')->saveData($data, 'private://' . $path, FileSystemInterface::EXISTS_REPLACE);
+  \Drupal::service('file_system')
+    ->saveData($data, 'private://' . $path, FileSystemInterface::EXISTS_REPLACE);
 }
 
-function _export_association($entityType)
-{
+function _export_association($entityType) {
   switch ($entityType) {
     case "member":
       _export_association_CSV('association_members', 'rest_export_1');
@@ -311,8 +299,7 @@ function _export_association($entityType)
   }
 }
 
-function _setListOfRecipients($status = 4)
-{
+function _setListOfRecipients($status = 4) {
   $sBcc = '';
   $database = Drupal::database();
   $query = $database->select('member', 'am');
@@ -327,6 +314,7 @@ function _setListOfRecipients($status = 4)
   foreach ($results as $key => $result) {
     $sBcc .= $result->email . ", ";
   }
+  $sBcc = substr($sBcc, 0, strlen($sBcc) - 2);
   return $sBcc;
 }
 
