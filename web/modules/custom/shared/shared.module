@@ -332,6 +332,7 @@ function shared_send_email($message) {
       $i++;
     }
     $iMax = $i;
+    $aParams[0] = NULL;
   }
   else {
     $aTo[0] = $sTo;

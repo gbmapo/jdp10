@@ -311,7 +311,6 @@ function sel_mail($key, &$message, $aParams) {
       $message['body'][] = \Drupal\Core\Render\Markup::create($sBody);
       break;
     case 'emailforexchange':
-      $message['headers']['bcc'] = $sFrom;
       $message['subject'] = '[Le Grenier à SÉL] Votre échange du ' . $aParams[1] . ' a été ' . $aParams[2] . '.';
       $sBody = $aParams[3] . "<br><br>";
       $message['body'][] = \Drupal\Core\Render\Markup::create($sBody);

@@ -539,13 +539,13 @@ function amap_mail($key, &$message, $params) {
   $sFrom = 'amap@lejardindepoissy.org';
   $message['from'] = $sFrom;
   $message['headers'] = [
-    'bcc' => $sFrom,
     'From' => $sFrom,
     'Sender' => $sFrom,
     'Return-Path' => $sFrom,
   ];
   switch ($key) {
     case 'emailforstupids':
+      $message['headers']['bcc'] = $sFrom;
       $message['subject'] = '[L\'AMAP du Jardin de Poissy] Distribution du ' . $params[0] . ' - Rappel pour les étourdis';
       $sBody = "<b>" . $params[0] . "</b> :";
       $sBody .= "<br>Sont charg&eacute;s de la <i>Distribution</i> : " . $params[1];

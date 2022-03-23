@@ -27,7 +27,7 @@ class MembershipSettings extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-    $config = \Drupal::config('association.renewalperiod');
+    $config = Drupal::config('association.renewalperiod');
     $rpStep = $config->get('step');
     $rpYear = $config->get('year');
     $rpStatus = $config->get('status');
@@ -112,7 +112,7 @@ class MembershipSettings extends FormBase {
   public function validateForm(array &$form, FormStateInterface $form_state) {
     parent::validateForm($form, $form_state);
 
-    $config = \Drupal::config('association.renewalperiod');
+    $config = Drupal::config('association.renewalperiod');
     $rpStep = $config->get('step');
     switch ($rpStep) {
       case 0:
@@ -127,7 +127,7 @@ class MembershipSettings extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
-    $config = \Drupal::service('config.factory')
+    $config = Drupal::service('config.factory')
       ->getEditable('association.renewalperiod');
     $rpStep = $config->get('step');
     $rpYear = $config->get('year');
@@ -135,23 +135,19 @@ class MembershipSettings extends FormBase {
     $rpFirstEmail = $config->get('firstemail');
     $rpReminder = $config->get('reminder');
 
-    $sTo = \Drupal::config('system.site')->get('mail');
+    $sTo = Drupal::config('system.site')->get('mail');
 
     $sMessage = '';
     $sType = 'status';
     switch ($rpStep) {
 
       case 0:
-        $config->set('step', 1);
-        $config->set('year', $form_state->getValue('1B'));
-        $config->set('status', 'Opened');
-        $config->set('firstemail', FALSE);
-        $config->set('reminder', 0);
-        // Autoriser les adhérents à accéder au formulaire
+        // Autoriser les personnes associées aux adhérents à accéder au formulaire
         $role = Role::create(['id' => 'member', 'label' => t('Member')]);
-        $role->grantPermission('Renew membership');
+        $role->grantPermission('renew membership');
         $role->save();
-        $database = \Drupal::database();
+
+        $database = Drupal::database();
         $query = $database->select('person', 'pe');
         $query->fields('pe', ['id', 'member_id ']);
         $query->condition('member_id', 0, '>');
@@ -161,33 +157,34 @@ class MembershipSettings extends FormBase {
           $user->addRole('member');
           $user->save();
         }
+
         // Mettre le statut de tous les adhérents actifs à 'Adhésion en attente'
-        $storage = \Drupal::entityTypeManager()->getStorage('member');
-        $database = \Drupal::database();
-        $query = $database->select('member', 'am');
-        $query->fields('am', ['id', 'status'])->condition('am.status', 4, '=');
-        $results = $query->execute();
-        $iNumber = 0;
-        foreach ($results as $key => $result) {
-          $entity = $storage->load($result->id);
-          $entity->status = 2;
-          $entity->save();
-          $iNumber++;
-        }
-        \Drupal::logger('association')
-          ->info('Renew membership: Period has been opened.');
-        \Drupal::logger('association')
-          ->info('Renew membership: Number of members: @number.', ['@number' => $iNumber]);
+        $database = Drupal::database();
+        $number_updated = $database->update('member')
+          ->fields(['status' => 2,])
+          ->condition('status', 4, '=')
+          ->execute();
+
+        $config->set('step', 1);
+        $config->set('year', $form_state->getValue('1B'));
+        $config->set('status', 'Opened');
+        $config->set('firstemail', FALSE);
+        $config->set('reminder', 0);
+        $config->save();
+
+        drupal_flush_all_caches();
+
         $sMessage = $this->t('Renew membership: Period has been opened.');
+        Drupal::logger('association')
+          ->info($sMessage . ' ' . Drupal::translation()
+              ->formatPlural($number_updated, 'One member updated.', '@count members updated.'));
         break;
 
       case 1:
         if ($form_state->getValue('2B') == "1") {
-          $config->set('step', 2);
-          $config->set('firstemail', TRUE);
           // Envoyer le premier courriel
-          $sBcc = _setListOfRecipients(2);
-          $aParams = [$sBcc, $rpYear];
+          $sRecipients = _setListOfRecipients(2);
+          $aParams = [$sRecipients, $rpYear];
           $message = [
             'module' => 'association',
             'key' => 'membershipfirstemail',
@@ -196,7 +193,10 @@ class MembershipSettings extends FormBase {
             'reply' => 'Le Jardin de Poissy',
           ];
           $result = shared_send_email($message);
-          \Drupal::logger('association')
+          $config->set('step', 2);
+          $config->set('firstemail', TRUE);
+          $config->save();
+          Drupal::logger('association')
             ->info('Renew membership: First email has been sent.');
           $sMessage = $this->t('Renew membership: First email has been sent.');
         }
@@ -209,8 +209,8 @@ class MembershipSettings extends FormBase {
           $rpReminder = $config->get('reminder') + 1;
           $config->set('reminder', $rpReminder);
           // Envoyer un courriel de relance
-          $sBcc = _setListOfRecipients(2);
-          $aParams = [$sBcc, $rpYear, $rpReminder];
+          $sRecipients = _setListOfRecipients(2);
+          $aParams = [$sRecipients, $rpYear, $rpReminder];
           $message = [
             'module' => 'association',
             'key' => 'membershipreminderemail',
@@ -219,7 +219,8 @@ class MembershipSettings extends FormBase {
             'reply' => 'Le Jardin de Poissy',
           ];
           $result = shared_send_email($message);
-          \Drupal::logger('association')
+          $config->save();
+          Drupal::logger('association')
             ->info('Renew membership: Reminder email @number has been sent.', ['@number' => $rpReminder]);
           $sMessage = $this->t('Renew membership: Reminder email @number has been sent.', ['@number' => $rpReminder]);
         }
@@ -230,171 +231,31 @@ class MembershipSettings extends FormBase {
         $sType = 'warning';
     }
 
-    $config->save();
-
     if ($form_state->getValue('4B') == "1") {
+
+      // Enlever l'accès au formulaire aux personnes associées aux adhérents
+      $role = Role::load('member');
+      $role->delete();
 
       $config->set('step', 0);
       $config->set('year', '');
       $config->set('status', 'Closed');
       $config->set('firstemail', FALSE);
       $config->set('reminder', 0);
+      $config->save();
 
-      $operations = [];
+			$sMessage = $this->t('Renew membership: Period has been closed.');
+			Drupal::logger('association')
+				->info($sMessage);
 
-      // Mettre le statut de tous les adhérents 'Adhésion non renouvelée' à 'Ancien adhérent'
-      $database = \Drupal::database();
-      $query = $database->select('member', 'am');
-      $query->fields('am', ['id', 'status'])->condition('am.status', 1, '=');
-      $results = $query->execute();
-      $enddate = ($rpYear - 1) . '-12-31';
-      foreach ($results as $key => $result) {
-        $operations[] = [
-          '\Drupal\association\Form\MembershipSettings::updateMember',
-          [$result, $enddate],
-        ];
-      }
-
-      // Enlever l'accès au formulaire aux adhérents
-      $operations[] = [
-        '\Drupal\association\Form\MembershipSettings::updateUsers',
-        [],
-      ];
-
-      $operations[] = [
-        '\Drupal\association\Form\MembershipSettings::removeRole',
-        [],
-      ];
-
-      $operations[] = [
-        '\Drupal\association\Form\MembershipSettings::saveConfig',
-        [$config],
-      ];
-
-      $batch = [
-        'operations' => $operations,
-        'title' => t('Membership: Renewal Period Closure'),
-        'init_message' => t('Process is starting...'),
-        'progress_message' => t('Processed @current out of @total. Estimated remaining time: @estimate.'),
-        'finished' => '\Drupal\association\Form\MembershipSettings::endofPeriodClosure',
-      ];
-      batch_set($batch);
+      drupal_flush_all_caches();
 
     }
 
     if ($sMessage != '') {
-      \Drupal::messenger()->addMessage($sMessage, $sType);
-    }
-  }
-
-  public static function updateMember($result, $enddate, &$context) {
-    $error = FALSE;
-    try {
-      $id = $result->id;
-      $storage = \Drupal::entityTypeManager()->getStorage('member');
-      $member = $storage->load($id);
-      if ($member) {
-        $member->set("status", -1);
-        $member->set("enddate", $enddate);
-        $member->save();
-        $context['results']['member'][] = $id;
-        $context['message'] = t('Updated member @id.', ['@id' => $id]);
-      }
-    } catch (PDOException $e) {
-      $error = TRUE;
-    }
-    if ($error) {
-      $context['finished'] = 1;
-    }
-  }
-
-  public static function updateUsers(&$context) {
-    if (empty($context['sandbox'])) {
-      $uids = \Drupal::entityQuery('user')
-        ->condition('roles', 'member')
-        ->execute();
-      $context['sandbox']['progress'] = 0;
-      $context['sandbox']['max'] = count($uids);
-      $context['sandbox']['$uids'] = array_values($uids);
+      Drupal::messenger()->addMessage($sMessage, $sType);
     }
 
-    $error = FALSE;
-    try {
-      $uid = $context['sandbox']['$uids'][$context['sandbox']['progress']];
-      $user = User::load($uid);
-      if ($user) {
-        $user->removeRole('member');
-        $user->save();
-        $context['results']['user'][] = $uid;
-        $context['sandbox']['progress']++;
-        $context['message'] = t('Updated user @num of @max.', [
-          '@num' => $context['sandbox']['progress'],
-          '@max' => $context['sandbox']['max'],
-        ]);
-      }
-      if ($context['sandbox']['progress'] != $context['sandbox']['max']) {
-        $context['finished'] = $context['sandbox']['progress'] / $context['sandbox']['max'];
-      }
-    } catch (PDOException $e) {
-      $error = TRUE;
-    }
-    if ($error) {
-      $context['finished'] = 1;
-    }
-  }
-
-  public static function removeRole(&$context) {
-    $role = Role::load('member');
-    $role->delete();
-    $context['results']['role'] = 'role';
-    $context['message'] = t('Removing role @id', ['@id' => 'member']);
-  }
-
-  public static function saveConfig($config, &$context) {
-    $config->save();
-    $context['results']['config'] = 'config';
-    $context['message'] = t('Saving configuration');
-  }
-
-  public static function endofPeriodClosure($success, $results, $operations) {
-    if ($success) {
-      if (isset($results['member'])) {
-        $sMessage = \Drupal::translation()
-          ->formatPlural(count($results['member']), 'One member updated.', '@count members updated.');
-        \Drupal::messenger()->addMessage($sMessage, 'status');
-        \Drupal::logger('association')
-          ->info('Renew membership: Number of members: @number.', ['@number' => count($results['member'])]);
-      }
-      if (isset($results['user'])) {
-        $sMessage = \Drupal::translation()
-          ->formatPlural(count($results['user']), 'One user updated.', '@count users updated.');
-        \Drupal::messenger()->addMessage($sMessage, 'status');
-      }
-      if (isset($results['role'])) {
-        \Drupal::messenger()
-          ->addMessage(t('Role « %label » has been removed.', ['%label' => t('Member')]), 'status');
-      }
-      if (isset($results['config'])) {
-        \Drupal::messenger()
-          ->addMessage(t('Renew membership: Period has been closed.'), 'status');
-      }
-      \Drupal::logger('association')
-        ->info('Renew membership: Period has been closed.');
-    }
-    else {
-      // $operations contains the operations that remained unprocessed.
-      $remaining_operations = reset($operations);
-      \Drupal::messenger()->addMessage(
-        t('An error occurred while processing @operation with parameters: @parms.',
-          [
-            '@operation' => $remaining_operations[0],
-            '@parms' => print_r($remaining_operations[1], TRUE),
-          ]
-        )
-      );
-      \Drupal::messenger()
-        ->addMessage(t('Renew membership: Period Closure has encountered an error.'), 'warning');
-    }
   }
 
 }
