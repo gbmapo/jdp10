@@ -244,10 +244,14 @@ function _sendEmailForServicesExtraction($sCase) {
   ];
   $result = shared_send_email($message);
 
-  $sText = $aParams[3] . '@number emails sent, @number2 emails not sent.';
   $OK = isset($result['OK']) ? count($result['OK']) : 0;
   $KO = isset($result['KO']) ? count($result['KO']) : 0;
-  \Drupal::logger('sel')->info($sText, ['@number' => $OK, '@number2' => $KO]);
+  \Drupal::logger('sel')
+    ->info('@title@number emails sent, @number2 emails not sent.', [
+      '@title' => $aParams[3],
+      '@number' => $OK,
+      '@number2' => $KO,
+    ]);
 
   $sNextWeek = strftime("%Y-%m-%d", strtotime("+ 1 week"));
   \Drupal::state()->set($aParams[2], $sNextWeek);

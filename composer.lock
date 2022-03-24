@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0971bcd49d22492506d7f34b639b1d87",
+    "content-hash": "059acf1c7c6ee5e76fa7252ebe6563a1",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -5520,50 +5520,6 @@
                 "source": "https://github.com/justinrainbow/json-schema/tree/5.2.11"
             },
             "time": "2021-07-22T09:24:00+00:00"
-        },
-        {
-            "name": "kgaut/potx",
-            "version": "dev-8.x-1.x",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kgaut/drupal-potx.git",
-                "reference": "bb7ab9e96ad9dd489a77080ed7d6a22b42968a48"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kgaut/drupal-potx/zipball/bb7ab9e96ad9dd489a77080ed7d6a22b42968a48",
-                "reference": "bb7ab9e96ad9dd489a77080ed7d6a22b42968a48",
-                "shasum": ""
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "default-branch": true,
-            "type": "drupal-module",
-            "extra": {
-                "installer-name": "potx",
-                "drush": {
-                    "services": {
-                        "drush.services.yml": "^9"
-                    }
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "description": "Translation template extractor port for Drupal 8",
-            "homepage": "https://mespronos.net",
-            "keywords": [
-                "drupal",
-                "drupal8",
-                "l10n"
-            ],
-            "support": {
-                "issues": "https://github.com/kgaut/drupal-potx/issues",
-                "source": "https://github.com/kgaut/drupal-potx/tree/8.x-1.x"
-            },
-            "time": "2021-08-26T06:01:11+00:00"
         },
         {
             "name": "kint-php/kint",
@@ -13261,8 +13217,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "drupal/potx": 15,
-        "kgaut/potx": 20
+        "drupal/potx": 15
     },
     "prefer-stable": true,
     "prefer-lowest": false,

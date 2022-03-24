@@ -65,3 +65,4 @@
 
 # Ignore as specific to nozlaf
 /web/modules/custom/zonfal/
+/.editorconfig

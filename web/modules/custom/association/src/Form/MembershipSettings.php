@@ -176,8 +176,8 @@ class MembershipSettings extends FormBase {
 
         $sMessage = $this->t('Renew membership: Period has been opened.');
         Drupal::logger('association')
-          ->info($sMessage . ' ' . Drupal::translation()
-              ->formatPlural($number_updated, 'One member updated.', '@count members updated.'));
+          ->info('Renew membership: Period has been opened. @text', ['@text' => Drupal::translation()
+              ->formatPlural($number_updated, 'One member updated.', '@count members updated.')]);
         break;
 
       case 1:
@@ -246,7 +246,7 @@ class MembershipSettings extends FormBase {
 
 			$sMessage = $this->t('Renew membership: Period has been closed.');
 			Drupal::logger('association')
-				->info($sMessage);
+				->info('Renew membership: Period has been closed.');
 
       drupal_flush_all_caches();
 
