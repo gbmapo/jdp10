@@ -6,7 +6,6 @@ use Drupal;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\AppendCommand;
-use Drupal\Core\Ajax\RedirectCommand;
 use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -17,21 +16,18 @@ use Drupal\user\Entity\User;
 /**
  * Class MembershipStep0.
  */
-class MembershipStep0 extends FormBase
-{
+class MembershipStep0 extends FormBase {
 
   protected $step = 0;
 
-  public function getFormId()
-  {
+  public function getFormId() {
     return 'membership_step0';
   }
 
-  public function buildForm(array $form, FormStateInterface $form_state)
-  {
+  public function buildForm(array $form, FormStateInterface $form_state) {
 
     $form['step'] = [
-      '#type'  => 'hidden',
+      '#type' => 'hidden',
       '#value' => [$this->step],
     ];
 
@@ -39,27 +35,27 @@ class MembershipStep0 extends FormBase
       case 0:
         if ($this->currentUser()->isAnonymous()) {
           $form['didyouread'] = [
-            '#type'     => 'radios',
-            '#title'    => $this->t('Did you read Frequently Asked Questions (FAQ)?'),
-            '#options'  => [
+            '#type' => 'radios',
+            '#title' => $this->t('Did you read Frequently Asked Questions (FAQ)?'),
+            '#options' => [
               0 => $this->t('No'),
               1 => $this->t('Yes'),
             ],
             '#required' => TRUE,
           ];
           $form['didyoumeet'] = [
-            '#type'     => 'radios',
-            '#title'    => $this->t('Did you meet someone of the organisation?'),
-            '#options'  => [
+            '#type' => 'radios',
+            '#title' => $this->t('Did you meet someone of the organisation?'),
+            '#options' => [
               0 => $this->t('No'),
               1 => $this->t('Yes'),
             ],
             '#required' => TRUE,
           ];
           $form['areyousure'] = [
-            '#type'     => 'radios',
-            '#title'    => $this->t('Are you sure about this?'),
-            '#options'  => [
+            '#type' => 'radios',
+            '#title' => $this->t('Are you sure about this?'),
+            '#options' => [
               0 => $this->t('No'),
               1 => $this->t('Yes'),
             ],
@@ -70,7 +66,7 @@ class MembershipStep0 extends FormBase
               '@str' => $nextStepNotice,
             ]) . '<BR>';
           $form['footer'] = [
-            '#type'     => 'inline_template',
+            '#type' => 'inline_template',
             '#template' => $markup,
           ];
         }
@@ -132,7 +128,8 @@ class MembershipStep0 extends FormBase
               $form_state->set('seliste2', $results[1]->field_sel_isseliste_value);
               $form_state->set('name2', $results[1]->name);
             }
-            $iTemp = ($this->currentUser()->getDisplayName() == $results[0]->name) ? 0 : 1;
+            $iTemp = ($this->currentUser()
+                ->getDisplayName() == $results[0]->name) ? 0 : 1;
             $form_state->set('undersigned', $iTemp);
             $form_state->set('lastname', $results[$iTemp]->lastname);
             $form_state->set('firstname', $results[$iTemp]->firstname);
@@ -142,7 +139,7 @@ class MembershipStep0 extends FormBase
             $form_state->set('status', 4);
           }
           $nextStepNotice = $this->t('correct, if needed,');
-          $config = \Drupal::config('association.renewalperiod');
+          $config = Drupal::config('association.renewalperiod');
           $rpYear = $config->get('year');
           $rpStatus = $config->get('status');
 
@@ -160,28 +157,26 @@ class MembershipStep0 extends FormBase
               break;
             default:
               switch ($form_state->getStorage()['status']) {
-                case 2:
-                  $iWish = null;
-                  break;
                 case 1:
                   $iWish = 0;
                   break;
                 case 3:
                   $iWish = 1;
                   break;
+                case 2:
                 default:
-                  $iWish = null;
+                  $iWish = NULL;
                   break;
               }
               $sMember = new FormattableMarkup('<span style="color: #0000ff;">' . $form_state->getStorage()['designation'] . '</span>', []);
               $sPerson = new FormattableMarkup('<span style="color: #0000ff;">' . $form_state->getStorage()['firstname'] . ' ' . $form_state->getStorage()['lastname'] . '</span>', []);
               if ($form_state->getStorage()['status'] == 4) {
                 $sTemp = $this->t('The member «&nbsp;%member&nbsp;» has already renewed his membership to the association <I>Le Jardin de Poissy</I> for year « %year ».', [
-                    '%member' => $sMember,
-                    '%year'   => $rpYear,
-                  ]);
+                  '%member' => $sMember,
+                  '%year' => $rpYear,
+                ]);
                 $form['header'] = [
-                  '#type'     => 'inline_template',
+                  '#type' => 'inline_template',
                   '#template' => $sTemp,
                 ];
               }
@@ -191,28 +186,28 @@ class MembershipStep0 extends FormBase
                 $sTemp2 = $this->t('I, the undersigned «&nbsp;%person&nbsp;», representing the member «&nbsp;%member&nbsp;», wishes to renew my membership to the association <I>Le Jardin de Poissy</I> for year « %year ».', [
                   '%person' => $sPerson,
                   '%member' => $sMember,
-                  '%year'   => $rpYear,
+                  '%year' => $rpYear,
                 ]);
                 $sTemp = $sTemp . $sTemp2;
                 $form['header'] = [
-                  '#type'     => 'inline_template',
+                  '#type' => 'inline_template',
                   '#template' => $sTemp,
                 ];
                 $form['suscribe'] = [
-                  '#type'          => 'radios',
-                  '#title'         => '',
-                  '#options'       => [
+                  '#type' => 'radios',
+                  '#title' => '',
+                  '#options' => [
                     0 => $this->t('No'),
                     1 => $this->t('Yes'),
                   ],
                   '#default_value' => $iWish,
-                  '#validated'     => TRUE,
+                  '#validated' => TRUE,
                 ];
                 $markup = $this->t('After submitting this form, you will be able to @str your personal information then choose your subscription payment mode.', [
                     '@str' => $nextStepNotice,
                   ]) . '<BR>';
                 $form['suscribedyes'] = [
-                  '#type'   => 'item',
+                  '#type' => 'item',
                   '#markup' => $markup,
                   '#states' => [
                     'visible' => [
@@ -228,113 +223,114 @@ class MembershipStep0 extends FormBase
       case 1:
         $weight = 0;
         $form['person1'] = [
-          '#type'  => 'fieldset',
-          '#title' => t('Person') . ' 1 ' . t('(Contact)'),
+          '#type' => 'fieldset',
+          '#title' => t('Person') . ' 1 (' . t('Contact') . ') <a class="use-ajax" data-dialog-options="{&quot;width&quot;:440}" data-dialog-type="modal" href="/node/139" id="modal-dialog"><img src="/sites/default/files/images/info.svg"></a>',
         ];
+        $form['person1']['#attached'] = ['library' => ['core/drupal.dialog.ajax']];
         $weight++;
         $temp = isset($form_state->getStorage()['lastname1']) ? $form_state->getStorage()['lastname1'] : '';
         $form['person1']['lastname1'] = [
-          '#type'          => 'textfield',
-          '#title'         => $this->t('Last Name'),
-          '#size'          => 32,
-          '#required'      => TRUE,
+          '#type' => 'textfield',
+          '#title' => $this->t('Last Name'),
+          '#size' => 32,
+          '#required' => TRUE,
           '#default_value' => $temp,
-          '#weight'        => $weight,
-          '#attributes'    => ['onchange' => 'hasChanged(this)',],
+          '#weight' => $weight,
+          '#attributes' => ['onchange' => 'hasChanged(this)',],
         ];
         $weight++;
         $temp = isset($form_state->getStorage()['firstname1']) ? $form_state->getStorage()['firstname1'] : '';
         $form['person1']['firstname1'] = [
-          '#type'          => 'textfield',
-          '#title'         => $this->t('First Name'),
-          '#size'          => 32,
-          '#required'      => TRUE,
+          '#type' => 'textfield',
+          '#title' => $this->t('First Name'),
+          '#size' => 32,
+          '#required' => TRUE,
           '#default_value' => $temp,
-          '#weight'        => $weight,
-          '#attributes'    => ['onchange' => 'hasChanged(this)',],
+          '#weight' => $weight,
+          '#attributes' => ['onchange' => 'hasChanged(this)',],
         ];
         $weight++;
         $temp = isset($form_state->getStorage()['email1']) ? $form_state->getStorage()['email1'] : '';
         $form['person1']['email1'] = [
-          '#type'          => 'email',
-          '#title'         => $this->t('Email'),
-          '#size'          => 64,
-          '#required'      => TRUE,
+          '#type' => 'email',
+          '#title' => $this->t('Email'),
+          '#size' => 64,
+          '#required' => TRUE,
           '#default_value' => $temp,
-          '#weight'        => $weight,
-          '#attributes'    => ['onchange' => 'hasChanged(this)',],
+          '#weight' => $weight,
+          '#attributes' => ['onchange' => 'hasChanged(this)',],
         ];
         $weight++;
         $temp = isset($form_state->getStorage()['cellphone1']) ? $form_state->getStorage()['cellphone1'] : '';
         $form['person1']['cellphone1'] = [
-          '#type'          => 'textfield',
-          '#title'         => $this->t('Cellphone'),
-          '#size'          => 16,
-          '#required'      => TRUE,
+          '#type' => 'textfield',
+          '#title' => $this->t('Cellphone'),
+          '#size' => 16,
+          '#required' => TRUE,
           '#default_value' => $temp,
-          '#weight'        => $weight,
-          '#attributes'    => ['onchange' => 'hasChanged(this)',],
+          '#weight' => $weight,
+          '#attributes' => ['onchange' => 'hasChanged(this)',],
         ];
         $weight++;
         $temp = isset($form_state->getStorage()['seliste1']) ? $form_state->getStorage()['seliste1'] : 0;
         $form['person1']['seliste1'] = [
-          '#type'          => 'checkbox',
-          '#title'         => $this->t('I wish to be SÉListe'),
+          '#type' => 'checkbox',
+          '#title' => $this->t('I wish to be SÉListe'),
           '#default_value' => $temp,
-          '#weight'        => $weight,
+          '#weight' => $weight,
         ];
         $weight++;
         $form['person2'] = [
-          '#type'  => 'fieldset',
+          '#type' => 'fieldset',
           '#title' => t('Person') . ' 2 ',
         ];
         $weight++;
         $temp = isset($form_state->getStorage()['lastname2']) ? $form_state->getStorage()['lastname2'] : '';
         $form['person2']['lastname2'] = [
-          '#type'          => 'textfield',
-          '#title'         => $this->t('Last Name'),
-          '#size'          => 32,
+          '#type' => 'textfield',
+          '#title' => $this->t('Last Name'),
+          '#size' => 32,
           '#default_value' => $temp,
-          '#weight'        => $weight,
-          '#attributes'    => ['onchange' => 'hasChanged(this)',],
+          '#weight' => $weight,
+          '#attributes' => ['onchange' => 'hasChanged(this)',],
         ];
         $weight++;
         $temp = isset($form_state->getStorage()['firstname2']) ? $form_state->getStorage()['firstname2'] : '';
         $form['person2']['firstname2'] = [
-          '#type'          => 'textfield',
-          '#title'         => $this->t('First Name'),
-          '#size'          => 32,
+          '#type' => 'textfield',
+          '#title' => $this->t('First Name'),
+          '#size' => 32,
           '#default_value' => $temp,
-          '#weight'        => $weight,
-          '#attributes'    => ['onchange' => 'hasChanged(this)',],
+          '#weight' => $weight,
+          '#attributes' => ['onchange' => 'hasChanged(this)',],
         ];
         $weight++;
         $temp = isset($form_state->getStorage()['email2']) ? $form_state->getStorage()['email2'] : '';
         $form['person2']['email2'] = [
-          '#type'          => 'email',
-          '#title'         => $this->t('Email'),
-          '#size'          => 64,
+          '#type' => 'email',
+          '#title' => $this->t('Email'),
+          '#size' => 64,
           '#default_value' => $temp,
-          '#weight'        => $weight,
-          '#attributes'    => ['onchange' => 'hasChanged(this)',],
+          '#weight' => $weight,
+          '#attributes' => ['onchange' => 'hasChanged(this)',],
         ];
         $weight++;
         $temp = isset($form_state->getStorage()['cellphone2']) ? $form_state->getStorage()['cellphone2'] : '';
         $form['person2']['cellphone2'] = [
-          '#type'          => 'textfield',
-          '#title'         => $this->t('Cellphone'),
-          '#size'          => 26,
+          '#type' => 'textfield',
+          '#title' => $this->t('Cellphone'),
+          '#size' => 26,
           '#default_value' => $temp,
-          '#weight'        => $weight,
-          '#attributes'    => ['onchange' => 'hasChanged(this)',],
+          '#weight' => $weight,
+          '#attributes' => ['onchange' => 'hasChanged(this)',],
         ];
         $weight++;
         $temp = isset($form_state->getStorage()['seliste2']) ? $form_state->getStorage()['seliste2'] : 0;
         $form['person2']['seliste2'] = [
-          '#type'          => 'checkbox',
-          '#title'         => $this->t('I wish to be SÉListe'),
+          '#type' => 'checkbox',
+          '#title' => $this->t('I wish to be SÉListe'),
           '#default_value' => $temp,
-          '#weight'        => $weight,
+          '#weight' => $weight,
         ];
         break;
 
@@ -351,73 +347,73 @@ class MembershipStep0 extends FormBase
           }
         }
         $form['designation'] = [
-          '#type'          => 'textfield',
-          '#title'         => $this->t('Designation'),
-          '#size'          => 64,
-          '#required'      => TRUE,
+          '#type' => 'textfield',
+          '#title' => $this->t('Designation'),
+          '#size' => 64,
+          '#required' => TRUE,
           '#default_value' => $temp,
-          '#weight'        => $weight,
+          '#weight' => $weight,
         ];
         $form['address'] = [
-          '#type'   => 'fieldset',
-          '#title'  => t('Address'),
+          '#type' => 'fieldset',
+          '#title' => t('Address'),
           '#weight' => $weight,
         ];
         $weight++;
         $temp = isset($form_state->getStorage()['addresssupplement']) ? $form_state->getStorage()['addresssupplement'] : '';
         $form['address']['addresssupplement'] = [
-          '#type'          => 'textfield',
-          '#title'         => $this->t('Address supplement'),
-          '#size'          => 64,
+          '#type' => 'textfield',
+          '#title' => $this->t('Address supplement'),
+          '#size' => 64,
           '#default_value' => $temp,
-          '#placeholder'   => 'Batiment B',
-          '#weight'        => $weight,
-          '#attributes'    => ['onchange' => 'hasChanged(this)',],
+          '#placeholder' => 'Batiment B',
+          '#weight' => $weight,
+          '#attributes' => ['onchange' => 'hasChanged(this)',],
         ];
         $weight++;
         $temp = isset($form_state->getStorage()['street']) ? $form_state->getStorage()['street'] : '';
         $form['address']['street'] = [
-          '#type'          => 'textfield',
-          '#title'         => $this->t('Street'),
-          '#size'          => 64,
-          '#required'      => TRUE,
-          '#placeholder'   => '28 bis boulevard Victor Hugo',
+          '#type' => 'textfield',
+          '#title' => $this->t('Street'),
+          '#size' => 64,
+          '#required' => TRUE,
+          '#placeholder' => '28 bis boulevard Victor Hugo',
           '#default_value' => $temp,
-          '#weight'        => $weight,
-          '#attributes'    => ['onchange' => 'hasChanged(this)',],
+          '#weight' => $weight,
+          '#attributes' => ['onchange' => 'hasChanged(this)',],
         ];
         $weight++;
         $temp = isset($form_state->getStorage()['postalcode']) ? $form_state->getStorage()['postalcode'] : '';
         $form['address']['postalcode'] = [
-          '#type'          => 'textfield',
-          '#title'         => $this->t('Postal Code'),
-          '#size'          => 10,
-          '#required'      => TRUE,
-          '#placeholder'   => '78300',
+          '#type' => 'textfield',
+          '#title' => $this->t('Postal Code'),
+          '#size' => 10,
+          '#required' => TRUE,
+          '#placeholder' => '78300',
           '#default_value' => $temp,
-          '#weight'        => $weight,
+          '#weight' => $weight,
         ];
         $weight++;
         $temp = isset($form_state->getStorage()['city']) ? $form_state->getStorage()['city'] : '';
         $form['address']['city'] = [
-          '#type'          => 'textfield',
-          '#title'         => $this->t('City'),
-          '#size'          => 64,
-          '#required'      => TRUE,
-          '#placeholder'   => 'Poissy',
+          '#type' => 'textfield',
+          '#title' => $this->t('City'),
+          '#size' => 64,
+          '#required' => TRUE,
+          '#placeholder' => 'Poissy',
           '#default_value' => $temp,
-          '#weight'        => $weight,
-          '#attributes'    => ['onchange' => 'hasChanged(this)',],
+          '#weight' => $weight,
+          '#attributes' => ['onchange' => 'hasChanged(this)',],
         ];
         $weight++;
         $temp = isset($form_state->getStorage()['telephone']) ? $form_state->getStorage()['telephone'] : '';
         $form['telephone'] = [
-          '#type'          => 'textfield',
-          '#title'         => $this->t('Landline Phone'),
-          '#size'          => 16,
+          '#type' => 'textfield',
+          '#title' => $this->t('Landline Phone'),
+          '#size' => 16,
           '#default_value' => $temp,
-          '#weight'        => $weight,
-          '#attributes'    => ['onchange' => 'hasChanged(this)',],
+          '#weight' => $weight,
+          '#attributes' => ['onchange' => 'hasChanged(this)',],
         ];
         break;
 
@@ -425,7 +421,7 @@ class MembershipStep0 extends FormBase
         $form['#prefix'] = '<div id="membership_step3">';
         $form['#suffix'] = '</div>';
         $form['anonymous'] = [
-          '#type'  => 'hidden',
+          '#type' => 'hidden',
           '#value' => [$this->currentUser()->isAnonymous() ? 'Y' : 'N'],
         ];
         $i1 = $form_state->get('undersigned') + 1;
@@ -440,12 +436,12 @@ class MembershipStep0 extends FormBase
           ')',
         ]);
         $form['person1'] = [
-          '#type'   => 'item',
+          '#type' => 'item',
           '#markup' => $markup,
         ];
         $markup = $form_state->getStorage()['designation'];
         $form['member'] = [
-          '#type'   => 'item',
+          '#type' => 'item',
           '#markup' => $markup,
         ];
         $i2 = ($i1 % 2) + 1;
@@ -461,7 +457,7 @@ class MembershipStep0 extends FormBase
         ]);
         $markup = $form_state->getStorage()['lastname2'] ? $markup : '';
         $form['person2'] = [
-          '#type'   => 'item',
+          '#type' => 'item',
           '#markup' => $markup,
         ];
         $markup = implode("", [
@@ -471,27 +467,27 @@ class MembershipStep0 extends FormBase
           $form_state->getStorage()['telephone'] ? $form_state->getStorage()['telephone'] : '',
         ]);
         $form['address'] = [
-          '#type'   => 'item',
+          '#type' => 'item',
           '#markup' => $markup,
         ];
         $form['commitment1'] = [
-          '#type'           => 'checkbox',
-          '#required'       => TRUE,
+          '#type' => 'checkbox',
+          '#required' => TRUE,
           '#required_error' => t('You must commit to observe the statuses of the association.'),
         ];
         $form['authorisation'] = [
-          '#type'           => 'checkbox',
-          '#required'       => TRUE,
+          '#type' => 'checkbox',
+          '#required' => TRUE,
           '#required_error' => t('You must authorise the association to use your personal information.'),
         ];
         $form['commitment2'] = [
-          '#type'           => 'checkbox',
-          '#required'       => TRUE,
+          '#type' => 'checkbox',
+          '#required' => TRUE,
           '#required_error' => t('You must commit not to use the information of other members for personal purposes.'),
         ];
         $form['sel'] = [
-          '#type'          => 'checkboxes',
-          '#options'       => [
+          '#type' => 'checkboxes',
+          '#options' => [
             'sel1' => $form_state->getStorage()['lastname1'] . ' ' . $form_state->getStorage()['firstname1'],
             'sel2' => $form_state->getStorage()['lastname2'] ? $form_state->getStorage()['lastname2'] . ' ' . $form_state->getStorage()['firstname2'] : '',
           ],
@@ -499,7 +495,7 @@ class MembershipStep0 extends FormBase
             $form_state->getStorage()['seliste1'] ? 'sel1' : 0,
             $form_state->getStorage()['seliste2'] ? 'sel2' : 0,
           ],
-          '#disabled'      => TRUE,
+          '#disabled' => TRUE,
         ];
         $form['amap'] = ['#type' => 'checkbox',];
         $form['amap_legumes'] = ['#type' => 'checkbox',];
@@ -520,19 +516,19 @@ class MembershipStep0 extends FormBase
         $form['amap_cidre'] = ['#type' => 'checkbox',];
         $form['ifbasket'] = ['#type' => 'checkbox',];
         $form['payment'] = [
-          '#type'           => 'radios',
-          '#title'          => $this->t('Subscription Payment Method'),
-          '#options'        => [
+          '#type' => 'radios',
+          '#title' => $this->t('Subscription Payment Method'),
+          '#options' => [
             0 => $this->t('by check'),
             1 => $this->t('by bank transfer'),
             2 => $this->t('by card'),
           ],
-          '#required'       => TRUE,
+          '#required' => TRUE,
           '#required_error' => t('You must choose a subscription payment method.'),
         ];
         $markup = $this->t('After submitting this form, you will be redirected to the online payment process.');
         $form['paymentcrd'] = [
-          '#type'   => 'item',
+          '#type' => 'item',
           '#states' => [
             'visible' => [
               ':input[name="payment"]' => ['value' => 2],
@@ -550,11 +546,11 @@ class MembershipStep0 extends FormBase
 
     if ($this->step > 0) {
       $form['previous'] = [
-        '#type'                    => 'submit',
-        '#value'                   => $this->t('Previous'),
-        '#submit'                  => ['::goto_previous_step'],
+        '#type' => 'submit',
+        '#value' => $this->t('Previous'),
+        '#submit' => ['::goto_previous_step'],
         '#limit_validation_errors' => [],
-        '#weight'                  => 98,
+        '#weight' => 98,
       ];
     }
 
@@ -588,19 +584,19 @@ class MembershipStep0 extends FormBase
     }
     if ($this->step == 3) {
       $form['submit'] = [
-        '#type'   => $type,
-        '#value'  => $label,
+        '#type' => $type,
+        '#value' => $label,
         '#weight' => 99,
-        '#ajax'   => [
-          'wrapper'  => 'membership_step3',
+        '#ajax' => [
+          'wrapper' => 'membership_step3',
           'callback' => '::ajaxSubmit',
         ],
       ];
     }
     else {
       $form['submit'] = [
-        '#type'   => $type,
-        '#value'  => $label,
+        '#type' => $type,
+        '#value' => $label,
         '#weight' => 99,
       ];
     }
@@ -610,14 +606,12 @@ class MembershipStep0 extends FormBase
     return $form;
   }
 
-  public function goto_previous_step($form, $form_state)
-  {
+  public function goto_previous_step($form, $form_state) {
     $form_state->setRebuild();
     $this->step = $this->step - 1;
   }
 
-  public function validateForm(array &$form, FormStateInterface $form_state)
-  {
+  public function validateForm(array &$form, FormStateInterface $form_state) {
     switch ($this->step) {
       case 0:
         if ($this->currentUser()->isAnonymous()) {
@@ -632,7 +626,7 @@ class MembershipStep0 extends FormBase
           }
         }
         else {
-          if ($form_state->getValue('suscribe') == null) {
+          if ($form_state->getValue('suscribe') == NULL) {
             $form_state->setErrorByName('suscribe', $this->t('Please choose one option.'));
           }
         }
@@ -669,7 +663,8 @@ class MembershipStep0 extends FormBase
             $form_state->setErrorByName('email2', $message);
           }
           else {
-            if ($this->currentUser()->isAnonymous() || (is_null($form_state->getStorage()['ap_id2']))) {
+            if ($this->currentUser()
+                ->isAnonymous() || (is_null($form_state->getStorage()['ap_id2']))) {
               $sTemp = $this->_existsEmail($email2);
               if ($sTemp) {
                 $form_state->setErrorByName('email2', $sTemp);
@@ -687,6 +682,7 @@ class MembershipStep0 extends FormBase
         break;
 
       case 2:
+      case 4:
         break;
 
       case 3:
@@ -697,18 +693,14 @@ class MembershipStep0 extends FormBase
         }
         break;
 
-      case 4:
-        break;
-
       default:
 
     }
     parent::validateForm($form, $form_state);
   }
 
-  public function _existsEmail($email)
-  {
-    $database = \Drupal::database();
+  public function _existsEmail($email) {
+    $database = Drupal::database();
     $query = $database->select('users_field_data', 'us');
     $query->fields('us', ['uid', 'name', 'mail'])
       ->condition('us.mail', $email, '=');
@@ -718,7 +710,7 @@ class MembershipStep0 extends FormBase
     }
     else {
       $url = Url::fromUri('base:/user/login');
-      $link = \Drupal\Core\Link::fromTextAndUrl($this->t('here'), $url)
+      $link = Drupal\Core\Link::fromTextAndUrl($this->t('here'), $url)
         ->toString();
       $output = $this->t('This email is already registered for « %user ».<BR>If you are already a member, please log in %link.', [
         '%user' => $results[0]->name,
@@ -728,13 +720,12 @@ class MembershipStep0 extends FormBase
     return $output;
   }
 
-  public function ajaxSubmit(array &$form, FormStateInterface $form_state)
-  {
+  public function ajaxSubmit(array &$form, FormStateInterface $form_state) {
     $response = new AjaxResponse();
     if ($form_state->hasAnyErrors()) {
-      $messages = \Drupal::messenger()->deleteAll();
+      $messages = Drupal::messenger()->deleteAll();
       $messages = [
-        '#theme'        => 'status_messages',
+        '#theme' => 'status_messages',
         '#message_list' => $messages,
       ];
       $response->addCommand(new ReplaceCommand('#messages', ''));
@@ -751,21 +742,24 @@ class MembershipStep0 extends FormBase
       $contracts = substr($contracts, 0, strlen($contracts) - 2);
       $contracts = ($contracts) ? 'AMAP : ' . $contracts . '.' : '';
       $aCleanValues['contracts'] = $contracts;
-      $payment = (string)$form['payment']['#title'] . ' : ' . (string)$form['payment']['#options'][$form_state->getValue('payment')] . '.';
+      $payment = (string) $form['payment']['#title'] . ' : ' . (string) $form['payment']['#options'][$form_state->getValue('payment')] . '.';
       $aCleanValues['payment'] = $payment;
       $form_state->setStorage(array_merge($form_state->getStorage(), $aCleanValues));
       $this->saveData($form_state);
       switch ($form_state->getValue('payment')) {
         case '2':
-          $_SESSION['association']['anonymous'] = $this->currentUser()->isAnonymous();
+          $_SESSION['association']['anonymous'] = $this->currentUser()
+            ->isAnonymous();
           $_SESSION['association']['designation'] = $form_state->getStorage()['designation'];
           $_SESSION['association']['lastname'] = $form_state->getStorage()['lastname'];
           $_SESSION['association']['firstname'] = $form_state->getStorage()['firstname'];
           $_SESSION['association']['email'] = $form_state->getStorage()['email'];
-          $response->addCommand(new \Drupal\Core\Ajax\RedirectCommand(Url::fromRoute('association.membership4')->toString()));
+          $response->addCommand(new \Drupal\Core\Ajax\RedirectCommand(Url::fromRoute('association.membership4')
+            ->toString()));
           break;
         default:
-          $response->addCommand(new \Drupal\Core\Ajax\RedirectCommand(Url::fromRoute('<front>')->toString()));
+          $response->addCommand(new \Drupal\Core\Ajax\RedirectCommand(Url::fromRoute('<front>')
+            ->toString()));
       }
     }
     return $response;
@@ -773,10 +767,10 @@ class MembershipStep0 extends FormBase
 
   /**
    * {@inheritdoc}
-   * $form_state->set('key', 'value'). The value ends up in $form_state->getStorage()['value'].
+   * $form_state->set('key', 'value'). The value ends up in
+   * $form_state->getStorage()['value'].
    */
-  public function submitForm(array &$form, FormStateInterface $form_state)
-  {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
     $aCleanValues = $form_state->cleanValues()->getValues();
     switch ($this->step) {
       case 0:
@@ -808,45 +802,17 @@ class MembershipStep0 extends FormBase
         $this->step++;
         break;
       case 3:
-        /*
-                $contracts = '';
-                foreach ($aCleanValues as $key => $value) {
-                  if (substr($key, 0, 5) == 'amap_' && $value == 1) {
-                    $contracts .= substr($key, 5, 999) . ', ';
-                  }
-                }
-                $contracts = substr($contracts, 0, strlen($contracts) - 2);
-                $contracts = ($contracts) ? 'AMAP : ' . $contracts . '.' : '';
-                $aCleanValues['contracts'] = $contracts;
-                $payment = (string)$form['payment']['#title'] . ' : ' . (string)$form['payment']['#options'][$form_state->getValue('payment')] . '.';
-                $aCleanValues['payment'] = $payment;
-                $form_state->setStorage(array_merge($form_state->getStorage(), $aCleanValues));
-                $this->saveData($form_state);
-                switch ($form_state->getValue('payment')) {
-                  case '2':
-                    $_SESSION['association']['anonymous'] = $this->currentUser()->isAnonymous();
-                    $_SESSION['association']['designation'] = $form_state->getStorage()['designation'];
-                    $_SESSION['association']['lastname'] = $form_state->getStorage()['lastname'];
-                    $_SESSION['association']['firstname'] = $form_state->getStorage()['firstname'];
-                    $_SESSION['association']['email'] = $form_state->getStorage()['email'];
-                    $form_state->setRedirect('association.membership4');
-                    break;
-                  default:
-                    $form_state->setRedirectUrl(Url::fromRoute('<front>'));
-                }
-         */
         break;
       default:
     }
   }
 
-  public function saveData(FormStateInterface $form_state)
-  {
+  public function saveData(FormStateInterface $form_state) {
     $database = Drupal::database();
 
     if ($this->step == 0) {
 
-      $database->update(member)
+      $database->update('member')
         ->condition('id', $form_state->getStorage()['am_id'])
         ->fields(['status' => $form_state->getStorage()['status']])
         ->execute();
@@ -886,12 +852,12 @@ class MembershipStep0 extends FormBase
         $idM = NULL;
         $comment = ($form_state->getStorage()['contracts'] ? $form_state->getStorage()['contracts'] . ' ' : '') . $form_state->getStorage()['payment'];
         $insertFieldsM = [
-          'comment'    => $comment,
+          'comment' => $comment,
           'contact_id' => $uid['1'],
-          'created'    => $now,
-          'enddate'    => '2037-12-30',
-          'owner_id'   => $uid['1'],
-          'startdate'  => date('Y-m-d'),
+          'created' => $now,
+          'enddate' => '2037-12-30',
+          'owner_id' => $uid['1'],
+          'startdate' => date('Y-m-d'),
         ];
         $form_state->set('status', 5);
       }
@@ -902,14 +868,14 @@ class MembershipStep0 extends FormBase
       $updateFieldsM = [];
       $fieldsM = [
         'addresssupplement' => $form_state->getStorage()['addresssupplement'],
-        'changed'           => $now,
-        'city'              => $form_state->getStorage()['city'],
-        'country'           => 'FR',
-        'designation'       => $form_state->getStorage()['designation'],
-        'postalcode'        => $form_state->getStorage()['postalcode'],
-        'street'            => $form_state->getStorage()['street'],
-        'telephone'         => $form_state->getStorage()['telephone'],
-        'status'            => $form_state->getStorage()['status'],
+        'changed' => $now,
+        'city' => $form_state->getStorage()['city'],
+        'country' => 'FR',
+        'designation' => $form_state->getStorage()['designation'],
+        'postalcode' => $form_state->getStorage()['postalcode'],
+        'street' => $form_state->getStorage()['street'],
+        'telephone' => $form_state->getStorage()['telephone'],
+        'status' => $form_state->getStorage()['status'],
       ];
       $insertFieldsM = array_merge($insertFieldsM, $fieldsM);
       $updateFieldsM = array_merge($updateFieldsM, $fieldsM);
@@ -931,13 +897,13 @@ class MembershipStep0 extends FormBase
         if ($anon || ($i == 2 && is_null($form_state->getStorage()['ap_id2']))) {
           $idP[$i] = $uid[$i];
           $insertFieldsP[$i] = [
-            'comment'   => NULL,
-            'created'   => $now,
-            'isactive'  => 0,
+            'comment' => NULL,
+            'created' => $now,
+            'isactive' => 0,
             'iscontact' => $i == 1 ? 1 : 0,
             'member_id' => $idM,
-            'owner_id'  => $uid['1'],
-            'user_id'   => $uid[$i],
+            'owner_id' => $uid['1'],
+            'user_id' => $uid[$i],
           ];
         }
         else {
@@ -951,10 +917,10 @@ class MembershipStep0 extends FormBase
         $updateFieldsP[$i] = [];
         $fieldsP[$i] = [
           'cellphone' => $form_state->getStorage()['cellphone' . $i],
-          'changed'   => $now,
-          'email'     => $form_state->getStorage()['email' . $i],
+          'changed' => $now,
+          'email' => $form_state->getStorage()['email' . $i],
           'firstname' => $form_state->getStorage()['firstname' . $i],
-          'lastname'  => $form_state->getStorage()['lastname' . $i],
+          'lastname' => $form_state->getStorage()['lastname' . $i],
         ];
         $insertFieldsP[$i] = array_merge($insertFieldsP[$i], $fieldsP[$i]);
         $updateFieldsP[$i] = array_merge($updateFieldsP[$i], $fieldsP[$i]);
@@ -966,11 +932,11 @@ class MembershipStep0 extends FormBase
         $database->merge('person__field_sel_isseliste')
           ->key('entity_id', $idP[$i])
           ->fields([
-            'bundle'                    => 'person',
-            'entity_id'                 => $idP[$i],
-            'revision_id'               => $idP[$i],
-            'langcode'                  => 'und',
-            'delta'                     => 0,
+            'bundle' => 'person',
+            'entity_id' => $idP[$i],
+            'revision_id' => $idP[$i],
+            'langcode' => 'und',
+            'delta' => 0,
             'field_sel_isseliste_value' => $form_state->getStorage()['seliste' . $i],
           ])
           ->execute();
@@ -978,11 +944,11 @@ class MembershipStep0 extends FormBase
           $database->merge('person__field_sel_balance')
             ->key('entity_id', $idP[$i])
             ->fields([
-              'bundle'                  => 'person',
-              'entity_id'               => $idP[$i],
-              'revision_id'             => $idP[$i],
-              'langcode'                => 'und',
-              'delta'                   => 0,
+              'bundle' => 'person',
+              'entity_id' => $idP[$i],
+              'revision_id' => $idP[$i],
+              'langcode' => 'und',
+              'delta' => 0,
               'field_sel_balance_value' => 180,
             ])
             ->execute();
@@ -1025,9 +991,8 @@ class MembershipStep0 extends FormBase
 
   }
 
-  public function _generateName($firstname, $lastname)
-  {
-    $database = \Drupal::database();
+  public function _generateName($firstname, $lastname) {
+    $database = Drupal::database();
     $query = $database->select('users_field_data', 'us');
     $query->fields('us', ['name']);
     $query->condition('name', $firstname . '%', 'like');
