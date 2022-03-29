@@ -3,7 +3,7 @@ _core:
 langcode: fr
 theme: mayo
 defaults:
-  sender: php_mail
+  sender: phpmailer_smtp
   formatter: mime_mail
 modules:
   association:

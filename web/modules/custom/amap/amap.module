@@ -537,9 +537,8 @@ function _sendEmailForStupids() {
 function amap_mail($key, &$message, $params) {
 
   $sFrom = 'amap@lejardindepoissy.org';
-  $message['from'] = $sFrom;
   $message['headers'] = [
-    'From' => $sFrom,
+    'From' => '"L\'AMAP du Jardin de Poissy"<amap@lejardindepoissy.org>',
     'Sender' => $sFrom,
     'Return-Path' => $sFrom,
   ];

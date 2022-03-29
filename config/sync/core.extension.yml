@@ -50,6 +50,7 @@ module:
   page_cache: 0
   path: 0
   path_alias: 0
+  phpmailer_smtp: 0
   poll: 0
   quickedit: 0
   r4032login: 0

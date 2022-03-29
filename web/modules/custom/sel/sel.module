@@ -291,9 +291,8 @@ function _sendEmailForExchange($aParams) {
 function sel_mail($key, &$message, $aParams) {
 
   $sFrom = 'sel@lejardindepoissy.org';
-  $message['from'] = $sFrom;
   $message['headers'] = [
-    'From' => $sFrom,
+    'From' => '=?UTF-8?B?'.base64_encode('Le Grenier à SÉL').'?=' . '<sel@lejardindepoissy.org>',
     'Sender' => $sFrom,
     'Return-Path' => $sFrom,
   ];

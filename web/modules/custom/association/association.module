@@ -174,9 +174,8 @@ function association_entity_update(EntityInterface $entity) {
 function association_mail($key, &$message, $aParams) {
 
   $sFrom = Drupal::config('system.site')->get('mail');
-  $message['from'] = $sFrom;
   $message['headers'] = [
-    'From' => $sFrom,
+//  'From' => '"Le Jardin de Poissy"<contact@lejardindepoissy.org>',
     'Sender' => $sFrom,
     'Return-Path' => $sFrom,
   ];
