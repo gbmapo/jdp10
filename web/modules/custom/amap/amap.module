@@ -527,7 +527,7 @@ function _sendEmailForStupids() {
     'params' => $aParams,
     'reply' => 'L\'AMAP du Jardin de Poissy',
   ];
-  $result = shared_send_email($message);
+  $aResults = shared_send_email($message);
 
   $sNextMonday = strftime("%Y-%m-%d %H:%M:%S", strtotime("next Monday"));
   \Drupal::state()->set('amap.NextEmailForStupids', $sNextMonday);

@@ -87,15 +87,15 @@ function sel_cron() {
   if ($iNumber != 0) {
     $aServiceOwners = array_unique($aServiceOwners);
     $sTo = 'sel@lejardindepoissy.org';
-    $sBcc = '';
+    $sRecipients = '';
     $results = _setListOfSelistes();
     foreach ($results as $key => $result) {
       if (in_array($result->id, $aServiceOwners)) {
-        $sBcc .= $result->email . ", ";
+        $sRecipients .= $result->email . ", ";
       }
     }
-    $sBcc = substr($sBcc, 0, strlen($sBcc) - 2);
-    $aParams = [$sBcc];
+    $sRecipients = substr($sRecipients, 0, strlen($sRecipients) - 2);
+    $aParams = [$sRecipients];
 
     $message = [
       'module' => 'sel',
@@ -104,7 +104,7 @@ function sel_cron() {
       'params' => $aParams,
       'reply' => 'Le Grenier à SÉL',
     ];
-    $result = shared_send_email($message);
+    $aResults = shared_send_email($message);
 
   }
 
@@ -142,17 +142,17 @@ function sel_cron() {
 
 }
 
-function _sendEmailForUrgentService($sSeliste, $sAction, $sDueDate) {
+function _sendEmailForUrgentService($sSeliste, $sAction, $sService, $sDueDate) {
 
   $sTo = 'sel@lejardindepoissy.org';
-  $sBcc = '';
+  $sRecipients = '';
 
   $results = _setListOfSelistes();
   foreach ($results as $key => $result) {
-    $sBcc .= $result->email . ", ";
+    $sRecipients .= $result->email . ", ";
   }
-  $sBcc = substr($sBcc, 0, strlen($sBcc) - 2);
-  $aParams = [$sBcc, $sSeliste, $sAction, $sDueDate];
+  $sRecipients = substr($sRecipients, 0, strlen($sRecipients) - 2);
+  $aParams = [$sRecipients, $sSeliste, $sAction, $sService, $sDueDate];
 
   $message = [
     'module' => 'sel',
@@ -161,10 +161,10 @@ function _sendEmailForUrgentService($sSeliste, $sAction, $sDueDate) {
     'params' => $aParams,
     'reply' => 'Le Grenier à SÉL',
   ];
-  $result = shared_send_email($message);
+  $aResults = shared_send_email($message);
 
-  $OK = isset($results['OK']) ? count($result['OK']) : 0;
-  $KO = isset($results['KO']) ? count($result['KO']) : 0;
+  $OK = isset($aResults['OK']) ? count($aResults['OK']) : 0;
+  $KO = isset($aResults['KO']) ? count($aResults['KO']) : 0;
   \Drupal::logger('association')
     ->info('Urgent service: @number emails sent, @number2 emails not sent.', [
       '@number' => $OK,
@@ -193,13 +193,13 @@ function _setListOfSelistes() {
 function _sendEmailForServicesExtraction($sCase) {
 
   $sTo = 'sel@lejardindepoissy.org';
-  $sBcc = '';
+  $sRecipients = '';
 
   $results = _setListOfSelistes();
   foreach ($results as $key => $result) {
-    $sBcc .= $result->email . ", ";
+    $sRecipients .= $result->email . ", ";
   }
-  $sBcc = substr($sBcc, 0, strlen($sBcc) - 2);
+  $sRecipients = substr($sRecipients, 0, strlen($sRecipients) - 2);
 
   switch ($sCase) {
     case 'emailforservicespercategory':
@@ -213,7 +213,7 @@ function _sendEmailForServicesExtraction($sCase) {
         $view = \Drupal::service('renderer')->renderPlain($view);
       } while (strpos($view, "ThisCategoryIsEmpty") !== FALSE);
       $aParams = [
-        $sBcc,
+        $sRecipients,
         $view,
         'sel.NextEmailForServicesPerCategory',
         'Extraction of services per category: ',
@@ -227,7 +227,7 @@ function _sendEmailForServicesExtraction($sCase) {
       $view = views_embed_view('sel_services', 'embed_2', $dLastExtractionDate);
       $view = \Drupal::service('renderer')->renderPlain($view);
       $aParams = [
-        $sBcc,
+        $sRecipients,
         $view,
         'sel.NextEmailForNewServices',
         'Last additions to Catalog of Services: ',
@@ -242,10 +242,10 @@ function _sendEmailForServicesExtraction($sCase) {
     'params' => $aParams,
     'reply' => 'Le Grenier à SÉL',
   ];
-  $result = shared_send_email($message);
+  $aResults = shared_send_email($message);
 
-  $OK = isset($result['OK']) ? count($result['OK']) : 0;
-  $KO = isset($result['KO']) ? count($result['KO']) : 0;
+  $OK = isset($aResults['OK']) ? count($aResults['OK']) : 0;
+  $KO = isset($aResults['KO']) ? count($aResults['KO']) : 0;
   \Drupal::logger('sel')
     ->info('@title@number emails sent, @number2 emails not sent.', [
       '@title' => $aParams[3],
@@ -282,7 +282,7 @@ function _sendEmailForExchange($aParams) {
     'params' => $aParams,
     'reply' => 'Le Grenier à SÉL',
   ];
-  $result = shared_send_email($message);
+  $aResults = shared_send_email($message);
 
   \Drupal::logger('sel')->info('Exchange: Email sent.');
 
@@ -299,7 +299,7 @@ function sel_mail($key, &$message, $aParams) {
   switch ($key) {
     case 'emailforurgentservice':
       $message['subject'] = '[Le Grenier à SÉL] Un service urgent requiert votre attention...';
-      $sBody = $aParams[1] . " a posté une " . $aParams[2] . " urgente valide jusqu'au <font color='#FF0000'>" . $aParams[3] . "</font>.<br>";
+      $sBody = $aParams[1] . ' a posté cette ' . $aParams[2] . ' urgente valide jusqu\'au <span style="color:red">' . $aParams[4] . '</span> : ' . $aParams[3] . '<br><br>';
       $message['body'][] = \Drupal\Core\Render\Markup::create($sBody);
       break;
     case 'emailforservicespercategory':

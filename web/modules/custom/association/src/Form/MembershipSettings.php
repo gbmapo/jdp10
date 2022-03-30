@@ -192,7 +192,7 @@ class MembershipSettings extends FormBase {
             'params' => $aParams,
             'reply' => 'Le Jardin de Poissy',
           ];
-          $result = shared_send_email($message);
+          $aResults = shared_send_email($message);
           $config->set('step', 2);
           $config->set('firstemail', TRUE);
           $config->save();
@@ -218,7 +218,7 @@ class MembershipSettings extends FormBase {
             'params' => $aParams,
             'reply' => 'Le Jardin de Poissy',
           ];
-          $result = shared_send_email($message);
+          $aResults = shared_send_email($message);
           $config->save();
           Drupal::logger('association')
             ->info('Renew membership: Reminder email @number has been sent.', ['@number' => $rpReminder]);
