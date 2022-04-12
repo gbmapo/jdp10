@@ -1,0 +1,23 @@
+uuid: d5b2f12e-24b4-4a12-b698-a1802441df17
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_body2
+    - node.type.evenement
+  module:
+    - text
+id: node.evenement.field_body2
+field_name: field_body2
+entity_type: node
+bundle: evenement
+label: Body2
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

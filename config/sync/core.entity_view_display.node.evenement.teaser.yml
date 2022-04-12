@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.evenement.body
+    - field.field.node.evenement.field_body2
     - field.field.node.evenement.field_event_date_end
     - field.field.node.evenement.field_event_date_start
     - field.field.node.evenement.field_gallery
@@ -32,6 +33,7 @@ content:
     weight: 100
     region: content
 hidden:
+  field_body2: true
   field_event_date_end: true
   field_event_date_start: true
   field_gallery: true
