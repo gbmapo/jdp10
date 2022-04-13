@@ -5,9 +5,9 @@ display_denied_message: true
 access_denied_message: "<p><strong>Vous n'êtes pas autorisé(e) à accéder à cette page.</strong> Si vous êtes adhérent, veuillez vous connecter.</p>\r\n<p>Sinon, nous vous invitons à consulter la <a href=\"/faq\">Foire Aux Questions</a>.<br />\r\n\tSi vous ne trouvez de réponse à vos interrogations, veuillez utiliser le <a href=\"/contact\">formulaire de contact</a> pour poser vos questions.\r\n</p>"
 access_denied_message_type: error
 redirect_authenticated_users_to: ''
+throw_authenticated_404: false
 user_login_path: /user/login
 default_redirect_code: 307
 destination_parameter_override: ''
 match_noredirect_pages: ''
 redirect_to_destination: true
-throw_authenticated_404: false

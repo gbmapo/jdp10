@@ -10,7 +10,7 @@ dependencies:
 id: mostrecentpoll
 theme: mayo
 region: sidebar_first
-weight: 0
+weight: -4
 provider: null
 plugin: poll_recent_block
 settings:

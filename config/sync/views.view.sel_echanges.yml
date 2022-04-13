@@ -817,13 +817,23 @@ display:
             last: Dernier
           expose:
             items_per_page: true
-            items_per_page_label: 'Éléments par page'
+            items_per_page_label: 'Échanges par page'
             items_per_page_options: '10, 25, 50, 100'
             items_per_page_options_all: false
             items_per_page_options_all_label: '- Tout -'
             offset: false
             offset_label: Décalage
           quantity: 3
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Appliquer
+          reset_button: false
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Trier par'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
       empty:
         area:
           id: area
@@ -857,6 +867,7 @@ display:
       defaults:
         empty: false
         pager: false
+        exposed_form: false
         fields: false
         sorts: false
         header: false
@@ -875,6 +886,7 @@ display:
             value: "<div class=\"visibleforuser[current-user:account-name]\"><a href=\"/sel/exchange/add\" class=\"form-submit\">Ajouter</a></div>\r\n"
             format: full_html
           tokenize: false
+      exposed_block: true
       display_extenders: {  }
       path: sel/exchanges
       menu:

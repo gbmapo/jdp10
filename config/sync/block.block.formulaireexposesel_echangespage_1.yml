@@ -1,0 +1,28 @@
+uuid: 59bd9e0b-0769-424c-9693-3a02db5d5728
+langcode: fr
+status: true
+dependencies:
+  config:
+    - views.view.sel_echanges
+  module:
+    - system
+    - views
+  theme:
+    - mayo
+id: formulaireexposesel_echangespage_1
+theme: mayo
+region: content
+weight: -3
+provider: null
+plugin: 'views_exposed_filter_block:sel_echanges-page_1'
+settings:
+  id: 'views_exposed_filter_block:sel_echanges-page_1'
+  label: ''
+  label_display: visible
+  provider: views
+  views_label: ''
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /sel/exchanges

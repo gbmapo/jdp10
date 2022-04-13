@@ -9,7 +9,7 @@ _core:
 id: mayo_local_actions
 theme: mayo
 region: content
-weight: -20
+weight: -5
 provider: null
 plugin: local_actions_block
 settings:

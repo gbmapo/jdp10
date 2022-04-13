@@ -11,7 +11,7 @@ _core:
 id: mayo_breadcrumbs
 theme: mayo
 region: breadcrumb
-weight: 0
+weight: -8
 provider: null
 plugin: system_breadcrumb_block
 settings:
