@@ -29,6 +29,7 @@
         "drupal/csv_serialization": "^2.0",
         "drupal/devel": "^4.1",
         "drupal/devel_kint_extras": "^1.0",
+        "drupal/fontawesome": "^2.22",
         "drupal/fullcalendar_view": "^5.1",
         "drupal/honeypot": "^2.0",
         "drupal/imce": "^2.4",

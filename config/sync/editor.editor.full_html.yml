@@ -18,6 +18,7 @@ settings:
           name: Text
           items:
             - SpecialChar
+            - DrupalFontAwesome
             - PasteText
             - PasteFromWord
         -

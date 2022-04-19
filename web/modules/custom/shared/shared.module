@@ -9,15 +9,17 @@ use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\field\Entity\FieldStorageConfig;
-use \Drupal\node\NodeInterface;
-use \Drupal\Core\Session\AccountInterface;
+use Drupal\node\NodeInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
+use Drupal\Component\Render\FormattableMarkup;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Implements hook_help().
  */
-function shared_help($route_name, RouteMatchInterface $route_match) {
+function shared_help($route_name, RouteMatchInterface $route_match)
+{
   switch ($route_name) {
     // Main module help for the shared module.
     case 'help.page.shared':
@@ -33,7 +35,8 @@ function shared_help($route_name, RouteMatchInterface $route_match) {
 /**
  * Implements hook_theme().
  */
-function shared_theme() {
+function shared_theme()
+{
   return [
     'shared' => [
       'render element' => 'children',
@@ -52,7 +55,8 @@ function shared_theme() {
  *   allowed_values: {  }
  *   allowed_values_function: 'mymodule_allowed_values_function'
  */
-function shared_allowed_values_function(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL, $cacheable) {
+function shared_allowed_values_function(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL, $cacheable)
+{
 
   // ----------------------------------------------------------------------------
   // Ajout de l'adresse de l'association au formulaire de contact
@@ -68,7 +72,8 @@ function shared_allowed_values_function(FieldStorageConfig $definition, ContentE
 
 }
 
-function shared_form_contact_message_feedback_form_alter(&$form, FormStateInterface $form_state) {
+function shared_form_contact_message_feedback_form_alter(&$form, FormStateInterface $form_state)
+{
 
   $markup = '<p style="border:2px; border-style:solid; border-color:#FF0000; padding: 1em;">';
   $markup .= t('Before sending your question, are you sure that the answer is not in our Frequently Asked Questions (see FAQ in the general menu)?');
@@ -87,7 +92,8 @@ function shared_form_contact_message_feedback_form_alter(&$form, FormStateInterf
 }
 
 
-function shared_mail_alter(&$message) {
+function shared_mail_alter(&$message)
+{
 
   switch ($message['id']) {
 
@@ -132,22 +138,22 @@ function shared_mail_alter(&$message) {
 
 }
 
-function shared_views_plugins_field_alter(array &$plugins) {
+function shared_views_plugins_field_alter(array &$plugins)
+{
 
   $plugins['custom']['class'] = 'Drupal\shared\Plugin\views\field\CustomToken';
 
 }
 
-function shared_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+function shared_form_alter(&$form, FormStateInterface $form_state, $form_id)
+{
 
   if ($form_id == 'views_form_association_persons_page_2' || $form_id == 'views_form_association_persons_page_4') {
     $views_send_to_name = 'nothing_pos_2';
-  }
-  elseif (substr($form_id, 0, 47) == 'views_form_amap_contracts_subscriptions_page_1_') {
+  } elseif (substr($form_id, 0, 47) == 'views_form_amap_contracts_subscriptions_page_1_') {
     $views_send_to_name = 'designation_pos_3';
     $form_id = 'views_form_amap_contracts_subscriptions_page_1_';
-  }
-  else {
+  } else {
   }
 
   switch ($form_id) {
@@ -245,7 +251,8 @@ function shared_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
 }
 
-function shared_node_access(NodeInterface $node, $op, AccountInterface $account) {
+function shared_node_access(NodeInterface $node, $op, AccountInterface $account)
+{
 
   switch ($node->type->target_id) {
     case 'article':
@@ -259,8 +266,7 @@ function shared_node_access(NodeInterface $node, $op, AccountInterface $account)
           if ($tag->tid->value == 7) { // 7=Privé
             if ($account->isAnonymous()) {
               return \Drupal\Core\Access\AccessResult::forbidden();
-            }
-            else {
+            } else {
               return \Drupal\Core\Access\AccessResult::allowed();
             }
           }
@@ -290,7 +296,8 @@ function shared_node_access(NodeInterface $node, $op, AccountInterface $account)
  * }
  */
 
-function shared_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+function shared_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id)
+{
   $currentUrl = \Drupal::service('path.current')->getPath();
   if ($currentUrl && (substr($currentUrl, 0, 12) == '/user/reset/')) {
     return;
@@ -298,12 +305,14 @@ function shared_form_user_login_form_alter(&$form, FormStateInterface $form_stat
   $form['#submit'][] = 'shared_user_login_form_submit';
 }
 
-function shared_user_login_form_submit($form, FormStateInterface $form_state) {
+function shared_user_login_form_submit($form, FormStateInterface $form_state)
+{
   $url = Url::fromRoute('<front>');
   $form_state->setRedirectUrl($url);
 }
 
-function shared_preprocess_node__page(array &$variables) {
+function shared_preprocess_node__page(array &$variables)
+{
 
   if ($variables['node']->nid->value == 25) {
     $variables['#attached']['library'][] = 'shared/modal';
@@ -311,7 +320,8 @@ function shared_preprocess_node__page(array &$variables) {
 
 }
 
-function shared_send_email($message) {
+function shared_send_email($message)
+{
 
   $sModule = $message['module'];
   $sKey = $message['key'];
@@ -330,8 +340,7 @@ function shared_send_email($message) {
     }
     $iMax = $i;
     $aParams[0] = NULL;
-  }
-  else {
+  } else {
     $aTo[0] = $sTo;
     $iMax = 1;
   }
@@ -340,10 +349,20 @@ function shared_send_email($message) {
       ->mail($sModule, $sKey, $aTo[$i], $sLangcode, $aParams, $sReply, $bSend);
     if ($result) {
       $aResults['OK'][] = $aTo[$i];
-    }
-    else {
+    } else {
       $aResults['KO'][] = $aTo[$i];
     }
   }
   return $aResults;
+}
+
+function shared_link_alter(&$variables)
+{
+  if ($variables["url"]->isExternal()) {
+    if ($variables['text'] == "facebook_for_jdp") {
+      $variables['options']['attributes']['target'] = '_blank';
+      $variables['options']['attributes']['aria-label'] = $variables['text'];
+      $variables['text'] = new FormattableMarkup('<i class="fab fa-facebook-square" aria-hidden="true"></i>', []);
+    }
+  }
 }

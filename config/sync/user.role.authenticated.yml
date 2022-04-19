@@ -9,6 +9,7 @@ dependencies:
     - association
     - comment
     - contact
+    - fontawesome
     - node
     - poll
     - search
@@ -24,6 +25,7 @@ is_admin: false
 permissions:
   - 'access comments'
   - 'access content'
+  - 'access fontawesome additional settings'
   - 'access polls'
   - 'access shortcuts'
   - 'access site-wide contact form'
