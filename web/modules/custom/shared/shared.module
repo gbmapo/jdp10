@@ -100,6 +100,8 @@ function shared_mail_alter(&$message)
     case "association_membershipfirstemail":
     case "association_membershipreminderemail":
     case "amap_emailforstupids":
+    case 'amap_emailfordistributiond':
+    case 'amap_emailfordistributionx':
     case "sel_emailfordeactivatedservices":
     case "sel_emailforexchange":
     case "sel_emailfornewservices":
