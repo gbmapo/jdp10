@@ -22,6 +22,7 @@ tr.distrib- {
     display: none;
 }
 
+/* Remove arrows/spinners from input type number with CSS. */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;

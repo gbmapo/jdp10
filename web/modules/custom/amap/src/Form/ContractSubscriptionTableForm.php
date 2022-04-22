@@ -35,10 +35,10 @@ class ContractSubscriptionTableForm extends FormBase
     $aContractTypeHeader = $aContractType[2];
 
     $form['subscriptions'] = [
-      '#type'       => 'table',
-      '#sticky'     => TRUE,
+      '#type' => 'table',
+      '#sticky' => TRUE,
       '#responsive' => TRUE,
-      '#id'         => 'subscriptions',
+      '#id' => 'subscriptions',
       '#quantities' => $iNumberOfQuantities,
     ];
 
@@ -46,9 +46,9 @@ class ContractSubscriptionTableForm extends FormBase
     $form['subscriptions']['#header'] = array_merge($form['subscriptions']['#header'], $aContractTypeHeader);
     $aContractStandardHeader = [
       'sharedwith' => t('Shared with'),
-      'comment'    => t('Comment'),
-      'file'       => '•••',
-      'addRow'     => '',
+      'comment' => t('Comment'),
+      'file' => '•••',
+      'addRow' => '',
     ];
     $form['subscriptions']['#header'] = array_merge($form['subscriptions']['#header'], $aContractStandardHeader);
 
@@ -112,8 +112,7 @@ class ContractSubscriptionTableForm extends FormBase
       $sharedwith_id = $value->sharedwith_member_id;
       if ($sharedwith_id == "0") {
         $iKey = 0;
-      }
-      else {
+      } else {
         if (!array_search($sharedwith_id, $results_am)) {
           $results_am = $results_am + [$sharedwith_id => t('Member') . sprintf("%03d", $sharedwith_id)];
         }
@@ -129,58 +128,56 @@ class ContractSubscriptionTableForm extends FormBase
       for ($i = 1; $i <= $iNumberOfQuantities; $i++) {
         $sField = 'quantity' . sprintf("%02d", $i);
         $default_value = $value->$sField;
-        if ($default_value == 0) {
+        if ($default_value == "" || $default_value == 0) {
           $default_value = "";
-        }
-        elseif ((int)$default_value == (float)$default_value) {
+        } elseif ((int)$default_value == (float)$default_value) {
           $default_value = sprintf("%d", $default_value);
-        }
-        else {
+        } else {
           $default_value = sprintf("%01.2f", $value->$sField);
         }
         $sQuantities4Hash .= $default_value . "_";
         $form['subscriptions'][$myKey][$sField] = [
-          '#type'          => 'number',
-          '#min'           => 0.00,
-          '#max'           => 99.95,
-          '#step'          => 0.05,
+          '#type' => 'number',
+          '#min' => 0.00,
+          '#max' => 99.95,
+          '#step' => 0.05,
           '#default_value' => $default_value,
         ];
       }
       $form['subscriptions'][$myKey]['sharedwith'] = [
-        '#type'          => 'select',
-        '#options'       => $results_am,
+        '#type' => 'select',
+        '#options' => $results_am,
         '#default_value' => $iKey,
       ];
       $form['subscriptions'][$myKey]['comment'] = [
-        '#type'          => 'textarea',
-        '#rows'          => 1,
+        '#type' => 'textarea',
+        '#rows' => 1,
         '#default_value' => $value->comment,
       ];
       $fileId = (int)$value->file__target_id;
       $title = ($fileId == 0) ? '000' : sprintf("%03d", $fileId);
       $form['subscriptions'][$myKey]['filehead'] = [
-        '#type'  => 'details',
+        '#type' => 'details',
         '#title' => $title,
       ];
       $form['subscriptions'][$myKey]['filehead']['file'] = [
-        '#type'              => 'managed_file',
-        '#upload_location'   => 'private://contracts/subscriptions/',
+        '#type' => 'managed_file',
+        '#upload_location' => 'private://contracts/subscriptions/',
         '#upload_validators' => [
           'file_validate_extensions' => ['pdf'],
         ],
-        '#default_value'     => [$fileId],
+        '#default_value' => [$fileId],
       ];
       if ($sContractIsOpenForSubscription) {
         $form['subscriptions'][$myKey]['addRow'] = [
-          '#type'  => 'submit',
-          '#name'  => $myKey,
+          '#type' => 'submit',
+          '#name' => $myKey,
           '#value' => '+',
-          '#ajax'  => [
+          '#ajax' => [
             'callback' => '::ajaxAddRow',
-            'wrapper'  => $wrapper,
+            'wrapper' => $wrapper,
             'progress' => [
-              'type'    => 'throbber',
+              'type' => 'throbber',
               'message' => NULL,
             ],
           ],
@@ -195,19 +192,19 @@ class ContractSubscriptionTableForm extends FormBase
 
     if ($sContractIsOpenForSubscription) {
       $form['submit'] = [
-        '#type'  => 'submit',
-        '#name'  => 'submit',
+        '#type' => 'submit',
+        '#name' => 'submit',
         '#value' => $this->t('Submit'),
-        '#ajax'  => [
-          'wrapper'  => $wrapper,
+        '#ajax' => [
+          'wrapper' => $wrapper,
           'callback' => '::ajaxSubmit',
         ],
       ];
     }
 
     $form['cancel'] = [
-      '#type'  => 'submit',
-      '#name'  => 'cancel',
+      '#type' => 'submit',
+      '#name' => 'cancel',
       '#value' => $this->t('Cancel'),
     ];
 
@@ -218,6 +215,9 @@ class ContractSubscriptionTableForm extends FormBase
 
   public function validateForm(array &$form, FormStateInterface $form_state)
   {
+    if ($form_state->getTriggeringElement()['#name'] == 'cancel') {
+      return;
+    }
     parent::validateForm($form, $form_state);
   }
 
@@ -259,8 +259,7 @@ class ContractSubscriptionTableForm extends FormBase
                       }
                   }
                 }
-              }
-              else {
+              } else {
               }
             }
           }
@@ -303,12 +302,10 @@ class ContractSubscriptionTableForm extends FormBase
           if ($sQuantities != "") {
             $entity = $storage->create();
             $sAction = 'C';
-          }
-          else {
+          } else {
             $sAction = '0';
           }
-        }
-        else {
+        } else {
           $entity = $storage->load($id);
           if ($sQuantities != "") {
             $file = $value['filehead']['file'];
@@ -316,12 +313,10 @@ class ContractSubscriptionTableForm extends FormBase
             $hash = $sQuantities4Hash . $value['sharedwith'] . $value['comment'] . $file;
             if ($hash == $value['hash']) {
               $sAction = '0';
-            }
-            else {
+            } else {
               $sAction = 'M';
             }
-          }
-          else {
+          } else {
             $sAction = 'S';
           }
         }
@@ -349,11 +344,9 @@ class ContractSubscriptionTableForm extends FormBase
       _export_amap_CSV('amap_contracts_subscriptions', 'rest_export_1', $args[0]);
       \Drupal::messenger()->addMessage($this->t('The changes have been saved.'));
 
-    }
-    elseif ($form_state->getTriggeringElement()['#name'] == 'cancel') {
+    } elseif ($form_state->getTriggeringElement()['#name'] == 'cancel') {
       $form_state->setRedirect('amap.contracts');
-    }
-    else {
+    } else {
       $form_state->setRebuild();
     }
   }
