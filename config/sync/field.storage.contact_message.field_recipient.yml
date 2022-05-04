@@ -39,10 +39,10 @@ settings:
       value: '181'
       label: '2. AMAP Farine et Huile'
     -
-      value: '162'
+      value: '191'
       label: '2. AMAP Fruits rouges'
     -
-      value: '176'
+      value: '189'
       label: '2. AMAP Herbier d''Elsa'
     -
       value: '172'
@@ -54,7 +54,7 @@ settings:
       value: '173'
       label: '2. AMAP Lentilles Épeautre'
     -
-      value: '154'
+      value: '190'
       label: '2. AMAP Miel'
     -
       value: '165'

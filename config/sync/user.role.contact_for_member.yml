@@ -2,8 +2,6 @@ uuid: b5f1ad00-2d49-43a4-bfb0-43ee94cefbdb
 langcode: fr
 status: true
 dependencies:
-  module:
-    - association
   enforced:
     module:
       - association
@@ -13,5 +11,4 @@ id: contact_for_member
 label: 'Contact pour adhérent'
 weight: -6
 is_admin: null
-permissions:
-  - 'renew membership'
+permissions: {  }
