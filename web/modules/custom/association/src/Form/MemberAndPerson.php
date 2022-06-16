@@ -256,6 +256,8 @@ class MemberAndPerson extends FormBase
     $user->setEmail($values['email1']);
     $user->save();
 
+    drupal_flush_all_caches();
+
     \Drupal::messenger()->addMessage($this->t('Member « %label » has been added.', [
       '%label' => $values['designation'],
     ]));

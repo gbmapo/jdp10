@@ -216,7 +216,7 @@ class ContractSubscriptionTableForm extends FormBase
   public function validateForm(array &$form, FormStateInterface $form_state)
   {
     if ($form_state->getTriggeringElement()['#name'] == 'cancel') {
-      return;
+      $form_state->setRedirect('amap.contracts');
     }
     parent::validateForm($form, $form_state);
   }

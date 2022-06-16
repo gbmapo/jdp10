@@ -965,6 +965,8 @@ class MembershipStep0 extends FormBase {
         $user->save();
 
       }
+
+      drupal_flush_all_caches();
     }
     // Completion message -----------------------------------------------------
     if ($this->currentUser()->isAnonymous()) {

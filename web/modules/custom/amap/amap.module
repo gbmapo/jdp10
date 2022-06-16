@@ -664,7 +664,6 @@ function amap_mail($key, &$message, $params)
       $message['body'][] = check_markup(nl2br($sBody), 'full_html');
       break;
     case 'emailfordistributiond':
-      $message['headers']['bcc'] = $sFrom;
       $message['subject'] = '[L\'AMAP du Jardin de Poissy] La distribution du ' . $params[1] . ' manque de bras';
       $sBody = "<b>" . $params[1] . "</b>, ";
       switch ($params[2]) {
@@ -681,7 +680,6 @@ function amap_mail($key, &$message, $params)
       $message['body'][] = check_markup(nl2br($sBody), 'full_html');
       break;
     case 'emailfordistributionx':
-      $message['headers']['bcc'] = $sFrom;
       $message['subject'] = '[L\'AMAP du Jardin de Poissy] La distribution du ' . $params[1] . ' manque de référent';
       $sBody = "<b>" . $params[1] . "</b>, aucun référent de distribution n'est inscrit.";
       $message['body'][] = check_markup(nl2br($sBody), 'full_html');
