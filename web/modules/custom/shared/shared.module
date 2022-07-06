@@ -126,13 +126,13 @@ function shared_mail_alter(&$message)
       break;
     //----------------------------------------------------------------------
     case "user_register_pending_approval":
+    case "user_status_activated":
       $bcc = \Drupal::config('system.site')->get('mail');
       $message['headers']['Bcc'] = $bcc;
       break;
     case "user_password_reset":
     case "user_register_admin_created":
     case "user_register_no_approval_required":
-    case "user_status_activated":
     case "user_status_blocked":
     case "user_status_deleted":
       break;
@@ -235,7 +235,8 @@ function shared_form_alter(&$form, FormStateInterface $form_state, $form_id)
           $form['mail']['views_send_attachments']['#description'] = NULL;
           $form['additional']['#type'] = 'hidden';
           $form['views_send_remember']['#type'] = 'hidden';
-          $form['views_send_direct']['#disabled'] = TRUE;
+          $form['views_send_direct']['#default_value'] = 0;
+          $form['views_send_direct']['#type'] = 'hidden';
           $form['#attached']['library'][] = 'shared/masscontact';
           break;
 
