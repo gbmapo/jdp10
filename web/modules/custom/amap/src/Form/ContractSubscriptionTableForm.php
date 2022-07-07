@@ -341,6 +341,9 @@ class ContractSubscriptionTableForm extends FormBase
         }
       }
 
+//    Mise à jour de la liste des AMAPiens
+      _setAmapien();
+
       _export_amap_CSV('amap_contracts_subscriptions', 'rest_export_1', $args[0]);
       \Drupal::messenger()->addMessage($this->t('The changes have been saved.'));
 

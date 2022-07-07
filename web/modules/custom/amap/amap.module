@@ -435,11 +435,6 @@ function amap_cron()
   }
 
   // ----------------------------------------------------------------------------
-  // Mise à jour de la liste des AMAPiens
-  // ----------------------------------------------------------------------------
-  _setAmapien();
-
-  // ----------------------------------------------------------------------------
   // Envoi du courriel 'Rappel pour les étourdis'
   // ----------------------------------------------------------------------------
   $dNextEmailForStupids = \Drupal::state()->get('amap.NextEmailForStupids', '');
@@ -594,13 +589,13 @@ function _sendEmailsForNextDistribution()
       $role = 'amapien';
       $key = 'emailfordistributiond';
       $info = 'email for next distribution (AMAPiens): ';
-      _sendEmails($role, $key, $info, $D, $X);
+      _sendEmailsForNextDistributionPerRole($role, $key, $info, $D, $X);
     }
     if ($X < AMAP_REFERENT_PER_DISTRIBUTION_MIN) {
       $role = 'referent_of_distribution';
       $key = 'emailfordistributionx';
       $info = 'email for next distribution (Referents): ';
-      _sendEmails($role, $key, $info, $D, $X);
+      _sendEmailsForNextDistributionPerRole($role, $key, $info, $D, $X);
     }
   } else {
     \Drupal::logger('amap')->info('email for next distribution: nothing to do.');
@@ -611,7 +606,7 @@ function _sendEmailsForNextDistribution()
 
 }
 
-function _sendEmails($role, $key, $info, $D, $X)
+function _sendEmailsForNextDistributionPerRole($role, $key, $info, $D, $X)
 {
   setlocale(LC_TIME, "fr_FR.UTF-8");
   $sNextWednesday = strftime("%e %B %G", strtotime("next Wednesday"));
@@ -636,7 +631,7 @@ function _sendEmails($role, $key, $info, $D, $X)
   $message['key'] = $key;
   $message['params'][0] = $sRecipients;
   $aResults = shared_send_email($message);
-  \Drupal::logger('sel')
+  \Drupal::logger('amap')
     ->info('@title@number emails sent, @number2 emails not sent.', [
       '@title' => $info,
       '@number' => isset($aResults['OK']) ? count($aResults['OK']) : 0,
