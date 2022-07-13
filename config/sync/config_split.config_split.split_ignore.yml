@@ -1,0 +1,16 @@
+uuid: 5e1f9878-ee84-4384-907d-f7e989d50e08
+langcode: fr
+status: true
+dependencies: {  }
+id: split_ignore
+label: 'Split Ignore'
+description: ''
+weight: -10
+folder: ''
+module: {  }
+theme: {  }
+blacklist:
+  - phpmailer_smtp.settings
+graylist: {  }
+graylist_dependents: true
+graylist_skip_equal: true
