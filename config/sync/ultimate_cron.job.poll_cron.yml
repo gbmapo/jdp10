@@ -6,7 +6,7 @@ dependencies:
     - poll
 title: 'Default cron handler'
 id: poll_cron
-weight: 0
+weight: -3
 module: poll
 callback: poll_cron
 scheduler:

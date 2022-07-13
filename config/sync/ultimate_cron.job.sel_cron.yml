@@ -6,7 +6,7 @@ dependencies:
     - sel
 title: 'Default cron handler'
 id: sel_cron
-weight: 0
+weight: -9
 module: sel
 callback: sel_cron
 scheduler:

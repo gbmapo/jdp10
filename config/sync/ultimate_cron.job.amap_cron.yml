@@ -6,7 +6,7 @@ dependencies:
     - amap
 title: 'Default cron handler'
 id: amap_cron
-weight: 0
+weight: -10
 module: amap
 callback: amap_cron
 scheduler:
