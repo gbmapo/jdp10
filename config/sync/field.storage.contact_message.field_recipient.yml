@@ -21,7 +21,7 @@ settings:
       value: sel@lejardindepoissy.org
       label: '3. SÉL'
     -
-      value: '163'
+      value: '192'
       label: '2. AMAP Agneau'
     -
       value: '170'
@@ -30,7 +30,7 @@ settings:
       value: '168'
       label: '2. AMAP Bœuf'
     -
-      value: '166'
+      value: '195'
       label: '2. AMAP Champignons'
     -
       value: '178'
@@ -57,14 +57,14 @@ settings:
       value: '190'
       label: '2. AMAP Miel'
     -
-      value: '165'
+      value: '196'
       label: '2. AMAP Pain'
-    -
-      value: '169'
-      label: '2. AMAP Panier solidaire'
     -
       value: '177'
       label: '2. AMAP Pommes de terre'
+    -
+      value: '197'
+      label: '2. AMAP Pommes-Poires'
     -
       value: '167'
       label: '2. AMAP Porc'
@@ -72,7 +72,7 @@ settings:
       value: '185'
       label: '2. AMAP Produits laitiers (Brebis)'
     -
-      value: '186'
+      value: '194'
       label: '2. AMAP Produits laitiers (Vache)'
     -
       value: '155'

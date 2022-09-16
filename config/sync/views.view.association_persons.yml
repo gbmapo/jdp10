@@ -1758,7 +1758,9 @@ display:
               amapien: '0'
               contact_for_member: '0'
               referent_of_distribution: '0'
+              referent_de_rencontre: '0'
               referent_of_contract: '0'
+              producteur: '0'
               secretary: '0'
               administrator: '0'
             reduce: true
