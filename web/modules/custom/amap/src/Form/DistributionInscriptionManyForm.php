@@ -194,9 +194,11 @@ class DistributionInscriptionManyForm extends FormBase
     else {
 
       $iCurrentUserId = \Drupal::currentUser()->id();
+      $iNextWed = $form_state->getValue('inscriptions')[0]['distributiondate_id'];
 
       $query = \Drupal::database()->delete('distribution_inscription');
       $query->condition('amapien_id', $iCurrentUserId);
+      $query->condition('distributiondate_id', $iNextWed, '>=');
       $query->execute();
 
       foreach ($form_state->getValue('inscriptions') as $key => $value) {
