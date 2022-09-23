@@ -169,19 +169,29 @@ function shared_form_alter(&$form, FormStateInterface $form_state, $form_id)
           break;
 
         case 'views_send_config_form':
+          $oCurrentUser = \Drupal::currentUser();
           $person = \Drupal::entityTypeManager()
             ->getStorage('person')
-            ->load(\Drupal::currentUser()->id());
+            ->load($oCurrentUser->id());
           $sNomPrenom = $person->label();
           $sMail = $person->get('email')
             ->getString();
+          $currentUserRoles = $oCurrentUser->getRoles();
+          $bReferentDistrib = (in_array("referent_of_distribution", $currentUserRoles)) ? TRUE : FALSE;
           $aFromName = [
             0 => '<Veuillez choisir une valeur dans la liste>',
             1 => $sNomPrenom,
-            2 => 'Le Jardin de Poissy',
-            3 => 'L\'AMAP du Jardin de Poissy',
-            4 => 'Le Grenier à SEL',
           ];
+          if (in_array("secretary", $currentUserRoles)) {
+            $aFromName[2] = 'Le Jardin de Poissy';
+          }
+          if (in_array("referent_of_contract", $currentUserRoles)) {
+            $aFromName[3] = 'L\'AMAP du Jardin de Poissy';
+          }
+          if (in_array("referent_de_rencontre", $currentUserRoles)) {
+            $aFromName[4] = 'Le Grenier à SÉL';
+          }
+
           $form['from']['views_send_from_name_bis'] = [
             '#attributes' => [
               'onchange' => 'hasChanged(this)',
