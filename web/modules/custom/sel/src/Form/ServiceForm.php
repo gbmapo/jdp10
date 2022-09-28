@@ -56,7 +56,7 @@ class ServiceForm extends ContentEntityForm
       $sDueDate = $values['duedate'][0]['value']->format("Y-m-d");
       $sToday = strftime("%Y-%m-%d");
       $sIn2Weeks = strftime("%Y-%m-%d", strtotime("+ 2 weeks"));
-      $sIn3Months = strftime("%Y-%m-%d", strtotime("+ 3 months"));
+      $sIn6Months = strftime("%Y-%m-%d", strtotime("+ 6 months"));
 
       if ($values['status']['value'] == 0) {
         //Pas de contrôle si le service n'est pas publié
@@ -72,8 +72,8 @@ class ServiceForm extends ContentEntityForm
             }
           }
           else {
-            if ($sDueDate > $sIn3Months) {
-              $form_state->setErrorByName('duedate', $this->t('Validity period cannot exceed three months!'));
+            if ($sDueDate > $sIn6Months) {
+              $form_state->setErrorByName('duedate', $this->t('Validity period cannot exceed six months!'));
             }
           }
         }
