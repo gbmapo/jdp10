@@ -165,7 +165,7 @@ function _sendEmailForUrgentService($sSeliste, $sAction, $sService, $sDueDate) {
 
   $OK = isset($aResults['OK']) ? count($aResults['OK']) : 0;
   $KO = isset($aResults['KO']) ? count($aResults['KO']) : 0;
-  \Drupal::logger('association')
+  \Drupal::logger('sel')
     ->info('Urgent service: @number emails sent, @number2 emails not sent.', [
       '@number' => $OK,
       '@number2' => $KO,
