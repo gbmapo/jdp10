@@ -9,7 +9,6 @@ weight: 0
 folder: ../config/split_dvlp
 module:
   devel: 0
-  devel_kint_extras: 0
   mail_safety: 0
   potx: 0
 theme: {  }
