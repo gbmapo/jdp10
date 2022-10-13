@@ -601,8 +601,12 @@ function _sendEmailsForNextDistribution()
     \Drupal::logger('amap')->info('email for next distribution: nothing to do.');
   }
 
-  $sNextThursday = strftime("%Y-%m-%d %H:%M:%S", strtotime("next Thursday"));
-  \Drupal::state()->set('amap.EmailForNextDistribution', $sNextThursday);
+  if(date("l")=="Thursday") {
+    $sNextDay = strftime("%Y-%m-%d %H:%M:%S", strtotime("next Sunday"));
+  } else {
+    $sNextDay = strftime("%Y-%m-%d %H:%M:%S", strtotime("next Thursday"));
+  }
+  \Drupal::state()->set('amap.EmailForNextDistribution', $sNextDay);
 
 }
 
@@ -652,10 +656,14 @@ function amap_mail($key, &$message, $params)
     case 'emailforstupids':
       $message['headers']['bcc'] = $sFrom;
       $message['subject'] = '[L\'AMAP du Jardin de Poissy] Distribution du ' . $params[0] . ' - Rappel pour les étourdis';
-      $sBody = "<b>" . $params[0] . "</b> :";
-      $sBody .= "<br>Sont charg&eacute;s de la <i>Distribution</i> : " . $params[1];
+      $sBody  = "<b>" . $params[0] . "</b>.";
+      $sBody .= "<br><br>Sont charg&eacute;s de la <i>Distribution</i> : " . $params[1];
       $sBody .= "<br><i>est Rempla&ccedil;ant</i> : " . $params[2];
       $sBody .= "<br><i>est R&eacute;f&eacute;rent</i> : " . $params[3];
+      $sBody .= "<br><br>En cas d'indisponibilit&eacute; de derni&eacute;re minute, vous devez pr&eacute;venir le « Rempla&ccedil;ant » et le « R&eacute;f&eacute;rent ».";
+      if (date("W")%2 == 1) {
+        $sBody .= "<br><br>N'oubliez pas de sortir la poubelle bleue en fin de distribution.";
+      }
       $message['body'][] = check_markup(nl2br($sBody), 'full_html');
       break;
     case 'emailfordistributiond':
