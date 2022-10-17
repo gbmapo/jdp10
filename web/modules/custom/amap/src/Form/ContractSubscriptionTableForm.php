@@ -9,6 +9,7 @@ use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\RedirectCommand;
 use Drupal\Core\Url;
 
+use Drupal\Component\Utility\Bytes;
 
 /**
  * Class ContractSubscriptionTableForm.
@@ -107,6 +108,11 @@ class ContractSubscriptionTableForm extends FormBase
     $results = \Drupal::database()->query($query);
 
 //  Génération des lignes du tableau
+    $upload_max_filesize = Bytes::toInt(ini_get('upload_max_filesize'));
+    $post_max_size = Bytes::toInt(ini_get('post_max_size'));
+    $myMax = 2 * 1024 * 1024;
+    $upload_max = min($upload_max_filesize, $post_max_size, $myMax);
+    $upload_max_inMB = $upload_max / 1024 / 1024;
     foreach ($results as $key => $value) {
       $myKey = 10 + $key * 10;
       $sharedwith_id = $value->sharedwith_member_id;
@@ -162,9 +168,11 @@ class ContractSubscriptionTableForm extends FormBase
       ];
       $form['subscriptions'][$myKey]['filehead']['file'] = [
         '#type' => 'managed_file',
+        '#description' => $this->t('Limited to @size MB.', array('@size' => $upload_max_inMB)).'<br>'.$this->t('Allowed types: pdf.'),
         '#upload_location' => 'private://contracts/subscriptions/',
         '#upload_validators' => [
           'file_validate_extensions' => ['pdf'],
+          'file_validate_size' => [$upload_max],
         ],
         '#default_value' => [$fileId],
       ];
@@ -216,9 +224,10 @@ class ContractSubscriptionTableForm extends FormBase
   public function validateForm(array &$form, FormStateInterface $form_state)
   {
     if ($form_state->getTriggeringElement()['#name'] == 'cancel') {
-      $form_state->setRedirect('amap.contracts');
+      return;
     }
     parent::validateForm($form, $form_state);
+
   }
 
   public function ajaxAddRow(array &$form, FormStateInterface $form_state)
