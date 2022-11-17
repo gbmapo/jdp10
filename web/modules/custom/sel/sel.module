@@ -181,6 +181,7 @@ function _setListOfSelistes() {
   $query->leftJoin('user__roles', 'ur', 'ur.entity_id = ap.user_id');
   $query->fields('ap', ['id', 'lastname', 'firstname', 'email'])
     ->fields('ur', ['entity_id', 'deleted', 'roles_target_id'])
+    ->condition('isactive', '1', '=')
     ->condition('status', [2, 3, 4], 'IN')
     ->condition('deleted', '0', '=')
     ->condition('roles_target_id', 'seliste', '=')
