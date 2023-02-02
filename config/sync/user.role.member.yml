@@ -1,0 +1,12 @@
+uuid: 3a82a839-9174-4f96-b513-f75e9e93bca6
+langcode: fr
+status: true
+dependencies:
+  module:
+    - association
+id: member
+label: Adhérent
+weight: 2
+is_admin: null
+permissions:
+  - 'renew membership'

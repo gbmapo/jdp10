@@ -456,6 +456,9 @@ display:
         options:
           role:
             authenticated: authenticated
+      cache:
+        type: none
+        options: {  }
       filters:
         status:
           id: status
@@ -542,6 +545,7 @@ display:
         options: {  }
       defaults:
         access: false
+        cache: false
         title: false
         pager: false
         style: false

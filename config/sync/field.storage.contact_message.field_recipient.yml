@@ -24,7 +24,7 @@ settings:
       value: '192'
       label: '2. AMAP Agneau'
     -
-      value: '170'
+      value: '199'
       label: '2. AMAP Brioche de Noël'
     -
       value: '168'
@@ -36,22 +36,28 @@ settings:
       value: '178'
       label: '2. AMAP Cidre'
     -
-      value: '181'
+      value: '214'
+      label: '2. AMAP Cidre'
+    -
+      value: '207'
+      label: '2. AMAP Cidre déstockage'
+    -
+      value: '209'
       label: '2. AMAP Farine et Huile'
     -
       value: '191'
       label: '2. AMAP Fruits rouges'
     -
-      value: '189'
+      value: '206'
       label: '2. AMAP Herbier d''Elsa'
     -
-      value: '172'
+      value: '200'
       label: '2. AMAP Jus de pommes Hutrel'
     -
-      value: '179'
+      value: '203'
       label: '2. AMAP Légumes'
     -
-      value: '173'
+      value: '201'
       label: '2. AMAP Lentilles Épeautre'
     -
       value: '190'
@@ -60,31 +66,28 @@ settings:
       value: '196'
       label: '2. AMAP Pain'
     -
-      value: '177'
+      value: '204'
       label: '2. AMAP Pommes de terre'
     -
       value: '197'
       label: '2. AMAP Pommes-Poires'
     -
-      value: '167'
+      value: '198'
       label: '2. AMAP Porc'
     -
       value: '185'
       label: '2. AMAP Produits laitiers (Brebis)'
     -
-      value: '194'
+      value: '215'
       label: '2. AMAP Produits laitiers (Vache)'
     -
-      value: '155'
-      label: '2. AMAP Produits transformés'
-    -
-      value: '171'
+      value: '205'
       label: '2. AMAP Terrines'
     -
-      value: '180'
+      value: '212'
       label: '2. AMAP Volaille'
     -
-      value: '174'
+      value: '202'
       label: '2. AMAP Œufs'
   allowed_values_function: shared_allowed_values_function
 module: options

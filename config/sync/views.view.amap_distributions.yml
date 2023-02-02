@@ -1784,6 +1784,9 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+      cache:
+        type: none
+        options: {  }
       filters:
         distributiondate:
           id: distributiondate
@@ -2041,6 +2044,7 @@ display:
           separator: ''
           hide_empty: false
       defaults:
+        cache: false
         title: false
         style: false
         row: false
