@@ -32,7 +32,7 @@
         "drupal/fontawesome": "^2.22",
         "drupal/fullcalendar_view": "^5.1",
         "drupal/honeypot": "^2.0",
-        "drupal/imce": "^2.4",
+        "drupal/imce": "^3.0",
         "drupal/mail_safety": "^1.2",
         "drupal/mailsystem": "^4.2",
         "drupal/mimemail": "^1.0@alpha",
