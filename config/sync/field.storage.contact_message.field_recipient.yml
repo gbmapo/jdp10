@@ -33,9 +33,6 @@ settings:
       value: '195'
       label: '2. AMAP Champignons'
     -
-      value: '178'
-      label: '2. AMAP Cidre'
-    -
       value: '214'
       label: '2. AMAP Cidre'
     -
@@ -75,10 +72,10 @@ settings:
       value: '198'
       label: '2. AMAP Porc'
     -
-      value: '185'
+      value: '218'
       label: '2. AMAP Produits laitiers (Brebis)'
     -
-      value: '215'
+      value: '217'
       label: '2. AMAP Produits laitiers (Vache)'
     -
       value: '205'
@@ -87,7 +84,7 @@ settings:
       value: '212'
       label: '2. AMAP Volaille'
     -
-      value: '202'
+      value: '216'
       label: '2. AMAP Œufs'
   allowed_values_function: shared_allowed_values_function
 module: options
