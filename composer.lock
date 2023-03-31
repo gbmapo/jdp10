@@ -3867,26 +3867,26 @@
         },
         {
             "name": "drupal/poll",
-            "version": "1.5.0",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/poll.git",
-                "reference": "8.x-1.5"
+                "reference": "8.x-1.6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/poll-8.x-1.5.zip",
-                "reference": "8.x-1.5",
-                "shasum": "59b4ec4545aa5901c5f3a177760b17b645c0617d"
+                "url": "https://ftp.drupal.org/files/projects/poll-8.x-1.6.zip",
+                "reference": "8.x-1.6",
+                "shasum": "e7ae83ed214a03e6ecf26a8ac7b500ba61d4dde5"
             },
             "require": {
-                "drupal/core": "^8.7.7 || ^9"
+                "drupal/core": "^9 || ^10"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.5",
-                    "datestamp": "1638777657",
+                    "version": "8.x-1.6",
+                    "datestamp": "1680209860",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3899,12 +3899,16 @@
             ],
             "authors": [
                 {
+                    "name": "adammalone",
+                    "homepage": "https://www.drupal.org/user/1295980"
+                },
+                {
                     "name": "Berdir",
                     "homepage": "https://www.drupal.org/user/214652"
                 },
                 {
-                    "name": "adammalone",
-                    "homepage": "https://www.drupal.org/user/1295980"
+                    "name": "BramDriesen",
+                    "homepage": "https://www.drupal.org/user/3383264"
                 },
                 {
                     "name": "mqanneh",
