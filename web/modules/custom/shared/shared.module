@@ -377,5 +377,10 @@ function shared_link_alter(&$variables)
       $variables['options']['attributes']['aria-label'] = $variables['text'];
       $variables['text'] = new FormattableMarkup('<i class="fab fa-facebook-square" aria-hidden="true"></i>', []);
     }
+    if ($variables['text'] == "instagram_for_jdp") {
+      $variables['options']['attributes']['target'] = '_blank';
+      $variables['options']['attributes']['aria-label'] = $variables['text'];
+      $variables['text'] = new FormattableMarkup('<i class="fab fa-instagram-square" aria-hidden="true"></i>', []);
+    }
   }
 }
