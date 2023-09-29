@@ -12,7 +12,6 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\user\Entity\User;
 
-
 /**
  * Class MembershipStep0.
  */
@@ -748,12 +747,13 @@ class MembershipStep0 extends FormBase {
       $this->saveData($form_state);
       switch ($form_state->getValue('payment')) {
         case '2':
-          $_SESSION['association']['anonymous'] = $this->currentUser()
-            ->isAnonymous();
-          $_SESSION['association']['designation'] = $form_state->getStorage()['designation'];
-          $_SESSION['association']['lastname'] = $form_state->getStorage()['lastname'];
-          $_SESSION['association']['firstname'] = $form_state->getStorage()['firstname'];
-          $_SESSION['association']['email'] = $form_state->getStorage()['email'];
+          $session = \Drupal::request()->getSession();
+          $session->set('association.anonymous', $this->currentUser()
+            ->isAnonymous());
+          $session->set('association.designation', $form_state->getStorage()['designation']);
+          $session->set('association.lastname', $form_state->getStorage()['lastname']);
+          $session->set('association.firstname', $form_state->getStorage()['firstname']);
+          $session->set('association.email', $form_state->getStorage()['email']);
           $response->addCommand(new \Drupal\Core\Ajax\RedirectCommand(Url::fromRoute('association.membership4')
             ->toString()));
           break;
