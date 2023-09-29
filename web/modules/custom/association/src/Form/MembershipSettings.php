@@ -7,6 +7,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\user\Entity\Role;
 use Drupal\user\Entity\User;
+use Drupal\Core\Datetime\DrupalDateTime;
 
 
 /**
@@ -35,7 +36,7 @@ class MembershipSettings extends FormBase {
     $rpReminder = $config->get('reminder');
 
     if ($rpStep == 0) {
-      $iY1 = (int) strftime("%Y");
+      $iY1 = (int) DrupalDateTime::createFromTimestamp(strtotime("now"), new \DateTimeZone('Europe/Paris'), )->format('Y');
       $iY2 = $iY1 + 1;
       $form['actions']['1B'] = [
         '#type' => 'select',

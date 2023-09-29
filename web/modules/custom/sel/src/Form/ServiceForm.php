@@ -4,6 +4,7 @@ namespace Drupal\sel\Form;
 
 use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
  * Form controller for Service edit forms.
@@ -54,9 +55,9 @@ class ServiceForm extends ContentEntityForm
 
       $values = $form_state->getValues();
       $sDueDate = $values['duedate'][0]['value']->format("Y-m-d");
-      $sToday = strftime("%Y-%m-%d");
-      $sIn2Weeks = strftime("%Y-%m-%d", strtotime("+ 2 weeks"));
-      $sIn6Months = strftime("%Y-%m-%d", strtotime("+ 6 months"));
+      $sToday = DrupalDateTime::createFromTimestamp(strtotime("now"), new \DateTimeZone('Europe/Paris'), )->format('Y-m-d');
+      $sIn2Weeks = DrupalDateTime::createFromTimestamp(strtotime("+ 2 weeks"), new \DateTimeZone('Europe/Paris'), )->format('Y-m-d');
+      $sIn6Months = DrupalDateTime::createFromTimestamp(strtotime("+ 6 months"), new \DateTimeZone('Europe/Paris'), )->format('Y-m-d');
 
       if ($values['status']['value'] == 0) {
         //Pas de contrôle si le service n'est pas publié

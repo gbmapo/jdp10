@@ -11,6 +11,7 @@ use Drupal\user\Entity\User;
 use Drupal\views\ViewExecutable;
 use Drupal\views\Plugin\views\query\QueryPluginBase;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
  * Implements hook_help().
@@ -223,8 +224,7 @@ function _sendEmailForServicesExtraction($sCase) {
       break;
     case 'emailfornewservices':
       $query = \Drupal::entityQuery('service_category');
-      $dLastExtractionDate = strftime("%Y-%m-%d", strtotime("- 1 week", strtotime(\Drupal::state()
-        ->get('sel.NextEmailForNewServices'))));
+      $dLastExtractionDate = DrupalDateTime::createFromTimestamp(strtotime("- 1 week", strtotime(\Drupal::state()->get('sel.NextEmailForNewServices'))), new \DateTimeZone('Europe/Paris'), )->format('Y-m-d');
       $view = views_embed_view('sel_services', 'embed_2', $dLastExtractionDate);
       $view = \Drupal::service('renderer')->renderPlain($view);
       $aParams = [
@@ -254,7 +254,7 @@ function _sendEmailForServicesExtraction($sCase) {
       '@number2' => $KO,
     ]);
 
-  $sNextWeek = strftime("%Y-%m-%d", strtotime("+ 1 week"));
+  $sNextWeek = DrupalDateTime::createFromTimestamp(strtotime("+ 1 week"), new \DateTimeZone('Europe/Paris'), )->format('Y-m-d');
   \Drupal::state()->set($aParams[2], $sNextWeek);
 
 }

@@ -2,6 +2,8 @@
 
 namespace Drupal\amap;
 
+use Drupal\Core\Datetime\DrupalDateTime;
+
 /**
  * Class ListEnrolments.
  */
@@ -28,7 +30,7 @@ class ListEnrolments
 
     $iCurrentUserId = \Drupal::currentUser()->id();
 
-    $sNextWed = ($this->filter == 'all') ? '' : strftime("%Y-%m-%d", strtotime("next Wednesday", strtotime("Yesterday")));
+    $sNextWed = ($this->filter == 'all') ? '' :  DrupalDateTime::createFromTimestamp(strtotime("next Wednesday", strtotime("Yesterday")), new \DateTimeZone('Europe/Paris'), )->format('Y-m-d');
     $database = \Drupal::database();
     $query = $database->select('distribution_date', 'amdd');
     $query->leftJoin('distribution_inscription', 'amdi', 'amdi.distributiondate_id = amdd.id');

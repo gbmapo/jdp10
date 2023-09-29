@@ -4,6 +4,7 @@ namespace Drupal\amap\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
  * Class DistributionDateTableForm.
@@ -47,7 +48,8 @@ class DistributionDateTableForm extends FormBase
     }
 
     $currentDay = date('Y-m-d');
-    $sNextWed = strftime("%Y-%m-%d", strtotime("next Wednesday", strtotime("Yesterday")));
+    $sNextWed = DrupalDateTime::createFromTimestamp(strtotime("next Wednesday", strtotime("Yesterday")), new \DateTimeZone('Europe/Paris'), )->format('Y-m-d');
+
 
     $storage  = \Drupal::entityTypeManager()->getStorage('distribution_date');
     $database = \Drupal::database();

@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Drupal\views\Plugin\views\query\QueryPluginBase;
 use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\Datetime\DrupalDateTime;
 
 const AMAP_AMAPIEN_PER_DISTRIBUTION = 5;
 const AMAP_RESERVE_PER_DISTRIBUTION = 1;
@@ -467,7 +468,7 @@ function _setAmapien()
     ->condition('roles', 'amapien')
     ->execute();
 
-  $sToday = strftime("%Y-%m-%d");
+  $sToday = DrupalDateTime::createFromTimestamp(strtotime("now"), new \DateTimeZone('Europe/Paris'), )->format('Y-m-d');
   $database = \Drupal::database();
   $query = $database->select('contract_subscription', 'cs');
   $query->leftJoin('contract', 'ct', 'ct.id = cs.contract_id');
@@ -505,7 +506,7 @@ function _sendEmailForStupids()
   $aX = [];
   $sTo = "";
 
-  $sNextWednesday = strftime("%Y-%m-%d", strtotime("next Wednesday", strtotime("Yesterday")));
+  $sNextWednesday = DrupalDateTime::createFromTimestamp(strtotime("next Wednesday", strtotime("Yesterday")), new \DateTimeZone('Europe/Paris'), )->format('Y-m-d');
   $database = \Drupal::database();
   $query = $database->select('distribution_date', 'amdd');
   $query->leftJoin('distribution_inscription', 'amdi', 'amdi.distributiondate_id = amdd.id');
@@ -540,7 +541,7 @@ function _sendEmailForStupids()
   $sR = implode(", ", $aR);
   $sX = implode(", ", $aX);
   setlocale(LC_TIME, "fr_FR.UTF-8");
-  $sNextWednesday = strftime("%A %d %B %Y", strtotime("next Wednesday", strtotime("Yesterday")));
+  $sNextWednesday = DrupalDateTime::createFromTimestamp(strtotime("next Wednesday", strtotime("Yesterday")), new \DateTimeZone('Europe/Paris'), )->format('l j F Y');
   $aParams = [$sNextWednesday, $sD, $sR, $sX];
 
   $message = [
@@ -552,7 +553,7 @@ function _sendEmailForStupids()
   ];
   $aResults = shared_send_email($message);
 
-  $sNextMonday = strftime("%Y-%m-%d %H:%M:%S", strtotime("next Monday"));
+  $sNextMonday = DrupalDateTime::createFromTimestamp(strtotime("next Monday"), new \DateTimeZone('Europe/Paris'), )->format('Y-m-d H-i-s');
   \Drupal::state()->set('amap.NextEmailForStupids', $sNextMonday);
   \Drupal::logger('amap')->info('email \'Rappel pour les étourdis\': sent.');
 }
@@ -560,7 +561,7 @@ function _sendEmailForStupids()
 function _sendEmailsForNextDistribution()
 {
 
-  $sNextWednesday = strftime("%Y-%m-%d", strtotime("next Wednesday"));
+  $sNextWednesday = DrupalDateTime::createFromTimestamp(strtotime("next Wednesday"), new \DateTimeZone('Europe/Paris'), )->format('Y-m-d');
   $database = \Drupal::database();
   $query = $database->select('distribution_date', 'amdd');
   $query->leftJoin('distribution_inscription', 'amdi', 'amdi.distributiondate_id = amdd.id');
@@ -602,9 +603,9 @@ function _sendEmailsForNextDistribution()
   }
 
   if(date("l")=="Thursday") {
-    $sNextDay = strftime("%Y-%m-%d %H:%M:%S", strtotime("next Sunday"));
+    $sNextDay = DrupalDateTime::createFromTimestamp(strtotime("next Sunday"), new \DateTimeZone('Europe/Paris'), )->format('Y-m-d H-i-s');
   } else {
-    $sNextDay = strftime("%Y-%m-%d %H:%M:%S", strtotime("next Thursday"));
+    $sNextDay = DrupalDateTime::createFromTimestamp(strtotime("next Thursday"), new \DateTimeZone('Europe/Paris'), )->format('Y-m-d H-i-s');
   }
   \Drupal::state()->set('amap.EmailForNextDistribution', $sNextDay);
 
@@ -613,7 +614,7 @@ function _sendEmailsForNextDistribution()
 function _sendEmailsForNextDistributionPerRole($role, $key, $info, $D, $X)
 {
   setlocale(LC_TIME, "fr_FR.UTF-8");
-  $sNextWednesday = strftime("%e %B %G", strtotime("next Wednesday"));
+  $sNextWednesday = DrupalDateTime::createFromTimestamp(strtotime("next Wednesday"), new \DateTimeZone('Europe/Paris'), )->format(' j F Y');
   $aParams = ['', $sNextWednesday, $D, $X];
   $message = [
     'module' => 'amap',

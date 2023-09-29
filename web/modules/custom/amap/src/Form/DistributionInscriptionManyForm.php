@@ -5,6 +5,7 @@ namespace Drupal\amap\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
+use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
  * Class DistributionInscriptionManyForm.
@@ -86,7 +87,7 @@ class DistributionInscriptionManyForm extends FormBase
         $bDisabledX = !$bReferentDistrib || ($row[3] == AMAP_REFERENT_PER_DISTRIBUTION && !$row[4]) || $row[5] || $row[6];
       }
       setlocale(LC_TIME, "fr_FR.UTF8");
-      $sDate = strftime("%d/%m/%Y", strtotime(substr($row[0], 5, 2) . "/" . substr($row[0], 8, 2) . "/" . substr($row[0], 0, 4)));
+      $sDate = DrupalDateTime::createFromTimestamp(strtotime(substr($row[0], 5, 2) . "/" . substr($row[0], 8, 2) . "/" . substr($row[0], 0, 4)), new \DateTimeZone('Europe/Paris'), )->format('d/m/Y');
 
       $form['inscriptions'][$key]['distributiondatelong'] = [
         '#markup' => $sDate,
