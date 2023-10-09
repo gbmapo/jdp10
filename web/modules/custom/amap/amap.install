@@ -3,40 +3,39 @@
 use Drupal\Core\Field\BaseFieldDefinition;
 
 /**
- * Implements hook_update_N() on Module AMAP Update # 8001.
+ * Implements hook_update_N() on Module AMAP.
  */
-function amap_update_8001(&$sandbox)
-{
+function amap_update_8001(&$sandbox) {
   $entity_type_manager = \Drupal::entityTypeManager();
   $bundle_of = 'contract_type';
 
   $storage = $entity_type_manager->getStorage($bundle_of);
   $bundle_definition = $entity_type_manager->getDefinition($bundle_of);
-//Sometimes the primary key isn't 'id'. e.g. 'eid' or 'item_id'.
+  //Sometimes the primary key isn't 'id'. e.g. 'eid' or 'item_id'.
   $id_key = $bundle_definition->getKey('id');
-//If there is no data table defined then use the base table.
+  //If there is no data table defined then use the base table.
   $table_name = $storage->getDataTable() ?: $storage->getBaseTable();
   $database = \Drupal::database();
   $definition_manager = \Drupal::entityDefinitionUpdateManager();
 
-//Store the existing values.
+  //Store the existing values.
   $header_values = $database->select($table_name)
     ->fields($table_name, [$id_key, 'formheader', 'exportheader'])
     ->execute()
     ->fetchAllAssoc($id_key);
 
-//Clear out the values.
+  //Clear out the values.
   $database->update($table_name)
     ->fields(['formheader' => NULL, 'exportheader' => NULL])
     ->execute();
 
-//Uninstall the field.
+  //Uninstall the field.
   $field_storage_definition = $definition_manager->getFieldStorageDefinition('formheader', $bundle_of);
   $definition_manager->uninstallFieldStorageDefinition($field_storage_definition);
   $field_storage_definition = $definition_manager->getFieldStorageDefinition('exportheader', $bundle_of);
   $definition_manager->uninstallFieldStorageDefinition($field_storage_definition);
 
-//Create a new field definition.
+  //Create a new field definition.
   $new_formheader = BaseFieldDefinition::create('string_long')
     ->setLabel(t('Header for Form'))
     ->setSettings([
@@ -71,20 +70,189 @@ function amap_update_8001(&$sandbox)
     ->setDisplayConfigurable('form', TRUE)
     ->setDisplayConfigurable('view', TRUE);
 
-//Install the new definition.
+  //Install the new definition.
   $definition_manager->installFieldStorageDefinition('formheader', $bundle_of, $bundle_of, $new_formheader);
   $definition_manager->installFieldStorageDefinition('exportheader', $bundle_of, $bundle_of, $new_exportheader);
 
-//Restore the values.
+  //Restore the values.
   foreach ($header_values as $id => $value) {
     $database->update($table_name)
-      ->fields(['formheader' => $value->formheader, 'exportheader' => $value->exportheader])
+      ->fields([
+        'formheader' => $value->formheader,
+        'exportheader' => $value->exportheader,
+      ])
       ->condition($id_key, $id)
       ->execute();
   }
 
   drupal_flush_all_caches();
 
-  \Drupal::messenger()->addMessage('Module AMAP Update # 8001 was executed successfully.');
+  \Drupal::messenger()
+    ->addMessage('Module AMAP Update # 8001 was executed successfully.');
+
+}
+
+/**
+ * Adds fields 'Quantity 29' to 'Quantity 36' to ContractSubscription
+ */
+function amap_update_9001(&$sandbox) {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $bundle_of = 'contract_subscription';
+  $definition_manager = \Drupal::entityDefinitionUpdateManager();
+
+  //Create new fields definition.
+  // ----------------------------------------------------------------------------
+  $weight = 33;
+  // ----------------------------------------------------------------------------
+  $weight++;
+  $quantity29 = BaseFieldDefinition::create('decimal')
+    ->setLabel(t('Quantity 29'))
+    ->setSettings([
+      'precision' => 4,
+      'scale' => 2,
+    ])
+    ->setDisplayOptions('view', [
+      'label' => 'above',
+      'weight' => $weight,
+    ])
+    ->setDisplayOptions('form', [
+      'weight' => $weight,
+    ])
+    ->setDisplayConfigurable('form', TRUE)
+    ->setDisplayConfigurable('view', TRUE);
+  // ----------------------------------------------------------------------------
+  $weight++;
+  $quantity30 = BaseFieldDefinition::create('decimal')
+    ->setLabel(t('Quantity 30'))
+    ->setSettings([
+      'precision' => 4,
+      'scale' => 2,
+    ])
+    ->setDisplayOptions('view', [
+      'label' => 'above',
+      'weight' => $weight,
+    ])
+    ->setDisplayOptions('form', [
+      'weight' => $weight,
+    ])
+    ->setDisplayConfigurable('form', TRUE)
+    ->setDisplayConfigurable('view', TRUE);
+  // ----------------------------------------------------------------------------
+  $weight++;
+  $quantity31 = BaseFieldDefinition::create('decimal')
+    ->setLabel(t('Quantity 31'))
+    ->setSettings([
+      'precision' => 4,
+      'scale' => 2,
+    ])
+    ->setDisplayOptions('view', [
+      'label' => 'above',
+      'weight' => $weight,
+    ])
+    ->setDisplayOptions('form', [
+      'weight' => $weight,
+    ])
+    ->setDisplayConfigurable('form', TRUE)
+    ->setDisplayConfigurable('view', TRUE);
+  // ----------------------------------------------------------------------------
+  $weight++;
+  $quantity32 = BaseFieldDefinition::create('decimal')
+    ->setLabel(t('Quantity 32'))
+    ->setSettings([
+      'precision' => 4,
+      'scale' => 2,
+    ])
+    ->setDisplayOptions('view', [
+      'label' => 'above',
+      'weight' => $weight,
+    ])
+    ->setDisplayOptions('form', [
+      'weight' => $weight,
+    ])
+    ->setDisplayConfigurable('form', TRUE)
+    ->setDisplayConfigurable('view', TRUE);
+  // ----------------------------------------------------------------------------
+  $weight++;
+  $quantity33 = BaseFieldDefinition::create('decimal')
+    ->setLabel(t('Quantity 33'))
+    ->setSettings([
+      'precision' => 4,
+      'scale' => 2,
+    ])
+    ->setDisplayOptions('view', [
+      'label' => 'above',
+      'weight' => $weight,
+    ])
+    ->setDisplayOptions('form', [
+      'weight' => $weight,
+    ])
+    ->setDisplayConfigurable('form', TRUE)
+    ->setDisplayConfigurable('view', TRUE);
+  // ----------------------------------------------------------------------------
+  $weight++;
+  $quantity34 = BaseFieldDefinition::create('decimal')
+    ->setLabel(t('Quantity 34'))
+    ->setSettings([
+      'precision' => 4,
+      'scale' => 2,
+    ])
+    ->setDisplayOptions('view', [
+      'label' => 'above',
+      'weight' => $weight,
+    ])
+    ->setDisplayOptions('form', [
+      'weight' => $weight,
+    ])
+    ->setDisplayConfigurable('form', TRUE)
+    ->setDisplayConfigurable('view', TRUE);
+  // ----------------------------------------------------------------------------
+  $weight++;
+  $quantity35 = BaseFieldDefinition::create('decimal')
+    ->setLabel(t('Quantity 35'))
+    ->setSettings([
+      'precision' => 4,
+      'scale' => 2,
+    ])
+    ->setDisplayOptions('view', [
+      'label' => 'above',
+      'weight' => $weight,
+    ])
+    ->setDisplayOptions('form', [
+      'weight' => $weight,
+    ])
+    ->setDisplayConfigurable('form', TRUE)
+    ->setDisplayConfigurable('view', TRUE);
+  // ----------------------------------------------------------------------------
+  $weight++;
+  $quantity36 = BaseFieldDefinition::create('decimal')
+    ->setLabel(t('Quantity 36'))
+    ->setSettings([
+      'precision' => 4,
+      'scale' => 2,
+    ])
+    ->setDisplayOptions('view', [
+      'label' => 'above',
+      'weight' => $weight,
+    ])
+    ->setDisplayOptions('form', [
+      'weight' => $weight,
+    ])
+    ->setDisplayConfigurable('form', TRUE)
+    ->setDisplayConfigurable('view', TRUE);
+
+  //Install the new definitions.
+  $definition_manager->installFieldStorageDefinition('quantity29', $bundle_of, $bundle_of, $quantity29);
+  $definition_manager->installFieldStorageDefinition('quantity30', $bundle_of, $bundle_of, $quantity30);
+  $definition_manager->installFieldStorageDefinition('quantity31', $bundle_of, $bundle_of, $quantity31);
+  $definition_manager->installFieldStorageDefinition('quantity32', $bundle_of, $bundle_of, $quantity32);
+  $definition_manager->installFieldStorageDefinition('quantity33', $bundle_of, $bundle_of, $quantity33);
+  $definition_manager->installFieldStorageDefinition('quantity34', $bundle_of, $bundle_of, $quantity34);
+  $definition_manager->installFieldStorageDefinition('quantity35', $bundle_of, $bundle_of, $quantity35);
+  $definition_manager->installFieldStorageDefinition('quantity36', $bundle_of, $bundle_of, $quantity36);
+
+  drupal_flush_all_caches();
+
+  \Drupal::messenger()
+    ->addMessage('Module AMAP Update # 8002 was executed successfully.');
 
 }

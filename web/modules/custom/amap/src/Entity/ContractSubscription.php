@@ -41,23 +41,23 @@ use Drupal\user\UserInterface;
  *   links = {
  *     "canonical" = "/amap/contract_subscription/{contract_subscription}",
  *     "add-form" = "/amap/contract_subscription/add",
- *     "edit-form" = "/amap/contract_subscription/{contract_subscription}/edit",
- *     "delete-form" = "/amap/contract_subscription/{contract_subscription}/delete",
+ *     "edit-form" =
+ *   "/amap/contract_subscription/{contract_subscription}/edit",
+ *     "delete-form" =
+ *   "/amap/contract_subscription/{contract_subscription}/delete",
  *     "collection" = "/amap/contract_subscription",
  *   },
  *   field_ui_base_route = "contract_subscription.settings"
  * )
  */
-class ContractSubscription extends ContentEntityBase implements ContractSubscriptionInterface
-{
+class ContractSubscription extends ContentEntityBase implements ContractSubscriptionInterface {
 
   use EntityChangedTrait;
 
   /**
    * {@inheritdoc}
    */
-  public static function preCreate(EntityStorageInterface $storage_controller, array &$values)
-  {
+  public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
     parent::preCreate($storage_controller, $values);
     $values += [
       'owner_id' => \Drupal::currentUser()->id(),
@@ -67,16 +67,14 @@ class ContractSubscription extends ContentEntityBase implements ContractSubscrip
   /**
    * {@inheritdoc}
    */
-  public function getCreatedTime()
-  {
+  public function getCreatedTime() {
     return $this->get('created')->value;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function setCreatedTime($timestamp)
-  {
+  public function setCreatedTime($timestamp) {
     $this->set('created', $timestamp);
     return $this;
   }
@@ -84,24 +82,21 @@ class ContractSubscription extends ContentEntityBase implements ContractSubscrip
   /**
    * {@inheritdoc}
    */
-  public function getOwner()
-  {
+  public function getOwner() {
     return $this->get('owner_id')->entity;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getOwnerId()
-  {
+  public function getOwnerId() {
     return $this->get('owner_id')->target_id;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function setOwnerId($uid)
-  {
+  public function setOwnerId($uid) {
     $this->set('owner_id', $uid);
     return $this;
   }
@@ -109,8 +104,7 @@ class ContractSubscription extends ContentEntityBase implements ContractSubscrip
   /**
    * {@inheritdoc}
    */
-  public function setOwner(UserInterface $account)
-  {
+  public function setOwner(UserInterface $account) {
     $this->set('owner_id', $account->id());
     return $this;
   }
@@ -118,92 +112,91 @@ class ContractSubscription extends ContentEntityBase implements ContractSubscrip
   /**
    * {@inheritdoc}
    */
-  public static function baseFieldDefinitions(EntityTypeInterface $entity_type)
-  {
+  public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields = parent::baseFieldDefinitions($entity_type);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight = 0;
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['contract_id'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Contract'))
       ->setSetting('target_type', 'contract')
-      ->setDisplayOptions('view', array(
+      ->setDisplayOptions('view', [
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'type' => 'entity_reference_autocomplete',
         'weight' => $weight,
-        'settings' => array(
+        'settings' => [
           'match_operator' => 'CONTAINS',
           'size' => '60',
           'autocomplete_type' => 'tags',
           'placeholder' => '',
-        ),
-      ))
+        ],
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['member_id'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Member'))
       ->setSetting('target_type', 'member')
-      ->setDisplayOptions('view', array(
+      ->setDisplayOptions('view', [
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'type' => 'entity_reference_autocomplete',
         'weight' => $weight,
-        'settings' => array(
+        'settings' => [
           'match_operator' => 'CONTAINS',
           'size' => '60',
           'autocomplete_type' => 'tags',
           'placeholder' => '',
-        ),
-      ))
+        ],
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['sharedwith_member_id'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Shared with'))
       ->setSetting('target_type', 'member')
-      ->setDisplayOptions('view', array(
+      ->setDisplayOptions('view', [
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'type' => 'entity_reference_autocomplete',
         'weight' => $weight,
-        'settings' => array(
+        'settings' => [
           'match_operator' => 'CONTAINS',
           'size' => '60',
           'autocomplete_type' => 'tags',
           'placeholder' => '',
-        ),
-      ))
+        ],
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['comment'] = BaseFieldDefinition::create('string_long')
       ->setLabel(t('Comment'))
-      ->setSettings(array(
+      ->setSettings([
         'max_length' => 255,
         'text_processing' => 0,
-      ))
+      ])
       ->setDefaultValue('')
-      ->setDisplayOptions('view', array(
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'string_long',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'type' => 'string_textarea',
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['file'] = BaseFieldDefinition::create('file')
       ->setLabel(t('pdf file'))
@@ -226,483 +219,619 @@ class ContractSubscription extends ContentEntityBase implements ContractSubscrip
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE)
       ->setReadOnly(TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity01'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 01'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity02'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 02'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity03'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 03'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity04'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 04'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity05'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 05'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity06'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 06'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity07'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 07'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity08'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 08'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity09'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 09'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity10'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 10'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity11'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 11'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity12'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 12'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity13'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 13'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity14'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 14'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity15'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 15'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity16'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 16'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity17'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 17'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity18'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 18'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity19'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 19'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity20'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 20'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity21'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 21'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity22'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 22'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity23'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 23'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity24'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 24'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity25'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 25'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity26'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 26'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity27'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 27'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['quantity28'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity 28'))
-      ->setSettings(array(
+      ->setSettings([
         'precision' => 4,
         'scale' => 2,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'weight' => $weight,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'weight' => $weight,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
+    $weight++;
+    $fields['quantity29'] = BaseFieldDefinition::create('decimal')
+      ->setLabel(t('Quantity 29'))
+      ->setSettings([
+        'precision' => 4,
+        'scale' => 2,
+      ])
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'weight' => $weight,
+      ])
+      ->setDisplayOptions('form', [
+        'weight' => $weight,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+    // ----------------------------------------------------------------------------
+    $weight++;
+    $fields['quantity30'] = BaseFieldDefinition::create('decimal')
+      ->setLabel(t('Quantity 30'))
+      ->setSettings([
+        'precision' => 4,
+        'scale' => 2,
+      ])
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'weight' => $weight,
+      ])
+      ->setDisplayOptions('form', [
+        'weight' => $weight,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+    // ----------------------------------------------------------------------------
+    $weight++;
+    $fields['quantity31'] = BaseFieldDefinition::create('decimal')
+      ->setLabel(t('Quantity 31'))
+      ->setSettings([
+        'precision' => 4,
+        'scale' => 2,
+      ])
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'weight' => $weight,
+      ])
+      ->setDisplayOptions('form', [
+        'weight' => $weight,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+    // ----------------------------------------------------------------------------
+    $weight++;
+    $fields['quantity32'] = BaseFieldDefinition::create('decimal')
+      ->setLabel(t('Quantity 32'))
+      ->setSettings([
+        'precision' => 4,
+        'scale' => 2,
+      ])
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'weight' => $weight,
+      ])
+      ->setDisplayOptions('form', [
+        'weight' => $weight,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+    // ----------------------------------------------------------------------------
+    $weight++;
+    $fields['quantity33'] = BaseFieldDefinition::create('decimal')
+      ->setLabel(t('Quantity 33'))
+      ->setSettings([
+        'precision' => 4,
+        'scale' => 2,
+      ])
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'weight' => $weight,
+      ])
+      ->setDisplayOptions('form', [
+        'weight' => $weight,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+    // ----------------------------------------------------------------------------
+    $weight++;
+    $fields['quantity34'] = BaseFieldDefinition::create('decimal')
+      ->setLabel(t('Quantity 34'))
+      ->setSettings([
+        'precision' => 4,
+        'scale' => 2,
+      ])
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'weight' => $weight,
+      ])
+      ->setDisplayOptions('form', [
+        'weight' => $weight,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+    // ----------------------------------------------------------------------------
+    $weight++;
+    $fields['quantity35'] = BaseFieldDefinition::create('decimal')
+      ->setLabel(t('Quantity 35'))
+      ->setSettings([
+        'precision' => 4,
+        'scale' => 2,
+      ])
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'weight' => $weight,
+      ])
+      ->setDisplayOptions('form', [
+        'weight' => $weight,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+    // ----------------------------------------------------------------------------
+    $weight++;
+    $fields['quantity36'] = BaseFieldDefinition::create('decimal')
+      ->setLabel(t('Quantity 36'))
+      ->setSettings([
+        'precision' => 4,
+        'scale' => 2,
+      ])
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'weight' => $weight,
+      ])
+      ->setDisplayOptions('form', [
+        'weight' => $weight,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['owner_id'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Authored by'))
@@ -710,20 +839,19 @@ class ContractSubscription extends ContentEntityBase implements ContractSubscrip
       ->setSetting('handler', 'default')
       ->setDefaultValueCallback('Drupal\association\Entity\Service::getCurrentUserId')
       ->setReadOnly(TRUE);
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Created'));
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     $weight++;
     $fields['changed'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('Changed'));
-// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
     return $fields;
   }
 
-  public static function getCurrentUserId()
-  {
+  public static function getCurrentUserId() {
     return [\Drupal::currentUser()->id()];
   }
 
