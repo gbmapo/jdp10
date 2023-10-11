@@ -122,10 +122,22 @@
           </div>
         </div>
       </div>
-      <br>
+      <br><br>
+
+J'ai connu le <b>Le Jardin de Poissy</b> par
+<input type="checkbox" id="edit-how_boucheaoreille" name="how_boucheaoreille" class="form-checkbox">
+<label for="edit-how_boucheaoreille"> <span style="font-weight: normal;"> bouche-à-oreille </span> </label>
+<input type="checkbox" id="edit-how_moteurderechercheinternet" name="how_moteurderechercheinternet" class="form-checkbox">
+<label for="edit-how_moteurderechercheinternet"> <span style="font-weight: normal;"> moteur de recherche internet </span> </label>
+<input type="checkbox" id="edit-how_pagefacebook" name="how_pagefacebook" class="form-checkbox">
+<label for="edit-how_pagefacebook"> <span style="font-weight: normal;"> page Facebook </span> </label>
+<input type="checkbox" id="edit-how_pageinstagram" name="how_pageinstagram" class="form-checkbox">
+<label for="edit-how_pageinstagram"> <span style="font-weight: normal;"> page Instagram</span> </label><br>
+autre, préciser :<input type="text" id="edit-how_autre" name="how_autre" class="form-text" size="64">
+
     {% endif %}
 
-    <br>
+    <br><br>
     L’adhésion à l’association est formalisée par une cotisation ayant pour objet de couvrir les frais de
     fonctionnement. Son montant pour une année civile (du 1er janvier au 31 décembre) est de 24&nbsp;€. Il est
     dégressif, à raison de 2&nbsp;€ par mois écoulé depuis le 1er janvier :
@@ -201,7 +213,7 @@
       Après la soumission de ce formulaire, vous serez redirigé vers le processus de paiement en ligne.
     </div>
 
-    {# Renders the rest of the form #} {{ form | without('person1', 'member', 'person2', 'address', 'commitment1', 'authorisation', 'commitment2', 'sel', 'amap', 'amap_legumes', 'amap_fruits', 'amap_pain', 'amap_viandedebœuf', 'amap_œufs', 'amap_volaille', 'amap_champignons', 'amap_lentilles', 'amap_viandedeporc', 'amap_produitslaitiersvache', 'amap_pommesdeterre', 'amap_produitslaitiersbrebis', 'amap_farine', 'amap_miel', 'amap_jusdepomme', 'amap_cidre', 'ifbasket', 'payment') }}
+    {# Renders the rest of the form #} {{ form | without('person1', 'member', 'person2', 'address', 'commitment1', 'authorisation', 'commitment2', 'sel', 'amap', 'amap_legumes', 'amap_fruits', 'amap_pain', 'amap_viandedebœuf', 'amap_œufs', 'amap_volaille', 'amap_champignons', 'amap_lentilles', 'amap_viandedeporc', 'amap_produitslaitiersvache', 'amap_pommesdeterre', 'amap_produitslaitiersbrebis', 'amap_farine', 'amap_miel', 'amap_jusdepomme', 'amap_cidre', 'how_boucheaoreille', 'how_moteurderechercheinternet', 'how_pagefacebook', 'how_pageinstagram', 'how_autre', 'ifbasket', 'payment') }}
 
 {% endif %}
   </div>

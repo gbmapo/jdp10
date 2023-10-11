@@ -513,6 +513,11 @@ class MembershipStep0 extends FormBase {
         $form['amap_miel'] = ['#type' => 'checkbox',];
         $form['amap_jusdepomme'] = ['#type' => 'checkbox',];
         $form['amap_cidre'] = ['#type' => 'checkbox',];
+        $form['how_boucheaoreille'] = ['#type' => 'checkbox',];
+        $form['how_moteurderechercheinternet'] = ['#type' => 'checkbox',];
+        $form['how_pagefacebook'] = ['#type' => 'checkbox',];
+        $form['how_pageinstagram'] = ['#type' => 'checkbox',];
+        $form['how_autre'] = ['#type' => 'textfield', '#size' => 64,];
         $form['ifbasket'] = ['#type' => 'checkbox',];
         $form['payment'] = [
           '#type' => 'radios',
@@ -732,15 +737,27 @@ class MembershipStep0 extends FormBase {
     }
     else {
       $contracts = '';
+      $how = '';
       $aCleanValues = $form_state->cleanValues()->getValues();
       foreach ($aCleanValues as $key => $value) {
         if (substr($key, 0, 5) == 'amap_' && $value == 1) {
           $contracts .= substr($key, 5, 999) . ', ';
         }
+        if (substr($key, 0, 4) == 'how_') {
+          if ($value == 1) {
+            $how .= substr($key, 4, 999) . ', ';
+          }
+          elseif ($value != 0) {
+            $how .= $value . ', ';
+          }
+        }
       }
       $contracts = substr($contracts, 0, strlen($contracts) - 2);
       $contracts = ($contracts) ? 'AMAP : ' . $contracts . '.' : '';
       $aCleanValues['contracts'] = $contracts;
+      $how = substr($how, 0, strlen($how) - 2);
+      $how = ($how) ? 'Connu par : ' . $how . '.' : '';
+      $aCleanValues['how'] = $how;
       $payment = (string) $form['payment']['#title'] . ' : ' . (string) $form['payment']['#options'][$form_state->getValue('payment')] . '.';
       $aCleanValues['payment'] = $payment;
       $form_state->setStorage(array_merge($form_state->getStorage(), $aCleanValues));
@@ -850,7 +867,7 @@ class MembershipStep0 extends FormBase {
       // Member ---------------------------------------------------------------
       if ($anon) {
         $idM = NULL;
-        $comment = ($form_state->getStorage()['contracts'] ? $form_state->getStorage()['contracts'] . ' ' : '') . $form_state->getStorage()['payment'];
+        $comment = ($form_state->getStorage()['contracts'] ? $form_state->getStorage()['contracts'] . ' ' : '') . ($form_state->getStorage()['how'] ? $form_state->getStorage()['how'] . ' ' : '') . $form_state->getStorage()['payment'];
         $insertFieldsM = [
           'comment' => $comment,
           'contact_id' => $uid['1'],
