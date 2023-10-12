@@ -57,7 +57,7 @@ class ServiceForm extends ContentEntityForm
       $sDueDate = $values['duedate'][0]['value']->format("Y-m-d");
       $sToday = DrupalDateTime::createFromTimestamp(strtotime("now"), new \DateTimeZone('Europe/Paris'), )->format('Y-m-d');
       $sIn2Weeks = DrupalDateTime::createFromTimestamp(strtotime("+ 2 weeks"), new \DateTimeZone('Europe/Paris'), )->format('Y-m-d');
-      $sIn6Months = DrupalDateTime::createFromTimestamp(strtotime("+ 6 months"), new \DateTimeZone('Europe/Paris'), )->format('Y-m-d');
+      $sIn10Years = DrupalDateTime::createFromTimestamp(strtotime("+ 10 years"), new \DateTimeZone('Europe/Paris'), )->format('Y-m-d');
 
       if ($values['status']['value'] == 0) {
         //Pas de contrôle si le service n'est pas publié
@@ -73,8 +73,8 @@ class ServiceForm extends ContentEntityForm
             }
           }
           else {
-            if ($sDueDate > $sIn6Months) {
-              $form_state->setErrorByName('duedate', $this->t('Validity period cannot exceed six months!'));
+            if ($sDueDate > $sIn10Years) {
+              $form_state->setErrorByName('duedate', $this->t('Validity period cannot exceed ten years!'));
             }
           }
         }
