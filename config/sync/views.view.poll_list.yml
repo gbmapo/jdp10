@@ -11,7 +11,7 @@ dependencies:
 _core:
   default_config_hash: PAXbr8tzcAK03CmNItYYBHGVp0nPjtanq53wnj76ATY
 id: poll_list
-label: 'List Polls'
+label: 'Afficher les sondages'
 module: views
 description: ''
 tag: ''
@@ -24,7 +24,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'List Polls'
+      title: 'Afficher les sondages'
       fields:
         question:
           id: question

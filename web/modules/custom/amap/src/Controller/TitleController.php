@@ -9,21 +9,31 @@ use Drupal\Core\Url;
 /**
  * Class TitleController.
  */
-class TitleController extends ControllerBase
-{
+class TitleController extends ControllerBase {
 
-  public function titleMany()
-  {
+  public function changeTitle($page, $contract = NULL) {
 
-    $title = $this->t('Sign up for Planning <a class="form-submit" href="/amap/signupForPlanningOne">Little screen</a>');
-    return $title;
+    switch ($page) {
 
-  }
+      case 'signupForPlanningMany':
+        $title = $this->t('Sign up for Planning <a class="form-submit" href="/amap/signupForPlanningOne">Little screen</a>');
+        break;
+      case 'signupForPlanningOne':
+        $title = $this->t('Sign up for Planning <a class="form-submit" href="/amap/signupForPlanningMany">Big screen</a>');
+        break;
 
-  public function titleOne()
-  {
+      case 'subscribeMany':
+        $title = $this->t('Change subscriptions <a class="form-submit" href="/amap/contract/subscribeOne/@contract/subscribeOne">Little screen</a>', ['@contract' => $contract]);
+        break;
+      case 'subscribeOne':
+        $title = $this->t('Change a subscription <a class="form-submit" href="/amap/contract/subscribeMany/@contract">Big screen</a>', ['@contract' => $contract]);
+        break;
+      case 'one':
+        $title = $this->t('Change subscriptions');
+        break;
 
-    $title = $this->t('Sign up for Planning <a class="form-submit" href="/amap/signupForPlanningMany">Big screen</a>');
+      default:
+    }
     return $title;
 
   }

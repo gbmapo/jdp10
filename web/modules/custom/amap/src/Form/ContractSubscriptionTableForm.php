@@ -14,26 +14,32 @@ use Drupal\Component\Utility\Bytes;
 /**
  * Class ContractSubscriptionTableForm.
  */
-class ContractSubscriptionTableForm extends FormBase
-{
+class ContractSubscriptionTableForm extends FormBase {
 
 
-  public function getFormId()
-  {
+  public function getFormId() {
     return 'contract_subscription_table_form';
   }
 
-  public function buildForm(array $form, FormStateInterface $form_state, $contract = NULL)
-  {
+  public function buildForm(array $form, FormStateInterface $form_state, $contract = NULL) {
 
-    $oContract = \Drupal::entityTypeManager()->getStorage('contract')->load($contract);
-    $sContractIsVisible = $oContract->get('isvisible')->getString();
-    $sContractIsOpenForSubscription = $oContract->get('isopenforsubscription')->getString();
+    //  Détails du contrat
+    $oContract = \Drupal::entityTypeManager()
+      ->getStorage('contract')
+      ->load($contract);
+    $sContractIsOpenForSubscription = $oContract->get('isopenforsubscription')
+      ->getString();
     $sContractType = $oContract->get('type')->getString();
 
     $aContractType = _detail_contract_type($sContractType);
     $iNumberOfQuantities = $aContractType[1];
     $aContractTypeHeader = $aContractType[2];
+
+    $upload_max_filesize = Bytes::toInt(ini_get('upload_max_filesize'));
+    $post_max_size = Bytes::toInt(ini_get('post_max_size'));
+    $myMax = 2 * 1024 * 1024;
+    $upload_max = min($upload_max_filesize, $post_max_size, $myMax);
+    $upload_max_inMB = $upload_max / 1024 / 1024;
 
     $form['subscriptions'] = [
       '#type' => 'table',
@@ -53,7 +59,7 @@ class ContractSubscriptionTableForm extends FormBase
     ];
     $form['subscriptions']['#header'] = array_merge($form['subscriptions']['#header'], $aContractStandardHeader);
 
-//  Liste des Adhérents pour 'Partagé avec'
+    //  Liste des Adhérents pour 'Partagé avec'
     $query_am = \Drupal::database()->select('member', 'am');
     $query_am->fields('am', ['id', 'designation']);
     $query_am->condition('status', [2, 3, 4], 'IN')
@@ -61,7 +67,7 @@ class ContractSubscriptionTableForm extends FormBase
     $results_am = $query_am->execute()->fetchAllKeyed();
     $results_am = ["0" => ""] + $results_am;
 
-//  Liste des Adhérents avec leur souscription éventuelle
+    //  Liste des Adhérents avec leur souscription éventuelle
     $sTemp1 = "";
     $sTemp2 = "";
     for ($i = 1; $i <= $iNumberOfQuantities; $i++) {
@@ -107,18 +113,14 @@ class ContractSubscriptionTableForm extends FormBase
       ";
     $results = \Drupal::database()->query($query);
 
-//  Génération des lignes du tableau
-    $upload_max_filesize = Bytes::toInt(ini_get('upload_max_filesize'));
-    $post_max_size = Bytes::toInt(ini_get('post_max_size'));
-    $myMax = 2 * 1024 * 1024;
-    $upload_max = min($upload_max_filesize, $post_max_size, $myMax);
-    $upload_max_inMB = $upload_max / 1024 / 1024;
+    //  Génération des lignes du tableau
     foreach ($results as $key => $value) {
       $myKey = 10 + $key * 10;
       $sharedwith_id = $value->sharedwith_member_id;
       if ($sharedwith_id == "0") {
         $iKey = 0;
-      } else {
+      }
+      else {
         if (!array_search($sharedwith_id, $results_am)) {
           $results_am = $results_am + [$sharedwith_id => t('Member') . sprintf("%03d", $sharedwith_id)];
         }
@@ -136,9 +138,11 @@ class ContractSubscriptionTableForm extends FormBase
         $default_value = $value->$sField;
         if ($default_value == "" || $default_value == 0) {
           $default_value = "";
-        } elseif ((int)$default_value == (float)$default_value) {
+        }
+        elseif ((int) $default_value == (float) $default_value) {
           $default_value = sprintf("%d", $default_value);
-        } else {
+        }
+        else {
           $default_value = sprintf("%01.2f", $value->$sField);
         }
         $sQuantities4Hash .= $default_value . "_";
@@ -160,7 +164,7 @@ class ContractSubscriptionTableForm extends FormBase
         '#rows' => 1,
         '#default_value' => $value->comment,
       ];
-      $fileId = (int)$value->file__target_id;
+      $fileId = (int) $value->file__target_id;
       $title = ($fileId == 0) ? '000' : sprintf("%03d", $fileId);
       $form['subscriptions'][$myKey]['filehead'] = [
         '#type' => 'details',
@@ -168,7 +172,7 @@ class ContractSubscriptionTableForm extends FormBase
       ];
       $form['subscriptions'][$myKey]['filehead']['file'] = [
         '#type' => 'managed_file',
-        '#description' => $this->t('Limited to @size MB.', array('@size' => $upload_max_inMB)).'<br>'.$this->t('Allowed types: pdf.'),
+        '#description' => $this->t('Limited to @size MB.', ['@size' => $upload_max_inMB]) . '<br>' . $this->t('Allowed types: pdf.'),
         '#upload_location' => 'private://contracts/subscriptions/',
         '#upload_validators' => [
           'file_validate_extensions' => ['pdf'],
@@ -191,10 +195,19 @@ class ContractSubscriptionTableForm extends FormBase
           ],
         ];
       }
-      $form['subscriptions'][$myKey]['am_id'] = ['#type' => 'hidden', '#default_value' => $value->am_id];
-      $form['subscriptions'][$myKey]['cs_id'] = ['#type' => 'hidden', '#default_value' => $value->cs_id];
+      $form['subscriptions'][$myKey]['am_id'] = [
+        '#type' => 'hidden',
+        '#default_value' => $value->am_id,
+      ];
+      $form['subscriptions'][$myKey]['cs_id'] = [
+        '#type' => 'hidden',
+        '#default_value' => $value->cs_id,
+      ];
       $hash = $sQuantities4Hash . $iKey . $value->comment . $fileId;
-      $form['subscriptions'][$myKey]['hash'] = ['#type' => 'hidden', '#default_value' => $hash];
+      $form['subscriptions'][$myKey]['hash'] = [
+        '#type' => 'hidden',
+        '#default_value' => $hash,
+      ];
 
     }
 
@@ -202,7 +215,7 @@ class ContractSubscriptionTableForm extends FormBase
       $form['submit'] = [
         '#type' => 'submit',
         '#name' => 'submit',
-        '#value' => $this->t('Submit'),
+        '#value' => $this->t('Save'),
         '#ajax' => [
           'wrapper' => $wrapper,
           'callback' => '::ajaxSubmit',
@@ -213,16 +226,15 @@ class ContractSubscriptionTableForm extends FormBase
     $form['cancel'] = [
       '#type' => 'submit',
       '#name' => 'cancel',
-      '#value' => $this->t('Cancel'),
+      '#value' => $this->t('Leave'),
     ];
 
-    $form['#attached']['library'][] = 'amap/amap';
+    $form['#attached']['library'][] = 'amap/subscriptions';
 
     return $form;
   }
 
-  public function validateForm(array &$form, FormStateInterface $form_state)
-  {
+  public function validateForm(array &$form, FormStateInterface $form_state) {
     if ($form_state->getTriggeringElement()['#name'] == 'cancel') {
       return;
     }
@@ -230,8 +242,7 @@ class ContractSubscriptionTableForm extends FormBase
 
   }
 
-  public function ajaxAddRow(array &$form, FormStateInterface $form_state)
-  {
+  public function ajaxAddRow(array &$form, FormStateInterface $form_state) {
     $myKey = $form_state->getTriggeringElement()['#name'];
     $formBis = [];
     foreach ($form as $key => $value) {
@@ -268,7 +279,8 @@ class ContractSubscriptionTableForm extends FormBase
                       }
                   }
                 }
-              } else {
+              }
+              else {
               }
             }
           }
@@ -282,19 +294,19 @@ class ContractSubscriptionTableForm extends FormBase
 
   }
 
-  public function ajaxSubmit(array &$form, FormStateInterface $form_state)
-  {
+  public function ajaxSubmit(array &$form, FormStateInterface $form_state) {
     $response = new AjaxResponse();
-    $response->addCommand(new \Drupal\Core\Ajax\RedirectCommand(Url::fromRoute('amap.contracts')->toString()));
+    $response->addCommand(new \Drupal\Core\Ajax\RedirectCommand(Url::fromRoute('amap.contracts')
+      ->toString()));
     return $response;
   }
 
-  public function submitForm(array &$form, FormStateInterface $form_state)
-  {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
     if ($form_state->getTriggeringElement()['#name'] == 'submit') {
 
       $args = $form_state->getBuildInfo()['args'];
-      $storage = \Drupal::entityTypeManager()->getStorage('contract_subscription');
+      $storage = \Drupal::entityTypeManager()
+        ->getStorage('contract_subscription');
       $iNumberOfQuantities = $form['subscriptions']['#quantities'];
 
       foreach ($form_state->getValue('subscriptions') as $key => $value) {
@@ -311,10 +323,12 @@ class ContractSubscriptionTableForm extends FormBase
           if ($sQuantities != "") {
             $entity = $storage->create();
             $sAction = 'C';
-          } else {
+          }
+          else {
             $sAction = '0';
           }
-        } else {
+        }
+        else {
           $entity = $storage->load($id);
           if ($sQuantities != "") {
             $file = $value['filehead']['file'];
@@ -322,10 +336,12 @@ class ContractSubscriptionTableForm extends FormBase
             $hash = $sQuantities4Hash . $value['sharedwith'] . $value['comment'] . $file;
             if ($hash == $value['hash']) {
               $sAction = '0';
-            } else {
+            }
+            else {
               $sAction = 'M';
             }
-          } else {
+          }
+          else {
             $sAction = 'S';
           }
         }
@@ -335,7 +351,11 @@ class ContractSubscriptionTableForm extends FormBase
             $entity->contract_id = $args;
             $entity->member_id = $value['am_id'];
             $entity->sharedwith_member_id = $value['sharedwith'];
-            $entity->comment = str_replace(["\r\n", "\n", "\r"], " ", $value['comment']);
+            $entity->comment = str_replace([
+              "\r\n",
+              "\n",
+              "\r",
+            ], " ", $value['comment']);
             $entity->file = $value['filehead']['file'];
             for ($i = 1; $i <= $iNumberOfQuantities; $i++) {
               $sTemp = 'quantity' . sprintf("%02d", $i);
@@ -350,15 +370,18 @@ class ContractSubscriptionTableForm extends FormBase
         }
       }
 
-//    Mise à jour de la liste des AMAPiens
+      //    Mise à jour de la liste des AMAPiens
       _setAmapien();
 
       _export_amap_CSV('amap_contracts_subscriptions', 'rest_export_1', $args[0]);
-      \Drupal::messenger()->addMessage($this->t('The changes have been saved.'));
+      \Drupal::messenger()
+        ->addMessage($this->t('The changes have been saved.'));
 
-    } elseif ($form_state->getTriggeringElement()['#name'] == 'cancel') {
+    }
+    elseif ($form_state->getTriggeringElement()['#name'] == 'cancel') {
       $form_state->setRedirect('amap.contracts');
-    } else {
+    }
+    else {
       $form_state->setRebuild();
     }
   }

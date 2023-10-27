@@ -9,15 +9,13 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 /**
  * Class ContractsController.
  */
-class ContractsController extends ControllerBase
-{
+class ContractsController extends ControllerBase {
 
-  public function showContracts()
-  {
+  public function showContracts() {
 
     $oCurrentUser = $this->currentUser();
 
-    switch (true) {
+    switch (TRUE) {
       case ($oCurrentUser->isAnonymous()):
         return $this->redirect('view.amap_contracts.page_3');
         break;
@@ -29,8 +27,7 @@ class ContractsController extends ControllerBase
     }
   }
 
-  public function export_subscriptions($contract)
-  {
+  public function export_subscriptions($contract) {
 
     _export_amap_CSV('amap_contracts_subscriptions', 'rest_export_1', $contract);
 
@@ -43,5 +40,21 @@ class ContractsController extends ControllerBase
 
   }
 
-}
+  public function enterSubscriptions($contract) {
 
+    $oContract = \Drupal::entityTypeManager()
+      ->getStorage('contract')
+      ->load($contract);
+    $sContractType = $oContract->get('type')->getString();
+    $aContractType = _detail_contract_type($sContractType);
+    $iNumberOfQuantities = (int) $aContractType[1];
+    if ($iNumberOfQuantities < 29) {
+      return $this->redirect('amap.contract_subscription_table_form', ['contract' => $contract]);
+    }
+    else {
+      return $this->redirect('amap.contract_subcription_one_form', ['contract' => $contract, 'page' => 'one']);
+    }
+
+  }
+
+}

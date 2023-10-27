@@ -148,7 +148,7 @@ display:
           entity_type: poll
           entity_field: anonymous_vote_allow
           plugin_id: field
-          label: 'Allow anonymous votes'
+          label: 'Autoriser les votes anonymes'
           exclude: false
           alter:
             alter_text: false
@@ -268,7 +268,7 @@ display:
           admin_label: ''
           entity_type: poll
           plugin_id: poll_totalvotes
-          label: 'Total votes'
+          label: 'Nombre total de votes'
           exclude: false
           alter:
             alter_text: false
@@ -408,7 +408,7 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: true
-          content: 'No polls are available.'
+          content: 'Aucun sondage n''est disponible.'
           tokenize: false
       sorts: {  }
       arguments: {  }

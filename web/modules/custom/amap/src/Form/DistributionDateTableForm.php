@@ -86,7 +86,7 @@ class DistributionDateTableForm extends FormBase
       '#value' => $this->t('Save'),
     ];
 
-    $form['#attached']['library'][] = 'amap/amap';
+    $form['#attached']['library'][] = 'amap/calendar-of-distributions';
 
     return $form;
   }

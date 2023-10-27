@@ -157,7 +157,7 @@ class DistributionInscriptionOneForm extends FormBase
       '#value' => $this->t('Save'),
     ];
 
-    $form['#attached']['library'][] = 'amap/amap';
+    $form['#attached']['library'][] = 'amap/planning-of-distributions';
 
     $form['#attached']['drupalSettings']['myConstants'] = [
       'nbmaxD' => AMAP_AMAPIEN_PER_DISTRIBUTION,
