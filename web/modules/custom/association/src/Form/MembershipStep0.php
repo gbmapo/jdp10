@@ -2,13 +2,14 @@
 
 namespace Drupal\association\Form;
 
+use Drupal\Core\Form\FormBase;
+use Drupal\Core\Form\FormStateInterface;
+
 use Drupal;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\AppendCommand;
 use Drupal\Core\Ajax\ReplaceCommand;
-use Drupal\Core\Form\FormBase;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\user\Entity\User;
 
@@ -60,13 +61,37 @@ class MembershipStep0 extends FormBase {
             ],
             '#required' => TRUE,
           ];
+          $form['mode'] = [
+            '#type' => 'radios',
+            '#title' => $this->t('Mode of membership'),
+            '#options' => [
+              0 => $this->t('Online'),
+              1 => $this->t('Membership form'),
+            ],
+            '#required' => TRUE,
+          ];
           $nextStepNotice = $this->t('enter');
-          $markup = $this->t('After submitting this form, you will be redirected to the membership process where you can @str your personal information then choose your subscription payment mode.', [
+          $markup0 = $this->t('After submitting this form, you will be redirected to the membership process where you can @str your personal information then choose your subscription payment mode.', [
               '@str' => $nextStepNotice,
-            ]) . '<BR>';
-          $form['footer'] = [
-            '#type' => 'inline_template',
-            '#template' => $markup,
+            ]) . '<BR><BR>';
+          $form['footer0'] = [
+            '#type' => 'item',
+            '#markup' => $markup0,
+            '#states' => [
+              'visible' => [
+                ':input[name="mode"]' => ['value' => 0],
+              ],
+            ],
+          ];
+          $markup1 = $this->t('After submitting this form, you will be redirected to a page where you can download the membership form.') . '<BR><BR>';
+          $form['footer1'] = [
+            '#type' => 'item',
+            '#markup' => $markup1,
+            '#states' => [
+              'visible' => [
+                ':input[name="mode"]' => ['value' => 1],
+              ],
+            ],
           ];
         }
         else {
@@ -331,6 +356,16 @@ class MembershipStep0 extends FormBase {
           '#default_value' => $temp,
           '#weight' => $weight,
         ];
+        if (!$this->currentUser()->isAnonymous()) {
+          $weight++;
+          $temp = isset($form_state->getStorage()['newcontact']) ? $form_state->getStorage()['newcontact'] : 0;
+          $form['person2']['newcontact'] = [
+            '#type' => 'checkbox',
+            '#title' => $this->t('I wish to be contact for member'),
+            '#default_value' => $temp,
+            '#weight' => $weight,
+          ];
+        }
         break;
 
       case 2:
@@ -788,6 +823,7 @@ class MembershipStep0 extends FormBase {
    * $form_state->getStorage()['value'].
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+
     $aCleanValues = $form_state->cleanValues()->getValues();
     switch ($this->step) {
       case 0:
@@ -807,6 +843,12 @@ class MembershipStep0 extends FormBase {
               return;
           }
         }
+        else {
+          if ($aCleanValues["mode"] == "1") {
+            $form_state->setRedirectUrl(Url::fromUri('base:/MembershipWithForm'));
+            return;
+          }
+        }
       case 1:
         if ($this->currentUser()->isAnonymous()) {
           $aCleanValues['lastname'] = $form_state->getValue('lastname1');
@@ -822,6 +864,7 @@ class MembershipStep0 extends FormBase {
         break;
       default:
     }
+
   }
 
   public function saveData(FormStateInterface $form_state) {
@@ -982,8 +1025,16 @@ class MembershipStep0 extends FormBase {
         $user->save();
 
       }
+      if (!$anon) {
+        if ($form_state->getStorage()['newcontact']) {
+          $entity = Drupal::entityTypeManager()
+            ->getStorage('person')
+            ->load($uid[2]);
+          _updatePersonToContact($entity);
+        }
+      }
 
-      drupal_flush_all_caches();
+//    drupal_flush_all_caches();
     }
     // Completion message -----------------------------------------------------
     if ($this->currentUser()->isAnonymous()) {
