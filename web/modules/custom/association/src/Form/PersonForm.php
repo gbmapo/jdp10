@@ -24,6 +24,12 @@ class PersonForm extends ContentEntityForm {
 
     $entity = $this->entity;
 
+    $form['wascontact'] = [
+      '#type' => 'hidden',
+      '#value' => $entity->iscontact->value,
+    ];
+
+
     return $form;
   }
 
@@ -54,17 +60,21 @@ class PersonForm extends ContentEntityForm {
     $entity = $this->entity;
 
     $user_id = $entity->user_id->target_id;
+
     $userofperson = User::load($user_id);
+    $member = Drupal::entityTypeManager()
+      ->getStorage('member')
+      ->load($entity->member_id->target_id);
 
-    $storageM = Drupal::entityTypeManager()->getStorage('member');
-    $member = $storageM->load($entity->member_id->target_id);
-
+    // L'identifiant et l'email de la Personne sont hérités de ceux du User associé
     $entity->set('id', $user_id);
     $entity->set('email', $userofperson->getEmail());
 
     if ($entity->isactive->value) {
       if ($entity->iscontact->value) {
-        _updatePersonToContact($entity);
+        if ($form['wascontact']['#value'] == 0) {
+          _updatePersonToContact($entity);
+        }
       }
       else {
         $userofperson->removeRole('contact_for_member');

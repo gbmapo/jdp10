@@ -868,6 +868,7 @@ class MembershipStep0 extends FormBase {
   }
 
   public function saveData(FormStateInterface $form_state) {
+
     $database = Drupal::database();
 
     if ($this->step == 0) {
@@ -883,6 +884,7 @@ class MembershipStep0 extends FormBase {
       $numberOfPersons = $form_state->getStorage()['lastname2'] ? 2 : 1;
       $now = Drupal::time()->getRequestTime();
       $anon = $this->currentUser()->isAnonymous();
+
       // User(s) --------------------------------------------------------------
       $uid = [];
       for ($i = 1; $i <= $numberOfPersons; $i++) {
@@ -907,114 +909,99 @@ class MembershipStep0 extends FormBase {
           $uid[$i] = $form_state->getStorage()['ap_id' . $i];
         }
       }
+
       // Member ---------------------------------------------------------------
+
+      $storage = Drupal::entityTypeManager()
+        ->getStorage('member');
+
       if ($anon) {
-        $idM = NULL;
+        $member = $storage->create();
         $comment = ($form_state->getStorage()['contracts'] ? $form_state->getStorage()['contracts'] . ' ' : '') . ($form_state->getStorage()['how'] ? $form_state->getStorage()['how'] . ' ' : '') . $form_state->getStorage()['payment'];
-        $insertFieldsM = [
-          'comment' => $comment,
-          'contact_id' => $uid['1'],
-          'created' => $now,
-          'enddate' => '2037-12-30',
-          'owner_id' => $uid['1'],
-          'startdate' => date('Y-m-d'),
-        ];
+        $member->comment = $comment;
+        $member->contact_id = $uid['1'];
+        $member->created = $now;
+        $member->enddate = '2037-12-30';
+        $member->owner_id = $uid['1'];
+        $member->startdate = date('Y-m-d');
         $form_state->set('status', 5);
       }
       else {
-        $insertFieldsM = [];
         $idM = $form_state->getStorage()['am_id'];
+        $member = $storage->load($idM);
       }
-      $updateFieldsM = [];
-      $fieldsM = [
-        'addresssupplement' => $form_state->getStorage()['addresssupplement'],
-        'changed' => $now,
-        'city' => $form_state->getStorage()['city'],
-        'country' => 'FR',
-        'designation' => $form_state->getStorage()['designation'],
-        'postalcode' => $form_state->getStorage()['postalcode'],
-        'street' => $form_state->getStorage()['street'],
-        'telephone' => $form_state->getStorage()['telephone'],
-        'status' => $form_state->getStorage()['status'],
-      ];
-      $insertFieldsM = array_merge($insertFieldsM, $fieldsM);
-      $updateFieldsM = array_merge($updateFieldsM, $fieldsM);
-      $database->merge('member')
-        ->insertFields($insertFieldsM)
-        ->updateFields($updateFieldsM)
-        ->key('id', $idM)
-        ->execute();
+      $member->addresssupplement = $form_state->getStorage()['addresssupplement'];
+      $member->changed = $now;
+      $member->city = $form_state->getStorage()['city'];
+      $member->country = 'FR';
+      $member->designation = $form_state->getStorage()['designation'];
+      $member->postalcode = $form_state->getStorage()['postalcode'];
+      $member->street = $form_state->getStorage()['street'];
+      $member->telephone = $form_state->getStorage()['telephone'];
+      $member->status = $form_state->getStorage()['status'];
+      $member->save();
       if ($anon) {
-        $query = $database->select('member', 'am');
-        $query->fields('am', ['id', 'created']);
-        $query->condition('created', $now, '=');
-        $idM = $query->execute()->fetchCol()[0];
+        $idM = $member->id();
       }
+
       // Person(s) ------------------------------------------------------------
+
+      $storage = Drupal::entityTypeManager()
+        ->getStorage('person');
+
       $idP = [];
-      $insertFieldsP = [];
       for ($i = 1; $i <= $numberOfPersons; $i++) {
         if ($anon || ($i == 2 && is_null($form_state->getStorage()['ap_id2']))) {
-          $idP[$i] = $uid[$i];
-          $insertFieldsP[$i] = [
-            'comment' => NULL,
-            'created' => $now,
-            'isactive' => 0,
-            'iscontact' => $i == 1 ? 1 : 0,
-            'member_id' => $idM,
-            'owner_id' => $uid['1'],
-            'user_id' => $uid[$i],
-          ];
+          switch ($i) {
+            case 1:
+              $person1 = $storage->create();
+              $person1->id = $uid[1];
+              $person = $person1;
+              break;
+            case 2:
+              $person2 = $storage->create();
+              $person2->id = $uid[2];
+              $person = $person2;
+              break;
+            default:
+              break;
+          }
+          $person->comment = NULL;
+          $person->created = $now;
+          $person->isactive = 0;
+          $person->iscontact = $i == 1 ? 1 : 0;
+          $person->member_id = $idM;
+          $person->owner_id = $uid['1'];
+          $person->user_id = $uid[$i];
         }
         else {
-          $insertFieldsP[$i] = [];
           $idP[$i] = $form_state->getStorage()['ap_id' . $i];
-        }
-      }
-      $updateFieldsP = [];
-      $fieldsP = [];
-      for ($i = 1; $i <= $numberOfPersons; $i++) {
-        $updateFieldsP[$i] = [];
-        $fieldsP[$i] = [
-          'cellphone' => $form_state->getStorage()['cellphone' . $i],
-          'changed' => $now,
-          'email' => $form_state->getStorage()['email' . $i],
-          'firstname' => $form_state->getStorage()['firstname' . $i],
-          'lastname' => $form_state->getStorage()['lastname' . $i],
-        ];
-        $insertFieldsP[$i] = array_merge($insertFieldsP[$i], $fieldsP[$i]);
-        $updateFieldsP[$i] = array_merge($updateFieldsP[$i], $fieldsP[$i]);
-        $database->merge('person')
-          ->insertFields($insertFieldsP[$i])
-          ->updateFields($updateFieldsP[$i])
-          ->key('id', $idP[$i])
-          ->execute();
-        $database->merge('person__field_sel_isseliste')
-          ->key('entity_id', $idP[$i])
-          ->fields([
-            'bundle' => 'person',
-            'entity_id' => $idP[$i],
-            'revision_id' => $idP[$i],
-            'langcode' => 'und',
-            'delta' => 0,
-            'field_sel_isseliste_value' => $form_state->getStorage()['seliste' . $i],
-          ])
-          ->execute();
-        if ($form_state->getStorage()['seliste' . $i] == 1) {
-          $database->merge('person__field_sel_balance')
-            ->key('entity_id', $idP[$i])
-            ->fields([
-              'bundle' => 'person',
-              'entity_id' => $idP[$i],
-              'revision_id' => $idP[$i],
-              'langcode' => 'und',
-              'delta' => 0,
-              'field_sel_balance_value' => 180,
-            ])
-            ->execute();
+          switch ($i) {
+            case 1:
+              $person1 = $storage->load($idP[1]);
+              $person = $person1;
+              break;
+            case 2:
+              $person2 = $storage->load($idP[2]);
+              $person = $person2;
+              break;
+            default:
+              break;
+          }
         }
 
-        $user = User::load($idP[$i]);
+        $person->cellphone = $form_state->getStorage()['cellphone' . $i];
+        $person->changed = $now;
+        $person->email = $form_state->getStorage()['email' . $i];
+        $person->firstname = $form_state->getStorage()['firstname' . $i];
+        $person->lastname = $form_state->getStorage()['lastname' . $i];
+        $person->field_sel_isseliste = $form_state->getStorage()['seliste' . $i];
+        if ($form_state->getStorage()['seliste' . $i] == 1) {
+          $person->field_sel_balance = 180;
+        }
+        $person->save();
+
+        $user = User::load($uid[$i]);
         $user->setEmail($form_state->getStorage()['email' . $i]);
         if ($form_state->getStorage()['seliste' . $i] == 1) {
           $user->addRole('seliste');
@@ -1023,8 +1010,8 @@ class MembershipStep0 extends FormBase {
           $user->removeRole('seliste');
         }
         $user->save();
-
       }
+
       if (!$anon) {
         if ($form_state->getStorage()['newcontact']) {
           $entity = Drupal::entityTypeManager()
@@ -1033,9 +1020,8 @@ class MembershipStep0 extends FormBase {
           _updatePersonToContact($entity);
         }
       }
-
-//    drupal_flush_all_caches();
     }
+
     // Completion message -----------------------------------------------------
     if ($this->currentUser()->isAnonymous()) {
       $str = $this->t('membership request');

@@ -215,6 +215,7 @@ function association_mail($key, &$message, $aParams) {
 }
 
 function association_menu_local_tasks_alter(&$data, $route_name) {
+
   $oCurrentUser = Drupal::currentUser();
   switch ($route_name) {
     case 'view.association_members_and_persons.page_1':
@@ -233,9 +234,11 @@ function association_menu_local_tasks_alter(&$data, $route_name) {
       break;
     default:
   }
+
 }
 
 function association_views_pre_render(ViewExecutable $view) {
+
   switch ($view->id()) {
     case 'association_members':
       switch ($view->current_display) {
@@ -255,9 +258,11 @@ function association_views_pre_render(ViewExecutable $view) {
       break;
     default:
   }
+
 }
 
 function association_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
+
   switch ($view->id()) {
     case 'association_persons':
       if ($view->current_display == 'page_2') {
@@ -275,9 +280,11 @@ function association_views_query_alter(ViewExecutable $view, QueryPluginBase $qu
       break;
     default:
   }
+
 }
 
 function _updatePersonToContact($entity) {
+
   $user_id = $entity->user_id->target_id;
   // List all other persons for the current member
   $member_id = $entity->member_id->target_id;
@@ -307,9 +314,11 @@ function _updatePersonToContact($entity) {
   $usertemp = User::load($user_id);
   $usertemp->addRole('contact_for_member');
   $usertemp->save();
-  }
+
+}
 
 function _deletePersonsOfMember($entity) {
+
   // List all Persons for this Member
   $id = $entity->id->value;
   $database = Drupal::database();
@@ -323,18 +332,22 @@ function _deletePersonsOfMember($entity) {
     $person = $storage->load($result->id);
     $person->delete();
   }
+
 }
 
 function _export_association_CSV($view, $page) {
+
   $view = Views::getView($view);
   $view->setDisplay($page);
   $path = $view->getPath();
   $data = $view->preview($page)['#markup'];
   \Drupal::service('file_system')
     ->saveData($data, 'private://' . $path, FileSystemInterface::EXISTS_REPLACE);
+
 }
 
 function _export_association($entityType) {
+
   switch ($entityType) {
     case "member":
       _export_association_CSV('association_members', 'rest_export_1');
@@ -348,9 +361,11 @@ function _export_association($entityType) {
       break;
     default:
   }
+
 }
 
 function _setListOfRecipients($status = 4) {
+
   $sRecipients = '';
   $database = Drupal::database();
   $query = $database->select('member', 'am');
@@ -367,5 +382,6 @@ function _setListOfRecipients($status = 4) {
   }
   $sRecipients = substr($sRecipients, 0, strlen($sRecipients) - 2);
   return $sRecipients;
+
 }
 
