@@ -1,0 +1,14 @@
+uuid: 3d1c3f42-a5df-4ba9-baae-8cbcd4a85c6d
+langcode: fr
+status: true
+dependencies:
+  config:
+    - user.role.sponsor
+  module:
+    - user
+id: user_remove_role_action.sponsor
+label: 'Enlever le rôle Parrain des utilisateurs sélectionnés'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: sponsor

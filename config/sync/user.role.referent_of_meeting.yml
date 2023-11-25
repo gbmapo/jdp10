@@ -1,0 +1,9 @@
+uuid: d16ae1e0-df51-45cd-8a6d-d914cf4255be
+langcode: fr
+status: true
+dependencies: {  }
+id: referent_of_meeting
+label: 'Référent de Rencontre'
+weight: -3
+is_admin: null
+permissions: {  }

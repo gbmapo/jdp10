@@ -1,0 +1,14 @@
+uuid: 5e4def67-2254-4604-9e3b-c0fdea484be6
+langcode: fr
+status: true
+dependencies:
+  config:
+    - user.role.ca
+  module:
+    - user
+id: user_add_role_action.ca
+label: 'Ajouter le rôle CA aux utilisateurs sélectionnés'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: ca

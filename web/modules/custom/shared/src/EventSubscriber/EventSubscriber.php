@@ -2,13 +2,13 @@
 
 namespace Drupal\shared\EventSubscriber;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\EventDispatcher\Event;
-use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
+use Symfony\Component\EventDispatcher\Event;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
  * Class EventSubscriber.
@@ -43,6 +43,7 @@ class EventSubscriber implements EventSubscriberInterface
 
   public function redirectIf(FilterResponseEvent $event)
   {
+
     $node = $event->getRequest()->attributes->get('node');
     if ($node) {
       if (is_object($node)) {
@@ -58,6 +59,7 @@ class EventSubscriber implements EventSubscriberInterface
         }
       }
     }
+
   }
 
   /**

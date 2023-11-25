@@ -67,6 +67,43 @@ function association_allowed_values_function(FieldStorageDefinitionInterface $de
 
 }
 
+function association_cron() {
+
+  // ----------------------------------------------------------------------------
+  // Mise à jour du CA étendu
+  // ----------------------------------------------------------------------------
+  $usersWhoAreExtentedCA = \Drupal::entityQuery('user')
+    ->condition('roles', 'extended_ca')
+    ->execute();
+
+  $usersWhoShouldBeExtentedCA = \Drupal::entityQuery('user')
+    ->condition('roles', [
+      'ca',
+      'community_manager',
+      'referent_of_meeting',
+      'referent_of_contract',
+      'referent_of_distribution',
+    ], 'IN')
+    ->execute();
+
+  $toBeRemoved = array_diff($usersWhoAreExtentedCA, $usersWhoShouldBeExtentedCA);
+  $users = User::loadMultiple($toBeRemoved);
+  foreach ($users as $user) {
+    $user->removeRole('extended_ca');
+    $user->save();
+  }
+
+  $toBeAdded = array_diff($usersWhoShouldBeExtentedCA, $usersWhoAreExtentedCA);
+  foreach ($toBeAdded as $item) {
+    if (!is_null($item)) {
+      $user = User::load($item);
+      $user->addRole('extended_ca');
+      $user->save();
+    }
+  }
+
+}
+
 function association_entity_delete(EntityInterface $entity) {
 
   $mode = 'delete';
@@ -384,4 +421,3 @@ function _setListOfRecipients($status = 4) {
   return $sRecipients;
 
 }
-

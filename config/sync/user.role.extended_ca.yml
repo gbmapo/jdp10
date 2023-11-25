@@ -1,0 +1,9 @@
+uuid: b1b53a54-83cc-4936-968c-73649aab0e3c
+langcode: fr
+status: true
+dependencies: {  }
+id: extended_ca
+label: 'CA étendu'
+weight: 2
+is_admin: null
+permissions: {  }

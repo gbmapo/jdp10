@@ -21,16 +21,13 @@ settings:
       value: sel@lejardindepoissy.org
       label: '3. SÉL'
     -
-      value: '192'
+      value: '233'
       label: '2. AMAP Agneau'
     -
-      value: '199'
-      label: '2. AMAP Brioche de Noël'
+      value: '232'
+      label: '2. AMAP Brioche'
     -
-      value: '168'
-      label: '2. AMAP Bœuf'
-    -
-      value: '195'
+      value: '224'
       label: '2. AMAP Champignons'
     -
       value: '214'
@@ -42,49 +39,55 @@ settings:
       value: '209'
       label: '2. AMAP Farine et Huile'
     -
-      value: '191'
+      value: '220'
       label: '2. AMAP Fruits rouges'
     -
-      value: '206'
+      value: '234'
       label: '2. AMAP Herbier d''Elsa'
     -
-      value: '200'
+      value: '228'
       label: '2. AMAP Jus de pommes Hutrel'
     -
-      value: '203'
+      value: '235'
       label: '2. AMAP Légumes'
     -
-      value: '201'
-      label: '2. AMAP Lentilles Épeautre'
+      value: '230'
+      label: '2. AMAP Lentilles'
     -
-      value: '190'
+      value: '219'
       label: '2. AMAP Miel'
     -
-      value: '196'
+      value: '226'
       label: '2. AMAP Pain'
     -
-      value: '204'
+      value: '225'
       label: '2. AMAP Pommes de terre'
     -
-      value: '197'
+      value: '227'
       label: '2. AMAP Pommes-Poires'
     -
-      value: '198'
+      value: '229'
       label: '2. AMAP Porc'
     -
       value: '218'
       label: '2. AMAP Produits laitiers (Brebis)'
     -
-      value: '217'
+      value: '223'
       label: '2. AMAP Produits laitiers (Vache)'
     -
-      value: '205'
+      value: '236'
+      label: '2. AMAP Produits transformés'
+    -
+      value: '221'
+      label: '2. AMAP Prunes'
+    -
+      value: '231'
       label: '2. AMAP Terrines'
     -
       value: '212'
       label: '2. AMAP Volaille'
     -
-      value: '216'
+      value: '222'
       label: '2. AMAP Œufs'
   allowed_values_function: shared_allowed_values_function
 module: options

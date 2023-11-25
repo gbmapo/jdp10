@@ -1,0 +1,14 @@
+uuid: d4014bb8-f21e-4277-ac13-6e683de8d8b6
+langcode: fr
+status: true
+dependencies:
+  config:
+    - user.role.sponsor
+  module:
+    - user
+id: user_add_role_action.sponsor
+label: 'Ajouter le rôle Parrain aux utilisateurs sélectionnés'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: sponsor

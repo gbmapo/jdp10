@@ -29,4 +29,4 @@ visibility:
     id: request_path
     negate: true
     context_mapping: {  }
-    pages: "/amap/contract/subscribeMany/*\r\n/amap/distributions\r\n/amap/editCalendar\r\n/sel/services*\r\n/node/163"
+    pages: "/amap/contract/subscribeMany/*\r\n/amap/distributions\r\n/amap/editCalendar\r\n/sel/services*\r\n/node/191"

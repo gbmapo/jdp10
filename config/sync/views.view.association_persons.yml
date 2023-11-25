@@ -7,6 +7,7 @@ dependencies:
     - user.role.amapien
     - user.role.authenticated
     - user.role.contact_for_member
+    - user.role.extended_ca
     - user.role.referent_of_contract
     - user.role.referent_of_distribution
     - user.role.secretary
@@ -1737,6 +1738,7 @@ display:
             contact_for_member: contact_for_member
             referent_of_distribution: referent_of_distribution
             referent_of_contract: referent_of_contract
+            extended_ca: extended_ca
           group: 1
           exposed: true
           expose:
@@ -1761,6 +1763,8 @@ display:
               referent_de_rencontre: '0'
               referent_of_contract: '0'
               producteur: '0'
+              ca: '0'
+              extended_ca: '0'
               secretary: '0'
               administrator: '0'
             reduce: true

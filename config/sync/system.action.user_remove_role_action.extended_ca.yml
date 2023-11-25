@@ -1,0 +1,14 @@
+uuid: 0e43f729-2b81-442d-b042-da42d7ff7f44
+langcode: fr
+status: true
+dependencies:
+  config:
+    - user.role.extended_ca
+  module:
+    - user
+id: user_remove_role_action.extended_ca
+label: 'Enlever le rôle CA étendu des utilisateurs sélectionnés'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: extended_ca

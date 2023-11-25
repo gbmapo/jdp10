@@ -16,7 +16,7 @@ _core:
   default_config_hash: 6DrPsy3hNSd-85yNmMVIZ1IlLsLckD6VWDSYQhX-dy8
 id: referent_of_contract
 label: 'Référent de contrat'
-weight: -3
+weight: -4
 is_admin: false
 permissions:
   - 'access in-place editing'

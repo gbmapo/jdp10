@@ -188,7 +188,7 @@ function shared_form_alter(&$form, FormStateInterface $form_state, $form_id)
           if (in_array("referent_of_contract", $currentUserRoles)) {
             $aFromName[3] = 'L\'AMAP du Jardin de Poissy';
           }
-          if (in_array("referent_de_rencontre", $currentUserRoles)) {
+          if (in_array("referent_of_meeting", $currentUserRoles)) {
             $aFromName[4] = 'Le Grenier à SÉL';
           }
 
