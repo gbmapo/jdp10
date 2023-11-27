@@ -69,9 +69,9 @@ function association_allowed_values_function(FieldStorageDefinitionInterface $de
 
 function association_cron() {
 
-  // ----------------------------------------------------------------------------
-  // Mise à jour du CA étendu
-  // ----------------------------------------------------------------------------
+  /*
+   * Mise à jour du CA étendu
+   */
   $usersWhoAreExtentedCA = \Drupal::entityQuery('user')
     ->condition('roles', 'extended_ca')
     ->execute();
@@ -101,6 +101,33 @@ function association_cron() {
       $user->save();
     }
   }
+
+  /*
+   * Vérification de la personne Contact des adhérents
+   */
+  $database = \Drupal::database();
+  $query = $database->select('member', 'am');
+  $query->leftJoin('person', 'ap', 'ap.id = am.contact_id');
+  $query->fields('am', ['id', 'status'])->fields('ap', [
+    'id',
+  ]);
+  $query->condition('status', 0, '>');
+  $query->isNull('ap.id');
+  $results = $query->execute();
+  $errors = 0;
+  $membersWithError = '';
+  foreach ($results as $key => $result) {
+    $membersWithError .= $result->id . '-';
+    $errors++;
+  }
+  if ($errors != 0) {
+    \Drupal::logger('amap')
+      ->error('Missing contact for @text: @membersWithError', [
+        '@text' => \Drupal::translation()
+          ->formatPlural($errors, 'this member', 'these members'),
+        '@membersWithError' => $membersWithError,
+      ]);
+    }
 
 }
 
@@ -398,26 +425,5 @@ function _export_association($entityType) {
       break;
     default:
   }
-
-}
-
-function _setListOfRecipients($status = 4) {
-
-  $sRecipients = '';
-  $database = Drupal::database();
-  $query = $database->select('member', 'am');
-  $query->leftJoin('person', 'ap', 'ap.id = am.contact_id');
-  $query->fields('am', ['id', 'status'])->fields('ap', [
-    'id',
-    'lastname',
-    'firstname',
-    'email',
-  ])->condition('status', $status, '=');
-  $results = $query->execute();
-  foreach ($results as $key => $result) {
-    $sRecipients .= $result->email . ", ";
-  }
-  $sRecipients = substr($sRecipients, 0, strlen($sRecipients) - 2);
-  return $sRecipients;
 
 }

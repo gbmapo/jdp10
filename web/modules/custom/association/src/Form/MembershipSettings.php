@@ -36,7 +36,8 @@ class MembershipSettings extends FormBase {
     $rpReminder = $config->get('reminder');
 
     if ($rpStep == 0) {
-      $iY1 = (int) DrupalDateTime::createFromTimestamp(strtotime("now"), new \DateTimeZone('Europe/Paris'), )->format('Y');
+      $iY1 = (int) DrupalDateTime::createFromTimestamp(strtotime("now"), new \DateTimeZone('Europe/Paris'), )
+        ->format('Y');
       $iY2 = $iY1 + 1;
       $form['actions']['1B'] = [
         '#type' => 'select',
@@ -116,10 +117,13 @@ class MembershipSettings extends FormBase {
     $config = Drupal::config('association.renewalperiod');
     $rpStep = $config->get('step');
     switch ($rpStep) {
+
       case 0:
         if ($form_state->getValue('1B') == "") {
           $form_state->setErrorByName('1A', $this->t('Please choose one option.'));
         }
+        break;
+
     }
   }
 
@@ -177,14 +181,16 @@ class MembershipSettings extends FormBase {
 
         $sMessage = $this->t('Renew membership: Period has been opened.');
         Drupal::logger('association')
-          ->info('Renew membership: Period has been opened. @text', ['@text' => Drupal::translation()
-              ->formatPlural($number_updated, 'One member updated.', '@count members updated.')]);
+          ->info('Renew membership: Period has been opened. @text', [
+            '@text' => Drupal::translation()
+              ->formatPlural($number_updated, 'One member updated.', '@count members updated.'),
+          ]);
         break;
 
       case 1:
         if ($form_state->getValue('2B') == "1") {
           // Envoyer le premier courriel
-          $sRecipients = _setListOfRecipients(2);
+          $sRecipients = $this->_setListOfRecipients();
           $aParams = [$sRecipients, $rpYear];
           $message = [
             'module' => 'association',
@@ -210,7 +216,7 @@ class MembershipSettings extends FormBase {
           $rpReminder = $config->get('reminder') + 1;
           $config->set('reminder', $rpReminder);
           // Envoyer un courriel de relance
-          $sRecipients = _setListOfRecipients(2);
+          $sRecipients = $this->_setListOfRecipients();
           $aParams = [$sRecipients, $rpYear, $rpReminder];
           $message = [
             'module' => 'association',
@@ -245,9 +251,9 @@ class MembershipSettings extends FormBase {
       $config->set('reminder', 0);
       $config->save();
 
-			$sMessage = $this->t('Renew membership: Period has been closed.');
-			Drupal::logger('association')
-				->info('Renew membership: Period has been closed.');
+      $sMessage = $this->t('Renew membership: Period has been closed.');
+      Drupal::logger('association')
+        ->info('Renew membership: Period has been closed.');
 
       drupal_flush_all_caches();
 
@@ -256,6 +262,27 @@ class MembershipSettings extends FormBase {
     if ($sMessage != '') {
       Drupal::messenger()->addMessage($sMessage, $sType);
     }
+
+  }
+
+  function _setListOfRecipients() {
+
+    $sRecipients = '';
+    $database = Drupal::database();
+    $query = $database->select('person', 'ap');
+    $query->leftJoin('member', 'am', 'ap.member_id = am.id');
+    $query->fields('am', ['id', 'status'])->fields('ap', [
+      'id',
+      'lastname',
+      'firstname',
+      'email',
+    ])->condition('status', 2, '=');
+    $results = $query->execute();
+    foreach ($results as $key => $result) {
+      $sRecipients .= $result->email . ", ";
+    }
+    $sRecipients = substr($sRecipients, 0, strlen($sRecipients) - 2);
+    return $sRecipients;
 
   }
 
