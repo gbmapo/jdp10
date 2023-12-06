@@ -1,0 +1,48 @@
+uuid: aa6301e5-bf70-48a2-974a-e40568415c8d
+langcode: fr
+status: true
+dependencies: {  }
+id: database_for_daily_schedule
+label: 'Database for Daily Schedule'
+config:
+  namer:
+    filename: backup
+    timestamp: true
+    timestamp_format: Y-m-d\TH-i-s
+  compressor:
+    compression: gzip
+  utils:
+    site_offline: false
+  metadata:
+    description: ''
+  db_exclude:
+    exclude_tables: {  }
+    nodata_tables:
+      d8_cache_bootstrap: d8_cache_bootstrap
+      d8_cache_config: d8_cache_config
+      d8_cache_container: d8_cache_container
+      d8_cache_data: d8_cache_data
+      d8_cache_default: d8_cache_default
+      d8_cache_discovery: d8_cache_discovery
+      d8_cache_discovery_migration: d8_cache_discovery_migration
+      d8_cache_dynamic_page_cache: d8_cache_dynamic_page_cache
+      d8_cache_entity: d8_cache_entity
+      d8_cache_menu: d8_cache_menu
+      d8_cache_migrate: d8_cache_migrate
+      d8_cache_page: d8_cache_page
+      d8_cache_render: d8_cache_render
+      d8_cache_rest: d8_cache_rest
+      d8_cache_toolbar: d8_cache_toolbar
+      d8_cachetags: d8_cachetags
+      d8_watchdog: d8_watchdog
+  private_files_exclude:
+    exclude_filepaths:
+      - backup_migrate
+  public_files_exclude:
+    exclude_filepaths:
+      - js
+      - css
+      - php
+      - styles
+      - 'config_*'
+      - .htaccess

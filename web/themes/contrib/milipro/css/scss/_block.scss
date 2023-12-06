@@ -1,0 +1,19 @@
+/*
+ * Common styling for block regions
+ */
+ .block,
+ .block-content,
+ h3.block-title {
+   position: relative;
+ }
+/*
+ * Highlighted
+ */
+.region-highlighted {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.region-highlighted .block {
+  margin-bottom: 1rem;
+}

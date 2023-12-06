@@ -1,0 +1,22 @@
+_core:
+  default_config_hash: o4bYR9ZupWb3AsOIizTUG4g-nu1mdJqA59UB7QT-ifQ
+langcode: fr
+definitions:
+  node__add_page:
+    menu_name: tools
+    parent: ''
+    weight: 0
+    expanded: false
+    enabled: false
+  standard__front_page:
+    enabled: false
+    menu_name: main
+    parent: ''
+    expanded: false
+    weight: 0
+  user__logout:
+    menu_name: main
+    parent: ''
+    weight: 10
+    expanded: false
+    enabled: true

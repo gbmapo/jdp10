@@ -1,0 +1,23 @@
+uuid: ebebec59-9d30-464b-b4a2-28a0bf5895b5
+langcode: en
+status: true
+dependencies:
+  module:
+    - search
+  theme:
+    - milipro
+_core:
+  default_config_hash: 6c_MgC-sRp78cY4rTTNR1RCRx0vq5PmDd6feGD7gRJI
+id: milipro_search
+theme: milipro
+region: search_box
+weight: -7
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: Search
+  label_display: visible
+  provider: search
+  page_id: ''
+visibility: {  }

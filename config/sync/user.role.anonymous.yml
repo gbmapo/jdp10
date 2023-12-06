@@ -1,0 +1,21 @@
+uuid: ff4d4baf-e62c-463e-81ba-41d9e13eef06
+langcode: fr
+status: true
+dependencies:
+  module:
+    - amap
+    - contact
+    - sel
+    - system
+_core:
+  default_config_hash: pq_mEIu_B4widZN7Ap81iCJSjShFFdcL0jEiCi8VrDk
+id: anonymous
+label: 'Utilisateur anonyme'
+weight: -10
+is_admin: false
+permissions:
+  - 'access content'
+  - 'access site-wide contact form'
+  - 'view contract entities'
+  - 'view contract type entities'
+  - 'view service category entities'

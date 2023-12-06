@@ -1,0 +1,7 @@
+name: 'AMAP'
+type: module
+description: 'To manage the AMAP of the Jardin de Poissy.'
+core_version_requirement: ^9 || ^10
+package: 'Association'
+dependencies:
+  - association

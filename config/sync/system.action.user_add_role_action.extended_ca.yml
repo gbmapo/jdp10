@@ -1,0 +1,14 @@
+uuid: ceb23d69-b87f-4de9-ba9e-63e13792ca76
+langcode: fr
+status: true
+dependencies:
+  config:
+    - user.role.extended_ca
+  module:
+    - user
+id: user_add_role_action.extended_ca
+label: 'Ajouter le rôle CA étendu aux utilisateurs sélectionnés'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: extended_ca

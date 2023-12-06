@@ -1,0 +1,72 @@
+_core:
+  default_config_hash: UdqKB6G1oJ-cqT7HcF-RHVeLYxiutT3_75wa2DOJV9Q
+favicon:
+  use_default: true
+features:
+  comment_user_picture: true
+  comment_user_verification: true
+  favicon: true
+  node_user_picture: true
+logo:
+  use_default: true
+sticky_header_option: 0
+all_icons_show: 1
+facebook_url: 'https://www.facebook.com/pages/Le-jardin-de-Poissy/393031280902923'
+twitter_url: ''
+instagram_url: 'https://www.instagram.com/amap_sel_lejardindepoissy/'
+linkedin_url: ''
+youtube_url: ''
+vimeo_url: ''
+telegram_url: ''
+whatsapp_url: ''
+github_url: ''
+vk_url: ''
+slider_show: 1
+slider_type: slider-layered
+slider_classic_image: {  }
+slider_classic_image_path: ''
+slider_classic_code: ''
+slider_single_code: ''
+slider_time: '10000'
+slider_animateout: slideOutDown
+slider_animatein: flipInX
+slider_dots: 'true'
+slider_code: "<div class=\"slider-item\"><div class=\"slider-text-container\"><div class=\"container\"><div class=\"slider-text\"><h1 class=\"layer1\">Le Jardin de Poissy<br>est une AMAP</h1><h3 class=\"layer2\">Association pour le<br>Maintien d'une<br>Agriculture<br>Paysanne</h3><div class=\"layer3\"><a class=\"button\" href=\"/node/165\">En savoir plus</a></div></div></div></div></div>\r\n<div class=\"slider-item\"><div class=\"slider-text-container\"><div class=\"container\"><div class=\"slider-text\"><h1 class=\"layer1\">Le Jardin de Poissy<br>est un SÉL</h1><h3 class=\"layer2\">Système d'<br>Échange<br>Local</h3><div class=\"layer3\"><a class=\"button\" href=\"/node/1002\">En savoir plus</a></div></div></div></div></div>\r\n<div class=\"slider-item\"><div class=\"slider-text-container\"><div class=\"container\"><div class=\"slider-text\"><h1 class=\"layer1\">Vous voulez adhérer ?</h1><div class=\"layer2\"><a class=\"button\" href=\"/node/1003\">C'est ici...</a></div></div></div></div></div>"
+preloader_option: 1
+comment_user_pic: 1
+node_author_pic: 0
+node_tags: 1
+node_share_page: 0
+node_share_article: 0
+node_share_other: 0
+node_share_front: 1
+material_icon: 0
+fontawesome: 0
+fontawesome_five: 0
+iconmonstr: 0
+front_sidebar: 0
+animated_sidebar_option: 0
+copyright_text: 1
+copyright_text_custom: ''
+scrolltotop_on: 1
+cookie_message: 1
+cookie_message_custom: ''
+styling: 1
+styling_code: "img, picture, svg { display: inline-block;}\r\ntr:nth-child(even) {background-color: #f4fce6;}\r\n"
+insert_head: 0
+head_code: ''
+insert_body_start: 1
+body_start_code: "<script>\r\n  window.addEventListener(\"load\", function () {\r\n    document.querySelector('.header-main-container').insertAdjacentHTML('beforebegin', '<div class=\"text-align-center\"><a href=\"/\"><img src=\"/sites/default/files/images/logo.jpg\"></a></div>');\r\n  });\r\n</script>\r\n"
+insert_body_end: 0
+body_end_code: ''
+color_scheme: color_custom
+color_primary: '#9ba983'
+color_secondary: '#3b6124'
+bg_body: '#fcfbf8'
+block_bg: '#ffffff'
+color_text: '#404040'
+color_heading: '#7f9c20'
+color_light: '#f5f2ed'
+color_dark: '#4e100b'
+color_border: '#d6d6d6'
+bg_header: '#232323'

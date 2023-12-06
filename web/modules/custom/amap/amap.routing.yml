@@ -1,0 +1,86 @@
+# -------------------------------------------------------------------
+amap.contracts:
+  path: '/amap/showContracts'
+  defaults:
+    _controller: '\Drupal\amap\Controller\ContractsController::showContracts'
+    _title: 'Contracts'
+  requirements:
+    _access: 'TRUE'
+
+# -------------------------------------------------------------------
+amap.duplicate_contract:
+  path: '/amap/contract/duplicate/{id}'
+  defaults:
+    _form: '\Drupal\amap\Form\ContractDuplicateForm'
+    _title: 'Duplicate Contract'
+  requirements:
+    _permission: 'add contract entities'
+    id: ^\d+$
+
+# -------------------------------------------------------------------
+amap.contract_subscription_form:
+  path: '/amap/contract/subscribe/{contract}'
+  defaults:
+    _controller: '\Drupal\amap\Controller\ContractsController::enterSubscriptions'
+  requirements:
+    _permission: 'add contract subscription entities'
+
+# -------------------------------------------------------------------
+amap.contract_subscription_table_form:
+  path: '/amap/contract/subscribeMany/{contract}'
+  defaults:
+    _form: '\Drupal\amap\Form\ContractSubscriptionTableForm'
+    _title_callback: '\Drupal\amap\Controller\TitleController::changeTitle'
+    page : 'subscribeMany'
+    contract : $contract
+  requirements:
+    _permission: 'add contract subscription entities'
+
+# -------------------------------------------------------------------
+amap.contract_subcription_one_form:
+  path: '/amap/contract/subscribeOne/{contract}/{page}'
+  defaults:
+    _form: '\Drupal\amap\Form\ContractSubscriptionOneForm'
+    _title_callback: '\Drupal\amap\Controller\TitleController::changeTitle'
+    contract : $contract
+    page : $page
+  requirements:
+    _permission: 'add contract subscription entities'
+
+# -------------------------------------------------------------------
+amap.export_subscriptions:
+  path: '/amap/contract/export/{contract}'
+  defaults:
+    _controller: '\Drupal\amap\Controller\ContractsController::export_subscriptions'
+    _title: 'Export Subscriptions'
+  requirements:
+    _permission: 'add contract subscription entities'
+
+# -------------------------------------------------------------------
+amap.distribution_date_table_form:
+  path: '/amap/editCalendar'
+  defaults:
+    _form: '\Drupal\amap\Form\DistributionDateTableForm'
+    _title: 'Update Calendar'
+  requirements:
+    _permission: 'edit distribution date entities'
+
+# -------------------------------------------------------------------
+amap.distribution_inscription_many_form:
+  path: '/amap/signupForPlanningMany'
+  defaults:
+    _form: '\Drupal\amap\Form\DistributionInscriptionManyForm'
+    _title_callback: '\Drupal\amap\Controller\TitleController::changeTitle'
+    page : 'signupForPlanningMany'
+  requirements:
+    _permission: 'edit distribution inscription entities'
+
+# -------------------------------------------------------------------
+amap.distribution_inscription_one_form:
+  path: '/amap/signupForPlanningOne'
+  defaults:
+    _form: '\Drupal\amap\Form\DistributionInscriptionOneForm'
+    _title_callback: '\Drupal\amap\Controller\TitleController::changeTitle'
+    page : 'signupForPlanningOne'
+  requirements:
+    _permission: 'edit distribution inscription entities'

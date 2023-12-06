@@ -1,0 +1,14 @@
+uuid: 42f17dde-9fa4-455f-99a4-22f7028b3868
+langcode: fr
+status: true
+dependencies:
+  config:
+    - user.role.community_manager
+  module:
+    - user
+id: user_remove_role_action.community_manager
+label: 'Enlever le rôle Community Manager des utilisateurs sélectionnés'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: community_manager

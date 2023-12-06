@@ -1,0 +1,11 @@
+langcode: fr
+status: true
+dependencies:
+  enforced:
+    module:
+      - amap
+id: referent_of_distribution
+label: 'Référent de distribution'
+weight: -5
+is_admin: false
+permissions: {  }

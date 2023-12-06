@@ -1,0 +1,14 @@
+uuid: 5e899ebe-bac4-485b-b8c7-3d5c095b6b0c
+langcode: fr
+status: true
+dependencies:
+  config:
+    - user.role.ca
+  module:
+    - user
+id: user_remove_role_action.ca
+label: 'Enlever le rôle CA des utilisateurs sélectionnés'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: ca

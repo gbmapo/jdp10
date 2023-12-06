@@ -1,0 +1,11 @@
+<section id="slider" class="slider">
+  <div class="slider-container">
+    <div class="owl-carousel home-slider">
+      {% if slider_code != '' %}
+        {{ slider_code | striptags('<div>,<span>,<ul>,<ol>,<li>,<p>,<a>,<img>,<video>,<h1>,<h2>,<h3>,<h4>,<h5>,<h6>,<em>,<strong>,<br>,<button>,<i>,<source>,<hr>,') | raw }}
+      {% else %}
+        {% include '@milipro/template-parts/slider/default-slider-layered.html.twig' %}
+      {% endif %}
+    </div> <!--/.home-slider -->
+  </div> <!--/.slider-container -->
+</section>

@@ -1,0 +1,14 @@
+uuid: 7fc6ac86-c363-4c81-99b5-e0d0136c2b80
+langcode: fr
+status: true
+dependencies:
+  module:
+    - association
+    - file
+id: member
+label: Adhérent
+weight: 5
+is_admin: null
+permissions:
+  - 'delete own files'
+  - 'renew membership'

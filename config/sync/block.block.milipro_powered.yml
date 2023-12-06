@@ -1,0 +1,22 @@
+uuid: 9b1ed960-2e1d-4b0b-82b3-69c206dd028e
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - milipro
+_core:
+  default_config_hash: X11PdMY5NX5wEU80O4fyKZpfBDe7ttkzMD7ac-6aBCo
+id: milipro_powered
+theme: milipro
+region: hidden_blocks
+weight: -4
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  label_display: '0'
+  provider: system
+visibility: {  }

@@ -1,0 +1,223 @@
+/*
+ * Main
+ */
+
+/* Main -> Admin Tabs */
+.page-tabs {
+  list-style: none;
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin: 0 0 1rem 0;
+  padding: 0;
+  border-bottom: 2px solid var(--border-color);
+}
+ul.page-tabs li {
+  padding: 0;
+}
+ul.page-tabs li a {
+  padding: 4px 10px;
+  background: var(--border-color);
+  color: var(--bold-color);
+  transition: all 0.3s ease;
+}
+ul.page-tabs li a:hover {
+  background: var(--color-secondary);
+  color: #ffffff;
+}
+ul.page-tabs li.active-page-tab a {
+  background: var(--color-primary);
+  color: #ffffff;
+}
+/* Main -> Node */
+.node,
+.node-promoted,
+.node-sticky,
+.node-unpublished,
+.node-view-mode-full {
+  position: relative;
+}
+.node-view-mode-teaser.node-sticky {
+  position: relative;
+  padding: 0 1em 1em 1em;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+/* Main -> Node -> teaser view */
+.node-view-mode-teaser {
+  position: relative;
+  margin-bottom: 60px;
+  padding-bottom: 80px;
+  border-bottom: 4px double var(--border-color);
+}
+
+/* Main -> Node -> full view node */
+.node-view-mode-full .node-taxonomy-container {
+  margin: 0;
+}
+/* Main -> Node -> author and submitted details */
+.node-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0 0 14px 0;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border-color);
+}
+.author-picture img {
+  width: auto;
+  height: 24px;
+  margin-right: 6px;
+}
+.node-submitted-details,
+.node-submitted-details a {
+  color: #757575;
+}
+.node-submitted-details a:hover {
+  border-bottom: 1px dotted var(--color-primary);
+}
+.node-submitted-details i {
+  color: var(--color-primary);
+  margin: 0 0 0 14px;
+  vertical-align: middle;
+}
+.node-submitted-details i.user-icon {
+  margin-left: 0px;
+}
+
+/* Main -> Node -> node taxonomy and links */
+.node-taxonomy-container,
+.node-links-container {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 1rem 0 1rem 0;
+  border-top: 1px solid var(--border-color);
+}
+.node-links-container {
+  border-bottom: 1px solid var(--border-color);
+}
+h3.term-title {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+.term-title i {
+  color: var(--color-primary);
+  font-size: 1.1rem;
+}
+ul.taxonomy-terms {
+  list-style: none;
+  margin: 1em 0 0.2rem 0;
+  padding: 0;
+}
+li.taxonomy-term {
+  display: inline-block;
+}
+li.taxonomy-term a {
+  padding: 4px 10px;
+  background: #ffffff;
+  border: 1px dashed var(--color-primary);
+  border-radius: 4px;
+  transition: all 0.4s ease;
+}
+li.taxonomy-term a:hover {
+  background: var(--color-primary);
+  color: #ffffff;
+}
+.node-links-container ul.links {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  list-style-type: none;
+}
+ul.inline,
+ul.links.inline {
+  list-style: none;
+  display: inline;
+  padding-left: 0;
+}
+ul.inline li {
+  position: relative;
+  display: inline-block;
+  padding: 0;
+}
+.node-links-container li {
+  margin-right: 1rem;
+  float: left;
+}
+.node-links-container li.node-readmore {
+  margin-left: 0;
+  float: right;
+}
+.node-links-container .comment-comments::before,
+.node-links-container .comment-add::before {
+  padding-right: 2px;
+  font-family: "milicon";
+}
+.node-links-container .comment-comments::before {
+  content: "\f0e6";
+}
+.node-links-container .comment-add::before {
+  content: "\f0e5";
+  vertical-align: 1px;
+  color: var(--color-primary);
+}
+.node-readmore {
+  float: left;
+}
+li.node-readmore a {
+  padding: 6px 12px;
+  background: var(--color-primary);
+  color: #ffffff;
+  -webkit-transition: background 0.4s ease;
+  -moz-transition: background 0.4s ease;
+  transition: background 0.4s ease;
+}
+li.node-readmore a:hover {
+  background: var(--color-secondary);
+  color: #ffffff;
+}
+li.node-readmore a::after {
+  content: "\f178";
+  padding-left: 10px;
+  font-family: "milicon";
+}
+.node-view-mode-teaser li.comment-add,
+.node-view-mode-teaser li.comment-forbidden {
+  text-align: right;
+}
+
+/* Main -> Node -> pager */
+nav.pager {
+  position: relative;
+}
+.pager ul.pager__items {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 1rem 0;
+}
+.pager__items {
+  clear: both;
+  text-align: center;
+}
+.pager__item {
+  display: inline-block;
+  padding: 12px 0;
+}
+.pager__item a {
+  background: #ffffff;
+  padding: 8px 14px;
+  border: 1px dashed var(--color-primary);
+  border-radius: 4px;
+}
+.pager__item a:hover,
+.pager__item.is-active a {
+  background: var(--color-primary);
+  color: #ffffff;
+}

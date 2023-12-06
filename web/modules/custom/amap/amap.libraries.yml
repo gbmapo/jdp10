@@ -1,0 +1,33 @@
+subscriptions:
+  version: 1.x
+  css:
+    theme:
+      css/subscriptions.css: { }
+
+calendar-of-distributions:
+  version: 1.x
+  css:
+    theme:
+      css/calendar-of-distributions.css: { }
+
+planning-of-distributions:
+  version: 1.x
+  css:
+    theme:
+      css/signup-for-planning.css: { }
+  js:
+    js/signup-for-planning.js: { }
+  dependencies:
+    - core/drupalSettings
+
+LoD:
+  version: 1.x
+  css:
+    theme:
+      css/list-of-distributions.css: { }
+  header: true
+  js:
+    js/LoD.js: { }
+  dependencies:
+    - core/jquery
+    - shared/shared

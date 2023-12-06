@@ -1,0 +1,37 @@
+#maintenance-page {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: var(--color-primary);
+  color: #fff;
+}
+/* header -> maintenance-page header */
+.maintenance-header {
+  position: relative;
+  background: var(--color-primary);
+  height: 20vh;
+  width: 100%;
+}
+#maintenance {
+  position: relative;
+  background: var(--color-primary);
+}
+.maintenance {
+  color: #fff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 80vh;
+  padding: 10px 0 50px 0;
+}
+.maintenance-title {
+  color: #fff;
+}
+.maintenance-icon {
+  height: 50vh;
+}
+.maintenance-icon img {
+  max-height: 50vh;
+  width: auto;
+}

@@ -1,0 +1,17 @@
+uuid: 455aea2e-7f71-40c8-9931-96c56ad23848
+langcode: fr
+status: false
+dependencies: {  }
+id: split_prod
+label: 'Split Prod'
+description: ''
+weight: 0
+folder: ../config/split_prod
+module: {  }
+theme: {  }
+blacklist:
+  - system.logging
+  - system.performance
+graylist: {  }
+graylist_dependents: true
+graylist_skip_equal: true

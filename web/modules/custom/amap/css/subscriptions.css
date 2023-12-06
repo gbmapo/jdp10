@@ -1,0 +1,29 @@
+table.sticky-enabled {
+    text-align: left;
+}
+table.sticky-header {
+    text-align: left;
+}
+
+/* Remove arrows/spinners from input type number with CSS. */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+#subscriptions .form-number {
+    width: 35px;
+    padding-right: 2px;
+}
+#subscriptions .form-select {
+    width: 120px;
+}
+
+#theSubscription .form-number {
+    width: 35px;
+    padding-right: 2px;
+}

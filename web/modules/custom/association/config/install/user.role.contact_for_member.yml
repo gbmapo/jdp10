@@ -1,0 +1,12 @@
+langcode: fr
+status: true
+dependencies:
+  enforced:
+    module:
+      - association
+id: contact_for_member
+label: 'Contact pour adhérent'
+weight: -6
+is_admin: null
+permissions:
+  - 'renew membership'

@@ -1,0 +1,21 @@
++===============================+
+Version 10.1.0
+06 Jan 2023
++===============================+
+# Initial version of 10.x.x series.
+
+
++===============================+
+Version 10.1.1
+06 May 2023
++===============================+
+# Add new color options in theme settings.
+# Removed Google plus social icon.
+# Fixed minor known bugs.
+
+
++===============================+
+Version 10.1.2
+24 Oct 2023
++===============================+
+# Fixed minor known bugs.

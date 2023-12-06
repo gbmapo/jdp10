@@ -1,0 +1,23 @@
+table.sticky-enabled {
+    text-align: left;
+}
+
+table.sticky-header {
+    text-align: left;
+}
+
+tr:nth-child(even) {
+    BACKGROUND-COLOR: #F4FCE6;
+}
+
+tr:nth-child(odd) {
+    BACKGROUND-COLOR: #FFFFFF;
+}
+
+tr.distrib0 td {
+    BACKGROUND-COLOR: #FF0000 !important;
+}
+
+tr.distrib- {
+    display: none;
+}
