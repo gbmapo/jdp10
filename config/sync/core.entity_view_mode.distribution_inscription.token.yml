@@ -1,0 +1,10 @@
+uuid: 824318f6-6509-444a-9253-881769ea0d69
+langcode: fr
+status: true
+dependencies:
+  module:
+    - amap
+id: distribution_inscription.token
+label: 'Jeton (token)'
+targetEntityType: distribution_inscription
+cache: true

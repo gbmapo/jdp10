@@ -1,0 +1,10 @@
+uuid: f39b8d01-5094-44aa-b478-5684b9bc7972
+langcode: fr
+status: true
+dependencies:
+  module:
+    - association
+id: member.token
+label: 'Jeton (token)'
+targetEntityType: member
+cache: true

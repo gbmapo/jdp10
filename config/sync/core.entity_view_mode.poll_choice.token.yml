@@ -1,0 +1,10 @@
+uuid: ac6ecbd3-be48-4a38-a69d-aab9e9fc9689
+langcode: fr
+status: true
+dependencies:
+  module:
+    - poll
+id: poll_choice.token
+label: 'Jeton (token)'
+targetEntityType: poll_choice
+cache: true

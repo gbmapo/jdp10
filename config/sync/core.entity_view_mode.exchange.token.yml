@@ -1,0 +1,10 @@
+uuid: 30a79258-ce24-4f65-aed5-39926deb7f38
+langcode: fr
+status: true
+dependencies:
+  module:
+    - sel
+id: exchange.token
+label: 'Jeton (token)'
+targetEntityType: exchange
+cache: true

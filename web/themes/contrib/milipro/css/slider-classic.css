@@ -13,7 +13,7 @@ ul.js-rotating {
   font-size: 1.1rem;
 }
 .home-slider-classic.homepage .header {
-  background: linear-gradient(45deg, rgba(209,57,43,1) 0%, rgba(209,84,43,1) 50%, rgba(209,57,43,1) 100%);
+  background: linear-gradient(45deg, rgba(127,156,33,1) 0%, rgba(225,243,160,1) 100%);
   width: 100%;
   min-height: 100vh;
   padding: 0;

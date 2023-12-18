@@ -1,11 +1,13 @@
 _core:
   default_config_hash: UdqKB6G1oJ-cqT7HcF-RHVeLYxiutT3_75wa2DOJV9Q
+langcode: fr
 favicon:
-  use_default: true
+  path: ''
+  use_default: false
 features:
   comment_user_picture: true
   comment_user_verification: true
-  favicon: true
+  favicon: false
   node_user_picture: true
 logo:
   use_default: true
@@ -22,16 +24,16 @@ whatsapp_url: ''
 github_url: ''
 vk_url: ''
 slider_show: 1
-slider_type: slider-layered
+slider_type: slider-classic
 slider_classic_image: {  }
 slider_classic_image_path: ''
-slider_classic_code: ''
+slider_classic_code: '<li> <h1>Le Jardin de Poissy<br>est une AMAP </h1><h4>Association pour le<br>Maintien d''une <br>Agriculture <br>Paysanne </h4><br><a class="button" href="/node/194"> En savoir plus </a> </li><li> <h1>Le Jardin de Poissy<br>est un SÉL </h1><h4>Système d''<br>Échange<br>Local </h4><br><a class="button" href="/node/1002"> En savoir plus </a> </li><li> <h1>Vous voulez adhérer ? <br></h1><br><a class="button" href="/node/195"> C''est ici... </a> </li>'
 slider_single_code: ''
 slider_time: '10000'
 slider_animateout: slideOutDown
 slider_animatein: flipInX
 slider_dots: 'true'
-slider_code: "<div class=\"slider-item\"><div class=\"slider-text-container\"><div class=\"container\"><div class=\"slider-text\"><h1 class=\"layer1\">Le Jardin de Poissy<br>est une AMAP</h1><h3 class=\"layer2\">Association pour le<br>Maintien d'une<br>Agriculture<br>Paysanne</h3><div class=\"layer3\"><a class=\"button\" href=\"/node/165\">En savoir plus</a></div></div></div></div></div>\r\n<div class=\"slider-item\"><div class=\"slider-text-container\"><div class=\"container\"><div class=\"slider-text\"><h1 class=\"layer1\">Le Jardin de Poissy<br>est un SÉL</h1><h3 class=\"layer2\">Système d'<br>Échange<br>Local</h3><div class=\"layer3\"><a class=\"button\" href=\"/node/1002\">En savoir plus</a></div></div></div></div></div>\r\n<div class=\"slider-item\"><div class=\"slider-text-container\"><div class=\"container\"><div class=\"slider-text\"><h1 class=\"layer1\">Vous voulez adhérer ?</h1><div class=\"layer2\"><a class=\"button\" href=\"/node/1003\">C'est ici...</a></div></div></div></div></div>"
+slider_code: "<div class=\"slider-item\"><div class=\"slider-text-container\"><div class=\"container\"><div class=\"slider-text\"><h1 class=\"layer1\">Le Jardin de Poissy<br>est une AMAP</h1><h3 class=\"layer2\">Association pour le<br>Maintien d'une<br>Agriculture<br>Paysanne</h3><div class=\"layer3\"><a class=\"button\" href=\"/node/194\">En savoir plus</a></div></div></div></div></div>\r\n<div class=\"slider-item\"><div class=\"slider-text-container\"><div class=\"container\"><div class=\"slider-text\"><h1 class=\"layer1\">Le Jardin de Poissy<br>est un SÉL</h1><h3 class=\"layer2\">Système d'<br>Échange<br>Local</h3><div class=\"layer3\"><a class=\"button\" href=\"/node/1002\">En savoir plus</a></div></div></div></div></div>\r\n<div class=\"slider-item\"><div class=\"slider-text-container\"><div class=\"container\"><div class=\"slider-text\"><h1 class=\"layer1\">Vous voulez adhérer ?</h1><div class=\"layer2\"><a class=\"button\" href=\"/node/195\">C'est ici...</a></div></div></div></div></div>"
 preloader_option: 1
 comment_user_pic: 1
 node_author_pic: 0
@@ -39,24 +41,24 @@ node_tags: 1
 node_share_page: 0
 node_share_article: 0
 node_share_other: 0
-node_share_front: 1
+node_share_front: 0
 material_icon: 0
 fontawesome: 0
 fontawesome_five: 0
 iconmonstr: 0
 front_sidebar: 0
 animated_sidebar_option: 0
-copyright_text: 1
+copyright_text: 0
 copyright_text_custom: ''
 scrolltotop_on: 1
 cookie_message: 1
-cookie_message_custom: ''
+cookie_message_custom: 'Ce site utilise des cookies. En poursuivant votre navigation sur le site, vous acceptez notre utilisation de ces cookies.'
 styling: 1
-styling_code: "img, picture, svg { display: inline-block;}\r\ntr:nth-child(even) {background-color: #f4fce6;}\r\n"
+styling_code: "img, picture, svg { display: inline-block;}\r\ntr:nth-child(even) {background-color: #f4fce6;}\r\n#myLogo {background: url(/sites/default/files/images/logo.jpg) no-repeat left; height: 107px;}\r\n.form-item {margin-bottom: 0;}\r\n.field-item:first-child { clear: left; }\r\n.image-field { float: left; margin: 0 10px 5px 0; }\r\n\r\n\r\n"
 insert_head: 0
 head_code: ''
 insert_body_start: 1
-body_start_code: "<script>\r\n  window.addEventListener(\"load\", function () {\r\n    document.querySelector('.header-main-container').insertAdjacentHTML('beforebegin', '<div class=\"text-align-center\"><a href=\"/\"><img src=\"/sites/default/files/images/logo.jpg\"></a></div>');\r\n  });\r\n</script>\r\n"
+body_start_code: "<script>window.addEventListener(\"load\", function () {document.querySelector('.header-main-container').insertAdjacentHTML('beforebegin', '<div id=\"myLogo\"></div>');});</script>"
 insert_body_end: 0
 body_end_code: ''
 color_scheme: color_custom

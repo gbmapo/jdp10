@@ -1,0 +1,10 @@
+uuid: 9777cf0f-64cd-412c-8778-db495e0aea46
+langcode: fr
+status: true
+dependencies:
+  module:
+    - poll
+id: poll.token
+label: 'Jeton (token)'
+targetEntityType: poll
+cache: true

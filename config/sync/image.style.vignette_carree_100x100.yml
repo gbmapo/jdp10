@@ -1,12 +1,12 @@
-uuid: e4a51058-11b1-4844-98b1-5b6d42721c48
+uuid: cad1c57a-de56-45ff-8efc-8d326c63a9ce
 langcode: fr
 status: true
 dependencies: {  }
 name: vignette_carree_100x100
 label: 'Vignette carrée (100x100)'
 effects:
-  30966cc9-0fe9-4b82-8375-c388215c6fb3:
-    uuid: 30966cc9-0fe9-4b82-8375-c388215c6fb3
+  4c620a66-3da6-43a3-a31b-cb532bc96448:
+    uuid: 4c620a66-3da6-43a3-a31b-cb532bc96448
     id: image_scale_and_crop
     weight: 1
     data:

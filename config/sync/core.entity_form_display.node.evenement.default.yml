@@ -9,11 +9,12 @@ dependencies:
     - field.field.node.evenement.field_event_date_start
     - field.field.node.evenement.field_gallery
     - field.field.node.evenement.field_tags
-    - image.style.thumbnail
+    - image.style.vignette_carree_100x100
     - node.type.evenement
   module:
     - datetime
     - image
+    - imce
     - path
     - text
 id: node.evenement.default
@@ -65,8 +66,10 @@ content:
     region: content
     settings:
       progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
+      preview_image_style: vignette_carree_100x100
+    third_party_settings:
+      imce:
+        enabled: false
   field_tags:
     type: entity_reference_autocomplete
     weight: 13
@@ -128,5 +131,10 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden: {  }

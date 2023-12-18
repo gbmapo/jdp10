@@ -1874,7 +1874,7 @@ display:
             product18: product18
             product19: product19
             product20: product20
-          default: '-1'
+          default: distributiondate
           info:
             numberofproducts:
               sortable: false
@@ -1896,140 +1896,140 @@ display:
               align: views-align-center
               separator: ''
               empty_column: true
-              responsive: ''
+              responsive: priority-low
             product02:
               sortable: false
               default_sort_order: asc
               align: views-align-center
               separator: ''
               empty_column: true
-              responsive: ''
+              responsive: priority-low
             product03:
               sortable: false
               default_sort_order: asc
               align: views-align-center
               separator: ''
               empty_column: true
-              responsive: ''
+              responsive: priority-low
             product04:
               sortable: false
               default_sort_order: asc
               align: views-align-center
               separator: ''
               empty_column: true
-              responsive: ''
+              responsive: priority-low
             product05:
               sortable: false
               default_sort_order: asc
               align: views-align-center
               separator: ''
               empty_column: true
-              responsive: ''
+              responsive: priority-low
             product06:
               sortable: false
               default_sort_order: asc
               align: views-align-center
               separator: ''
               empty_column: true
-              responsive: ''
+              responsive: priority-low
             product07:
               sortable: false
               default_sort_order: asc
               align: views-align-center
               separator: ''
               empty_column: true
-              responsive: ''
+              responsive: priority-low
             product08:
               sortable: false
               default_sort_order: asc
               align: views-align-center
               separator: ''
               empty_column: true
-              responsive: ''
+              responsive: priority-low
             product09:
               sortable: false
               default_sort_order: asc
               align: views-align-center
               separator: ''
               empty_column: true
-              responsive: ''
+              responsive: priority-low
             product10:
               sortable: false
               default_sort_order: asc
               align: views-align-center
               separator: ''
               empty_column: true
-              responsive: ''
+              responsive: priority-low
             product11:
               sortable: false
               default_sort_order: asc
               align: views-align-center
               separator: ''
               empty_column: true
-              responsive: ''
+              responsive: priority-low
             product12:
               sortable: false
               default_sort_order: asc
               align: views-align-center
               separator: ''
               empty_column: true
-              responsive: ''
+              responsive: priority-low
             product13:
               sortable: false
               default_sort_order: asc
               align: views-align-center
               separator: ''
               empty_column: true
-              responsive: ''
+              responsive: priority-low
             product14:
               sortable: false
               default_sort_order: asc
               align: views-align-center
               separator: ''
               empty_column: true
-              responsive: ''
+              responsive: priority-low
             product15:
               sortable: false
               default_sort_order: asc
               align: views-align-center
               separator: ''
               empty_column: true
-              responsive: ''
+              responsive: priority-low
             product16:
               sortable: false
               default_sort_order: asc
               align: views-align-center
               separator: ''
               empty_column: true
-              responsive: ''
+              responsive: priority-low
             product17:
               sortable: false
               default_sort_order: asc
               align: views-align-center
               separator: ''
               empty_column: true
-              responsive: ''
+              responsive: priority-low
             product18:
               sortable: false
               default_sort_order: asc
               align: views-align-center
               separator: ''
               empty_column: true
-              responsive: ''
+              responsive: priority-low
             product19:
               sortable: false
               default_sort_order: asc
               align: views-align-center
               separator: ''
               empty_column: true
-              responsive: ''
+              responsive: priority-low
             product20:
               sortable: false
               default_sort_order: asc
               align: views-align-center
               separator: ''
               empty_column: true
-              responsive: ''
+              responsive: priority-low
           override: true
           sticky: true
           summary: ''

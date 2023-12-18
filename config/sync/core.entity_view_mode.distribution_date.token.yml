@@ -1,0 +1,10 @@
+uuid: 61e6d42d-f520-47bf-bd9e-357b60fd358b
+langcode: fr
+status: true
+dependencies:
+  module:
+    - amap
+id: distribution_date.token
+label: 'Jeton (token)'
+targetEntityType: distribution_date
+cache: true
