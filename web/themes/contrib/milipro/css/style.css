@@ -649,8 +649,8 @@ th {
   color: var(--color-secondary);
   font-family: "Poppins", sans-serif;
   margin: 0;
-  padding: 10px;
-  border: 2px solid var(--color-secondary);
+  padding: 4px; /* zonfal */
+/*   border: 2px solid var(--color-secondary); zonfal */
   text-align: left;
   text-shadow: none;
 }
@@ -661,7 +661,7 @@ th a {
 
 td {
   padding: 5px 10px;
-  border: 2px solid var(--border-color);
+/*   border: 2px solid var(--border-color); zonfal */
 }
 
 /**

@@ -1,3 +1,4 @@
+/*
 table.sticky-enabled {
     text-align: left;
 }
@@ -14,10 +15,11 @@ tr:nth-child(odd) {
     BACKGROUND-COLOR: #FFFFFF;
 }
 
-tr.distrib0 td {
-    BACKGROUND-COLOR: #FF0000 !important;
-}
-
 tr.distrib- {
     display: none;
+}
+ */
+
+tr.distrib0 td {
+    BACKGROUND-COLOR: #FF0000 !important;
 }

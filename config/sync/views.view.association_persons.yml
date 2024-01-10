@@ -1232,7 +1232,7 @@ display:
           plugin_id: text
           empty: false
           content:
-            value: '<BR><a href="/association/person/add" title="Ajouter  une personne" class="form-submit">Ajouter</a>'
+            value: '<BR><a href="/association/person/add" title="Ajouter  une personne" class="button-round">Ajouter</a>'
             format: full_html
           tokenize: false
       display_extenders: {  }

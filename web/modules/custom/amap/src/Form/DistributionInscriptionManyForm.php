@@ -27,7 +27,7 @@ class DistributionInscriptionManyForm extends FormBase
     if ($oCurrentUser->hasPermission('add distribution date entities')) {
       $data = [
         '#type'     => 'inline_template',
-        '#template' => '<input type="submit" id="edit-toggle" name="toggleButton" value="{{ foo }}" class="button js-form-submit form-submit">',
+        '#template' => '<input type="submit" id="edit-toggle" name="toggleButton" value="{{ foo }}" class="button-dark">',
         '#context'  => ['foo' => $this->t('Toggle')],
       ];
     }

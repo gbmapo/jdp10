@@ -1,0 +1,31 @@
+<html>
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	<style type="text/css">		body {
+					  font-family: 'Montserrat', sans-serif;
+					  font-size: 14px;
+					}
+					table {border-collapse: collapse;}
+					table, th, td {
+					  border: 1px solid black;
+					  padding: 5px;
+					  }
+					thead {
+				  	background-color: #dde4d3;
+				  	text-align: left;
+					}
+					tbody tr:nth-child(even) {background: #f4fce6}
+	</style>
+</head>
+<body>
+<p>
+	Chers S&Eacute;Listes,<br>
+	<br>
+	Voici notre piq&ucirc;re de rappel hebdomadaire...<br>
+	Vous trouverez ci-apr&egrave;s l'ensemble des offres et demandes de la cat&eacute;gorie « {{ body|raw }}<br>
+	Comme d'habitude, vous trouverez l'int&eacute;gralité du Catalogue <a href="{{ url('view.sel_services.page_1') }}">{{ 'ici'|t }}</a>.<br>
+	--<br>
+	Le Grenier à S&Eacute;L
+</p>
+</body>
+</html>

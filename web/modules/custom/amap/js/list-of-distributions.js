@@ -11,7 +11,7 @@ jQuery(document).ready(function ($) {
         display: $.fn.dataTable.Responsive.display.modal({
           header: function (row) {
             var data = row.data();
-            return 'Distribution du ' + data[0];
+            return '<span style="font-size: 1.4rem;">Distribution du ' + data[0] + '</span>';
           }
         }),
         // renderer: $.fn.dataTable.Responsive.renderer.tableAll()

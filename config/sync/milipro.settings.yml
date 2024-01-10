@@ -43,7 +43,7 @@ node_share_article: 0
 node_share_other: 0
 node_share_front: 0
 material_icon: 0
-fontawesome: 0
+fontawesome: 1
 fontawesome_five: 0
 iconmonstr: 0
 front_sidebar: 0
@@ -54,7 +54,7 @@ scrolltotop_on: 1
 cookie_message: 1
 cookie_message_custom: 'Ce site utilise des cookies. En poursuivant votre navigation sur le site, vous acceptez notre utilisation de ces cookies.'
 styling: 1
-styling_code: "img, picture, svg { display: inline-block;}\r\ntr:nth-child(even) {background-color: #f4fce6;}\r\n#myLogo {background: url(/sites/default/files/images/logo.jpg) no-repeat left; height: 107px;}\r\n.form-item {margin-bottom: 0;}\r\n.field-item:first-child { clear: left; }\r\n.image-field { float: left; margin: 0 10px 5px 0; }\r\n\r\n\r\n"
+styling_code: "img, picture, svg { display: inline-block;}\r\ntr:nth-child(even) {background-color: #f4fce6;}\r\n#myLogo {background: url(/sites/default/files/images/logo.jpg) no-repeat left; height: 107px;}\r\n.form-item {margin-bottom: 0;}\r\n.field-item:first-child { clear: left; }\r\n.image-field { float: left; margin: 0 10px 5px 0; }"
 insert_head: 0
 head_code: ''
 insert_body_start: 1

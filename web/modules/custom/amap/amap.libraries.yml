@@ -1,8 +1,14 @@
-subscriptions:
+list-of-distributions:
   version: 1.x
   css:
     theme:
-      css/subscriptions.css: { }
+      css/list-of-distributions.css: { }
+  header: true
+  js:
+    js/list-of-distributions.js: { }
+  dependencies:
+    - core/jquery
+    - shared/shared
 
 calendar-of-distributions:
   version: 1.x
@@ -20,14 +26,9 @@ planning-of-distributions:
   dependencies:
     - core/drupalSettings
 
-LoD:
+subscriptions:
   version: 1.x
   css:
     theme:
-      css/list-of-distributions.css: { }
-  header: true
-  js:
-    js/LoD.js: { }
-  dependencies:
-    - core/jquery
-    - shared/shared
+      css/subscriptions.css: { }
+

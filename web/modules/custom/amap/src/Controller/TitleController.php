@@ -16,10 +16,10 @@ class TitleController extends ControllerBase {
     switch ($page) {
 
       case 'signupForPlanningMany':
-        $title = $this->t('Sign up for Planning <a class="form-submit" href="/amap/signupForPlanningOne">Little screen</a>');
+        $title = $this->t('Sign up for Planning <a class="button-dark" href="/amap/signupForPlanningOne">Little screen</a>');
         break;
       case 'signupForPlanningOne':
-        $title = $this->t('Sign up for Planning <a class="form-submit" href="/amap/signupForPlanningMany">Big screen</a>');
+        $title = $this->t('Sign up for Planning <a class="button-dark" href="/amap/signupForPlanningMany">Big screen</a>');
         break;
 
       case 'subscribeMany':

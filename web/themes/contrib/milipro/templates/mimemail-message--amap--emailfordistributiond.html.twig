@@ -1,0 +1,32 @@
+<html>
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	<style type="text/css">		body {
+					  font-family: 'Montserrat', sans-serif;
+					  font-size: 14px;
+					}
+	</style>
+</head>
+<body>
+<div>
+	<table width="800px" cellpadding="0" cellspacing="0">
+		<tr>
+			<td>
+			<div style="padding: 0px 0px 0px 0px;">
+				<p>
+					AMAPiennes, AMAPiens,<br>
+					<br>
+					Attention, pour la distribution du {{ body|raw }}<br>
+					<br>
+					Pour s’inscrire, suivre <a href="{{ url('amap.distribution_inscription_many_form') }}">{{ 'ce lien'|t }}</a> ou aller sur le site du Jardin de Poissy [menu L’AMAP, option Distributions, onglet S'inscrire sur le Planning].<br>
+					--<br>
+					L'AMAP du Jardin de Poissy <br>
+					P.S. Ce courriel a été envoyé automatiquement. Merci de ne pas y répondre.
+				</p>
+			</div>
+			</td>
+		</tr>
+	</table>
+</div>
+</body>
+</html>
