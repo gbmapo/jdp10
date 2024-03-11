@@ -37,14 +37,14 @@ class DistributionInscriptionForm extends ContentEntityForm
 
     switch ($status) {
       case SAVED_NEW:
-        \Drupal::messenger()->addMessage($this->t('Distribution inscription « %label » has been added.', [
-          '%label' => $entity->label(),
+        \Drupal::messenger()->addMessage($this->t('Distribution inscription « @label » has been added.', [
+          '@label' => $entity->label(),
         ]));
         break;
 
       default:
-        \Drupal::messenger()->addMessage($this->t('Distribution inscription « %label » has been updated.', [
-          '%label' => $entity->label(),
+        \Drupal::messenger()->addMessage($this->t('Distribution inscription « @label » has been updated.', [
+          '@label' => $entity->label(),
         ]));
     }
     $form_state->setRedirect('entity.distribution_inscription.canonical', ['distribution_inscription' => $entity->id()]);

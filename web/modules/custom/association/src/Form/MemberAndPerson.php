@@ -258,8 +258,8 @@ class MemberAndPerson extends FormBase
 
     drupal_flush_all_caches();
 
-    \Drupal::messenger()->addMessage($this->t('Member « %label » has been added.', [
-      '%label' => $values['designation'],
+    \Drupal::messenger()->addMessage($this->t('Member « @label » has been added.', [
+      '@label' => $values['designation'],
     ]));
     $form_state->setRedirect('view.association_members.page_1');
 

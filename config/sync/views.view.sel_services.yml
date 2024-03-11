@@ -2389,6 +2389,7 @@ display:
     display_plugin: page
     position: 1
     display_options:
+      title: Services
       fields:
         id:
           id: id
@@ -3258,10 +3259,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: |
-              {% if owner_id_1=="[current-user:uid]"  %}
-              <a href="/sel/service/{{ id }}/edit"><img src="/sites/default/files/images/document-edit.gif" alt="" title="Modifier" width="11" height="13"></a> <a href="/sel/service/{{ id }}/delete"><img src="/sites/default/files/images/trash.gif" alt="" title="Supprimer" width="11" height="13"></a>
-              {% endif %}
+            text: "{% if owner_id_1==\"[current-user:uid]\"  %}\r\n<a href=\"/sel/service/{{ id }}/edit\"><img src=\"/sites/default/files/images/edit.svg\" title=\"Modifier le service\"></a> <a href=\"/sel/service/{{ id }}/delete\"><img src=\"/sites/default/files/images/trash-2.svg\" title=\"Supprimer le service\"></a>\r\n{% endif %}\r\n"
             make_link: false
             path: ''
             absolute: false
@@ -3537,6 +3535,7 @@ display:
           separator: ''
           hide_empty: false
       defaults:
+        title: false
         pager: false
         style: false
         row: false
@@ -4473,7 +4472,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "{% if owner_id_1==\"[current-user:uid]\"  %}\r\n<a href=\"/sel/service/{{ id }}/edit\"><img src=\"/sites/default/files/images/document-edit.gif\" alt=\"\" title=\"Modifier\" ></a> <a href=\"/sel/service/{{ id }}/delete\"><img src=\"/sites/default/files/images/trash.gif\" alt=\"\" title=\"Supprimer\"></a>\r\n{% endif %}\r\n"
+            text: "{% if owner_id_1==\"[current-user:uid]\"  %}\r\n<a href=\"/sel/service/{{ id }}/edit\"><img src=\"/sites/default/files/images/edit.svg\" title=\"Modifier le service\"></a> <a href=\"/sel/service/{{ id }}/delete\"><img src=\"/sites/default/files/images/trash-2.svg\" title=\"Supprimer le service\"></a>\r\n{% endif %}\r\n"
             make_link: false
             path: ''
             absolute: false

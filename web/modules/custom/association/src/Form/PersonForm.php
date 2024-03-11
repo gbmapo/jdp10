@@ -96,15 +96,15 @@ class PersonForm extends ContentEntityForm {
     switch ($status) {
       case SAVED_NEW:
         Drupal::messenger()
-          ->addMessage($this->t('Person « %label » has been added.', [
-            '%label' => $entity->label(),
+          ->addMessage($this->t('Person « @label » has been added.', [
+            '@label' => $entity->label(),
           ]));
         break;
 
       default:
         Drupal::messenger()
-          ->addMessage($this->t('Person « %label » has been updated.', [
-            '%label' => $entity->label(),
+          ->addMessage($this->t('Person « @label » has been updated.', [
+            '@label' => $entity->label(),
           ]));
     }
 

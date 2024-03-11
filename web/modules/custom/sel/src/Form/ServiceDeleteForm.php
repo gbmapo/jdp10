@@ -26,8 +26,8 @@ class ServiceDeleteForm extends ContentEntityDeleteForm
 
   public function getQuestion()
   {
-    return $this->t('Are you sure you want to delete service « %label »?', array(
-      '%label' => $this->getEntity()->label()
+    return $this->t('Are you sure you want to delete service « @label »?', array(
+      '@label' => $this->getEntity()->label()
     ));
   }
 
@@ -40,8 +40,8 @@ class ServiceDeleteForm extends ContentEntityDeleteForm
   protected function getDeletionMessage()
   {
     $entity = $this->getEntity();
-    \Drupal::messenger()->addMessage($this->t('Service « %label » has been deleted.', array(
-      '%label' => $entity->label()
+    \Drupal::messenger()->addMessage($this->t('Service « @label » has been deleted.', array(
+      '@label' => $entity->label()
     )));
   }
 }

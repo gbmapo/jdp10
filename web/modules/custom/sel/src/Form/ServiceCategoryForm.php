@@ -37,14 +37,14 @@ class ServiceCategoryForm extends ContentEntityForm
 
     switch ($status) {
       case SAVED_NEW:
-        \Drupal::messenger()->addMessage($this->t('Service category « %label » has been added.', [
-          '%label' => $entity->label(),
+        \Drupal::messenger()->addMessage($this->t('Service category « @label » has been added.', [
+          '@label' => $entity->label(),
         ]));
         break;
 
       default:
-        \Drupal::messenger()->addMessage($this->t('Service category « %label » has been updated.', [
-          '%label' => $entity->label(),
+        \Drupal::messenger()->addMessage($this->t('Service category « @label » has been updated.', [
+          '@label' => $entity->label(),
         ]));
     }
     $form_state->setRedirect('entity.service_category.canonical', ['service_category' => $entity->id()]);

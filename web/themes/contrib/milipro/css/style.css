@@ -649,8 +649,9 @@ th {
   color: var(--color-secondary);
   font-family: "Poppins", sans-serif;
   margin: 0;
+/*padding: 10px;   zonfal */
   padding: 4px; /* zonfal */
-/*   border: 2px solid var(--color-secondary); zonfal */
+/*border: 2px solid var(--color-secondary); zonfal */
   text-align: left;
   text-shadow: none;
 }
@@ -661,7 +662,7 @@ th a {
 
 td {
   padding: 5px 10px;
-/*   border: 2px solid var(--border-color); zonfal */
+/*border: 2px solid var(--border-color); zonfal */
 }
 
 /**
@@ -1029,6 +1030,7 @@ h3.block-title {
 
 /* header -> homepage header when slider is enabled */
 .frontpage.homepage .header {
+  background: linear-gradient(45deg, rgb(209, 57, 43) 0%, rgb(209, 84, 43) 50%, rgb(209, 57, 43) 100%);
   background: linear-gradient(45deg, rgba(127,156,33,1) 0%, rgba(225,243,160,1) 100%);
   width: 100%;
   height: 100vh;
@@ -1415,6 +1417,7 @@ ul.submenu .active-menu li.collapsed:hover ul.submenu {
   display: block;
   width: 100%;
   margin: 0;
+  padding: 2rem 0;
   padding: 0;
   z-index: 3;
 }
@@ -3196,6 +3199,7 @@ h3.single-comment-title {
   display: inline-block;
   padding: 7px 16px;
   transition: all 0.5s ease;
+  margin: 4px 0px; /* zonfal */
 }
 
 .button, a.button, button[disabled],
@@ -3775,12 +3779,16 @@ ul.tabs li a {
 }
 
 .message-warning {
-  background: #cd5a0a;
+/*background: #cd5a0a;    zonfal */
+  background: #FF9300; /* zonfal */
 }
+
+
 
 .message-warning::before {
   content: "\f071";
-  background-color: #a44707;
+/*background-color: #a44707;    zonfal */
+  background-color: #FF9300; /* zonfal */
 }
 
 .message-info {

@@ -28,8 +28,8 @@ class PersonDeleteForm extends ContentEntityDeleteForm
 
   public function getQuestion()
   {
-    return $this->t('Are you sure you want to delete person « %label »?', [
-      '%label' => $this->getEntity()->label(),
+    return $this->t('Are you sure you want to delete person « @label »?', [
+      '@label' => $this->getEntity()->label(),
     ]);
   }
 
@@ -41,8 +41,8 @@ class PersonDeleteForm extends ContentEntityDeleteForm
   protected function getDeletionMessage()
   {
     $entity = $this->getEntity();
-    Drupal::messenger()->addMessage($this->t('Person « %label » has been deleted.', [
-      '%label' => $entity->label(),
+    Drupal::messenger()->addMessage($this->t('Person « @label » has been deleted.', [
+      '@label' => $entity->label(),
     ]));
 
   }

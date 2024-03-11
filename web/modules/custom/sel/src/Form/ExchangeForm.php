@@ -60,15 +60,15 @@ class ExchangeForm extends ContentEntityForm
 
     switch ($status) {
       case SAVED_NEW:
-        \Drupal::messenger()->addMessage($this->t('Exchange « %label » has been added.', [
-          '%label' => $entity->label(),
+        \Drupal::messenger()->addMessage($this->t('Exchange « @label » has been added.', [
+          '@label' => $entity->label(),
         ]));
         $sAction = 'ajouté';
         break;
 
       default:
-        \Drupal::messenger()->addMessage($this->t('Exchange « %label » has been updated.', [
-          '%label' => $entity->label(),
+        \Drupal::messenger()->addMessage($this->t('Exchange « @label » has been updated.', [
+          '@label' => $entity->label(),
         ]));
         $sAction = 'modifié';
     }

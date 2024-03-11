@@ -1,0 +1,25 @@
+uuid: 0fe5a725-ff96-4b32-98a8-79491b64cbc8
+langcode: fr
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:5db8c730-1539-41e4-a00d-ed0046dc07eb'
+  module:
+    - block_content
+  theme:
+    - milipro
+id: milipro_location
+theme: milipro
+region: footer_third
+weight: 0
+provider: null
+plugin: 'block_content:5db8c730-1539-41e4-a00d-ed0046dc07eb'
+settings:
+  id: 'block_content:5db8c730-1539-41e4-a00d-ed0046dc07eb'
+  label: Location
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }
