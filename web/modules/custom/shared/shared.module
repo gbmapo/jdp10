@@ -97,11 +97,12 @@ function shared_mail_alter(&$message)
 
   switch ($message['id']) {
 
-    case "association_membershipfirstemail":
-    case "association_membershipreminderemail":
-    case "amap_emailforstupids":
     case 'amap_emailfordistributiond':
     case 'amap_emailfordistributionx':
+    case "amap_emailforbasket":
+    case "amap_emailforstupids":
+    case "association_membershipfirstemail":
+    case "association_membershipreminderemail":
     case "sel_emailfordeactivatedservices":
     case "sel_emailforexchange":
     case "sel_emailfornewservices":

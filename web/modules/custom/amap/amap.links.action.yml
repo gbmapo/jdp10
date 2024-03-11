@@ -27,3 +27,9 @@ entity.distribution_inscription.add_form:
   title: 'Add Distribution inscription'
   appears_on:
     - entity.distribution_inscription.collection
+
+entity.basket.add_form:
+  route_name: entity.basket.add_form
+  title: 'Add basket'
+  appears_on:
+    - entity.basket.collection

@@ -256,3 +256,23 @@ function amap_update_9001(&$sandbox) {
     ->addMessage('Module AMAP Update # 8002 was executed successfully.');
 
 }
+
+/**
+ * Add entity Basket
+ */
+function amap_update_10001(&$sandbox) {
+
+  if(\Drupal::database()->schema()->tableExists('basket')) {
+    return 'Entity « Basket » already exists.';
+  }
+  else {
+    \Drupal::entityTypeManager()->clearCachedDefinitions();
+    \Drupal::entityDefinitionUpdateManager()->installEntityType(\Drupal::entityTypeManager()->getDefinition('basket'));
+  }
+
+  drupal_flush_all_caches();
+
+  \Drupal::messenger()
+    ->addMessage('Module AMAP Update # 10001 was executed successfully: Entity « Basket » has been created.');
+
+}

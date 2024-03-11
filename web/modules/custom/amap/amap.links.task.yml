@@ -132,3 +132,27 @@ entity.distribution_inscription.delete_form:
   base_route:  entity.distribution_inscription.canonical
   title: Delete
   weight: 10
+
+# ---------------------------------------------------------
+# Basket routing definition
+# ---------------------------------------------------------
+basket.settings_tab:
+  route_name: basket.settings
+  title: 'Settings'
+  base_route: basket.settings
+
+# entity.basket.canonical:
+#   route_name: entity.basket.canonical
+#   base_route: entity.basket.canonical
+#   title: 'View'
+#
+# entity.basket.edit_form:
+#   route_name: entity.basket.edit_form
+#   base_route: entity.basket.canonical
+#   title: 'Edit'
+#
+# entity.basket.delete_form:
+#   route_name:  entity.basket.delete_form
+#   base_route:  entity.basket.canonical
+#   title: Delete
+#   weight: 10

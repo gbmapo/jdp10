@@ -1,7 +1,7 @@
 _core:
   default_config_hash: IhwTepsVwtbtbcT5GzQKhCXDCRvbk3MNkWqPiuiZ10s
 langcode: fr
-theme: mayo
+theme: milipro
 defaults:
   sender: phpmailer_smtp
   formatter: mime_mail
@@ -19,6 +19,8 @@ modules:
       formatter: mime_mail
   amap:
     emailforstupids:
+      formatter: mime_mail
+    emailforbasket:
       formatter: mime_mail
   sel:
     emailforexchange:

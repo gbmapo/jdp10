@@ -1,0 +1,29 @@
+<html>
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	<style type="text/css">		body {
+					  font-family: 'Montserrat', sans-serif;
+					  font-size: 14px;
+					}
+	</style>
+</head>
+<body>
+<div>
+	<table width="800px" cellpadding="0" cellspacing="0">
+		<tr>
+			<td>
+			<div style="padding: 0px 0px 0px 0px;">
+				<p>
+					{{ body|raw }}<br>
+					Le « Vendeur » contactera l'« Acheteur » dès que possible.<br>
+  				En cas de besoin, le « Vendeur » peut retrouver les coordonnées des personnes intéressées par son panier en consultant la bourse aux paniers <a href="{{ url('view.amap_baskets.page_1') }}">{{ 'ici'|t }}</a>.<br>
+					--<br>
+					L'AMAP du Jardin de Poissy
+				</p>
+			</div>
+			</td>
+		</tr>
+	</table>
+</div>
+</body>
+</html>
