@@ -27,16 +27,16 @@ settings:
       value: '232'
       label: '2. AMAP Brioche'
     -
+      value: '242'
+      label: '2. AMAP Bœuf'
+    -
       value: '224'
       label: '2. AMAP Champignons'
     -
-      value: '214'
+      value: '243'
       label: '2. AMAP Cidre'
     -
-      value: '207'
-      label: '2. AMAP Cidre déstockage'
-    -
-      value: '209'
+      value: '238'
       label: '2. AMAP Farine et Huile'
     -
       value: '220'
@@ -69,10 +69,10 @@ settings:
       value: '229'
       label: '2. AMAP Porc'
     -
-      value: '218'
+      value: '241'
       label: '2. AMAP Produits laitiers (Brebis)'
     -
-      value: '223'
+      value: '240'
       label: '2. AMAP Produits laitiers (Vache)'
     -
       value: '236'
@@ -84,10 +84,10 @@ settings:
       value: '231'
       label: '2. AMAP Terrines'
     -
-      value: '212'
+      value: '237'
       label: '2. AMAP Volaille'
     -
-      value: '222'
+      value: '239'
       label: '2. AMAP Œufs'
   allowed_values_function: shared_allowed_values_function
 module: options

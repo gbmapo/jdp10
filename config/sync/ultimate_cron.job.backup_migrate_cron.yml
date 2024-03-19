@@ -6,14 +6,14 @@ dependencies:
     - backup_migrate
 title: 'Default cron handler'
 id: backup_migrate_cron
-weight: -8
+weight: -7
 module: backup_migrate
 callback: backup_migrate_cron
 scheduler:
   id: simple
   configuration:
     rules:
-      - '0+@ 0 * * *'
+      - '0+@ */12 * * *'
 launcher:
   id: serial
   configuration:

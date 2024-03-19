@@ -1,9 +1,13 @@
 uuid: b1b53a54-83cc-4936-968c-73649aab0e3c
 langcode: fr
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - views_send
 id: extended_ca
 label: 'CA étendu'
 weight: 2
 is_admin: null
-permissions: {  }
+permissions:
+  - 'attachments with views_send'
+  - 'mass mailing with views_send'

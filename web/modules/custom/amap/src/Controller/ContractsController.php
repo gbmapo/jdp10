@@ -45,16 +45,26 @@ class ContractsController extends ControllerBase {
     $oContract = \Drupal::entityTypeManager()
       ->getStorage('contract')
       ->load($contract);
-    $sContractType = $oContract->get('type')->getString();
-    $aContractType = _detail_contract_type($sContractType);
-    $iNumberOfQuantities = (int) $aContractType[1];
-    if ($iNumberOfQuantities < 29) {
-      return $this->redirect('amap.contract_subscription_table_form', ['contract' => $contract]);
+    if ($oContract) {
+      $sContractType = $oContract->get('type')->getString();
+      $aContractType = _detail_contract_type($sContractType);
+      $iNumberOfQuantities = (int) $aContractType[1];
+      if ($iNumberOfQuantities < 29) {
+        return $this->redirect('amap.contract_subscription_table_form', ['contract' => $contract]);
+      }
+      else {
+        return $this->redirect('amap.contract_subcription_one_form', [
+          'contract' => $contract,
+          'page' => 'one',
+        ]);
+      }
     }
     else {
-      return $this->redirect('amap.contract_subcription_one_form', ['contract' => $contract, 'page' => 'one']);
+  /* TODO by zonfal
+   *
+   */
+      \Drupal::logger('amap')->error('Enter subscriptions: Contract @number not found.', ['@number' => $contract]);
     }
-
   }
 
 }

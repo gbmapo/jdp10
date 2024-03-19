@@ -14,7 +14,6 @@ jQuery(document).ready(function ($) {
             return 'Distribution du ' + data[0];
           }
         }),
-        // renderer: $.fn.dataTable.Responsive.renderer.tableAll()
         'renderer': function (api, rowIdx, columns) {
           var data = $.map(columns, function (col, i) {
 

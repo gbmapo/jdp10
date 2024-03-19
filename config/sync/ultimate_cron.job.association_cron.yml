@@ -6,7 +6,7 @@ dependencies:
     - association
 title: 'Default cron handler'
 id: association_cron
-weight: 0
+weight: -10
 module: association
 callback: association_cron
 scheduler:

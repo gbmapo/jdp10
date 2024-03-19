@@ -6,7 +6,7 @@ dependencies:
     - views_send
 title: 'Default cron handler'
 id: views_send_cron
-weight: -7
+weight: -6
 module: views_send
 callback: views_send_cron
 scheduler:

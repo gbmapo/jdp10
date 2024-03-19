@@ -8,7 +8,6 @@ dependencies:
     - amap
     - filter
     - quickedit
-    - views_send
   enforced:
     module:
       - amap
@@ -22,13 +21,11 @@ permissions:
   - 'access in-place editing'
   - 'add contract entities'
   - 'add contract subscription entities'
-  - 'attachments with views_send'
   - 'delete contract entities'
   - 'delete contract subscription entities'
   - 'edit contract entities'
   - 'edit contract subscription entities'
   - 'edit distribution date entities'
-  - 'mass mailing with views_send'
   - 'use text format restricted_html'
   - 'view contract entities'
   - 'view contract subscription entities'
