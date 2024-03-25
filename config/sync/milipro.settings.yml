@@ -1,0 +1,72 @@
+_core:
+  default_config_hash: UdqKB6G1oJ-cqT7HcF-RHVeLYxiutT3_75wa2DOJV9Q
+favicon:
+  use_default: true
+features:
+  comment_user_picture: true
+  comment_user_verification: true
+  favicon: true
+  node_user_picture: true
+logo:
+  use_default: true
+sticky_header_option: 0
+all_icons_show: 1
+facebook_url: 'https://www.facebook.com/pages/Le-jardin-de-Poissy/393031280902923'
+twitter_url: ''
+instagram_url: 'https://www.instagram.com/amap_sel_lejardindepoissy/'
+linkedin_url: ''
+youtube_url: ''
+vimeo_url: ''
+telegram_url: ''
+whatsapp_url: ''
+github_url: ''
+vk_url: ''
+slider_show: 1
+slider_type: slider-classic
+slider_classic_image: {  }
+slider_classic_image_path: ''
+slider_classic_code: '<li> <h1>Le Jardin de Poissy<br>est une AMAP </h1><h4>Association pour le<br>Maintien d''une <br>Agriculture <br>Paysanne </h4><br><a class="button" href="/node/194"> En savoir plus </a> </li><li> <h1>Le Jardin de Poissy<br>est un SÉL </h1><h4>Système d''<br>Échange<br>Local </h4><br><a class="button" href="/node/199"> En savoir plus </a> </li><li> <h1>Vous voulez adhérer ? <br></h1><br><a class="button" href="/node/195"> C''est ici... </a> </li>'
+slider_single_code: ''
+slider_time: '10000'
+slider_animateout: slideOutDown
+slider_animatein: flipInX
+slider_dots: 'true'
+slider_code: ''
+preloader_option: 1
+comment_user_pic: 1
+node_author_pic: 0
+node_tags: 1
+node_share_page: 0
+node_share_article: 0
+node_share_other: 0
+node_share_front: 0
+material_icon: 0
+fontawesome: 0
+fontawesome_five: 0
+iconmonstr: 0
+front_sidebar: 0
+animated_sidebar_option: 0
+copyright_text: 0
+copyright_text_custom: ''
+scrolltotop_on: 1
+cookie_message: 1
+cookie_message_custom: 'Ce site utilise des cookies. En poursuivant votre navigation sur le site, vous acceptez notre utilisation de ces cookies.'
+styling: 1
+styling_code: "img, picture, svg { display: inline-block;}\r\ntr:nth-child(even) {background-color: #f4fce6;}\r\n#myLogo {background: url(/sites/default/files/images/logo.jpg) no-repeat left; height: 107px;}\r\n.form-item {margin-bottom: 0;}\r\n.field-item:first-child { clear: left; }\r\n.image-field { float: left; margin: 0 10px 5px 0; }"
+insert_head: 0
+head_code: ''
+insert_body_start: 1
+body_start_code: "<script>window.addEventListener(\"load\", function () {document.querySelector('.header-main-container').insertAdjacentHTML('beforebegin', '<div id=\"myLogo\"></div>');});</script>"
+insert_body_end: 0
+body_end_code: ''
+color_scheme: color_default
+color_primary: '#9ba983'
+color_secondary: '#3b6124'
+bg_body: '#fcfbf8'
+block_bg: '#ffffff'
+color_text: '#404040'
+color_heading: '#7f9c20'
+color_light: '#f5f2ed'
+color_dark: '#4e100b'
+color_border: '#d6d6d6'
+bg_header: '#232323'

@@ -1,0 +1,22 @@
+uuid: 95755d8a-5953-4608-b1e3-595867908d82
+langcode: en
+status: true
+dependencies:
+  theme:
+    - milipro
+_core:
+  default_config_hash: jodi53bApFsiJMJ4YngfTX5I97FaawViXNDB-Updbw8
+id: milipro_local_tasks
+theme: milipro
+region: content
+weight: -7
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: true
+visibility: {  }

@@ -1,0 +1,25 @@
+uuid: 3fe27feb-3423-487a-aa06-e600494a9440
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - milipro
+_core:
+  default_config_hash: vml9YxFmZEhmwM_KeKTAMaGumz_4gWPJIzT3nMQpOG0
+id: milipro_branding
+theme: milipro
+region: site_branding
+weight: 0
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  label_display: '0'
+  provider: system
+  use_site_logo: false
+  use_site_name: false
+  use_site_slogan: false
+visibility: {  }

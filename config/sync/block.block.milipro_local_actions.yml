@@ -1,0 +1,20 @@
+uuid: 8ab27e1a-44cc-4c31-8261-378a3e83b366
+langcode: en
+status: true
+dependencies:
+  theme:
+    - milipro
+_core:
+  default_config_hash: 348JGbBs0dH9k3WcrBI7IOt98kFed8THGanix1jbIDU
+id: milipro_local_actions
+theme: milipro
+region: content
+weight: -5
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }

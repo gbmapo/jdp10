@@ -1,0 +1,22 @@
+uuid: 9f4d1a86-3c27-4ef0-8d49-133ccde754a2
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - milipro
+_core:
+  default_config_hash: LJPsKkDZyvhV0jVJwh-fcYSFJIbJXAfHIOy7GDjlIa8
+id: milipro_content
+theme: milipro
+region: content
+weight: -4
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

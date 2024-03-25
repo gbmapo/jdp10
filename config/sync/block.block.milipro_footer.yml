@@ -1,0 +1,27 @@
+uuid: 070cc4fb-e59f-4e97-87ce-13ab3e99a089
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.footer
+  module:
+    - system
+  theme:
+    - milipro
+_core:
+  default_config_hash: vsSVtnncF7Z0ZLjTHnXpRV1dr4Cnkas1AWQgufILP_A
+id: milipro_footer
+theme: milipro
+region: hidden_blocks
+weight: -6
+provider: null
+plugin: 'system_menu_block:footer'
+settings:
+  id: 'system_menu_block:footer'
+  label: 'Footer menu'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

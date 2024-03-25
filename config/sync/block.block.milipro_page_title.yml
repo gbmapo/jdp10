@@ -1,0 +1,20 @@
+uuid: ea26e6fa-877f-4175-bf3b-fbc344587803
+langcode: en
+status: true
+dependencies:
+  theme:
+    - milipro
+_core:
+  default_config_hash: _XCmJj1TJlV6DZz22twQ_29kFU4YKG8VZB4F6h4ySa4
+id: milipro_page_title
+theme: milipro
+region: page_header
+weight: -6
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility: {  }

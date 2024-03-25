@@ -1,0 +1,22 @@
+uuid: 0210b17c-20b9-496e-b958-f01dc8c32db0
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - milipro
+_core:
+  default_config_hash: WbhjQv3GuXWxaHVS6PXYVGHDIyJnt6l-rEbVNCc53WA
+id: milipro_help
+theme: milipro
+region: content
+weight: -6
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  label_display: '0'
+  provider: help
+visibility: {  }

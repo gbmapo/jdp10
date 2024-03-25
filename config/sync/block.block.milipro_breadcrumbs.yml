@@ -1,0 +1,22 @@
+uuid: 1e3412d9-98a9-49b2-bacf-13b69b649290
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - milipro
+_core:
+  default_config_hash: '-2Upu8yqYgEysIuALTEa-AoJA96L63YKRZrgiLgKH_o'
+id: milipro_breadcrumbs
+theme: milipro
+region: page_header
+weight: -5
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility: {  }

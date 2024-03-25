@@ -1,0 +1,22 @@
+uuid: ac92d25c-e49e-49ab-8967-208590694587
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - milipro
+_core:
+  default_config_hash: GewCc5NqVolnYp5DOB0hT37kYru6MoOlSeFz-pJd7a8
+id: milipro_messages
+theme: milipro
+region: highlighted
+weight: 0
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  label_display: '0'
+  provider: system
+visibility: {  }

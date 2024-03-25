@@ -1,0 +1,27 @@
+uuid: 79a135c6-7132-4ef8-858a-f6aa573e9659
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.account
+  module:
+    - system
+  theme:
+    - milipro
+_core:
+  default_config_hash: ZLndO0vGWGpB6XTIzxOuiYZC3oU9PSEmMwF7zma3yrE
+id: milipro_account_menu
+theme: milipro
+region: hidden_blocks
+weight: -5
+provider: null
+plugin: 'system_menu_block:account'
+settings:
+  id: 'system_menu_block:account'
+  label: 'User account menu'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 1
+  expand_all_items: false
+visibility: {  }

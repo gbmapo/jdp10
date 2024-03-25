@@ -1,0 +1,27 @@
+uuid: 895701a7-4c43-4ed6-978a-b2fba53b9be7
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - milipro
+_core:
+  default_config_hash: 420n5gaZYMrctYz-s8iSoQN0E5WCqc6xgXzobqRF5TE
+id: milipro_main_menu
+theme: milipro
+region: primary_menu
+weight: 0
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 5
+  expand_all_items: false
+visibility: {  }
