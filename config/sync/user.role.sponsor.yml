@@ -1,9 +1,12 @@
 uuid: 7cab067a-797e-4ff0-9a71-6a4ceb189084
 langcode: fr
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - file
 id: sponsor
 label: Parrain
 weight: 1
 is_admin: null
-permissions: {  }
+permissions:
+  - 'delete own files'

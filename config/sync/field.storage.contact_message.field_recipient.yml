@@ -43,7 +43,7 @@ settings:
       label: '2. AMAP Fruits rouges'
     -
       value: '234'
-      label: '2. AMAP Herbier d''Elsa'
+      label: "2. AMAP Herbier d'Elsa"
     -
       value: '228'
       label: '2. AMAP Jus de pommes Hutrel'

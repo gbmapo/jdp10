@@ -3,6 +3,7 @@ langcode: fr
 status: true
 dependencies:
   module:
+    - file
     - views_send
 id: extended_ca
 label: 'CA étendu'
@@ -10,4 +11,5 @@ weight: 2
 is_admin: null
 permissions:
   - 'attachments with views_send'
+  - 'delete own files'
   - 'mass mailing with views_send'

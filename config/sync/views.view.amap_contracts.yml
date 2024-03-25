@@ -1284,7 +1284,7 @@ display:
           plugin_id: text
           empty: true
           content:
-            value: 'Il n''y a aucun contrat à afficher.'
+            value: "Il n'y a aucun contrat à afficher."
             format: full_html
           tokenize: false
       sorts:
@@ -2139,7 +2139,7 @@ display:
           plugin_id: text
           empty: true
           content:
-            value: 'Il n''y a pas de contrat actif en ce moment.'
+            value: "Il n'y a pas de contrat actif en ce moment."
             format: full_html
           tokenize: false
       sorts:
@@ -2877,7 +2877,7 @@ display:
           plugin_id: text
           empty: true
           content:
-            value: 'Il n''y a pas de contrat actif en ce moment.'
+            value: "Il n'y a pas de contrat actif en ce moment."
             format: full_html
           tokenize: false
       sorts:

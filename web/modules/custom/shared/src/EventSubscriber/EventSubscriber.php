@@ -41,7 +41,7 @@ class EventSubscriber implements EventSubscriberInterface
 
   }
 
-  public function redirectIf(FilterResponseEvent $event)
+  public function redirectIf($event)
   {
 
     $node = $event->getRequest()->attributes->get('node');

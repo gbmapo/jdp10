@@ -9,6 +9,7 @@ dependencies:
     - association
     - comment
     - contact
+    - file
     - fontawesome
     - node
     - poll
@@ -34,6 +35,7 @@ permissions:
   - 'cancel own vote'
   - 'create forum content'
   - 'delete distribution inscription entities'
+  - 'delete own files'
   - 'delete own forum content'
   - 'edit distribution inscription entities'
   - 'edit own forum content'

@@ -6,8 +6,8 @@ dependencies:
     - filter.format.restricted_html
   module:
     - amap
+    - file
     - filter
-    - quickedit
   enforced:
     module:
       - amap
@@ -18,11 +18,11 @@ label: 'Référent de contrat'
 weight: -4
 is_admin: false
 permissions:
-  - 'access in-place editing'
   - 'add contract entities'
   - 'add contract subscription entities'
   - 'delete contract entities'
   - 'delete contract subscription entities'
+  - 'delete own files'
   - 'edit contract entities'
   - 'edit contract subscription entities'
   - 'edit distribution date entities'

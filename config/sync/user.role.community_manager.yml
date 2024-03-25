@@ -1,9 +1,12 @@
 uuid: 8918d8a0-6cfa-4489-9691-1d550c4043a9
 langcode: fr
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - file
 id: community_manager
 label: 'Community Manager'
 weight: -2
 is_admin: null
-permissions: {  }
+permissions:
+  - 'delete own files'

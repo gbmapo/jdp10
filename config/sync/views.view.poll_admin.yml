@@ -408,7 +408,7 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: true
-          content: 'Aucun sondage n''est disponible.'
+          content: "Aucun sondage n'est disponible."
           tokenize: false
       sorts: {  }
       arguments: {  }

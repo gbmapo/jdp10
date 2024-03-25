@@ -1,9 +1,12 @@
 uuid: f99c681c-f626-442a-9e90-bea5b1d0f5d9
 langcode: fr
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - file
 id: amapien
 label: AMAPien
 weight: -7
 is_admin: null
-permissions: {  }
+permissions:
+  - 'delete own files'

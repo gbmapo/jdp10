@@ -10,7 +10,7 @@ id: node.article.path
 field_name: path
 entity_type: node
 bundle: article
-label: 'Alias d''URL'
+label: "Alias d'URL"
 description: ''
 required: false
 translatable: false

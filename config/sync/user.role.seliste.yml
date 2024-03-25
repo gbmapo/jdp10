@@ -3,6 +3,7 @@ langcode: fr
 status: true
 dependencies:
   module:
+    - file
     - sel
   enforced:
     module:
@@ -17,6 +18,7 @@ permissions:
   - 'add exchange entities'
   - 'add service entities'
   - 'delete exchange entities'
+  - 'delete own files'
   - 'delete service entities'
   - 'edit exchange entities'
   - 'edit service entities'

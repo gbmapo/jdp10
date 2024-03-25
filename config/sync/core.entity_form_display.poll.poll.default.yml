@@ -2,14 +2,7 @@ uuid: 0903edf3-2272-46d6-a2f7-958c65b3b855
 langcode: fr
 status: true
 dependencies:
-  config:
-    - field.field.poll.poll.field_number_of_votes
-    - field.field.poll.poll.field_poll_type
-    - field.field.poll.poll.field_start_date
-    - field.field.poll.poll.field_writein
-    - field.field.poll.poll.field_writein_multiple
   module:
-    - datetime
     - poll
 id: poll.poll.default
 targetEntityType: poll
@@ -35,39 +28,6 @@ content:
     weight: -20
     region: content
     settings: {  }
-    third_party_settings: {  }
-  field_number_of_votes:
-    type: number
-    weight: 3
-    region: content
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
-  field_poll_type:
-    type: options_select
-    weight: 1
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_start_date:
-    type: datetime_default
-    weight: 4
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_writein:
-    type: boolean_checkbox
-    weight: 2
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  field_writein_multiple:
-    type: boolean_checkbox
-    weight: 2
-    region: content
-    settings:
-      display_label: true
     third_party_settings: {  }
   question:
     type: string_textfield

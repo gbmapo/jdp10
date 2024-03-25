@@ -1,9 +1,12 @@
 uuid: de458083-5692-436c-b412-b7b08e022a5d
 langcode: fr
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - file
 id: ca
 label: CA
 weight: 0
 is_admin: null
-permissions: {  }
+permissions:
+  - 'delete own files'

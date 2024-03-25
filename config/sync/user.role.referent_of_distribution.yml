@@ -2,6 +2,8 @@ uuid: b93ab6a2-0e9a-4e10-9be1-e1879ed44472
 langcode: fr
 status: true
 dependencies:
+  module:
+    - file
   enforced:
     module:
       - amap
@@ -11,4 +13,5 @@ id: referent_of_distribution
 label: 'Référent de distribution'
 weight: -5
 is_admin: false
-permissions: {  }
+permissions:
+  - 'delete own files'
