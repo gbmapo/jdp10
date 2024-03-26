@@ -1441,7 +1441,7 @@ display:
           plugin_id: text
           empty: false
           content:
-            value: "<BR>\r\n<a href=\"/association/member/add\" title=\"Ajouter un adhérent\" class=\"form-submit\">Ajouter</a>&nbsp;\r\n<a href=\"/association/export_personsformaps\" title=\"Télécharger pour Google Maps\" class=\"form-submit\">Télécharger</a>&nbsp;\r\n<a href=\"/association/import_members\" title=\"Importer les statuts\" class=\"form-submit\">Importer</a>\r\n"
+            value: "<BR>\r\n<a href=\"/association/member/add\" title=\"Ajouter un adhérent\" class=\"button-round\">Ajouter</a>&nbsp;\r\n<a href=\"/association/export_personsformaps\" title=\"Télécharger pour Google Maps\" class=\"button-round\">Télécharger</a>&nbsp;\r\n<a href=\"/association/import_members\" title=\"Importer les statuts\" class=\"button-round\">Importer</a>\r\n"
             format: full_html
           tokenize: false
       display_extenders: {  }

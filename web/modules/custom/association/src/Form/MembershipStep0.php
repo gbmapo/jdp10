@@ -69,6 +69,7 @@ class MembershipStep0 extends FormBase {
               1 => $this->t('Membership form'),
             ],
             '#required' => TRUE,
+            '#default_value' => $_REQUEST["mode"]=='online' ? 0 : '',
           ];
           $nextStepNotice = $this->t('enter');
           $markup0 = $this->t('After submitting this form, you will be redirected to the membership process where you can @str your personal information then choose your subscription payment mode.', [
@@ -738,6 +739,7 @@ class MembershipStep0 extends FormBase {
     parent::validateForm($form, $form_state);
   }
 
+/*
   public function _existsEmail($email) {
     $database = Drupal::database();
     $query = $database->select('users_field_data', 'us');
@@ -759,6 +761,7 @@ class MembershipStep0 extends FormBase {
     return $output;
   }
 
+ */
   public function ajaxSubmit(array &$form, FormStateInterface $form_state) {
     $response = new AjaxResponse();
     if ($form_state->hasAnyErrors()) {

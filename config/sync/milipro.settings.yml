@@ -1,5 +1,6 @@
 _core:
   default_config_hash: UdqKB6G1oJ-cqT7HcF-RHVeLYxiutT3_75wa2DOJV9Q
+langcode: fr
 favicon:
   use_default: true
 features:
@@ -25,7 +26,7 @@ slider_show: 1
 slider_type: slider-classic
 slider_classic_image: {  }
 slider_classic_image_path: ''
-slider_classic_code: '<li> <h1>Le Jardin de Poissy<br>est une AMAP </h1><h4>Association pour le<br>Maintien d''une <br>Agriculture <br>Paysanne </h4><br><a class="button" href="/node/194"> En savoir plus </a> </li><li> <h1>Le Jardin de Poissy<br>est un SÉL </h1><h4>Système d''<br>Échange<br>Local </h4><br><a class="button" href="/node/199"> En savoir plus </a> </li><li> <h1>Vous voulez adhérer ? <br></h1><br><a class="button" href="/node/195"> C''est ici... </a> </li>'
+slider_classic_code: '<li> <h1>Le Jardin de Poissy<br>est une AMAP </h1><h4>Association pour le<br>Maintien d''une <br>Agriculture <br>Paysanne </h4><br><a class="button" href="/node/197"> En savoir plus </a> </li><li> <h1>Le Jardin de Poissy<br>est un SÉL </h1><h4>Système d''<br>Échange<br>Local </h4><br><a class="button" href="/node/199"> En savoir plus </a> </li><li> <h1>Vous voulez adhérer ? <br></h1><br><a class="button" href="/node/196"> C''est ici... </a> </li>'
 slider_single_code: ''
 slider_time: '10000'
 slider_animateout: slideOutDown
@@ -41,7 +42,7 @@ node_share_article: 0
 node_share_other: 0
 node_share_front: 0
 material_icon: 0
-fontawesome: 0
+fontawesome: 1
 fontawesome_five: 0
 iconmonstr: 0
 front_sidebar: 0
@@ -59,7 +60,7 @@ insert_body_start: 1
 body_start_code: "<script>window.addEventListener(\"load\", function () {document.querySelector('.header-main-container').insertAdjacentHTML('beforebegin', '<div id=\"myLogo\"></div>');});</script>"
 insert_body_end: 0
 body_end_code: ''
-color_scheme: color_default
+color_scheme: color_custom
 color_primary: '#9ba983'
 color_secondary: '#3b6124'
 bg_body: '#fcfbf8'

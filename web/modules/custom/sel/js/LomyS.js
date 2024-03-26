@@ -4,13 +4,17 @@ jQuery(document).ready(function ($) {
 
     "info": false,
     "language": {
-      "search": "Rechercher",
+//    "sSearch": "Rechercher&nbsp;:",
+       search: "_INPUT_",
+       searchPlaceholder: "Rechercher...",
     },
     "ordering": false,
+/*
     fixedHeader: {
-      header: true,
+      header: false,
       footer: false
     },
+ */
     "paging": false,
     "responsive": true,
     columnDefs: [

@@ -1,0 +1,11 @@
+uuid: dfbb37bf-6706-4e1a-b612-be8b22fc4b7a
+langcode: fr
+status: true
+dependencies:
+  module:
+    - redirect
+id: redirect.token
+label: 'Jeton (token)'
+description: ''
+targetEntityType: redirect
+cache: true

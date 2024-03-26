@@ -1,0 +1,17 @@
+uuid: 6625d02b-b3fc-4378-b364-642d1d73c47e
+langcode: fr
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Galerie
+type: gallery
+description: "À faire en deux temps :\r\n<ol>\r\n\t<li>Créer sans images pour générer l'identifiant du nœud </li>\r\n\t<li>Modifier en ajoutant les images qui seront placées dans un répertoire nommé comme l'identifiant du nœud</li>\r\n</ol>"
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

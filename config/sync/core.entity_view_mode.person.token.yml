@@ -1,0 +1,11 @@
+uuid: 5c7794c9-381b-42bc-a3ac-e52c7d6df05b
+langcode: fr
+status: true
+dependencies:
+  module:
+    - association
+id: person.token
+label: 'Jeton (token)'
+description: ''
+targetEntityType: person
+cache: true

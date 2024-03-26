@@ -232,6 +232,7 @@ display:
     display_plugin: page
     position: 1
     display_options:
+      title: Échanges
       fields:
         id:
           id: id
@@ -766,7 +767,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "{% if (from_seliste_id_1 ==\"[current-user:uid]\") or (to_seliste_id_1 ==\"[current-user:uid]\")  %}\r\n<a href=\"/sel/exchange/{{ id }}/edit\"><img src=\"/sites/default/files/images/document-edit.gif\" alt=\"\" title=\"Modifier\" ></a> <a href=\"/sel/exchange/{{ id }}/delete\"><img src=\"/sites/default/files/images/trash.gif\" alt=\"\" title=\"Supprimer\" ></a>\r\n{% endif %}\r\n"
+            text: "{% if (from_seliste_id_1 ==\"[current-user:uid]\") or (to_seliste_id_1 ==\"[current-user:uid]\")  %}\r\n<a href=\"/sel/exchange/{{ id }}/edit\"><img src=\"/sites/default/files/images/edit.svg\" title=\"Modifier\" ></a> <a href=\"/sel/exchange/{{ id }}/delete\"><img src=\"/sites/default/files/images/trash-2.svg\" title=\"Supprimer\" ></a>\r\n{% endif %}\r\n"
             make_link: false
             path: ''
             absolute: false
@@ -866,6 +867,7 @@ display:
           exposed: false
       defaults:
         empty: false
+        title: false
         pager: false
         exposed_form: false
         fields: false
@@ -883,7 +885,7 @@ display:
           plugin_id: text
           empty: false
           content:
-            value: "<div class=\"visibleforuser[current-user:account-name]\"><a href=\"/sel/exchange/add\" class=\"form-submit\">Ajouter</a></div>\r\n"
+            value: "<div class=\"visibleforuser[current-user:account-name]\"><a href=\"/sel/exchange/add\" class=\"button-round\">Ajouter</a></div>\r\n"
             format: full_html
           tokenize: false
       exposed_block: true
@@ -1451,7 +1453,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "{% if (from_seliste_id_1 ==\"[current-user:uid]\") or (to_seliste_id_1 ==\"[current-user:uid]\")  %}\r\n<a href=\"/sel/exchange/{{ id }}/edit\"><img src=\"/sites/default/files/images/document-edit.gif\" alt=\"\" title=\"Modifier\" ></a> <a href=\"/sel/exchange/{{ id }}/delete\"><img src=\"/sites/default/files/images/trash.gif\" alt=\"\" title=\"Supprimer\" ></a>\r\n{% endif %}\r\n"
+            text: "{% if (from_seliste_id_1 ==\"[current-user:uid]\") or (to_seliste_id_1 ==\"[current-user:uid]\")  %}\r\n<a href=\"/sel/exchange/{{ id }}/edit\"><img src=\"/sites/default/files/images/edit.svg\" title=\"Modifier\" ></a> <a href=\"/sel/exchange/{{ id }}/delete\"><img src=\"/sites/default/files/images/trash-2.svg\" title=\"Supprimer\" ></a>\r\n{% endif %}\r\n"
             make_link: false
             path: ''
             absolute: false
@@ -1614,7 +1616,7 @@ display:
           plugin_id: text
           empty: false
           content:
-            value: "<div class=\"visibleforuser[current-user:account-name]\"><a href=\"/sel/exchange/add\" class=\"form-submit\">Ajouter</a></div>\r\n"
+            value: "<div class=\"visibleforuser[current-user:account-name]\"><a href=\"/sel/exchange/add\" class=\"button-round\">Ajouter</a></div>\r\n"
             format: full_html
           tokenize: false
       display_extenders: {  }

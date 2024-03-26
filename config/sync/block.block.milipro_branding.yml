@@ -1,5 +1,5 @@
 uuid: 3fe27feb-3423-487a-aa06-e600494a9440
-langcode: en
+langcode: fr
 status: true
 dependencies:
   module:
@@ -16,7 +16,7 @@ provider: null
 plugin: system_branding_block
 settings:
   id: system_branding_block
-  label: 'Site branding'
+  label: 'Marque du site'
   label_display: '0'
   provider: system
   use_site_logo: false

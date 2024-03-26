@@ -1874,7 +1874,7 @@ display:
             product18: product18
             product19: product19
             product20: product20
-          default: '-1'
+          default: distributiondate
           info:
             numberofproducts:
               sortable: false

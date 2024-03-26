@@ -35,8 +35,8 @@ class ContractSubscriptionTableForm extends FormBase {
     $iNumberOfQuantities = $aContractType[1];
     $aContractTypeHeader = $aContractType[2];
 
-    $upload_max_filesize = Bytes::toInt(ini_get('upload_max_filesize'));
-    $post_max_size = Bytes::toInt(ini_get('post_max_size'));
+    $upload_max_filesize = Bytes::toNumber(ini_get('upload_max_filesize'));
+    $post_max_size = Bytes::toNumber(ini_get('post_max_size'));
     $myMax = 2 * 1024 * 1024;
     $upload_max = min($upload_max_filesize, $post_max_size, $myMax);
     $upload_max_inMB = $upload_max / 1024 / 1024;

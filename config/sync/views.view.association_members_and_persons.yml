@@ -2067,7 +2067,7 @@ display:
           plugin_id: text
           empty: true
           content:
-            value: 'Pour voir les adhérents dans Google Maps : <A href="https://www.google.com/maps/d/embed?mid=15gqRpt0QExfFmmd2cpuxiQZxLXLFsRUd" target="_blank"><img src="/sites/default/files/images/extlink.png"></A>'
+            value: 'Pour voir les adhérents sur une carte, cliquer <A class="button-round" href="https://www.google.com/maps/d/embed?mid=15gqRpt0QExfFmmd2cpuxiQZxLXLFsRUd" target="_blank">ici</A>'
             format: full_html
           tokenize: false
       display_extenders: {  }

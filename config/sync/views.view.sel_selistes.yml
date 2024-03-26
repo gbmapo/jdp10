@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.person.field_sel_balance
-    - system.menu.mysuperfishmenu
+    - system.menu.main
     - user.role.seliste
   module:
     - association
@@ -968,7 +968,7 @@ display:
         description: ''
         weight: 32
         expanded: false
-        menu_name: mysuperfishmenu
+        menu_name: main
         parent: 'menu_link_content:43480f7f-ee50-4ca5-848c-24e19705c961'
         context: '0'
     cache_metadata:

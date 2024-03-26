@@ -5,7 +5,9 @@ jQuery(document).ready(function ($) {
   $('#listofmembers').DataTable({
     "language": {
       "sProcessing": "Traitement en cours...",
-      "sSearch": "Rechercher&nbsp;:",
+//    "sSearch": "Rechercher&nbsp;:",
+       search: "_INPUT_",
+       searchPlaceholder: "Rechercher...",
       "sLengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments",
       "sInfo": "Affichage de _TOTAL_ &eacute;l&eacute;ments",
       "sInfoEmpty": "Aucun &eacute;l&eacute;ment &agrave; afficher",
@@ -34,10 +36,18 @@ jQuery(document).ready(function ($) {
     }],
     orderCellsTop: true,
     "dom": '<"top"if>',
+    /* Results in:
+        <div class="top">
+          {information}
+          {filter}
+        </div>
+    */
+/*
     fixedHeader: {
-      header: true,
+      header: false,
       footer: false
     },
+ */
     initComplete: function () {
       this.api().columns([5, 6, 7]).every(function (i) {
         var column = this;

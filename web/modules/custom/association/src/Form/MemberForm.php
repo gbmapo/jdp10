@@ -38,14 +38,14 @@ class MemberForm extends ContentEntityForm
     $status = parent::save($form, $form_state);
     switch ($status) {
       case SAVED_NEW:
-        Drupal::messenger()->addMessage($this->t('Member « %label » has been added.', [
-          '%label' => $entity->label(),
+        Drupal::messenger()->addMessage($this->t('Member « @label » has been added.', [
+          '@label' => $entity->label(),
         ]));
         break;
 
       default:
-        Drupal::messenger()->addMessage($this->t('Member « %label » has been updated.', [
-          '%label' => $entity->label(),
+        Drupal::messenger()->addMessage($this->t('Member « @label » has been updated.', [
+          '@label' => $entity->label(),
         ]));
     }
 

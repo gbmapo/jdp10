@@ -271,6 +271,7 @@ function shared_node_access(NodeInterface $node, $op, AccountInterface $account)
     case 'article':
     case 'page':
     case 'evenement':
+    case 'gallery':
 
       if ($op == 'view') {
 

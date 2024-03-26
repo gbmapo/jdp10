@@ -1,0 +1,11 @@
+uuid: cac4060a-29cb-4061-96b8-3d44b2caa102
+langcode: fr
+status: true
+dependencies:
+  module:
+    - amap
+id: distribution_date.token
+label: 'Jeton (token)'
+description: ''
+targetEntityType: distribution_date
+cache: true

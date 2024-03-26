@@ -37,14 +37,14 @@ class ContractTypeForm extends ContentEntityForm
 
     switch ($status) {
       case SAVED_NEW:
-        \Drupal::messenger()->addMessage($this->t('Contract type « %label » has been added.', array(
-          '%label' => $entity->label()
+        \Drupal::messenger()->addMessage($this->t('Contract type « @label » has been added.', array(
+          '@label' => $entity->label()
         )));
         break;
 
       default:
-        \Drupal::messenger()->addMessage($this->t('Contract type « %label » has been updated.', array(
-          '%label' => $entity->label()
+        \Drupal::messenger()->addMessage($this->t('Contract type « @label » has been updated.', array(
+          '@label' => $entity->label()
         )));
     }
 

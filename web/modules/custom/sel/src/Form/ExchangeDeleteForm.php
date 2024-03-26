@@ -39,8 +39,8 @@ class ExchangeDeleteForm extends ContentEntityDeleteForm
 
   public function getQuestion()
   {
-    return $this->t('Are you sure you want to delete exchange « %label »?', array(
-      '%label' => $this->getEntity()->label()
+    return $this->t('Are you sure you want to delete exchange « @label »?', array(
+      '@label' => $this->getEntity()->label()
     ));
   }
 
@@ -54,8 +54,8 @@ class ExchangeDeleteForm extends ContentEntityDeleteForm
   {
 
     $entity = $this->getEntity();
-    \Drupal::messenger()->addMessage($this->t('Exchange « %label » has been deleted.', array(
-      '%label' => $entity->label()
+    \Drupal::messenger()->addMessage($this->t('Exchange « @label » has been deleted.', array(
+      '@label' => $entity->label()
     )));
 
   }

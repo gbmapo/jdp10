@@ -37,14 +37,14 @@ class ContractSubscriptionForm extends ContentEntityForm
 
     switch ($status) {
       case SAVED_NEW:
-        \Drupal::messenger()->addMessage($this->t('Contract subscription« %label » has been added.', array(
-          '%label' => $entity->label()
+        \Drupal::messenger()->addMessage($this->t('Contract subscription « @label » has been added.', array(
+          '@label' => $entity->label()
         )));
         break;
 
       default:
-        \Drupal::messenger()->addMessage($this->t('Contract subscription« %label » has been updated.', array(
-          '%label' => $entity->label()
+        \Drupal::messenger()->addMessage($this->t('Contract subscription « @label » has been updated.', array(
+          '@label' => $entity->label()
         )));
     }
     $form_state->setRedirect('entity.contract_subscription.canonical', ['contract_subscription' => $entity->id()]);

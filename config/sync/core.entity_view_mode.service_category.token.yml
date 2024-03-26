@@ -1,0 +1,11 @@
+uuid: 501b122c-e3a8-4436-81f2-21cad9dfec41
+langcode: fr
+status: true
+dependencies:
+  module:
+    - sel
+id: service_category.token
+label: 'Jeton (token)'
+description: ''
+targetEntityType: service_category
+cache: true

@@ -1,0 +1,25 @@
+uuid: 758ad5e6-3718-43be-8e9c-c2c74a02cf33
+langcode: fr
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:68516154-7b1b-48a0-8d4a-f4524e2bd19c'
+  module:
+    - block_content
+  theme:
+    - milipro
+id: milipro_slogan
+theme: milipro
+region: footer_first
+weight: 0
+provider: null
+plugin: 'block_content:68516154-7b1b-48a0-8d4a-f4524e2bd19c'
+settings:
+  id: 'block_content:68516154-7b1b-48a0-8d4a-f4524e2bd19c'
+  label: Slogan
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

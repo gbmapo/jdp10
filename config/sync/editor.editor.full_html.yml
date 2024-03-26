@@ -11,7 +11,9 @@ editor: ckeditor5
 settings:
   toolbar:
     items:
-      - specialCharacters
+      - sourceEditing
+      - undo
+      - redo
       - '|'
       - bold
       - italic
@@ -31,25 +33,23 @@ settings:
       - link
       - imce_link
       - '|'
-      - blockQuote
       - drupalInsertImage
       - imce_image
-      - insertTable
-      - horizontalLine
       - '|'
       - heading
+      - insertTable
+      - horizontalLine
       - codeBlock
-      - '|'
-      - sourceEditing
-      - undo
-      - redo
+      - specialCharacters
+      - blockQuote
+      - showBlocks
   plugins:
     ckeditor5_alignment:
       enabled_alignments:
-        - left
         - center
-        - right
         - justify
+        - left
+        - right
     ckeditor5_codeBlock:
       languages:
         -

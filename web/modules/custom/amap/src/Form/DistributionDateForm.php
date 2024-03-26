@@ -44,14 +44,14 @@ class DistributionDateForm extends ContentEntityForm
 
     switch ($status) {
       case SAVED_NEW:
-        \Drupal::messenger()->addMessage($this->t('Distribution date « %label » has been added.', array(
-          '%label' => $entity->label()
+        \Drupal::messenger()->addMessage($this->t('Distribution date « @label » has been added.', array(
+          '@label' => $entity->label()
         )));
         break;
 
       default:
-        \Drupal::messenger()->addMessage($this->t('Distribution date « %label » has been updated.', array(
-          '%label' => $entity->label()
+        \Drupal::messenger()->addMessage($this->t('Distribution date « @label » has been updated.', array(
+          '@label' => $entity->label()
         )));
     }
 

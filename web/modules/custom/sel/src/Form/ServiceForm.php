@@ -103,14 +103,14 @@ class ServiceForm extends ContentEntityForm
 
     switch ($status) {
       case SAVED_NEW:
-        \Drupal::messenger()->addMessage($this->t('Service « %label » has been added.', [
-          '%label' => $entity->label(),
+        \Drupal::messenger()->addMessage($this->t('Service « @label » has been added.', [
+          '@label' => $entity->label(),
         ]));
         break;
 
       default:
-        \Drupal::messenger()->addMessage($this->t('Service « %label » has been updated.', [
-          '%label' => $entity->label(),
+        \Drupal::messenger()->addMessage($this->t('Service « @label » has been updated.', [
+          '@label' => $entity->label(),
         ]));
     }
     $id = \Drupal::currentUser()->id();

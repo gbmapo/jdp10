@@ -1232,7 +1232,7 @@ display:
           plugin_id: text
           empty: false
           content:
-            value: '<BR><a href="/association/person/add" title="Ajouter  une personne" class="form-submit">Ajouter</a>'
+            value: '<BR><a href="/association/person/add" title="Ajouter  une personne" class="button-round">Ajouter</a>'
             format: full_html
           tokenize: false
       display_extenders: {  }
@@ -2020,7 +2020,7 @@ display:
             trim: false
             preserve_tags: ''
             html: false
-          element_type: ''
+          element_type: strong
           element_class: ''
           element_label_type: ''
           element_label_class: ''
@@ -2056,7 +2056,7 @@ display:
           entity_type: person
           entity_field: email
           plugin_id: field
-          label: 'Courriel : '
+          label: ''
           exclude: false
           alter:
             alter_text: false
@@ -2120,7 +2120,7 @@ display:
           entity_type: person
           entity_field: cellphone
           plugin_id: field
-          label: 'Portable : '
+          label: ''
           exclude: false
           alter:
             alter_text: false
@@ -2180,6 +2180,7 @@ display:
         options:
           role:
             authenticated: authenticated
+      empty: {  }
       sorts: {  }
       arguments:
         id:
@@ -2216,14 +2217,17 @@ display:
             type: none
             fail: 'not found'
           validate_options: {  }
-          break_phrase: false
+          break_phrase: true
           not: false
       defaults:
+        empty: false
         access: false
         title: false
+        use_ajax: false
         fields: false
         sorts: false
         arguments: false
+      use_ajax: false
       display_description: ''
       display_extenders: {  }
       path: association/person/%/view

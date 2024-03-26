@@ -1,0 +1,11 @@
+uuid: 03c8f58e-f948-4ce4-8439-19007c71d28c
+langcode: fr
+status: true
+dependencies:
+  module:
+    - config_split
+id: config_split.token
+label: 'Jeton (token)'
+description: ''
+targetEntityType: config_split
+cache: true

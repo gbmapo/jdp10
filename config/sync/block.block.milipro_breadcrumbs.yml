@@ -1,6 +1,6 @@
 uuid: 1e3412d9-98a9-49b2-bacf-13b69b649290
-langcode: en
-status: true
+langcode: fr
+status: false
 dependencies:
   module:
     - system

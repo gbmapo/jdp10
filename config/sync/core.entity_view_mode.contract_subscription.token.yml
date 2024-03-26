@@ -1,0 +1,11 @@
+uuid: 7d036f29-9eab-46a3-86c2-cd80c2abbbbe
+langcode: fr
+status: true
+dependencies:
+  module:
+    - amap
+id: contract_subscription.token
+label: 'Jeton (token)'
+description: ''
+targetEntityType: contract_subscription
+cache: true

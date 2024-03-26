@@ -27,8 +27,8 @@ class ContractDeleteForm extends ContentEntityDeleteForm
 
   public function getQuestion()
   {
-    return $this->t('Are you sure you want to delete contract « %label »?', [
-      '%label' => $this->getEntity()->label()
+    return $this->t('Are you sure you want to delete contract « @label »?', [
+      '@label' => $this->getEntity()->label()
     ]);
   }
 
@@ -40,8 +40,8 @@ class ContractDeleteForm extends ContentEntityDeleteForm
   protected function getDeletionMessage()
   {
     $entity = $this->getEntity();
-    \Drupal::messenger()->addMessage($this->t('Contract « %label » has been deleted.', array(
-      '%label' => $entity->label()
+    \Drupal::messenger()->addMessage($this->t('Contract « @label » has been deleted.', array(
+      '@label' => $entity->label()
     )));
   }
 

@@ -121,13 +121,13 @@ function association_cron() {
     $errors++;
   }
   if ($errors != 0) {
-    \Drupal::logger('amap')
+    \Drupal::logger('association')
       ->error('Missing contact for @text: @membersWithError', [
         '@text' => \Drupal::translation()
           ->formatPlural($errors, 'this member', 'these members'),
         '@membersWithError' => $membersWithError,
       ]);
-    }
+  }
 
 }
 
@@ -425,5 +425,28 @@ function _export_association($entityType) {
       break;
     default:
   }
+
+}
+
+function _existsEmail($email, $destination) {
+
+  $database = Drupal::database();
+  $query = $database->select('users_field_data', 'us');
+  $query->fields('us', ['uid', 'name', 'mail'])
+    ->condition('us.mail', $email, '=');
+  $results = $query->execute()->fetchAll();
+  if (count($results) == 0) {
+    $output = FALSE;
+  }
+  else {
+    $url = Url::fromUri('base:/user/login', ['query' => ['destination' => $destination]]);
+    $link = Drupal\Core\Link::fromTextAndUrl(t('here'), $url)
+      ->toString();
+    $output = t('This email is already registered for « %user ».<BR>If you are already a member, please log in %link.', [
+      '%user' => $results[0]->name,
+      '%link' => $link,
+    ]);
+  }
+  return $output;
 
 }
