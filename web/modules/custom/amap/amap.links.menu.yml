@@ -77,3 +77,19 @@ distribution_inscription.admin.structure.settings:
   description: 'Configure Distribution inscription entities'
   route_name: distribution_inscription.settings
   parent: system.admin_structure
+
+# ---------------------------------------------------------
+# Basket menu items definition
+# ---------------------------------------------------------
+entity.basket.collection:
+  title: 'Basket list'
+  route_name: entity.basket.collection
+  description: 'List Basket entities'
+  parent: system.admin_structure
+  weight: 100
+
+basket.admin.structure.settings:
+  title: 'Basket settings'
+  description: 'Configure Basket entities'
+  route_name:  basket.settings
+  parent: system.admin_structure

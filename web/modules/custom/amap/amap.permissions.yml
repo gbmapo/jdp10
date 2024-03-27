@@ -97,3 +97,23 @@ edit distribution inscription entities:
 
 view distribution inscription entities:
   title: 'View Distribution inscription entities'
+
+# ---------------------------------------------------------
+# Basket --------------------------------------------------
+# ---------------------------------------------------------
+add basket entities:
+  title: 'Create new basket entities'
+
+administer basket entities:
+  title: 'Administer basket entities'
+  description: 'Allow to access the administration form to configure basket entities.'
+  restrict access: true
+
+delete basket entities:
+  title: 'Delete basket entities'
+
+edit basket entities:
+  title: 'Edit basket entities'
+
+view basket entities:
+  title: 'View basket entities'

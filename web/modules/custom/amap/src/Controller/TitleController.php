@@ -23,10 +23,10 @@ class TitleController extends ControllerBase {
         break;
 
       case 'subscribeMany':
-        $title = $this->t('Change subscriptions <a class="form-submit" href="/amap/contract/subscribeOne/@contract/subscribeOne">Little screen</a>', ['@contract' => $contract]);
+        $title = $this->t('Change subscriptions <a class="button-dark" href="/amap/contract/subscribeOne/@contract/subscribeOne">Little screen</a>', ['@contract' => $contract]);
         break;
       case 'subscribeOne':
-        $title = $this->t('Change a subscription <a class="form-submit" href="/amap/contract/subscribeMany/@contract">Big screen</a>', ['@contract' => $contract]);
+        $title = $this->t('Change a subscription <a class="button-dark" href="/amap/contract/subscribeMany/@contract">Big screen</a>', ['@contract' => $contract]);
         break;
       case 'one':
         $title = $this->t('Change subscriptions');

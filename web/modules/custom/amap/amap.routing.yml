@@ -84,3 +84,20 @@ amap.distribution_inscription_one_form:
     page : 'signupForPlanningOne'
   requirements:
     _permission: 'edit distribution inscription entities'
+
+# -------------------------------------------------------------------
+entity.basket.settings:
+  path: 'admin/structure/basket'
+  defaults:
+    _form: '\Drupal\amap\Form\BasketSettingsForm'
+    _title: 'Basket'
+  requirements:
+    _permission: 'administer basket'
+
+amap.reserve_basket:
+  path: '/amap/reserveBasket'
+  defaults:
+    _title: 'Reserve basket'
+    _form: 'Drupal\amap\Form\BasketReservation'
+  requirements:
+    _permission: 'access content'
