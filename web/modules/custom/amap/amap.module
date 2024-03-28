@@ -370,6 +370,7 @@ function _setReferentOfContract() {
   }
 
   $usersWhoAreReferentOfContract = \Drupal::entityQuery('user')
+    ->accessCheck(FALSE)
     ->condition('roles', 'referent_of_contract')
     ->execute();
 
@@ -464,6 +465,7 @@ function amap_cron() {
 function _setAmapien() {
 
   $usersWhoAreAmapien = \Drupal::entityQuery('user')
+    ->accessCheck(FALSE)
     ->condition('roles', 'amapien')
     ->execute();
 
@@ -632,6 +634,7 @@ function _sendEmailsForNextDistributionPerRole($role, $key, $info, $D, $X) {
   ];
 
   $users = \Drupal::entityQuery('user')
+    ->accessCheck(FALSE)
     ->condition('roles', $role)
     ->execute();
   $users = User::loadMultiple($users);

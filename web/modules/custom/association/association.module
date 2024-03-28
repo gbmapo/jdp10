@@ -73,10 +73,12 @@ function association_cron() {
    * Mise à jour du CA étendu
    */
   $usersWhoAreExtentedCA = \Drupal::entityQuery('user')
+    ->accessCheck(FALSE)
     ->condition('roles', 'extended_ca')
     ->execute();
 
   $usersWhoShouldBeExtentedCA = \Drupal::entityQuery('user')
+    ->accessCheck(FALSE)
     ->condition('roles', [
       'ca',
       'community_manager',

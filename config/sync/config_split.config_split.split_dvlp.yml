@@ -11,6 +11,7 @@ module:
   devel: 0
   mail_safety: 0
   potx: 0
+  upgrade_status: 0
 theme: {  }
 blacklist:
   - system.logging
