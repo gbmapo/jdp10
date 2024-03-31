@@ -11,7 +11,7 @@ dependencies:
 id: milipro_links
 theme: milipro
 region: footer_second
-weight: 0
+weight: -8
 provider: null
 plugin: 'block_content:509a93c2-7693-4c06-9bf5-a555de0f07c8'
 settings:

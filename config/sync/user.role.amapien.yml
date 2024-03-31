@@ -3,10 +3,14 @@ langcode: fr
 status: true
 dependencies:
   module:
+    - amap
     - file
 id: amapien
 label: AMAPien
 weight: -7
 is_admin: null
 permissions:
+  - 'add basket entities'
+  - 'delete basket entities'
   - 'delete own files'
+  - 'edit basket entities'
