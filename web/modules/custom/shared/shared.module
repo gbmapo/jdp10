@@ -76,7 +76,7 @@ function shared_form_contact_message_feedback_form_alter(&$form, FormStateInterf
 {
 
   $markup = '<p style="border:2px; border-style:solid; border-color:#FF0000; padding: 1em;">';
-  $markup .= t('Before sending your question, are you sure that the answer is not in our Frequently Asked Questions (see FAQ in the general menu)?');
+  $markup .= t('Before sending your question, are you sure that the answer is not in our Frequently Asked Questions (see Frequently Asked Questions in the footer)?');
   $markup .= '</p>';
   $form['warning'] = [
     '#markup' => check_markup($markup, 'full_html'),
@@ -86,7 +86,7 @@ function shared_form_contact_message_feedback_form_alter(&$form, FormStateInterf
   $form['field_recipient']['widget']['#prefix'] = t('Recipient') . ' <a class="use-ajax" data-dialog-options="{&quot;width&quot;:440}" data-dialog-type="modal" href="/node/135" id="modal-dialog"><img src="/sites/default/files/images/info.svg"></a>';
   $form['field_recipient']['widget']['#attached'] = ['library' => ['core/drupal.dialog.ajax']];
   $form['field_recipient']['widget']['#sort_options'] = TRUE;
-  //$form['field_recipient']['#validated'] = TRUE;
+//$form['field_recipient']['#validated'] = TRUE;
   $form['actions']['preview']['#access'] = FALSE;
 
 }

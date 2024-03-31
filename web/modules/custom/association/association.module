@@ -252,6 +252,15 @@ function association_entity_update(EntityInterface $entity) {
       }
       break;
 
+    case "user":
+      $storage = Drupal::entityTypeManager()->getStorage('person');
+      $person = $storage->load($entity->uid->value);
+      if ($person->email->value <> $entity->mail->value) {
+          $person->email = $entity->mail->value;
+          $person->save();
+      }
+      break;
+
     default:
   }
   _export_association($entityType);

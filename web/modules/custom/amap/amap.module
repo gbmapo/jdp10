@@ -699,7 +699,7 @@ function amap_mail($key, &$message, $params) {
       break;
     case 'emailforbasket':
       $message['subject'] = '[L\'AMAP du Jardin de Poissy] Bourse aux paniers';
-      $sBody = $params[0]['firstname'] . " " . $params[0]['lastname'] . " (" . $params[0]['cellphone'] . " - " . $params[0]['email'] . "), l\'« Acheteur », déclare être intéressé(e) par le panier #" . $params[1] . " proposé par " . $params[0]['baskets'][$params[1]]['seller'] . ", le « Vendeur ».<br>";
+      $sBody = $params[0]['firstname'] . " " . $params[0]['lastname'] . " (" . $params[0]['cellphone'] . " - " . $params[0]['email'] . "), l'« Acheteur », déclare être intéressé(e) par le panier #" . $params[1] . " proposé par " . $params[0]['baskets'][$params[1]]['seller'] . ", le « Vendeur ».<br>";
       $message['body'][] = check_markup(nl2br($sBody), 'full_html');
       break;
   }
