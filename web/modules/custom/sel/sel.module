@@ -206,6 +206,7 @@ function _sendEmailForServicesExtraction($sCase) {
   switch ($sCase) {
     case 'emailforservicespercategory':
       $query = \Drupal::entityQuery('service_category');
+      $query->accessCheck(FALSE);
       do {
         $iCategory = rand(1, $query->count()->execute());
         $sCategory = \Drupal::entityTypeManager()
@@ -223,7 +224,6 @@ function _sendEmailForServicesExtraction($sCase) {
       ];
       break;
     case 'emailfornewservices':
-      $query = \Drupal::entityQuery('service_category');
       $dLastExtractionDate = DrupalDateTime::createFromTimestamp(strtotime("- 1 week", strtotime(\Drupal::state()->get('sel.NextEmailForNewServices'))), new \DateTimeZone('Europe/Paris'), )->format('Y-m-d');
       $view = views_embed_view('sel_services', 'embed_2', $dLastExtractionDate);
       $view = \Drupal::service('renderer')->renderPlain($view);
