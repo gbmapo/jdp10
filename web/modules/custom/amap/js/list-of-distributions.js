@@ -2,10 +2,11 @@ jQuery(document).ready(function ($) {
 
   $('#listofdistributions').DataTable({
 
-    "info": false,
-    "ordering": false,
-    "paging": false,
-    "searching": false,
+    info: false,
+    ordering: false,
+    paging: false,
+    searching: false,
+    fixedHeader: true,
     responsive: {
       details: {
         display: $.fn.dataTable.Responsive.display.modal({

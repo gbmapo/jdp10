@@ -403,9 +403,9 @@ function sel_views_post_execute(ViewExecutable $view) {
 function sel_views_pre_render(ViewExecutable $view) {
   switch ($view->id()) {
     case 'sel_services':
+      $view->element['#attached']['library'][] = 'sel/sel';
       switch ($view->current_display) {
         case 'page_1':
-          $view->element['#attached']['library'][] = 'sel/sel';
           $view->element['#attached']['library'][] = 'sel/LoS';
           break;
         case 'page_2':
@@ -415,10 +415,13 @@ function sel_views_pre_render(ViewExecutable $view) {
       }
       break;
     case 'sel_echanges':
+      $view->element['#attached']['library'][] = 'sel/sel';
       switch ($view->current_display) {
         case 'page_1':
+          $view->element['#attached']['library'][] = 'sel/LoE';
+          break;
         case 'page_2':
-          $view->element['#attached']['library'][] = 'sel/sel';
+          $view->element['#attached']['library'][] = 'sel/LomyE';
           break;
         default:
       }

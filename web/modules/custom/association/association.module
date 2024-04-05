@@ -331,6 +331,14 @@ function association_views_pre_render(ViewExecutable $view) {
         default:
       }
       break;
+    case 'association_members_and_persons':
+      switch ($view->current_display) {
+        case 'page_1':
+          $view->element['#attached']['library'][] = 'association/LoMP';
+          break;
+        default:
+      }
+      break;
     default:
   }
 

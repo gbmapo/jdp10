@@ -1,23 +1,18 @@
 jQuery(document).ready(function ($) {
 
-  $('#listofservices').DataTable({
+  $('#listofmyservices').DataTable({
 
-    "info": false,
-    "language": {
-//    "sSearch": "Rechercher&nbsp;:",
+    info: false,
+    language: {
        search: "_INPUT_",
        searchPlaceholder: "Rechercher...",
     },
-    "ordering": false,
-/*
-    fixedHeader: {
-      header: false,
-      footer: false
-    },
- */
-    "paging": false,
-    "responsive": true,
+    ordering: false,
+    paging: false,
+    fixedHeader: true,
+    responsive: true,
     columnDefs: [
+      {targets: [0,4,5,6,7,8,9,10], className: 'dt-head-center'},
       {responsivePriority: 1, targets: 0},
       {responsivePriority: 1, targets: 2},
       {responsivePriority: 1, targets: 3},

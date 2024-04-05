@@ -38,3 +38,19 @@ LomyS:
   dependencies:
     - core/jquery
     - shared/shared
+
+LoE:
+  version: 1.x
+  js:
+    js/LoE.js: {}
+  dependencies:
+    - core/jquery
+    - shared/shared
+
+LomyE:
+  version: 1.x
+  js:
+    js/LomyE.js: {}
+  dependencies:
+    - core/jquery
+    - shared/shared

@@ -7,14 +7,6 @@ table.sticky-header {
     text-align: left;
 }
 
-tr:nth-child(even) {
-    BACKGROUND-COLOR: #F4FCE6;
-}
-
-tr:nth-child(odd) {
-    BACKGROUND-COLOR: #FFFFFF;
-}
-
 tr.distrib- {
     display: none;
 }
@@ -22,4 +14,11 @@ tr.distrib- {
 
 tr.distrib0 td {
     BACKGROUND-COLOR: #FF0000 !important;
+}
+
+table.dataTable thead th,
+table.dataTable thead td,
+table.dataTable tfoot th,
+table.dataTable tfoot td {
+  text-align: center;
 }

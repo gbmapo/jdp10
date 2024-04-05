@@ -15,6 +15,11 @@ calendar-of-distributions:
   css:
     theme:
       css/calendar-of-distributions.css: { }
+  js:
+    js/calendar-of-distributions.js: { }
+  dependencies:
+    - core/jquery
+    - shared/shared
 
 planning-of-distributions:
   version: 1.x
@@ -31,4 +36,12 @@ subscriptions:
   css:
     theme:
       css/subscriptions.css: { }
+
+list-of-contracts:
+  version: 1.x
+  js:
+    js/list-of-contracts.js: { }
+  dependencies:
+    - core/jquery
+    - shared/shared
 

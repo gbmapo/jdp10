@@ -2035,8 +2035,8 @@ display:
               separator: ''
               empty_column: false
               responsive: priority-low
-          override: true
-          sticky: true
+          override: false
+          sticky: false
           summary: ''
           empty_table: false
           caption: ''

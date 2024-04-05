@@ -42,12 +42,7 @@ jQuery(document).ready(function ($) {
           {filter}
         </div>
     */
-/*
-    fixedHeader: {
-      header: false,
-      footer: false
-    },
- */
+    fixedHeader: true,
     initComplete: function () {
       this.api().columns([5, 6, 7]).every(function (i) {
         var column = this;

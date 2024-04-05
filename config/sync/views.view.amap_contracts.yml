@@ -1263,7 +1263,6 @@ display:
             id: id
             file1__target_id: file1__target_id
             file2__target_id: file2__target_id
-            type: type
             name: name
             startdate: startdate
             enddate: enddate
@@ -1274,11 +1273,11 @@ display:
             nothing: nothing
             nothing_1: nothing
             nothing_2: nothing
+            nothing_7: nothing
             nothing_3: nothing
             nothing_4: nothing
             nothing_5: nothing
             nothing_6: nothing
-            nothing_7: nothing
           default: '-1'
           info:
             id:
@@ -1299,13 +1298,6 @@ display:
               sortable: false
               default_sort_order: asc
               align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            type:
-              sortable: false
-              default_sort_order: asc
-              align: views-align-left
               separator: ''
               empty_column: false
               responsive: ''
@@ -1359,63 +1351,47 @@ display:
               empty_column: false
               responsive: ''
             nothing:
-              sortable: false
-              default_sort_order: asc
               align: views-align-left
               separator: ' '
               empty_column: false
               responsive: ''
             nothing_1:
-              sortable: false
-              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             nothing_2:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            nothing_3:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            nothing_4:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            nothing_5:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            nothing_6:
-              sortable: false
-              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             nothing_7:
-              sortable: false
-              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-          override: true
-          sticky: true
+            nothing_3:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            nothing_4:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            nothing_5:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            nothing_6:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          override: false
+          sticky: false
           summary: ''
           empty_table: false
           caption: ''
@@ -2097,7 +2073,6 @@ display:
           columns:
             id: id
             file2__target_id: file2__target_id
-            displayedname: displayedname
             name: name
             startdate: startdate
             enddate: enddate
@@ -2117,13 +2092,6 @@ display:
               sortable: false
               default_sort_order: asc
               align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            displayedname:
-              sortable: false
-              default_sort_order: asc
-              align: views-align-left
               separator: ''
               empty_column: false
               responsive: ''
@@ -2169,8 +2137,8 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-          override: true
-          sticky: true
+          override: false
+          sticky: false
           summary: ''
           empty_table: false
           caption: ''
@@ -2770,7 +2738,6 @@ display:
           columns:
             id: id
             file2__target_id: file2__target_id
-            displayedname: displayedname
             name: name
             startdate: startdate
             enddate: enddate
@@ -2789,13 +2756,6 @@ display:
               sortable: false
               default_sort_order: asc
               align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            displayedname:
-              sortable: false
-              default_sort_order: asc
-              align: views-align-left
               separator: ''
               empty_column: false
               responsive: ''
@@ -2828,14 +2788,12 @@ display:
               empty_column: false
               responsive: ''
             nothing:
-              sortable: false
-              default_sort_order: asc
               align: views-align-left
               separator: ''
               empty_column: false
               responsive: ''
-          override: true
-          sticky: true
+          override: false
+          sticky: false
           summary: ''
           empty_table: false
           caption: ''

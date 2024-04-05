@@ -8,7 +8,7 @@ LoM:
   js:
     js/LoM.js: {}
   dependencies:
-    - core/jquery
+#   - core/jquery
     - shared/shared
 
 LoP:
@@ -21,10 +21,18 @@ LoP:
   js:
     js/LoP.js: {}
   dependencies:
-    - core/jquery
+#   - core/jquery
     - shared/shared
 
 membership:
   version: 1.x
   js:
     js/membership.js: {}
+
+LoMP:
+  version: 1.x
+  js:
+    js/LoMP.js: { }
+  dependencies:
+#   - core/jquery
+    - shared/shared

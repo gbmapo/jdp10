@@ -32,7 +32,6 @@ class DistributionDateTableForm extends FormBase
 //    '#header' => array($this->t('Date')),
       '#header' => array(''),
       '#id' => 'calendarofdistributions',
-      '#sticky' => TRUE,
     ];
 
     _list_distribution_products($aProducts, $sMin, $sMax);
@@ -42,8 +41,9 @@ class DistributionDateTableForm extends FormBase
         // Remplacer le nom des champs product
         $i = (int)str_replace("product", "", $key);
         $newLabel = $aProducts[$i];
-        $newLabel = substr($newLabel, 0, 4);
-        $form['distributions']['#header'][] = array('data' => $newLabel,);
+        $title = $newLabel;
+        $newLabel = mb_substr($newLabel, 0, 4);
+        $form['distributions']['#header'][] = array('data' => $newLabel,'title' => $title,);
       }
     }
 

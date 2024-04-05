@@ -1179,28 +1179,22 @@ display:
               empty_column: false
               responsive: ''
             nothing:
-              sortable: false
-              default_sort_order: asc
               align: ''
               separator: ' '
               empty_column: false
               responsive: ''
             nothing_1:
-              sortable: false
-              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             nothing_2:
-              sortable: false
-              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-          override: true
-          sticky: true
+          override: false
+          sticky: false
           summary: ''
           empty_table: false
           caption: ''

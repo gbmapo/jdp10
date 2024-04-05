@@ -1269,7 +1269,7 @@ display:
             startdate: startdate
             enddate: enddate
             comment: comment
-            contact_id: contact_id
+            id_1: id_1
             nothing: nothing
             nothing_1: nothing
             nothing_2: nothing
@@ -1360,7 +1360,7 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            contact_id:
+            id_1:
               sortable: false
               default_sort_order: asc
               align: ''
@@ -1368,35 +1368,27 @@ display:
               empty_column: false
               responsive: ''
             nothing:
-              sortable: false
-              default_sort_order: asc
               align: ''
               separator: '&nbsp;'
               empty_column: false
               responsive: ''
             nothing_1:
-              sortable: false
-              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             nothing_2:
-              sortable: false
-              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             nothing_3:
-              sortable: false
-              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-          override: true
-          sticky: true
+          override: false
+          sticky: false
           summary: ''
           empty_table: false
           caption: ''

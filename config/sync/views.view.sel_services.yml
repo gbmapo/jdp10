@@ -3513,14 +3513,12 @@ display:
               empty_column: false
               responsive: ''
             nothing_1:
-              sortable: false
-              default_sort_order: asc
               align: views-align-left
               separator: ''
               empty_column: false
               responsive: ''
-          override: true
-          sticky: true
+          override: false
+          sticky: false
           summary: ''
           empty_table: false
           caption: ''
@@ -4722,14 +4720,12 @@ display:
               empty_column: false
               responsive: ''
             nothing_1:
-              sortable: false
-              default_sort_order: asc
               align: views-align-left
               separator: ''
               empty_column: false
               responsive: ''
-          override: true
-          sticky: true
+          override: false
+          sticky: false
           summary: ''
           empty_table: false
           caption: ''

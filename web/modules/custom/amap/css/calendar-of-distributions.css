@@ -1,3 +1,7 @@
 table#calendarofdistributions {
     text-align: center;
 }
+table.dataTable > thead > tr > th,
+table.dataTable > thead > tr > td {
+  padding: 0px;
+}

@@ -1,19 +1,14 @@
 window.onload = inzForm;
 
 function inzForm() {
-
     displayBalance()
-
 }
 
 function hasChanged(oTemp) {
-
     switch (oTemp.id) {
-
         case "edit-field-sel-isseliste-wrapper":
             displayBalance()
             break;
-
     }
 }
 
