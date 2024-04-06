@@ -476,10 +476,11 @@ function _setAmapien() {
   $query = $database->select('contract_subscription', 'cs');
   $query->leftJoin('contract', 'ct', 'ct.id = cs.contract_id');
   $query->leftJoin('member', 'me', 'me.id = cs.member_id');
-  $query->leftJoin('users_field_data', 'us', 'us.uid = me.contact_id');
-  $query->fields('us', ['uid']);
+  $query->leftJoin('person', 'pe', 'pe.member_id = me.id');
+  $query->fields('pe', ['id']);
   $query->condition('ct.startdate', $sToday, '<=');
   $query->condition('ct.enddate', $sToday, '>=');
+  $query->condition('me.status', [2, 3, 4], 'IN');
   $query->distinct();
   $usersWhoShouldBeAmapien = $query->execute()->fetchCol();
 
