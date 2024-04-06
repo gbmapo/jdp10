@@ -6,12 +6,13 @@ id: split_prod
 label: 'Split Prod'
 description: ''
 weight: 0
+stackable: false
+no_patching: false
+storage: folder
 folder: ../config/split_prod
 module: {  }
 theme: {  }
-blacklist:
+complete_list:
   - system.logging
   - system.performance
-graylist: {  }
-graylist_dependents: true
-graylist_skip_equal: true
+partial_list: {  }

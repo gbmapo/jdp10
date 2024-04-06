@@ -6,6 +6,9 @@ id: split_dvlp
 label: 'Split Dvlp'
 description: ''
 weight: 0
+stackable: false
+no_patching: false
+storage: folder
 folder: ../config/split_dvlp
 module:
   devel: 0
@@ -13,9 +16,7 @@ module:
   potx: 0
   upgrade_status: 0
 theme: {  }
-blacklist:
+complete_list:
   - system.logging
   - system.performance
-graylist: {  }
-graylist_dependents: true
-graylist_skip_equal: true
+partial_list: {  }

@@ -6,11 +6,12 @@ id: split_ignore
 label: 'Split Ignore'
 description: ''
 weight: -10
+stackable: false
+no_patching: false
+storage: database
 folder: ''
 module: {  }
 theme: {  }
-blacklist:
+complete_list:
   - phpmailer_smtp.settings
-graylist: {  }
-graylist_dependents: true
-graylist_skip_equal: true
+partial_list: {  }
