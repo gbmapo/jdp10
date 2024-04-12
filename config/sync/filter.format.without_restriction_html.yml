@@ -6,7 +6,7 @@ dependencies:
     - editor
 name: 'HTML sans restriction'
 format: without_restriction_html
-weight: -10
+weight: -7
 filters:
   editor_file_reference:
     id: editor_file_reference
