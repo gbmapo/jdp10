@@ -223,7 +223,7 @@ class BasketReservation extends FormBase {
           $label = $this->t('Next');
         }
         else {
-          $label = $this->t('Reserve');
+          $label = $this->t('Submit');
         }
         $name = 'next';
         break;
@@ -232,7 +232,7 @@ class BasketReservation extends FormBase {
         $name = 'next';
         break;
       case 2:
-        $label = $this->t('Reserve');
+        $label = $this->t('Submit');
         $name = 'reserve';
         break;
       default:
