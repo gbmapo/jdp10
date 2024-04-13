@@ -8,7 +8,7 @@ jQuery(document).ready(function ($) {
     searching: false,
     fixedHeader: true,
     columnDefs: [
-      {targets: [1,2,4,5], className: 'dt-head-center'},
+      {targets: [1,2,3], className: 'dt-head-center'},
     ],
   });
 
