@@ -123,12 +123,13 @@ function association_cron() {
     $errors++;
   }
   if ($errors != 0) {
+    $membersWithError = substr($membersWithError, 0, strlen($membersWithError) - 1);
     \Drupal::logger('association')
-      ->error('Missing contact for @text: @membersWithError', [
+      ->error(t('Missing contact for @text: @membersWithError', [
         '@text' => \Drupal::translation()
           ->formatPlural($errors, 'this member', 'these members'),
         '@membersWithError' => $membersWithError,
-      ]);
+      ]));
   }
 
 }
@@ -256,8 +257,8 @@ function association_entity_update(EntityInterface $entity) {
       $storage = Drupal::entityTypeManager()->getStorage('person');
       $person = $storage->load($entity->uid->value);
       if ($person->email->value <> $entity->mail->value) {
-          $person->email = $entity->mail->value;
-          $person->save();
+        $person->email = $entity->mail->value;
+        $person->save();
       }
       break;
 
