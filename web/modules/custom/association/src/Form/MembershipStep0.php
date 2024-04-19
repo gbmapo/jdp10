@@ -61,6 +61,12 @@ class MembershipStep0 extends FormBase {
             ],
             '#required' => TRUE,
           ];
+          $mode = NULL;
+          if (isset($_REQUEST["mode"])) {
+            if ($_REQUEST["mode"]=='online') {
+              $mode = 0;
+            }
+          }
           $form['mode'] = [
             '#type' => 'radios',
             '#title' => $this->t('Mode of membership'),
@@ -69,7 +75,7 @@ class MembershipStep0 extends FormBase {
               1 => $this->t('Membership form'),
             ],
             '#required' => TRUE,
-            '#default_value' => $_REQUEST["mode"]=='online' ? 0 : '',
+            '#default_value' => $mode,
           ];
           $nextStepNotice = $this->t('enter');
           $markup0 = $this->t('After submitting this form, you will be redirected to the membership process where you can @str your personal information then choose your subscription payment mode.', [
@@ -691,7 +697,7 @@ class MembershipStep0 extends FormBase {
         }
         $email1 = $form_state->getValue('email1');
         if ($this->currentUser()->isAnonymous()) {
-          $sTemp = $this->_existsEmail($email1);
+          $sTemp = _existsEmail($email1, $_SERVER["REQUEST_URI"]);
           if ($sTemp) {
             $form_state->setErrorByName('email1', $sTemp);
           }
@@ -705,7 +711,7 @@ class MembershipStep0 extends FormBase {
           else {
             if ($this->currentUser()
                 ->isAnonymous() || (is_null($form_state->getStorage()['ap_id2']))) {
-              $sTemp = $this->_existsEmail($email2);
+              $sTemp = _existsEmail($email2, $_SERVER["REQUEST_URI"]);
               if ($sTemp) {
                 $form_state->setErrorByName('email2', $sTemp);
               }
@@ -739,29 +745,6 @@ class MembershipStep0 extends FormBase {
     parent::validateForm($form, $form_state);
   }
 
-/*
-  public function _existsEmail($email) {
-    $database = Drupal::database();
-    $query = $database->select('users_field_data', 'us');
-    $query->fields('us', ['uid', 'name', 'mail'])
-      ->condition('us.mail', $email, '=');
-    $results = $query->execute()->fetchAll();
-    if (count($results) == 0) {
-      $output = FALSE;
-    }
-    else {
-      $url = Url::fromUri('base:/user/login');
-      $link = Drupal\Core\Link::fromTextAndUrl($this->t('here'), $url)
-        ->toString();
-      $output = $this->t('This email is already registered for « %user ».<BR>If you are already a member, please log in %link.', [
-        '%user' => $results[0]->name,
-        '%link' => $link,
-      ]);
-    }
-    return $output;
-  }
-
- */
   public function ajaxSubmit(array &$form, FormStateInterface $form_state) {
     $response = new AjaxResponse();
     if ($form_state->hasAnyErrors()) {

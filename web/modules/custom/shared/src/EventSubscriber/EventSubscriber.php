@@ -60,6 +60,8 @@ class EventSubscriber implements EventSubscriberInterface
         if ($node->get('nid')->value == 196) {
           if ($this->currentUser->isAnonymous()) {
           }
+          elseif ($this->currentUser->id()=="1") {
+          }
           else {
             $path = Url::fromUserInput('/association/membership0')->toString();
             $event->setResponse(new RedirectResponse($path));
