@@ -7,6 +7,7 @@ use Drupal\Core\Form\FormStateInterface;
 
 use Drupal\Core\Url;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\user\Entity\User;
 
 /**
  * Provides a amap form.
@@ -400,9 +401,18 @@ class BasketReservation extends FormBase {
         if ($anonymous) {
           $registeredAnonymousId = $form_state->getStorage()['registeredAnonymousId'];
           if ($registeredAnonymousId == 0) {
+            $user = User::create();
+            $user->enforceIsNew();
+            $user->setEmail($form_state->getStorage()['email']);
+            $user->setUsername('4294967295');
+            $user->block();
+            $user->save();
+            $user->setUsername($user->id());
+            $user->save();
             $person = \Drupal::entityTypeManager()
               ->getStorage('person')
               ->create();
+            $person->id = $user->id();
             $person->lastname = $form_state->getStorage()['lastname'];
             $person->firstname = $form_state->getStorage()['firstname'];
             $person->cellphone = $form_state->getStorage()['cellphone'];
@@ -410,7 +420,7 @@ class BasketReservation extends FormBase {
             $person->iscontact = 0;
             $person->isactive = 0;
             $person->member_id = NULL;
-            $person->user_id = 4294967295;
+            $person->user_id = $user->id();
             $person->comment = NULL;
             $person->owner_id = 1;
             $now = \Drupal::time()->getRequestTime();
