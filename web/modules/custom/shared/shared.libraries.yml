@@ -15,10 +15,14 @@ masscontact:
   js:
     js/masscontact.js: {}
 
-modal:
-  version: 1.x
-  js:
-    js/modal.js: {}
-  dependencies:
-    - core/drupal.dialog.ajax
-    - core/jquery
+#
+# Replaced by a script in /node/25
+# Update 4.27
+#
+# modal:
+#   version: 1.x
+#   js:
+#     js/modal.js: {}
+#   dependencies:
+#     - core/drupal.dialog.ajax
+#     - core/jquery
