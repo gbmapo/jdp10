@@ -36,18 +36,10 @@ association.membership_settings:
   requirements:
     _permission: 'administer membership'
 
-association.membership0:
-  path: '/association/membership0'
+association.membership:
+  path: '/association/membership'
   defaults:
-    _form: '\Drupal\association\Form\MembershipStep0'
     _title: 'Membership'
-  requirements:
-    _access: 'TRUE'
-
-association.membership4:
-  path: '/association/membership4'
-  defaults:
-    _form: '\Drupal\association\Form\MembershipStep4'
-    _title: 'Membership - Online Payment'
+    _form: 'Drupal\association\Form\Membership'
   requirements:
     _access: 'TRUE'

@@ -78,13 +78,14 @@ class BasketReservation extends FormBase {
         ->orderBy('product', 'ASC')
         ->orderBy('seller', 'ASC');
       $results = $query->execute();
-      $today = DrupalDateTime::createFromTimestamp(strtotime("now"), new \DateTimeZone('Europe/Paris'), )
+      $today = DrupalDateTime::createFromTimestamp(strtotime("now"), new \DateTimeZone('Europe/Paris'),)
         ->format('Y-m-d');
       $form_state->set('noBasketToReserve', TRUE);
       foreach ($results as $key => $result) {
-        if($result->distributiondate < $today) {
+        if ($result->distributiondate < $today) {
           $disabledRow = TRUE;
-        } else {
+        }
+        else {
           $disabledRow = FALSE;
           $form_state->set('noBasketToReserve', FALSE);
         }
@@ -327,9 +328,11 @@ class BasketReservation extends FormBase {
             $form_state->setErrorByName('email', $this->t('You must enter your email address.'));
           }
           else {
-            $sTemp = _existsEmail($email, $_SERVER["REQUEST_URI"]);
-            if ($sTemp) {
-              $form_state->setErrorByName('email', $sTemp);
+            $temp = _existsEmail($email, $_SERVER["REQUEST_URI"]);
+            if ($temp) {
+              if ($temp[1] == 4) {
+                $form_state->setErrorByName('email', $temp[0]);
+              }
             }
           }
         }

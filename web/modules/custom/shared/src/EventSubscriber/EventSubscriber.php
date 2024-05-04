@@ -63,7 +63,7 @@ class EventSubscriber implements EventSubscriberInterface
           elseif ($this->currentUser->id()=="1") {
           }
           else {
-            $path = Url::fromUserInput('/association/membership0')->toString();
+            $path = Url::fromUserInput('/association/membership')->toString();
             $event->setResponse(new RedirectResponse($path));
           }
         }

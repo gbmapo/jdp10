@@ -38,11 +38,6 @@ function association_theme() {
     'association' => [
       'render element' => 'children',
     ],
-
-    'membership_step0' => [
-      'render element' => 'form',
-      'template' => 'membership-step0',
-    ],
   ];
 
 }
@@ -124,12 +119,13 @@ function association_cron() {
   }
   if ($errors != 0) {
     $membersWithError = substr($membersWithError, 0, strlen($membersWithError) - 1);
+    $message = t('Missing contact for @text: @membersWithError', [
+      '@text' => \Drupal::translation()
+        ->formatPlural($errors, 'this member', 'these members'),
+      '@membersWithError' => $membersWithError,
+    ]);
     \Drupal::logger('association')
-      ->error(t('Missing contact for @text: @membersWithError', [
-        '@text' => \Drupal::translation()
-          ->formatPlural($errors, 'this member', 'these members'),
-        '@membersWithError' => $membersWithError,
-      ]));
+      ->error($message);
   }
 
 }
@@ -256,9 +252,11 @@ function association_entity_update(EntityInterface $entity) {
     case "user":
       $storage = Drupal::entityTypeManager()->getStorage('person');
       $person = $storage->load($entity->uid->value);
-      if ($person->email->value <> $entity->mail->value) {
-        $person->email = $entity->mail->value;
-        $person->save();
+      if ($person) {
+        if ($person->email->value <> $entity->mail->value) {
+          $person->email = $entity->mail->value;
+          $person->save();
+        }
       }
       break;
 
@@ -452,21 +450,44 @@ function _existsEmail($email, $destination) {
 
   $database = Drupal::database();
   $query = $database->select('users_field_data', 'us');
-  $query->fields('us', ['uid', 'name', 'mail'])
-    ->condition('us.mail', $email, '=');
+  $query->leftJoin('person', 'ap', 'ap.id = us.uid');
+  $query->leftJoin('member', 'am', 'am.id = ap.member_id');
+  $query->fields('us', ['uid', 'name', 'mail']);
+  $query->fields('am', ['status']);
+  $query->condition('us.mail', $email, '=');
   $results = $query->execute()->fetchAll();
   if (count($results) == 0) {
     $output = FALSE;
   }
   else {
     $url = Url::fromUri('base:/user/login', ['query' => ['destination' => $destination]]);
-    $link = Drupal\Core\Link::fromTextAndUrl(t('here'), $url)
-      ->toString();
-    $output = t('This email is already registered for « %user ».<BR>If you are already a member, please log in %link.', [
-      '%user' => $results[0]->name,
-      '%link' => $link,
-    ]);
+    $link = \Drupal\Core\Link::fromTextAndUrl(t('here'), $url)->toString();
+    switch ($results[0]->status) {
+      case NULL:
+        $output = FALSE;
+        break;
+      case "4":
+        $output = [
+          t('This email is already registered for « %user ».<br>You are an active member, please log in %link.', [
+            '%user' => $results[0]->name,
+            '%link' => $link,
+          ]),
+          4,
+        ];
+        break;
+      case "5":
+        $output = [
+          t('This email is already registered for « %user ».<br>You have an ongoing request for membership, no need to do a new request.', [
+            '%user' => $results[0]->name,
+          ]),
+          5,
+        ];
+        break;
+      default:
+        break;
+    }
   }
+
   return $output;
 
 }
