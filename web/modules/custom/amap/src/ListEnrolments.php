@@ -30,7 +30,7 @@ class ListEnrolments
 
     $iCurrentUserId = \Drupal::currentUser()->id();
 
-    $sNextWed = ($this->filter == 'all') ? '' :  DrupalDateTime::createFromTimestamp(strtotime("next Wednesday", strtotime("Yesterday")), new \DateTimeZone('Europe/Paris'), )->format('Y-m-d');
+    $sNextWed = ($this->filter == 'all') ? '' :  DrupalDateTime::createFromTimestamp(strtotime("last Wednesday"), new \DateTimeZone('Europe/Paris'), )->format('Y-m-d');
     $database = \Drupal::database();
     $query = $database->select('distribution_date', 'amdd');
     $query->leftJoin('distribution_inscription', 'amdi', 'amdi.distributiondate_id = amdd.id');

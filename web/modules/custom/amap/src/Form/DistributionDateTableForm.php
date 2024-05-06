@@ -40,10 +40,13 @@ class DistributionDateTableForm extends FormBase
       if ($key >= $sMin && $key <= $sMax) {
         // Remplacer le nom des champs product
         $i = (int)str_replace("product", "", $key);
-        $newLabel = $aProducts[$i];
-        $title = $newLabel;
-        $newLabel = mb_substr($newLabel, 0, 4);
-        $form['distributions']['#header'][] = array('data' => $newLabel,'title' => $title,);
+        $temp = $aProducts[$i];
+        if(mb_substr($temp, 0, 4) == 'Lait') {
+          $newLabel = mb_substr($temp, 5, 4);
+        } else {
+          $newLabel = mb_substr($temp, 0, 4);
+        }
+        $form['distributions']['#header'][] = array('data' => $newLabel,);
       }
     }
 

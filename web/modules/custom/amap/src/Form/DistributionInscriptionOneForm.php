@@ -41,7 +41,7 @@ class DistributionInscriptionOneForm extends FormBase
     if ($date !== NULL) {
       $key = $date;
     } else {
-      $key = 0;
+      $key = 1;
     }
     $row = $rows[$key];
 
