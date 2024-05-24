@@ -10,7 +10,7 @@ third_party_settings:
     parent: ''
 name: Évènement
 type: evenement
-description: ''
+description: "<ul>\r\n\t<li>Body: for anonymous users</li>\r\n\t<li>Body2: for authenticated users</li>\r\n</ul>"
 help: ''
 new_revision: false
 preview_mode: 1
