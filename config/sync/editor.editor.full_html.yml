@@ -15,6 +15,9 @@ settings:
       - undo
       - redo
       - '|'
+      - fontBackgroundColor
+      - fontColor
+      - fontSize
       - bold
       - italic
       - underline
@@ -108,6 +111,11 @@ settings:
         reversed: true
         startIndex: true
       multiBlock: true
+    ckeditor5_plugin_pack_font__font_color:
+      colors: {  }
+      use_default_colors: true
+    ckeditor5_plugin_pack_font__font_size:
+      options: ''
     ckeditor5_sourceEditing:
       allowed_tags: {  }
 image_upload:

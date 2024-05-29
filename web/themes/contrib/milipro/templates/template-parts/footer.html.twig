@@ -1,0 +1,98 @@
+<!-- Start: Footer -->
+<footer class="footer">
+  <div class="container">
+  {% if page.footer_top %}
+    <section class="footer-top">
+      {{ page.footer_top }}
+    </section>
+  {% endif %}<!-- /footer-top -->
+
+  {% if page.footer_first or page.footer_second or page.footer_third or page.footer_fourth %}
+  <section class="footer-blocks">
+    {% if page.footer_first %}
+      <div class="footer-block">
+        {{ page.footer_first }}
+      </div> <!--/footer-first -->
+    {% endif %}
+    {% if page.footer_second %}
+      <div class="footer-block">
+        {{ page.footer_second }}
+      </div> <!--/footer-second -->
+    {% endif %}
+    {% if page.footer_third %}
+      <div class="footer-block">
+        {{ page.footer_third }}
+      </div> <!--/footer-third -->
+    {% endif %}
+    {% if page.footer_fourth %}
+      <div class="footer-block">
+        {{ page.footer_fourth }}
+      </div> <!--/footer-fourth -->
+    {% endif %}
+  </section> <!--/footer-blocks -->
+{% endif %} {# end if for footer one, two, three, four blocks #}
+{% if copyright_text or all_icons_show %}
+<section class="footer-bottom-section">
+  {% if copyright_text %}
+    <div class="copyright">
+      {% if copyright_text_custom != '' %}
+        {{ copyright_text_custom | striptags('<p>,<div>,<span>,<a>,<img>,<h1>,<h2>,<h3>,<h4>,<h5>,<h6>,<em>,<strong><br><hr><i>') | raw }}
+      {% else %}
+        &copy; {{ "now"|date("Y") }} {{ site_name }}, All rights reserved.
+      {% endif %}
+      </div>
+  {% endif %}
+  {% if all_icons_show %}
+    {% include '@milipro/template-parts/social-icons.html.twig' %}
+  {% endif %}
+</section><!-- /footer-bottom-section -->
+{% endif %}
+{% if page.footer_bottom %}
+<section class="footer-bottom">
+  {{ page.footer_bottom }}
+</section> <!-- /footer-bottom -->
+{% endif %}
+  </div><!-- /.container -->
+</footer>
+</div> <!-- end page-wrapper, started in header -->
+{% if sticky_header_option %}
+  {{ attach_library('milipro/sticky') }}
+{% endif %}
+{% if cookie_message %}
+  {{ attach_library('milipro/cookiealert-scripts') }}
+  {% include '@milipro/template-parts/cookie.html.twig' %}
+{% endif %}
+{% if scrolltotop_on %}
+<div class="scrolltop"><i class="icon-angle-up"></i></div>
+{% endif %}
+<!-- End: Footer -->
+{% if fontawesome %}
+{{ attach_library('milipro/fontawesome') }}
+{% else %}
+<style>
+.fa {
+  display: none;
+}
+</style>
+{% endif %}
+{% if fontawesome_five %}
+{{ attach_library('milipro/fontawesome5') }}
+{% else %}
+<style>
+.fab {
+  display: none;
+}
+</style>
+{% endif %}
+{% if iconmonstr %}
+{{ attach_library('milipro/iconmonstr') }}
+{% else %}
+<style>
+.im {
+  display: none;
+}
+</style>
+{% endif %}
+{% if material_icon %}
+{{ attach_library('milipro/material') }}
+{% endif %}

@@ -21,7 +21,7 @@ settings:
       value: sel@lejardindepoissy.org
       label: '3. SÉL'
     -
-      value: '233'
+      value: '245'
       label: '2. AMAP Agneau'
     -
       value: '232'
@@ -39,7 +39,7 @@ settings:
       value: '238'
       label: '2. AMAP Farine et Huile'
     -
-      value: '220'
+      value: '244'
       label: '2. AMAP Fruits rouges'
     -
       value: '234'

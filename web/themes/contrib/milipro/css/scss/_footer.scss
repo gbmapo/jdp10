@@ -1,0 +1,141 @@
+/*
+ * Footer
+ */
+.footer {
+  background: var(--color-primary);
+  color: #ffffff;
+  position: relative;
+  width: 100%;
+}
+.footer a {
+  color: var(--color-secondary);
+}
+.footer a:hover {
+  color: #ffffff;
+}
+
+/* Footer -> footer top block region */
+.footer-top {
+  position: relative;
+  width: 100%;
+  padding: 2rem 0;
+}
+.region-footer-top {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+.region-footer-top .block {
+  margin-bottom: 30px;
+}
+/* Footer -> four column block regions */
+.footer-blocks {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  padding: 2rem 0;
+}
+.footer .block-title {
+  position: relative;
+  color: #ffffff;
+  font-size: 1.4rem;
+  margin: 0 0 10px 0;
+  padding: 0 0 8px 0;
+}
+.footer-blocks .block-title::after {
+  position: absolute;
+  content: '';
+  background: var(--color-secondary);
+  left: 0;
+  bottom: 0;
+  width: 3rem;
+  height: 2px;
+}
+
+/* footer list style */
+.footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.footer li {
+  padding: 4px 0;
+  border-bottom: 1px solid var(--color-secondary);
+}
+.footer li:last-child {
+  border-bottom: 0;
+}
+
+/* Footer -> footer bottom block region */
+.footer-bottom-section {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1rem 0;
+  border-top: 4px double var(--color-secondary);
+}
+/* Footer -> footer bottom -> Social icons. */
+.social-icons {
+  list-style: none;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+.social-icons li {
+  border: 0;
+}
+.social-icons a {
+  display: grid;
+  color: #ffffff;
+  place-content: center;
+  width: 48px;
+  height: 48px;
+  border: 2px solid var(--color-secondary);
+  border-radius: 50%;  
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+.social-icons a:hover {
+  background-color: var(--color-secondary);
+}
+.social-icons i {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+/* Footer -> Footer bottom block region */
+.footer-bottom {
+  position: relative;
+  padding: 0 0 20px 0;
+}
+/* Footer -> Scroll To Top. */
+.scrolltop {
+  position: fixed;
+  display: none;
+  place-content: center;
+  right: 10px;
+  bottom: 10px;
+  width: 48px;
+  height: 48px;
+  background: var(--bold-color);
+  color: #ffffff;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 8;
+  -webkit-transition: background 0.3s ease;
+  -moz-transition: background 0.3s ease;
+  transition: background 0.3s ease;
+  text-align: center;
+}
+.scrolltop i {
+  font-size: 1.6rem;
+}
+.scrolltop:hover {
+  background: var(--color-primary);
+}

@@ -1,0 +1,32 @@
+name: MiliPro
+type: theme
+base theme: stable9
+description: 'MiliPro is a light weight and modern looking Drupal 9 and 10 theme by <a href="https://www.drupar.com" target="_blank">Drupar.com</a>'
+package: Drupar
+core_version_requirement: ^9 || ^10
+version: 10.1.2
+# Libraries
+libraries:
+  - milipro/global-styling
+  - milipro/global-scripts
+  - milipro/jq_head
+regions:
+  site_branding: 'Site Branding'
+  primary_menu: 'Primary menu'
+  search_box: 'Full Page Search'
+  page_header: 'Page Header'
+  highlighted: Highlighted
+  content: Content
+  content_top: 'Content Top'
+  content_bottom: 'Content Bottom'
+  content_home: 'Homepage Content'
+  sidebar_first: 'Sidebar Left'
+  sidebar_second: 'Sidebar Right'
+  sidebar_sliding: 'Animated Sidebar'
+  footer_top: 'Footer Top'
+  footer_first: 'Footer first'
+  footer_second: 'Footer second'
+  footer_third: 'Footer third'
+  footer_fourth: 'Footer fourth'
+  footer_bottom: 'Footer Bottom'
+  hidden_blocks: 'Hidden Blocks'

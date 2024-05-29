@@ -1,0 +1,106 @@
+# Global stylings, css. These will be loaded on every pages.
+global-styling:
+  version: 1.1
+  css:
+    theme:
+      css/style.css: {}
+
+# Global Javascripts. These will be loaded on every pages.
+global-scripts:
+  version: 1.1
+  js:
+    js/slider.js: {}
+    js/viewportchecker.js: {}
+    js/cookiealert.js: {}
+    js/milipro.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+
+# Slider classic
+slider-classic:
+  version: 2.1.1
+  css:
+    component:
+      css/slider-classic.css: {}
+  js:
+    js/slider-classic.js: {}
+  dependencies:
+    - core/jquery
+
+# Slider layered
+slider-layered:
+  version: 2.1.1
+  css:
+    component:
+      css/slider.css: {}
+  js:
+    js/slider.js: {}
+  dependencies:
+    - core/jquery
+
+# cookiealert script
+cookiealert-scripts:
+  version: 1.0
+  js:
+    js/cookiealert.js: {}
+
+# Sticky header
+sticky:
+  version: VERSION
+  header: true
+  js:
+    js/sticky.js: {}
+  dependencies:
+    - core/jquery
+
+# Book
+book:
+  version: VERSION
+  css:
+    component:
+      css/book.css: {}
+
+# maintenance page
+maintenance:
+  version: 1.0
+  css:
+    theme:
+      css/maintenance.css: {}
+
+# Google Material Icons
+material:
+  version: 4.0.0
+  css:
+    component:
+      css/material.css: {}
+
+# FontAwesome 4 font icons
+fontawesome:
+  version: 4.7.0
+  css:
+    component:
+      css/font-awesome.css: {}
+
+# FontAwesome 5
+fontawesome5:
+  version: 5.15.1
+  css:
+    component:
+      css/font-awesome.min.css: {}
+
+# iconmonstr font icons
+iconmonstr:
+  version: 1.3.0
+  css:
+    component:
+      css/iconmonstr.css: {}
+
+# Blank
+jq_head:
+  version: VERSION
+  header: true
+  js:
+    js/blank.js: {}
+  dependencies:
+    - core/jquery

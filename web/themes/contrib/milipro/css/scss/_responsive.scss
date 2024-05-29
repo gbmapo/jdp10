@@ -1,0 +1,326 @@
+@media only screen and (max-width: 767px) {
+  /* Body */
+  body {
+    -webkit-text-size-adjust: none; /* none for no scaling */
+  }
+  /* typography */
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.8rem;
+  }
+  h3 {
+    font-size: 1.6rem;
+  }
+  input[type="text"],
+  input[type="password"],
+  input[type="search"] {
+    width: 100%;
+  }
+  /* Layout */
+  .no-sidebar .main-container,
+  .sidebar-left .main-container,
+  .sidebar-right .main-container,
+  .two-sidebar .main-container {
+    grid-template-columns: 100%;
+  }
+  #sidebar-left {
+    order: 3;
+    padding: 0;
+  }
+  #sidebar-right {
+    order: 4;
+    padding: 0;
+  }
+  /* Header */
+  .homepage .header,
+  .site-page .header {
+    padding: 10px 0;
+  }
+  .header-main {
+    padding: 0;
+  }
+  .site-logo img {
+    max-height: 24px;
+  }
+  .header-right i {
+    padding: 4px;
+  }
+  /* Slider */
+  .slider-img,
+  .slider-img img {
+    height: 100%;
+    width: 100%;
+  }
+  .slider-img img {
+    display: block;
+    object-fit: cover;
+  }
+  .slider h1,
+  .slider h2 {
+  	margin: 0;
+    font-size: 1.2em;
+  }
+  .slider h3 {
+  	margin: 0;
+    font-size: 1em;
+  }
+  .slider p {
+    margin: 10px 0;
+    width: 100%;
+  }
+  .slider a.button {
+    padding: 4px 10px;
+  }
+  /* Header -> menu */
+  .main-menu {
+    display: none;
+  }
+  .mobile-menu,
+  .active-menu .main-menu {
+    display: block;
+  }
+  .menu-wrap {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    margin-left: -1000px;
+    background: transparent;
+    z-index: 30;
+    transition: all 0.4s ease;
+  }
+  .active-menu .menu-wrap {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-width: 320px;
+    height: 100%;
+    margin-left: 0;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 30;
+    transition: all 0.4s ease;
+  }
+  .active-menu .menu-wrap ul.main-menu,
+  ul.main-menu {
+    overflow-y: scroll;
+  }
+  ul.main-menu {
+    height: 100vh;
+  }
+  .active-menu .menu-wrap ul.main-menu > li {
+    display: block;
+    float: none;
+  }
+  .active-menu .menu-wrap ul.main-menu a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #ffffff;
+  }
+  .active-menu .menu-wrap .dropdown-arrow {
+    position: absolute;
+    right: 10px;
+  }
+  .active-menu ul.main-menu ul.submenu {
+    position: relative;
+    display: block;
+    top: 0;
+    opacity: 1;
+  }
+  .active-menu ul.main-menu ul.submenu::before,
+  .active-menu ul.main-menu ul.submenu::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .active-menu ul.main-menu ul.submenu li {
+    position: relative;
+    width: 100%;
+    padding: 0 10px;
+    background: none;
+    text-align: right;
+  }
+  .active-menu ul.main-menu ul.submenu li a {
+    display: block;
+    width: 100%;
+  }
+  .active-menu ul.main-menu li a {
+    border-bottom: 1px solid #434343;
+  }
+  .active-menu .close-mobile-menu {
+    position: absolute;
+    display: block;
+    top: 4px;
+    right: 4px;
+  }
+  /* third level drop down */
+  .active-menu ul.main-menu ul.submenu ul.submenu {
+    position: relative;
+    display: block;
+    opacity: 1;
+    left: 0;
+  }
+  .active-menu ul.main-menu ul.submenu ul.submenu li {
+    position: relative;
+    background: none;
+    width: 100%;
+    text-align: right;
+    padding: 0 10px;
+  }
+  .active-menu ul.main-menu ul.submenu li.expanded::after {
+    position: absolute;
+    top: 8px;
+  }
+  /* Inner page header */
+  #page_header {
+    padding: 14px 0;
+  }
+  .breadcrumb {
+    padding: 4px 0;
+  }
+  .breadcrumb-item-seperator {
+    margin: 0 6px;
+  }
+  /* Drupal core */
+  .align-left,
+  .align-right {
+    float: none;
+    clear: both;
+    margin: 1rem auto;
+  }
+  /* Slider */
+  .home-slider p {
+    width: 100%;
+  }
+  /* comment */
+  .comment-user-picture {
+    padding: 0 3px;
+    flex: 0 0 50px;
+  }
+  .comment-user-picture img {
+    max-width: 50px;
+  }
+  .single-comment-content-body {
+    padding: 0 5px;
+  }
+  #node-comment .indented {
+    margin-left: 20px;
+  }
+  /* Elements */
+  .banner .banner-message {
+    padding: 0 10px;
+  }
+  .call-to-action {
+    padding: 10px;
+  }
+  .call-to-action .one-half, .call-to-action .one-three, .call-to-action .two-three, .call-to-action .one-four {
+    display: block;
+    text-align: center;
+  }
+  .owl-item.center .item {
+    margin: 0 auto;
+  }
+  .popup-content {
+    width: 100%;
+  }
+  ul.tabs li a {
+    padding: 6px 8px;
+  }
+  .copyright {
+    text-align: center;
+  }
+}
+/* iPad pro, Tablets
+------------------------------------------------- */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  /* Slider */
+  .slider-img,
+  .slider-img img {
+    height: 100%;
+    width: 100%;
+  }
+  .slider-img img {
+    display: block;
+    object-fit: cover;
+  }
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 18px;
+  }
+  .view-in-mobile {
+    display: none;
+  }
+  .view-in-desktop {
+    display: block;
+  }
+  /* shortcodes -> content width */
+  .width30 {
+    width: 30%;
+  }
+  .width40 {
+    width: 40%;
+  }
+  .width50 {
+    width: 50%;
+  }
+  .width60 {
+    width: 60%;
+  }
+  .width70 {
+    width: 70%;
+  }
+  .width80 {
+    width: 80%;
+  }
+  .width90 {
+    width: 90%;
+  }
+  /* shortcodes -> responsive column */
+  .columns .w10 {
+    flex-basis: calc(10% - 0.5rem);
+  }
+  .columns .w20 {
+    flex-basis: calc(20% - 0.5rem);
+  }
+  .columns .w30 {
+    flex-basis: calc(30% - 0.5rem);
+  }
+  .columns .w40 {
+    flex-basis: calc(40% - 0.5rem);
+  }
+  .columns .w50 {
+    flex-basis: calc(50% - 0.5rem);
+  }
+  .columns .w60 {
+    flex-basis: calc(60% - 0.5rem);
+  }
+  .columns .w70 {
+    flex-basis: calc(70% - 0.5rem);
+  }
+  .columns .w80 {
+    flex-basis: calc(80% - 0.5rem);
+  }
+  .columns .w90 {
+    flex-basis: calc(90% - 0.5rem);
+  }
+}
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+   scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

@@ -1,0 +1,62 @@
+Google material font icons
+---------------------------
+https://material.io/tools/icons
+
+
+FontAwesome
+-------------------
+https://fontawesome.com
+
+
+Iconmonstr Font Icons
+-------------------
+https://iconmonstr.com/iconicfont/
+
+
+
+Google web font
+---------------------------
+https://fonts.google.com/
+
+Heebo Font
+https://fonts.google.com/specimen/Heebo
+
+Poppins Font
+Indian Type Foundry (info@indiantypefoundry.com)
+
+
+
+Owl Carousel
+-------------------
+https://owlcarousel2.github.io/OwlCarousel2/
+
+
+
+Social Icons
+---------------------------
+https://www.flaticon.com/packs/social-media-51
+
+
+
+Cookie Alert by Wruczek
+-------------------
+https://github.com/Wruczek/Bootstrap-Cookie-Alert
+
+
+
+jQuery-viewport-checker
+-------------------
+https://github.com/dirkgroenen/jQuery-viewport-checker
+
+
+
+Demo slider image
+---------------------
+https://unsplash.com
+
+
+
+Please Note:
+Images used in this theme are for demo purpose only.
+All images are copyrighted to their respective owners.
+They should not be used on your website.

@@ -1,0 +1,40 @@
+<html>
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	<style type="text/css">		body {
+					  font-family: 'Montserrat', sans-serif;
+					  font-size: 14px;
+					}
+	</style>
+</head>
+<body>
+<div>
+	<table width="800px" cellpadding="0" cellspacing="0">
+		<tr>
+			<td>
+			<div style="padding: 0px 0px 0px 0px;">
+				<p>
+					Bonjour, <br>
+					<br>
+					Vous vous êtes inscrits pour la distribution du {{ body|raw }} <br>
+					<br>
+					Horaires de distribution :<br>
+					- Pr&eacute;paration : de 18 h &agrave; 18 h 30<br>
+					- Distribution : de 18 h 30 &agrave; 19 h 30<br>
+					<br>
+					Pour info, le Planning des distributions peut &ecirc;tre trouv&eacute; <a href="{{ url('amap.distribution_inscription_many_form') }}">{{ 'ici'|t }}</a> ! <br>
+					<br>
+<!--
+					Pensez &agrave; des v&ecirc;tements chauds : le local n'est pas chauff&eacute; !<br>
+ -->
+					&Agrave; mercredi<br>
+					--<br>
+					L'AMAP du Jardin de Poissy
+				</p>
+			</div>
+			</td>
+		</tr>
+	</table>
+</div>
+</body>
+</html>

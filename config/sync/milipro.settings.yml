@@ -59,7 +59,7 @@ styling_code: "img, picture, svg { display: inline-block;}\r\ntr:nth-child(even)
 insert_head: 0
 head_code: ''
 insert_body_start: 1
-body_start_code: "<script>window.addEventListener(\"load\", function () {document.querySelector('.header-main-container').insertAdjacentHTML('beforebegin', '<div id=\"myLogo\"></div>');});</script>"
+body_start_code: "<script>\r\nwindow.addEventListener(\"load\", function ()\r\n{try {\r\ndocument.querySelector('.header-main-container').insertAdjacentHTML('beforebegin', '<div id=\"myLogo\"></div>');\r\n} catch (error) {\r\n}});\r\n</script>"
 insert_body_end: 0
 body_end_code: ''
 color_scheme: color_custom

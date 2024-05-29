@@ -1,0 +1,15 @@
+<div class="sticky-header-height"></div>
+<section class="slider slider-single">
+  <div class="container">
+    <div class="slider-single-text">
+      {% if slider_single_code != '' %}
+        {{ slider_single_code | striptags('<ol>,<ul>,<li>,<p>,<a>,<img>,<video>,<h1>,<h2>,<h3>,<h4>,<h5>,<h6>,<em>,<strong>,<br>,<i>,<button>,<mark>,<div>,<span>,<sub>,<sup>') | raw }}
+      {% else %}
+      <h4>Welcome To MiliPro</h4>
+      <h1>We Create Awesome Drupal Themes</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+      <p><a class="button" href="#">read more</a></p>      
+      {% endif %} 
+    </div>
+  </div>
+</section>
