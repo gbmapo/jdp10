@@ -70,11 +70,16 @@ function amap_allowed_values_function(FieldStorageDefinitionInterface $definitio
   }
 }
 
+/*
+ * Replaced by a link in node/194
+ * Update 4.39
+ *
 function amap_link_alter(&$variables) {
   if ($variables['text'] == 'Nos producteurs') {
     $variables['options']['attributes'] = ['target' => '_blank'];
   }
 }
+ */
 
 function amap_entity_insert(EntityInterface $entity) {
   $mode = 'insert';

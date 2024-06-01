@@ -376,6 +376,10 @@ function shared_send_email($message)
   return $aResults;
 }
 
+/*
+ * Replaced by Social Icons in theme MiliPro
+ * Update 4.39
+ *
 function shared_link_alter(&$variables)
 {
   if ($variables["url"]->isExternal()) {
@@ -391,3 +395,4 @@ function shared_link_alter(&$variables)
     }
   }
 }
+ */
