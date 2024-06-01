@@ -16,25 +16,28 @@ config:
   metadata:
     description: ''
   db_exclude:
-    exclude_tables: {  }
+    exclude_tables:
+      SondageAGO: SondageAGO
     nodata_tables:
-      d8_cache_bootstrap: d8_cache_bootstrap
-      d8_cache_config: d8_cache_config
-      d8_cache_container: d8_cache_container
-      d8_cache_data: d8_cache_data
-      d8_cache_default: d8_cache_default
-      d8_cache_discovery: d8_cache_discovery
-      d8_cache_discovery_migration: d8_cache_discovery_migration
-      d8_cache_dynamic_page_cache: d8_cache_dynamic_page_cache
-      d8_cache_entity: d8_cache_entity
-      d8_cache_menu: d8_cache_menu
-      d8_cache_migrate: d8_cache_migrate
-      d8_cache_page: d8_cache_page
-      d8_cache_render: d8_cache_render
-      d8_cache_rest: d8_cache_rest
-      d8_cache_toolbar: d8_cache_toolbar
-      d8_cachetags: d8_cachetags
-      d8_watchdog: d8_watchdog
+      d10_cache_bootstrap: d10_cache_bootstrap
+      d10_cache_config: d10_cache_config
+      d10_cache_container: d10_cache_container
+      d10_cache_data: d10_cache_data
+      d10_cache_default: d10_cache_default
+      d10_cache_discovery: d10_cache_discovery
+      d10_cache_discovery_migration: d10_cache_discovery_migration
+      d10_cache_dynamic_page_cache: d10_cache_dynamic_page_cache
+      d10_cache_entity: d10_cache_entity
+      d10_cache_menu: d10_cache_menu
+      d10_cache_migrate: d10_cache_migrate
+      d10_cache_page: d10_cache_page
+      d10_cache_render: d10_cache_render
+      d10_cache_rest: d10_cache_rest
+      d10_cache_signal: d10_cache_signal
+      d10_cache_toolbar: d10_cache_toolbar
+      d10_cache_ultimate_cron_logger: d10_cache_ultimate_cron_logger
+      d10_cachetags: d10_cachetags
+      d10_watchdog: d10_watchdog
   private_files_exclude:
     exclude_filepaths:
       - backup_migrate

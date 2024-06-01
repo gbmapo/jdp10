@@ -55,7 +55,7 @@ scrolltotop_on: 1
 cookie_message: 1
 cookie_message_custom: 'Ce site utilise des cookies. En poursuivant votre navigation sur le site, vous acceptez notre utilisation de ces cookies.'
 styling: 1
-styling_code: "img, picture, svg { display: inline-block;}\r\ntr:nth-child(even) {background-color: #f4fce6;}\r\n#myLogo {background: url(/sites/default/files/images/logo.jpg) no-repeat left; height: 107px;}\r\n.form-item {margin-bottom: 0;}\r\n.field-item:first-child { clear: left; }\r\n.image-field { float: left; margin: 0 10px 5px 0; }"
+styling_code: "img, picture, svg { display: inline-block;}\r\ntr:nth-child(even) {background-color: #f4fce6;}\r\n#myLogo {background: url(/sites/default/files/images/logo.jpg) no-repeat left; height: 107px;}\r\n.form-item {margin-bottom: 0;}\r\n.field-item:first-child { clear: left; }\r\n.image-field { float: left; margin: 0 10px 5px 0; }\r\n@media (max-width: 767px) {\r\n  .home-slider-classic .slider-container {\r\n    flex-direction: column;\r\n    height: 100vh;\r\n  }\r\n  .home-slider-classic .slider-text,\r\n  .home-slider-classic .slider-section {\r\n    height: 100vh;\r\n  }\r\n}"
 insert_head: 0
 head_code: ''
 insert_body_start: 1

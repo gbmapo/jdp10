@@ -11,24 +11,22 @@ editor: ckeditor5
 settings:
   toolbar:
     items:
+      - undo
+      - redo
       - bold
       - italic
-      - '|'
-      - link
-      - '|'
+      - underline
+      - strikethrough
+      - removeFormat
       - bulletedList
       - numberedList
-      - '|'
-      - blockQuote
       - drupalInsertImage
-      - '|'
-      - sourceEditing
-      - '|'
-      - code
+      - link
       - heading
   plugins:
     ckeditor5_heading:
       enabled_headings:
+        - heading1
         - heading2
         - heading3
         - heading4
@@ -41,21 +39,6 @@ settings:
         reversed: false
         startIndex: true
       multiBlock: true
-    ckeditor5_sourceEditing:
-      allowed_tags:
-        - '<cite>'
-        - '<dl>'
-        - '<dt>'
-        - '<dd>'
-        - '<h2 id>'
-        - '<h3 id>'
-        - '<h4 id>'
-        - '<h5 id>'
-        - '<h6 id>'
-        - '<a hreflang>'
-        - '<blockquote cite>'
-        - '<ul type>'
-        - '<ol type>'
 image_upload:
   status: true
   scheme: public
