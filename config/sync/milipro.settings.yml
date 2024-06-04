@@ -25,7 +25,7 @@ whatsapp_url: ''
 github_url: ''
 vk_url: ''
 slider_show: 1
-slider_type: slider-classic
+slider_type: slider-layered
 slider_classic_image: {  }
 slider_classic_image_path: ''
 slider_classic_code: '<li><h1>Le Jardin de Poissy<br>est une AMAP</h1><h4>Association pour le<br>Maintien d''une<br>Agriculture<br>Paysanne</h4><br><a class="button" href="/node/197"> En savoir plus </a></li><li><h1>Le Jardin de Poissy<br>est un SÉL</h1><h4>Système d''<br>Échange<br>Local</h4><br><a class="button" href="/node/200"> En savoir plus </a></li><li><h1>Vous voulez adhérer ?<br></h1><br><a class="button" href="/node/196"> C''est ici... </a></li>'
@@ -34,7 +34,7 @@ slider_time: '10000'
 slider_animateout: slideOutDown
 slider_animatein: flipInX
 slider_dots: 'true'
-slider_code: ''
+slider_code: '<div class="slider-item"><div class="slider-img"><img src="themes/contrib/milipro/images/slider2.png" alt="slider" /></div><div class="slider-text-container"><div class="container"><div class="slider-text"><h1 class="layer1">Le Jardin de Poissy<br>est une AMAP</h1><h4 class="layer2">Association pour le<br>Maintien d''une<br>Agriculture<br>Paysanne</h4></li><div class="layer3"><a class="button" href="/node/197"> En savoir plus </a></div></div></div></div></div><div class="slider-item"><div class="slider-img"><img src="themes/contrib/milipro/images/slider2.png" alt="slider" /></div><div class="slider-text-container"><div class="container"><div class="slider-text"><h1 class="layer1">Le Jardin de Poissy<br>est un SÉL</h1><h4 class="layer2">Système d''<br>Échange<br>Local</h4></li><div class="layer3"><a class="button" href="/node/200"> En savoir plus </a></div></div></div></div></div><div class="slider-item"><div class="slider-img"><img src="themes/contrib/milipro/images/slider2.png" alt="slider" /></div><div class="slider-text-container"><div class="container"><div class="slider-text"><h1 class="layer1">Vous voulez adhérer ?</h1><div class="layer2"><a class="button" href="/node/196"> C''est ici... </a></div></div></div></div></div>'
 preloader_option: 1
 comment_user_pic: 1
 node_author_pic: 0
