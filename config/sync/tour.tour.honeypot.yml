@@ -19,7 +19,7 @@ tips:
     label: Honeypot
     weight: -10
     position: top-start
-    body: "Congratulations on installing Honeypot on your site! With just a few clicks, you can have your site well-protected against automated spam bots.\r\n\r\nClick Next to be guided through this configuration page."
+    body: "Félicitations pour l'installation de Honeypot sur votre site ! En quelques clics, vous pouvez protéger votre site contre les robots spammeurs.\r\n\r\nCliquez sur Suivant pour être guidé à travers cette page de configuration."
   protect-all-forms:
     id: protect-all-forms
     plugin: text
