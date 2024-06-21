@@ -30,21 +30,24 @@ contract.settings_tab:
   title: 'Settings'
   base_route: contract.settings
 
-entity.contract.canonical:
-  route_name: entity.contract.canonical
-  base_route: entity.contract.canonical
-  title: 'View'
-
-entity.contract.edit_form:
-  route_name: entity.contract.edit_form
-  base_route: entity.contract.canonical
-  title: 'Edit'
-
-entity.contract.delete_form:
-  route_name:  entity.contract.delete_form
-  base_route:  entity.contract.canonical
-  title: Delete
-  weight: 10
+#
+# Update 4.48
+#
+# entity.contract.canonical:
+#   route_name: entity.contract.canonical
+#   base_route: entity.contract.canonical
+#   title: 'View'
+#
+# entity.contract.edit_form:
+#   route_name: entity.contract.edit_form
+#   base_route: entity.contract.canonical
+#   title: 'Edit'
+#
+# entity.contract.delete_form:
+#   route_name:  entity.contract.delete_form
+#   base_route:  entity.contract.canonical
+#   title: Delete
+#   weight: 10
 
 # ---------------------------------------------------------
 # Contract subscription routing definition

@@ -25,6 +25,8 @@ class ContractForm extends ContentEntityForm
 
     $form['type']['widget']['#sort_options']  = TRUE;
 
+    unset($form['actions']['delete']);
+
     return $form;
   }
 
@@ -39,18 +41,20 @@ class ContractForm extends ContentEntityForm
 
     switch ($status) {
       case SAVED_NEW:
-        \Drupal::messenger()->addMessage($this->t('Contract « @label » has been added.', array(
+        \Drupal::messenger()->addMessage($this->t('Contract « @label » has been added.', [
           '@label' => $entity->label()
-        )));
+        ]));
         break;
-
-      default:
-        \Drupal::messenger()->addMessage($this->t('Contract « @label » has been updated.', array(
+      case SAVED_UPDATED:
+        \Drupal::messenger()->addMessage($this->t('Contract « @label » has been updated.', [
           '@label' => $entity->label()
-        )));
+        ]));
+      default:
+        break;
     }
 
     $form_state->setRedirect('view.amap_contracts.page_1');
+
   }
 
 }

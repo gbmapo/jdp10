@@ -41,6 +41,8 @@ class ExchangeForm extends ContentEntityForm
 
     $form['#attached']['library'][] = 'sel/echange';
 
+    unset($form['actions']['delete']);
+
     return $form;
   }
 
@@ -65,16 +67,18 @@ class ExchangeForm extends ContentEntityForm
         ]));
         $sAction = 'ajouté';
         break;
-
-      default:
+      case SAVED_UPDATED:
         \Drupal::messenger()->addMessage($this->t('Exchange « @label » has been updated.', [
           '@label' => $entity->label(),
         ]));
         $sAction = 'modifié';
+      default:
+        break;
     }
     _sendEmailForExchange(array($sDate, $sAction, $sSeliste));
 
     $form_state->setRedirect('view.sel_echanges.page_1');
+    
   }
 
 }

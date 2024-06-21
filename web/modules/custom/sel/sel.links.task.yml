@@ -30,21 +30,24 @@ service.settings_tab:
   title: 'Settings'
   base_route: service.settings
 
-entity.service.canonical:
-  route_name: entity.service.canonical
-  base_route: entity.service.canonical
-  title: 'View'
-
-entity.service.edit_form:
-  route_name: entity.service.edit_form
-  base_route: entity.service.canonical
-  title: 'Edit'
-
-entity.service.delete_form:
-  route_name:  entity.service.delete_form
-  base_route:  entity.service.canonical
-  title: Delete
-  weight: 10
+#
+# Update 4.48
+#
+# entity.service.canonical:
+#   route_name: entity.service.canonical
+#   base_route: entity.service.canonical
+#   title: 'View'
+#
+# entity.service.edit_form:
+#   route_name: entity.service.edit_form
+#   base_route: entity.service.canonical
+#   title: 'Edit'
+#
+# entity.service.delete_form:
+#   route_name:  entity.service.delete_form
+#   base_route:  entity.service.canonical
+#   title: Delete
+#   weight: 10
 
 # -------------------------------------------------------------------
 # Exchange routing definition
@@ -54,19 +57,22 @@ exchange.settings_tab:
   title: 'Settings'
   base_route: exchange.settings
 
-entity.exchange.canonical:
-  route_name: entity.exchange.canonical
-  base_route: entity.exchange.canonical
-  title: 'View'
-
-entity.exchange.edit_form:
-  route_name: entity.exchange.edit_form
-  base_route: entity.exchange.canonical
-  title: 'Edit'
-
-entity.exchange.delete_form:
-  route_name:  entity.exchange.delete_form
-  base_route:  entity.exchange.canonical
-  title: Delete
-  weight: 10
+#
+# Update 4.48
+#
+# entity.exchange.canonical:
+#   route_name: entity.exchange.canonical
+#   base_route: entity.exchange.canonical
+#   title: 'View'
+#
+# entity.exchange.edit_form:
+#   route_name: entity.exchange.edit_form
+#   base_route: entity.exchange.canonical
+#   title: 'Edit'
+#
+# entity.exchange.delete_form:
+#   route_name:  entity.exchange.delete_form
+#   base_route:  entity.exchange.canonical
+#   title: Delete
+#   weight: 10
 
