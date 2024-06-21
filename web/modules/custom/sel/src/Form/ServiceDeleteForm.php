@@ -19,9 +19,25 @@ class ServiceDeleteForm extends ContentEntityDeleteForm
     $entity = $this->getEntity();
     $entity->delete();
 
-    $id = \Drupal::currentUser()->id();
-    $form_state->setRedirect('view.sel_services.page_2', array('arg_0' => $id));
+    $form_state->setRedirectUrl($this->setUrl());
     \Drupal::messenger()->addMessage($this->getDeletionMessage());
+  }
+
+  public function setUrl() {
+    switch ($_GET['origin']) {
+      case 1:
+        $url = \Drupal\Core\Url::fromRoute('view.sel_services.page_1');
+        break;
+      case 2:
+        $url = \Drupal\Core\Url::fromRoute('view.sel_services.page_2', [
+          'arg_0' => \Drupal::currentUser()
+            ->id(),
+        ]);
+        break;
+      default:
+        break;
+    }
+    return $url;
   }
 
   public function getQuestion()
@@ -33,8 +49,7 @@ class ServiceDeleteForm extends ContentEntityDeleteForm
 
   public function getCancelUrl()
   {
-    $id = \Drupal::currentUser()->id();
-    return Url::fromRoute('view.sel_services.page_2', array('arg_0' => $id));
+    return $this->setUrl();
   }
 
   protected function getDeletionMessage()

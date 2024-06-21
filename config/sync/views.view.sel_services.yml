@@ -3257,7 +3257,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "{% if owner_id_1==\"[current-user:uid]\"  %}\r\n<a href=\"/sel/service/{{ id }}/edit\"><img src=\"/sites/default/files/images/edit.svg\" title=\"Modifier le service\"></a> <a href=\"/sel/service/{{ id }}/delete\"><img src=\"/sites/default/files/images/trash-2.svg\" title=\"Supprimer le service\"></a>\r\n{% endif %}\r\n"
+            text: "{% if owner_id_1==\"[current-user:uid]\"  %}\r\n<a href=\"/sel/service/{{ id }}/edit?origin=1\"><img src=\"/sites/default/files/images/edit.svg\" title=\"Modifier le service\"></a> <a href=\"/sel/service/{{ id }}/delete?origin=1\"><img src=\"/sites/default/files/images/trash-2.svg\" title=\"Supprimer le service\"></a>\r\n{% endif %}\r\n"
             make_link: false
             path: ''
             absolute: false
@@ -4468,7 +4468,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "{% if owner_id_1==\"[current-user:uid]\"  %}\r\n<a href=\"/sel/service/{{ id }}/edit\"><img src=\"/sites/default/files/images/edit.svg\" title=\"Modifier le service\"></a> <a href=\"/sel/service/{{ id }}/delete\"><img src=\"/sites/default/files/images/trash-2.svg\" title=\"Supprimer le service\"></a>\r\n{% endif %}\r\n"
+            text: "{% if owner_id_1==\"[current-user:uid]\"  %}\r\n<a href=\"/sel/service/{{ id }}/edit?origin=2\"><img src=\"/sites/default/files/images/edit.svg\" title=\"Modifier le service\"></a> <a href=\"/sel/service/{{ id }}/delete?origin=2\"><img src=\"/sites/default/files/images/trash-2.svg\" title=\"Supprimer le service\"></a>\r\n{% endif %}\r\n"
             make_link: false
             path: ''
             absolute: false

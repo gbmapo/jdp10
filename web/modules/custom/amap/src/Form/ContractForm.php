@@ -27,6 +27,17 @@ class ContractForm extends ContentEntityForm
 
     unset($form['actions']['delete']);
 
+    $url = \Drupal\Core\Url::fromRoute('view.amap_contracts.page_1');
+    $form['actions']['cancel'] = [
+      '#type' => 'link',
+      '#title' => $this->t('Cancel'),
+      '#url' => $url,
+      '#attributes' => [
+        'class' => 'button',
+      ],
+      '#weight' => '20',
+    ];
+
     return $form;
   }
 

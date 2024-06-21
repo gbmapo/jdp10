@@ -5,6 +5,7 @@ namespace Drupal\sel\Form;
 use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Url;
 
 /**
  * Form controller for Service edit forms.
@@ -41,7 +42,34 @@ class ServiceForm extends ContentEntityForm {
 
     unset($form['actions']['delete']);
 
+    $form['actions']['cancel'] = [
+      '#type' => 'link',
+      '#title' => $this->t('Cancel'),
+      '#url' => $this->setUrl(),
+      '#attributes' => [
+        'class' => 'button',
+      ],
+      '#weight' => '20',
+    ];
+
     return $form;
+  }
+
+  public function setUrl() {
+    switch ($_GET['origin']) {
+      case 1:
+        $url = Url::fromRoute('view.sel_services.page_1');
+        break;
+      case 2:
+        $url = Url::fromRoute('view.sel_services.page_2', [
+          'arg_0' => \Drupal::currentUser()
+            ->id(),
+        ]);
+        break;
+      default:
+        break;
+    }
+    return $url;
   }
 
   /**
@@ -123,10 +151,11 @@ class ServiceForm extends ContentEntityForm {
         break;
 
       default:
+        break;
     }
 
-    $id = \Drupal::currentUser()->id();
-    $form_state->setRedirect('view.sel_services.page_2', ['arg_0' => $id]);
+    $form_state->setRedirectUrl($this->setUrl());
+
   }
 
 }
