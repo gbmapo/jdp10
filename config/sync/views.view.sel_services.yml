@@ -3566,7 +3566,7 @@ display:
           plugin_id: text
           empty: true
           content:
-            value: "<div class=\"visibleforuser[current-user:account-name]\"><a href=\"/sel/service/add\" class=\"button-round\">Ajouter</a></div>\r\n"
+            value: "<div class=\"visibleforuser[current-user:account-name]\"><a href=\"/sel/service/add?origin=1\" class=\"button-round\">Ajouter</a></div>\r\n"
             format: full_html
           tokenize: false
       display_extenders: {  }
@@ -4783,7 +4783,7 @@ display:
           plugin_id: text
           empty: false
           content:
-            value: "<div class=\"visibleforuser[current-user:account-name]\"><a href=\"/sel/service/add\" class=\"button-round\">Ajouter</a></div>\r\n"
+            value: "<div class=\"visibleforuser[current-user:account-name]\"><a href=\"/sel/service/add?origin=2\" class=\"button-round\">Ajouter</a></div>\r\n"
             format: full_html
           tokenize: false
       display_extenders: {  }
