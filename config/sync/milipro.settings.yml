@@ -1,6 +1,5 @@
 _core:
   default_config_hash: UdqKB6G1oJ-cqT7HcF-RHVeLYxiutT3_75wa2DOJV9Q
-langcode: fr
 favicon:
   mimetype: image/vnd.microsoft.icon
   path: 'public://favicon.ico'

@@ -823,6 +823,7 @@ display:
             offset: false
             offset_label: Décalage
           quantity: 3
+          pagination_heading_level: h4
       exposed_form:
         type: basic
         options:
@@ -1533,7 +1534,7 @@ display:
           admin_label: ''
           entity_type: exchange
           entity_field: to_seliste_id
-          plugin_id: numeric
+          plugin_id: entity_target_id
           default_action: default
           exception:
             value: all
@@ -1559,6 +1560,7 @@ display:
           validate_options: {  }
           break_phrase: false
           not: false
+          target_entity_type_id: person
         from_seliste_id:
           id: from_seliste_id
           table: exchange
@@ -1568,7 +1570,7 @@ display:
           admin_label: ''
           entity_type: exchange
           entity_field: from_seliste_id
-          plugin_id: numeric
+          plugin_id: entity_target_id
           default_action: default
           exception:
             value: all
@@ -1594,6 +1596,7 @@ display:
           validate_options: {  }
           break_phrase: false
           not: false
+          target_entity_type_id: person
       defaults:
         empty: false
         access: false

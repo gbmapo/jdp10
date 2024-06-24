@@ -1004,7 +1004,7 @@ display:
           admin_label: ''
           entity_type: service
           entity_field: category
-          plugin_id: numeric
+          plugin_id: entity_target_id
           default_action: ignore
           exception:
             value: all
@@ -1031,6 +1031,7 @@ display:
           validate_options: {  }
           break_phrase: false
           not: false
+          target_entity_type_id: service_category
       filters:
         isactive:
           id: isactive
@@ -4536,7 +4537,7 @@ display:
           admin_label: ''
           entity_type: person
           entity_field: user_id
-          plugin_id: numeric
+          plugin_id: entity_target_id
           default_action: default
           exception:
             value: all
@@ -4562,6 +4563,7 @@ display:
           validate_options: {  }
           break_phrase: false
           not: false
+          target_entity_type_id: user
       filters:
         isactive:
           id: isactive

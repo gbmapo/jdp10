@@ -1,6 +1,5 @@
 _core:
   default_config_hash: o4bYR9ZupWb3AsOIizTUG4g-nu1mdJqA59UB7QT-ifQ
-langcode: fr
 definitions:
   node__add_page:
     menu_name: tools
@@ -15,8 +14,8 @@ definitions:
     expanded: false
     enabled: true
   standard__front_page:
-    enabled: false
     menu_name: main
     parent: ''
-    expanded: false
     weight: 0
+    expanded: false
+    enabled: false

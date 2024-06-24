@@ -11,7 +11,7 @@ third_party_settings:
 name: Évènement
 type: evenement
 description: "<ul>\r\n\t<li>Body: for anonymous users</li>\r\n\t<li>Body2: for authenticated users</li>\r\n</ul>"
-help: ''
+help: null
 new_revision: false
 preview_mode: 1
 display_submitted: false

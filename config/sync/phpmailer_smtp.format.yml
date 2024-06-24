@@ -1,3 +1,2 @@
-langcode: fr
 format: plain_text
-force_html: 0
+force_html: false

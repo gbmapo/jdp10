@@ -11,7 +11,7 @@ third_party_settings:
 name: Galerie
 type: gallery
 description: "À faire en deux temps :\r\n<ol>\r\n\t<li>Créer sans images pour générer l'identifiant du nœud </li>\r\n\t<li>Modifier en ajoutant les images qui seront placées dans un répertoire nommé comme l'identifiant du nœud</li>\r\n</ol>"
-help: ''
+help: null
 new_revision: false
 preview_mode: 1
 display_submitted: false
