@@ -3,6 +3,7 @@ langcode: fr
 status: true
 dependencies:
   config:
+    - user.role.administrator
     - user.role.seliste
   module:
     - datetime
@@ -806,6 +807,7 @@ display:
         type: full
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 10
           total_pages: null
           id: 0
@@ -823,7 +825,6 @@ display:
             offset: false
             offset_label: Décalage
           quantity: 3
-          pagination_heading_level: h4
       exposed_form:
         type: basic
         options:
@@ -1388,7 +1389,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "{% if (from_seliste_id_1 == arguments.from_seliste_id)  %}\r\n{{ value }}\r\n{% elseif (to_seliste_id_1 == arguments.to_seliste_id)  %}\r\n-{{ value }}\r\n{% else %}\r\n\"??\"\r\n{% endif %}"
+            text: "{% if (from_seliste_id_1 == raw_arguments.from_seliste_id)  %}\r\n{{ value }}\r\n{% elseif (to_seliste_id_1 == raw_arguments.to_seliste_id)  %}\r\n-{{ value }}\r\n{% else %}\r\n\"??\"\r\n{% endif %}"
             make_link: false
             path: ''
             absolute: false
@@ -1494,6 +1495,7 @@ display:
         options:
           role:
             seliste: seliste
+            administrator: administrator
       empty:
         area:
           id: area
