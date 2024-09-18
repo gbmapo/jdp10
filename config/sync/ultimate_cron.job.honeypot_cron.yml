@@ -1,4 +1,4 @@
-uuid: d05a46a6-b14b-432f-9a53-d303fe8a0766
+uuid: 373f0510-049c-4d6e-92ba-73c4726ef253
 langcode: fr
 status: true
 dependencies:
@@ -6,24 +6,12 @@ dependencies:
     - honeypot
 title: 'Default cron handler'
 id: honeypot_cron
-weight: -4
+weight: 0
 module: honeypot
 callback: honeypot_cron
 scheduler:
   id: simple
-  configuration:
-    rules:
-      - '0+@ */3 * * *'
 launcher:
   id: serial
-  configuration:
-    timeouts:
-      lock_timeout: 3600
-    launcher:
-      thread: 0
 logger:
   id: database
-  configuration:
-    method: '3'
-    expire: 1209600
-    retain: 1000
