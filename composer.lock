@@ -3884,26 +3884,26 @@
         },
         {
             "name": "drupal/mail_safety",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/mail_safety.git",
-                "reference": "2.0.0"
+                "reference": "2.1.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/mail_safety-2.0.0.zip",
-                "reference": "2.0.0",
-                "shasum": "2fc3b8f4298d6e3bdabac74eba24ddb3446332f3"
+                "url": "https://ftp.drupal.org/files/projects/mail_safety-2.1.0.zip",
+                "reference": "2.1.0",
+                "shasum": "e1c801ba9ad09ed003d2bde9dbf053e94e1c78e4"
             },
             "require": {
-                "drupal/core": "^9.4 || ^10"
+                "drupal/core": "^9.4 || ^10 || ^11"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.0.0",
-                    "datestamp": "1678822536",
+                    "version": "2.1.0",
+                    "datestamp": "1725963100",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3940,11 +3940,11 @@
                     "homepage": "https://www.drupal.org/user/3495403"
                 },
                 {
-                    "name": "Steven Buteneers",
+                    "name": "steven buteneers",
                     "homepage": "https://www.drupal.org/user/3301055"
                 },
                 {
-                    "name": "ThomasDik",
+                    "name": "thomasdik",
                     "homepage": "https://www.drupal.org/user/1718070"
                 }
             ],
