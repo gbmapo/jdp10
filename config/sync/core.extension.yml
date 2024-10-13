@@ -66,7 +66,6 @@ module:
   text: 0
   token: 0
   toolbar: 0
-  tour: 0
   ultimate_cron: 0
   update: 0
   user: 0
@@ -74,7 +73,6 @@ module:
   views_data_export: 0
   views_send: 0
   views_ui: 0
-  forum: 1
   menu_link_content: 1
   content_translation: 10
   views: 10

@@ -2,15 +2,12 @@ uuid: b7628713-7737-4dff-becb-01a8c1c6f27a
 langcode: fr
 status: true
 dependencies:
-  config:
-    - node.type.forum
   module:
     - amap
     - association
     - comment
     - contact
     - file
-    - node
     - poll
     - search
     - sel
@@ -19,7 +16,7 @@ dependencies:
 _core:
   default_config_hash: btW6TFHajhy7Eo6YUvdFiPh4TcPggo8GBXYctjV6zag
 id: authenticated
-label: 'Utilisateur authentifié'
+label: 'Authenticated user'
 weight: -9
 is_admin: false
 permissions:
@@ -31,12 +28,9 @@ permissions:
   - 'access user contact forms'
   - 'add distribution inscription entities'
   - 'cancel own vote'
-  - 'create forum content'
   - 'delete distribution inscription entities'
   - 'delete own files'
-  - 'delete own forum content'
   - 'edit distribution inscription entities'
-  - 'edit own forum content'
   - 'post comments'
   - 'search content'
   - 'skip comment approval'

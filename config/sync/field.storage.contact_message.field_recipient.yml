@@ -30,7 +30,7 @@ settings:
       value: '246'
       label: '2. AMAP Bœuf'
     -
-      value: '224'
+      value: '252'
       label: '2. AMAP Champignons'
     -
       value: '243'
@@ -45,31 +45,28 @@ settings:
       value: '234'
       label: "2. AMAP Herbier d'Elsa"
     -
-      value: '248'
-      label: '2. AMAP Jus de pommes Hutrel'
-    -
       value: '235'
       label: '2. AMAP Légumes'
     -
       value: '230'
       label: '2. AMAP Lentilles'
     -
-      value: '219'
+      value: '253'
       label: '2. AMAP Miel'
     -
-      value: '226'
+      value: '256'
       label: '2. AMAP Pain'
     -
-      value: '225'
+      value: '257'
       label: '2. AMAP Pommes de terre'
     -
       value: '251'
       label: '2. AMAP Pommes-Poires'
     -
-      value: '229'
+      value: '254'
       label: '2. AMAP Porc'
     -
-      value: '241'
+      value: '255'
       label: '2. AMAP Produits laitiers (Brebis)'
     -
       value: '249'

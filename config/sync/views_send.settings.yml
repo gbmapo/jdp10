@@ -1,4 +1,4 @@
-throttle: 20
+throttle: 10
 retry: 5
 spool_expire: 0
 debug: false
