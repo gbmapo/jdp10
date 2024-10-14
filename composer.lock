@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b8ce82573a3920a971e9b9caa7ae29c0",
+    "content-hash": "5f13b3e7d8b2b248621d507299d865a0",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4196,29 +4196,29 @@
         },
         {
             "name": "drupal/poll",
-            "version": "1.6.0",
+            "version": "2.0.0-alpha1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/poll.git",
-                "reference": "8.x-1.6"
+                "reference": "2.0.0-alpha1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/poll-8.x-1.6.zip",
-                "reference": "8.x-1.6",
-                "shasum": "e7ae83ed214a03e6ecf26a8ac7b500ba61d4dde5"
+                "url": "https://ftp.drupal.org/files/projects/poll-2.0.0-alpha1.zip",
+                "reference": "2.0.0-alpha1",
+                "shasum": "299b1a6399db8da7a77998659443f91f6935c210"
             },
             "require": {
-                "drupal/core": "^9 || ^10"
+                "drupal/core": "^9 || ^10 || ^11"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.6",
-                    "datestamp": "1680209860",
+                    "version": "2.0.0-alpha1",
+                    "datestamp": "1722708563",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Alpha releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -4232,12 +4232,16 @@
                     "homepage": "https://www.drupal.org/user/1295980"
                 },
                 {
-                    "name": "Berdir",
+                    "name": "berdir",
                     "homepage": "https://www.drupal.org/user/214652"
                 },
                 {
-                    "name": "BramDriesen",
+                    "name": "bramdriesen",
                     "homepage": "https://www.drupal.org/user/3383264"
+                },
+                {
+                    "name": "ivnish",
+                    "homepage": "https://www.drupal.org/user/3547706"
                 },
                 {
                     "name": "mqanneh",
@@ -4247,7 +4251,8 @@
             "description": "Allows your site to capture votes on different topics in the form of multiple choice questions.",
             "homepage": "https://www.drupal.org/project/poll",
             "support": {
-                "source": "https://git.drupalcode.org/project/poll"
+                "source": "https://git.drupalcode.org/project/poll.git",
+                "issues": "https://www.drupal.org/project/issues/poll"
             }
         },
         {
@@ -14692,6 +14697,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "drupal/mimemail": 15,
+        "drupal/poll": 15,
         "drupal/potx": 15,
         "drupal/ultimate_cron": 15,
         "drupal/views_send": 5
