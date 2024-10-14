@@ -118,16 +118,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.321.8",
+            "version": "3.324.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "df456658bdc2ad84a00cf35a7b5af874fdcc7a53"
+                "reference": "5b824a9b8015a38f18c53b023975c0f63c7bd3dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/df456658bdc2ad84a00cf35a7b5af874fdcc7a53",
-                "reference": "df456658bdc2ad84a00cf35a7b5af874fdcc7a53",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5b824a9b8015a38f18c53b023975c0f63c7bd3dc",
+                "reference": "5b824a9b8015a38f18c53b023975c0f63c7bd3dc",
                 "shasum": ""
             },
             "require": {
@@ -210,9 +210,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.321.8"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.324.1"
             },
-            "time": "2024-09-10T18:18:03+00:00"
+            "time": "2024-10-11T18:22:01+00:00"
         },
         {
             "name": "behat/mink",
@@ -2781,17 +2781,17 @@
         },
         {
             "name": "drupal/ckeditor5_plugin_pack",
-            "version": "1.2.1",
+            "version": "1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/ckeditor5_plugin_pack.git",
-                "reference": "1.2.1"
+                "reference": "1.2.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/ckeditor5_plugin_pack-1.2.1.zip",
-                "reference": "1.2.1",
-                "shasum": "6c1c97bd3639bab240b97587fef6904fd2d8b3cc"
+                "url": "https://ftp.drupal.org/files/projects/ckeditor5_plugin_pack-1.2.2.zip",
+                "reference": "1.2.2",
+                "shasum": "3974885574ab47cbd6ee325f05c9d2c43eb04d63"
             },
             "require": {
                 "drupal/ckeditor5_premium_features": "^1.3",
@@ -2804,8 +2804,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "1.2.1",
-                    "datestamp": "1723548212",
+                    "version": "1.2.2",
+                    "datestamp": "1727947517",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2826,10 +2826,6 @@
                     "name": "Dawid Olszewski (dolszewski)",
                     "homepage": "https://www.drupal.org/u/dolszewski",
                     "role": "Maintainer"
-                },
-                {
-                    "name": "wwalc",
-                    "homepage": "https://www.drupal.org/user/184556"
                 }
             ],
             "description": "The plugin pack for the CKEditor 5 WYSIWYG editor.",
@@ -2841,17 +2837,17 @@
         },
         {
             "name": "drupal/ckeditor5_premium_features",
-            "version": "1.3.1",
+            "version": "1.3.2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/ckeditor5_premium_features.git",
-                "reference": "1.3.1"
+                "reference": "1.3.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/ckeditor5_premium_features-1.3.1.zip",
-                "reference": "1.3.1",
-                "shasum": "bb7aaac84af6e90cd3f91eea86d53ffd4ddf2056"
+                "url": "https://ftp.drupal.org/files/projects/ckeditor5_premium_features-1.3.2.zip",
+                "reference": "1.3.2",
+                "shasum": "335c2e84bd432016eb585829f736dd1788bf01e9"
             },
             "require": {
                 "aws/aws-sdk-php": "^3.296",
@@ -2870,8 +2866,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "1.3.1",
-                    "datestamp": "1723547007",
+                    "version": "1.3.2",
+                    "datestamp": "1727958023",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
