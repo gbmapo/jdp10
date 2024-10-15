@@ -9,7 +9,7 @@ _core:
 id: milipro_page_title
 theme: milipro
 region: page_header
-weight: -6
+weight: -9
 provider: null
 plugin: page_title_block
 settings:

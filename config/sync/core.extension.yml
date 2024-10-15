@@ -60,6 +60,7 @@ module:
   serialization: 0
   shared: 0
   shortcut: 0
+  superfish: 0
   system: 0
   taxonomy: 0
   telephone: 0

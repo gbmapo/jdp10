@@ -11,7 +11,7 @@ _core:
 id: milipro_breadcrumbs
 theme: milipro
 region: page_header
-weight: -5
+weight: -8
 provider: null
 plugin: system_breadcrumb_block
 settings:
