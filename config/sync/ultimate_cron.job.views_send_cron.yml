@@ -10,10 +10,11 @@ weight: -6
 module: views_send
 callback: views_send_cron
 scheduler:
-  id: simple
+  id: crontab
   configuration:
     rules:
-      - '* * * * *'
+      - '*/2 * * * *'
+    catch_up: 0
 launcher:
   id: serial
   configuration:

@@ -45,6 +45,9 @@ settings:
       value: '234'
       label: "2. AMAP Herbier d'Elsa"
     -
+      value: '259'
+      label: '2. AMAP Jus de pommes Hutrel'
+    -
       value: '235'
       label: '2. AMAP Légumes'
     -
@@ -78,7 +81,7 @@ settings:
       value: '247'
       label: '2. AMAP Prunes'
     -
-      value: '231'
+      value: '258'
       label: '2. AMAP Terrines'
     -
       value: '237'

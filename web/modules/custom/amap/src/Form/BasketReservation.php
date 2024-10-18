@@ -78,7 +78,7 @@ class BasketReservation extends FormBase {
         ->orderBy('product', 'ASC')
         ->orderBy('seller', 'ASC');
       $results = $query->execute();
-      $today = DrupalDateTime::createFromTimestamp(strtotime("now"), new \DateTimeZone('Europe/Paris'),)
+      $today = DrupalDateTime::createFromTimestamp(strtotime("now"), new \DateTimeZone('Europe/Paris'))
         ->format('Y-m-d');
       $form_state->set('noBasketToReserve', TRUE);
       foreach ($results as $key => $result) {
@@ -104,7 +104,7 @@ class BasketReservation extends FormBase {
             ],
           ],
           'comment' => $result->comment == "" ? " " : $result->comment,
-          'seller' => $result->lastname . ' ' . $result->firstname,
+          'seller' => $anonymous ? "" : $result->lastname . ' ' . $result->firstname,
           'seller2' => [
             'data' => [
               '#markup' => $result->email,
@@ -498,12 +498,15 @@ class BasketReservation extends FormBase {
           $sType = 'warning';
         }
         else {
-          $sTo = $value['seller2']['data']['#markup'] . ', ' . $form_state->getStorage()['email'] . ', amap@lejardindepoissy.org';
-          $aParams = [$form_state->getStorage(), $key];
+          $aParams = [
+            $value['seller2']['data']['#markup'] . ', ' . $form_state->getStorage()['email'] . ', amap@lejardindepoissy.org',
+            $form_state->getStorage(),
+            $key,
+          ];
           $message = [
             'module' => 'amap',
             'key' => 'emailforbasket',
-            'to' => $sTo,
+            'to' => 'batch',
             'params' => $aParams,
             'reply' => 'L\'AMAP du Jardin de Poissy',
           ];
