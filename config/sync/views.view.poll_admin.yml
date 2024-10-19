@@ -486,7 +486,7 @@ display:
               authenticated: authenticated
           is_grouped: true
           group_info:
-            label: Actif
+            label: Publié
             description: ''
             identifier: status
             optional: true
@@ -501,7 +501,7 @@ display:
                 operator: '='
                 value: '1'
               2:
-                title: Non
+                title: Oui
                 operator: '='
                 value: '0'
       style:
