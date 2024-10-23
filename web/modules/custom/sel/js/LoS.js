@@ -23,8 +23,7 @@ jQuery(document).ready(function ($) {
       {responsivePriority: 4, targets: 1},
     ],
     initComplete: function () {
-//    this.api().columns([1, 8]).every(function (i) {
-      this.api().columns([8]).every(function (i) {
+      this.api().columns([1, 8]).every(function (i) {
         var column = this;
         var select = $('<select><option value=""></option></select>')
           .appendTo($(column.header()))
@@ -38,13 +37,11 @@ jQuery(document).ready(function ($) {
           });
 
         switch (i) {
-/*
           case 1:
             column.data().unique().sort().each(function (d, j) {
               select.append('<option value="' + d + '">' + d + '</option>');
             });
             break;
- */
           case 8:
             var temp = {};
             column.data().unique().each(function (d, j) {
