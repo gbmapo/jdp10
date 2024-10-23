@@ -48,7 +48,7 @@
         "drupal/views_data_export": "^1.4",
         "drupal/views_send": "^2.0@RC",
         "drush/drush": "^12.5",
-        "kint-php/kint": "^4.2",
+        "kint-php/kint": "^5.1",
         "vlucas/phpdotenv": "^4.0",
         "webflo/drupal-finder": "^1.0.0",
         "zaporylie/composer-drupal-optimizations": "^1.0"
