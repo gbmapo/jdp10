@@ -679,7 +679,7 @@ function amap_mail($key, &$message, $params) {
       $sBody .= "<br><i>est R&eacute;f&eacute;rent</i> : " . $params[3];
       $sBody .= "<br><br>En cas d'indisponibilit&eacute; de derni&eacute;re minute, vous devez pr&eacute;venir le « Rempla&ccedil;ant » et le « R&eacute;f&eacute;rent ».";
       if (date("W") % 2 == 1) {
-        $sBody .= "<br><br>N'oubliez pas de sortir la grande poubelle &agrave; couvercle jaune en fin de distribution.";
+        $sBody .= "<br><br><span style=\"color:red;\">N'oubliez pas de sortir la grande poubelle &agrave; couvercle jaune en fin de distribution.</span>";
       }
       $message['body'][] = check_markup(nl2br($sBody), 'full_html');
       break;
