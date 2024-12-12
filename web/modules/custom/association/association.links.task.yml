@@ -50,11 +50,11 @@ entity.person.delete_form:
 # Membership routing definition
 # -------------------------------------------------------------------
 membership:
-  route_name: association.membership0
+  route_name: association.membership
   title: 'Membership'
-  base_route: association.membership0
+  base_route: association.membership
 renewmembership.settings:
   route_name: association.membership_settings
   title: 'Settings'
-  base_route: association.membership0
+  base_route: association.membership
   weight: 100
