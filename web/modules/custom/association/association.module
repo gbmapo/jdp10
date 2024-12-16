@@ -484,6 +484,7 @@ function _existsEmail($email, $destination) {
         ];
         break;
       default:
+        \Drupal::logger('association')->notice('<pre>'.print_r($results, TRUE).'</pre>');
         break;
     }
   }
