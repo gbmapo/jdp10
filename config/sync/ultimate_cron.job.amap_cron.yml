@@ -8,7 +8,7 @@ title: 'Default cron handler'
 id: amap_cron
 weight: -9
 module: amap
-callback: amap_cron
+callback: 'amap#cron'
 scheduler:
   id: crontab
   configuration:

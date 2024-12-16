@@ -8,7 +8,7 @@ title: 'Default cron handler'
 id: poll_cron
 weight: -2
 module: poll
-callback: poll_cron
+callback: 'poll#cron'
 scheduler:
   id: simple
   configuration:

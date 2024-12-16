@@ -8,7 +8,7 @@ title: 'Default cron handler'
 id: views_send_cron
 weight: -6
 module: views_send
-callback: views_send_cron
+callback: 'views_send#cron'
 scheduler:
   id: crontab
   configuration:
