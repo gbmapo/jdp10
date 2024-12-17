@@ -466,6 +466,7 @@ function _existsEmail($email, $destination) {
       case NULL:
         $output = FALSE;
         break;
+      case "3":
       case "4":
         $output = [
           t('This email is already registered for « %user ».<br>You are an active member, please log in %link.', [
