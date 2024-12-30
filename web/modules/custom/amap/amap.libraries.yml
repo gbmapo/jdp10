@@ -39,9 +39,12 @@ subscriptions:
 
 list-of-contracts:
   version: 1.x
+  header: true
+  css:
+    theme:
+      css/datatable.css: {}
   js:
-    js/list-of-contracts.js: { }
+    js/list-of-contracts.js: {}
   dependencies:
-    - core/jquery
+#   - core/jquery
     - shared/shared
-
