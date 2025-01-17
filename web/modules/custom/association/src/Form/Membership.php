@@ -939,7 +939,7 @@ final class Membership extends FormBase {
       '#required_error' => t('You must choose a subscription payment method.'),
     ];
 
-    $markup = '<br>Votre chèque doit être envoyé à :<br>Le Jardin de Poissy<br>28 bis boulevard Victor Hugo<br>78300 Poissy<br>Ne pas oublier d’indiquer votre désignation d’adhérent (<span style="color: #0000ff;">' . $form_state->getStorage()['designation'] . '</span>) au verso.<br>';
+    $markup = '<br>Votre chèque doit être envoyé à :<br>Le Jardin de Poissy<br>28 bis boulevard Victor Hugo<br>78300 Poissy<br>Ne pas oublier d’indiquer votre désignation d’adhérent (<span style="color: #0000ff;">' . $form_state->getStorage()['designation'] . '</span>) au verso.<br><br>';
     $markup = new FormattableMarkup($markup, []);
     $form['payment0'] = [
       '#type' => 'item',
@@ -950,7 +950,7 @@ final class Membership extends FormBase {
         ],
       ],
     ];
-    $markup = '<br>Compte à utiliser pour votre virement : <br><table style="width: auto;"><tr><td>Titulaire</td><td>Le Jardin de Poissy</td></tr><tr><td>RIB</td><td>20041 01012 6701481J033 71</td></tr><tr><td>IBAN</td><td>FR19 2004 1010 1267 0148 1J03 371</td></tr><tr><td>BIC</td><td>PSSTFRPPSCE</td></tr></table>Ne pas oublier d’indiquer votre désignation d’adhérent (<span style="color: #0000ff;">' . $form_state->getStorage()['designation'] . '</span>) dans le commentaire destiné au bénéficiaire.<br>';
+    $markup = '<br>Compte à utiliser pour votre virement : <br><table style="width: auto;"><tr><td>Titulaire</td><td>Le Jardin de Poissy</td></tr><tr><td>RIB</td><td>20041 01012 6701481J033 71</td></tr><tr><td>IBAN</td><td>FR19 2004 1010 1267 0148 1J03 371</td></tr><tr><td>BIC</td><td>PSSTFRPPSCE</td></tr></table>Ne pas oublier d’indiquer votre désignation d’adhérent (<span style="color: #0000ff;">' . $form_state->getStorage()['designation'] . '</span>) dans le commentaire destiné au bénéficiaire.<br><br>';
     $markup = new FormattableMarkup($markup, []);
     $form['payment1'] = [
       '#type' => 'item',
@@ -961,7 +961,7 @@ final class Membership extends FormBase {
         ],
       ],
     ];
-    $markup = '<br>' . $this->t('After submitting this form, you will be redirected to the online payment process.') . '<br>';
+    $markup = '<br>' . $this->t('After submitting this form, you will be redirected to the online payment process.') . '<br><br>';
     $markup = new FormattableMarkup($markup, []);
     $form['payment2'] = [
       '#type' => 'item',
