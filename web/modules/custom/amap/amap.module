@@ -115,6 +115,7 @@ function amap_entity_delete(EntityInterface $entity) {
     case "contract":
       $id = $entity->id();
       $result = \Drupal::entityQuery('contract_subscription')
+        ->accessCheck(FALSE)
         ->condition('contract_id', $id, '=')
         ->execute();
       foreach ($result as $key => $value) {
