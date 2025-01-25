@@ -501,7 +501,7 @@ display:
                 operator: '='
                 value: '1'
               2:
-                title: Oui
+                title: Non
                 operator: '='
                 value: '0'
       style:

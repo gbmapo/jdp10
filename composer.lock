@@ -4261,26 +4261,30 @@
         },
         {
             "name": "drupal/poll",
-            "version": "2.0.0-alpha2",
+            "version": "2.0.0-alpha3",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/poll.git",
-                "reference": "2.0.0-alpha2"
+                "reference": "2.0.0-alpha3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/poll-2.0.0-alpha2.zip",
-                "reference": "2.0.0-alpha2",
-                "shasum": "a3fdcb2734317075eb66b4a1cf29aa349433994d"
+                "url": "https://ftp.drupal.org/files/projects/poll-2.0.0-alpha3.zip",
+                "reference": "2.0.0-alpha3",
+                "shasum": "28b708c13f371a00f11dbac64d8e9f7f0f83d7eb"
             },
             "require": {
                 "drupal/core": "^9 || ^10 || ^11"
             },
+            "require-dev": {
+                "drupal/devel": "^5.3",
+                "drupal/devel_generate-devel_generate": "*"
+            },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.0.0-alpha2",
-                    "datestamp": "1729151937",
+                    "version": "2.0.0-alpha3",
+                    "datestamp": "1737104569",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Alpha releases are not covered by Drupal security advisories."
