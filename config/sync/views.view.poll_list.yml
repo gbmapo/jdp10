@@ -1,4 +1,4 @@
-uuid: 4d666b84-6249-45ca-b4cc-c0173eb4657f
+uuid: 31bf3281-baea-403c-bb3a-27b05e972219
 langcode: fr
 status: true
 dependencies:
@@ -125,7 +125,7 @@ display:
       access:
         type: perm
         options:
-          perm: 'administer polls'
+          perm: 'access polls'
       cache:
         type: tag
         options: {  }
@@ -144,7 +144,6 @@ display:
           order: ASC
           expose:
             label: ''
-            field_identifier: created
           exposed: false
           granularity: second
       arguments: {  }
@@ -170,8 +169,6 @@ display:
             description: ''
             use_operator: false
             operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
             identifier: ''
             required: false
             remember: false

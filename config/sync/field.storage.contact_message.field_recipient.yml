@@ -21,13 +21,13 @@ settings:
       value: sel@lejardindepoissy.org
       label: '3. SÉL'
     -
-      value: '250'
+      value: '260'
       label: '2. AMAP Agneau'
     -
-      value: '232'
+      value: '262'
       label: '2. AMAP Brioche'
     -
-      value: '246'
+      value: '267'
       label: '2. AMAP Bœuf'
     -
       value: '252'
@@ -36,22 +36,22 @@ settings:
       value: '243'
       label: '2. AMAP Cidre'
     -
-      value: '238'
+      value: '266'
       label: '2. AMAP Farine et Huile'
     -
       value: '244'
       label: '2. AMAP Fruits rouges'
     -
-      value: '234'
+      value: '263'
       label: "2. AMAP Herbier d'Elsa"
     -
       value: '259'
       label: '2. AMAP Jus de pommes Hutrel'
     -
-      value: '235'
+      value: '265'
       label: '2. AMAP Légumes'
     -
-      value: '230'
+      value: '261'
       label: '2. AMAP Lentilles'
     -
       value: '253'
@@ -84,7 +84,7 @@ settings:
       value: '258'
       label: '2. AMAP Terrines'
     -
-      value: '237'
+      value: '264'
       label: '2. AMAP Volaille'
     -
       value: '239'

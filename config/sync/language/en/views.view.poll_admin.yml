@@ -1,24 +1,15 @@
+label: 'Poll admin'
 display:
   default:
+    display_title: Master
     display_options:
-      filters:
-        status:
-          group_info:
-            group_items:
-              1:
-                title: 'Yes'
-              2:
-                title: 'Yes'
-            label: Published
-          expose:
-            label: 'True'
-        question:
-          expose:
-            label: Question
       title: Poll
       fields:
         question:
           label: Question
+          separator: ', '
+        status:
+          label: Published
           separator: ', '
         status_with_runtime:
           label: Active
@@ -52,7 +43,29 @@ display:
       empty:
         area_text_custom:
           content: 'No polls are available.'
-    display_title: Master
-  page_1:
+      filters:
+        question:
+          expose:
+            label: Question
+        status:
+          expose:
+            label: 'True'
+          group_info:
+            label: Published
+            group_items:
+              1:
+                title: 'Yes'
+              2:
+                title: 'No'
+        active:
+          expose:
+            label: Active
+          group_info:
+            label: Active
+            group_items:
+              1:
+                title: 'Yes'
+              2:
+                title: 'No'
+  poll_admin:
     display_title: Page
-label: 'Poll admin'

@@ -1,4 +1,4 @@
-uuid: 3194eeb3-6d48-4102-944d-094c63ae6858
+uuid: 5e7ef3d6-1715-42e4-bcff-15bfb1d4656a
 langcode: fr
 status: true
 dependencies:
@@ -6,24 +6,12 @@ dependencies:
     - poll
 title: 'Default cron handler'
 id: poll_cron
-weight: -2
+weight: 0
 module: poll
 callback: 'poll#cron'
 scheduler:
   id: simple
-  configuration:
-    rules:
-      - '0+@ */3 * * *'
 launcher:
   id: serial
-  configuration:
-    timeouts:
-      lock_timeout: 3600
-    launcher:
-      thread: 0
 logger:
   id: database
-  configuration:
-    method: '3'
-    expire: 1209600
-    retain: 1000
