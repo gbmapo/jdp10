@@ -238,6 +238,40 @@ function amap_views_pre_render(ViewExecutable $view) {
   }
 }
 
+function amap_views_post_execute(ViewExecutable $view) {
+  switch ($view->id()) {
+
+    case 'amap_planning':
+      switch ($view->current_display) {
+        case 'page_1':
+        case 'page_2':
+        case 'page_3':
+          $database = \Drupal::database();
+          $rank = 0;
+          $numberofinscriptions = 0;
+          foreach ($view->result as $value) {
+            if ($value->distribution_inscription_id == $numberofinscriptions) {
+              $value->distribution_inscription_created = 0;
+            }
+            else {
+              $rank++;
+              $numberofinscriptions = $value->distribution_inscription_id;
+              $value->distribution_inscription_created = $rank;
+            }
+          }
+          break;
+
+        default:
+          break;
+      }
+      break;
+
+    default:
+      break;
+
+  }
+}
+
 function _detail_contract_type($sContractType) {
 
   $oContractType = \Drupal::entityTypeManager()
