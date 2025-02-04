@@ -503,6 +503,56 @@ function amap_cron() {
 
 }
 
+function amap_cron_twiceperday() {
+
+  // ----------------------------------------------------------------------------
+  // Gestion du modal bourse_aux_paniers
+  // ----------------------------------------------------------------------------
+  $modalStorage = \Drupal::entityTypeManager()->getStorage('modal');
+  $ids = $modalStorage->getQuery()
+    ->accessCheck(TRUE)
+    ->execute();
+  $modals = $modalStorage->loadMultiple($ids);
+
+  foreach ($modals as $modal) {
+    if ($modal->id() == 'bourse_aux_paniers') {
+      $today = DrupalDateTime::createFromTimestamp(strtotime("now"), new \DateTimeZone('Europe/Paris'))
+        ->format('Y-m-d');
+      $query = \Drupal::database()->select('basket', 'ba');
+      $query->leftJoin('distribution_date', 'dd', 'dd.id = ba.distributiondate');
+      $query->fields('dd', ['distributiondate']);
+      $query->orderBy('distributiondate', 'ASC');
+      $query->condition('dd.distributiondate', $today, '>=');
+      $numberofbaskets = (int) $query->countQuery()->execute()->fetchField();
+      switch ($numberofbaskets) {
+        case 0:
+          $modal->setBody([
+            'value' => 'Aucun panier n\'est disponible dans la Bourse aux paniers !',
+            'format' => 'full_html',
+          ]);
+          $modal->setPublished(FALSE);
+          break;
+        case 1:
+          $modal->setBody([
+            'value' => 'Un panier est disponible dans la Bourse aux paniers !',
+            'format' => 'full_html',
+          ]);
+          $modal->setPublished(TRUE);
+          break;
+        default:
+          $modal->setBody([
+            'value' => 'Des paniers sont disponibles dans la Bourse aux paniers !',
+            'format' => 'full_html',
+          ]);
+          $modal->setPublished(TRUE);
+          break;
+      }
+      $modal->save();
+    }
+  }
+
+}
+
 function _setAmapien() {
 
   $usersWhoAreAmapien = \Drupal::entityQuery('user')
@@ -510,7 +560,7 @@ function _setAmapien() {
     ->condition('roles', 'amapien')
     ->execute();
 
-  $sToday = DrupalDateTime::createFromTimestamp(strtotime("now"), new \DateTimeZone('Europe/Paris'), )
+  $sToday = DrupalDateTime::createFromTimestamp(strtotime("now"), new \DateTimeZone('Europe/Paris'))
     ->format('Y-m-d');
   $database = \Drupal::database();
   $query = $database->select('contract_subscription', 'cs');
@@ -549,7 +599,7 @@ function _sendEmailForStupids() {
   $aX = [];
   $sTo = "";
 
-  $sNextWednesday = DrupalDateTime::createFromTimestamp(strtotime("next Wednesday", strtotime("Yesterday")), new \DateTimeZone('Europe/Paris'), )
+  $sNextWednesday = DrupalDateTime::createFromTimestamp(strtotime("next Wednesday", strtotime("Yesterday")), new \DateTimeZone('Europe/Paris'))
     ->format('Y-m-d');
   $database = \Drupal::database();
   $query = $database->select('distribution_date', 'amdd');
@@ -585,7 +635,7 @@ function _sendEmailForStupids() {
   $sR = implode(", ", $aR);
   $sX = implode(", ", $aX);
   setlocale(LC_TIME, "fr_FR.UTF-8");
-  $sNextWednesday = DrupalDateTime::createFromTimestamp(strtotime("next Wednesday", strtotime("Yesterday")), new \DateTimeZone('Europe/Paris'), )
+  $sNextWednesday = DrupalDateTime::createFromTimestamp(strtotime("next Wednesday", strtotime("Yesterday")), new \DateTimeZone('Europe/Paris'))
     ->format('l j F Y');
   $aParams = [$sNextWednesday, $sD, $sR, $sX];
 
@@ -598,7 +648,7 @@ function _sendEmailForStupids() {
   ];
   $aResults = shared_send_email($message);
 
-  $sNextMonday = DrupalDateTime::createFromTimestamp(strtotime("next Monday"), new \DateTimeZone('Europe/Paris'), )
+  $sNextMonday = DrupalDateTime::createFromTimestamp(strtotime("next Monday"), new \DateTimeZone('Europe/Paris'))
     ->format('Y-m-d H-i-s');
   \Drupal::state()->set('amap.NextEmailForStupids', $sNextMonday);
   \Drupal::logger('amap')->info('email \'Rappel pour les étourdis\': sent.');
@@ -606,7 +656,7 @@ function _sendEmailForStupids() {
 
 function _sendEmailsForNextDistribution() {
 
-  $sNextWednesday = DrupalDateTime::createFromTimestamp(strtotime("next Wednesday"), new \DateTimeZone('Europe/Paris'), )
+  $sNextWednesday = DrupalDateTime::createFromTimestamp(strtotime("next Wednesday"), new \DateTimeZone('Europe/Paris'))
     ->format('Y-m-d');
   $database = \Drupal::database();
   $query = $database->select('distribution_date', 'amdd');
@@ -651,11 +701,11 @@ function _sendEmailsForNextDistribution() {
   }
 
   if (date("l") == "Thursday") {
-    $sNextDay = DrupalDateTime::createFromTimestamp(strtotime("next Sunday"), new \DateTimeZone('Europe/Paris'), )
+    $sNextDay = DrupalDateTime::createFromTimestamp(strtotime("next Sunday"), new \DateTimeZone('Europe/Paris'))
       ->format('Y-m-d H-i-s');
   }
   else {
-    $sNextDay = DrupalDateTime::createFromTimestamp(strtotime("next Thursday"), new \DateTimeZone('Europe/Paris'), )
+    $sNextDay = DrupalDateTime::createFromTimestamp(strtotime("next Thursday"), new \DateTimeZone('Europe/Paris'))
       ->format('Y-m-d H-i-s');
   }
   \Drupal::state()->set('amap.EmailForNextDistribution', $sNextDay);
@@ -664,7 +714,7 @@ function _sendEmailsForNextDistribution() {
 
 function _sendEmailsForNextDistributionPerRole($role, $key, $info, $D, $X) {
   setlocale(LC_TIME, "fr_FR.UTF-8");
-  $sNextWednesday = DrupalDateTime::createFromTimestamp(strtotime("next Wednesday"), new \DateTimeZone('Europe/Paris'), )
+  $sNextWednesday = DrupalDateTime::createFromTimestamp(strtotime("next Wednesday"), new \DateTimeZone('Europe/Paris'))
     ->format(' j F Y');
   $aParams = ['', $sNextWednesday, $D, $X];
   $message = [

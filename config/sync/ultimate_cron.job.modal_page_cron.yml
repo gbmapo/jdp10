@@ -1,0 +1,17 @@
+uuid: 1d1b784f-582e-4c9e-a104-65be32b8f49d
+langcode: fr
+status: true
+dependencies:
+  module:
+    - modal_page
+title: 'Default cron handler'
+id: modal_page_cron
+weight: 0
+module: modal_page
+callback: 'modal_page#cron'
+scheduler:
+  id: simple
+launcher:
+  id: serial
+logger:
+  id: database
