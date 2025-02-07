@@ -20,6 +20,8 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 use Drupal\Core\Render\Element;
 
+use Drupal\Core\Cache\Cache;
+
 const AMAP_AMAPIEN_PER_DISTRIBUTION = 5;
 const AMAP_RESERVE_PER_DISTRIBUTION = 1;
 const AMAP_REFERENT_PER_DISTRIBUTION = 1;
@@ -91,6 +93,10 @@ function amap_entity_insert(EntityInterface $entity) {
     case "contract_subscription":
       _handleContractSubscriptionFiles($entity, $mode);
       break;
+    case "basket":
+      _publishModalBourseauxpaniers();
+      break;
+
     default:
   }
 }
@@ -105,6 +111,10 @@ function amap_entity_update(EntityInterface $entity) {
     case "contract_subscription":
       _handleContractSubscriptionFiles($entity, $mode);
       break;
+    case "basket":
+      _publishModalBourseauxpaniers();
+      break;
+
     default:
   }
 }
@@ -127,9 +137,11 @@ function amap_entity_delete(EntityInterface $entity) {
       _handleContractFiles($entity, $mode);
       _setReferentOfContract();
       break;
-
     case "contract_subscription":
       _handleContractSubscriptionFiles($entity, $mode);
+      break;
+    case "basket":
+      _publishModalBourseauxpaniers();
       break;
 
     default:
@@ -503,56 +515,6 @@ function amap_cron() {
 
 }
 
-function amap_cron_twiceperday() {
-
-  // ----------------------------------------------------------------------------
-  // Gestion du modal bourse_aux_paniers
-  // ----------------------------------------------------------------------------
-  $modalStorage = \Drupal::entityTypeManager()->getStorage('modal');
-  $ids = $modalStorage->getQuery()
-    ->accessCheck(TRUE)
-    ->execute();
-  $modals = $modalStorage->loadMultiple($ids);
-
-  foreach ($modals as $modal) {
-    if ($modal->id() == 'bourse_aux_paniers') {
-      $today = DrupalDateTime::createFromTimestamp(strtotime("now"), new \DateTimeZone('Europe/Paris'))
-        ->format('Y-m-d');
-      $query = \Drupal::database()->select('basket', 'ba');
-      $query->leftJoin('distribution_date', 'dd', 'dd.id = ba.distributiondate');
-      $query->fields('dd', ['distributiondate']);
-      $query->orderBy('distributiondate', 'ASC');
-      $query->condition('dd.distributiondate', $today, '>=');
-      $numberofbaskets = (int) $query->countQuery()->execute()->fetchField();
-      switch ($numberofbaskets) {
-        case 0:
-          $modal->setBody([
-            'value' => 'Aucun panier n\'est disponible dans la Bourse aux paniers !',
-            'format' => 'full_html',
-          ]);
-          $modal->setPublished(FALSE);
-          break;
-        case 1:
-          $modal->setBody([
-            'value' => 'Un panier est disponible dans la Bourse aux paniers !',
-            'format' => 'full_html',
-          ]);
-          $modal->setPublished(TRUE);
-          break;
-        default:
-          $modal->setBody([
-            'value' => 'Des paniers sont disponibles dans la Bourse aux paniers !',
-            'format' => 'full_html',
-          ]);
-          $modal->setPublished(TRUE);
-          break;
-      }
-      $modal->save();
-    }
-  }
-
-}
-
 function _setAmapien() {
 
   $usersWhoAreAmapien = \Drupal::entityQuery('user')
@@ -813,5 +775,56 @@ function template_preprocess_basket(array &$variables) {
   foreach (Element::children($variables['elements']) as $key) {
     $variables['content'][$key] = $variables['elements'][$key];
   }
+}
+
+function _publishModalBourseauxpaniers() {
+
+  // ----------------------------------------------------------------------------
+  // Gestion du modal bourse_aux_paniers
+  // ----------------------------------------------------------------------------
+  $modalStorage = \Drupal::entityTypeManager()->getStorage('modal');
+  $ids = $modalStorage->getQuery()
+    ->accessCheck(TRUE)
+    ->execute();
+  $modals = $modalStorage->loadMultiple($ids);
+
+  foreach ($modals as $modal) {
+    if ($modal->id() == 'bourse_aux_paniers') {
+      $today = DrupalDateTime::createFromTimestamp(strtotime("now"), new \DateTimeZone('Europe/Paris'))
+        ->format('Y-m-d');
+      $query = \Drupal::database()->select('basket', 'ba');
+      $query->leftJoin('distribution_date', 'dd', 'dd.id = ba.distributiondate');
+      $query->fields('dd', ['distributiondate']);
+      $query->orderBy('distributiondate', 'ASC');
+      $query->condition('dd.distributiondate', $today, '>=');
+      $numberofbaskets = (int) $query->countQuery()->execute()->fetchField();
+      switch ($numberofbaskets) {
+        case 0:
+          $modal->setBody([
+            'value' => 'Aucun panier n\'est disponible dans la Bourse aux paniers !',
+            'format' => 'full_html',
+          ]);
+          $modal->setPublished(FALSE);
+          break;
+        case 1:
+          $modal->setBody([
+            'value' => 'Un panier est disponible dans la Bourse aux paniers !',
+            'format' => 'full_html',
+          ]);
+          $modal->setPublished(TRUE);
+          break;
+        default:
+          $modal->setBody([
+            'value' => 'Des paniers sont disponibles dans la Bourse aux paniers !',
+            'format' => 'full_html',
+          ]);
+          $modal->setPublished(TRUE);
+          break;
+      }
+      $modal->save();
+      Cache::invalidateTags(['modal_page:' . $modal->id()]);
+    }
+  }
+
 }
 

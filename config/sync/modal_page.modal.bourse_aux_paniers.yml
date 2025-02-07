@@ -5,7 +5,7 @@ dependencies: {  }
 id: bourse_aux_paniers
 label: 'Bourse aux paniers'
 body:
-  value: 'Des paniers sont disponibles dans la Bourse aux paniers !'
+  value: "Aucun panier n'est disponible dans la Bourse aux paniers !"
   format: full_html
 pages: "/node/1\r\n/node/25"
 auto_open: true
@@ -14,7 +14,7 @@ ok_label_button: "J'y vais !"
 top_right_button_label: x
 left_label_button: Effacer
 enable_dont_show_again_option: true
-dont_show_again_label: 'Ne plus montrer'
+dont_show_again_label: 'Ne plus montrer ce message'
 modal_size: modal-md
 modal_video_link: ''
 close_modal_esc_key: true
@@ -43,13 +43,13 @@ custom_cookie_expiration_time: 10000
 enable_show_on_height: false
 height_offset: ''
 height_offset_touch: '0'
-published: true
-insert_horizontal_line_header: true
-insert_horizontal_line_footer: true
+published: false
+insert_horizontal_line_header: false
+insert_horizontal_line_footer: false
 enable_modal_header: true
 enable_modal_footer: true
 display_title: true
-display_button_x_close: true
+display_button_x_close: false
 top_right_button_class: ''
 modal_class: ''
 header_class: ''
