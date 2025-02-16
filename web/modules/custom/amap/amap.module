@@ -257,7 +257,6 @@ function amap_views_post_execute(ViewExecutable $view) {
       switch ($view->current_display) {
         case 'page_1':
         case 'page_2':
-        case 'page_3':
           $database = \Drupal::database();
           $rank = 0;
           $numberofinscriptions = 0;
@@ -778,53 +777,48 @@ function template_preprocess_basket(array &$variables) {
 }
 
 function _publishModalBourseauxpaniers() {
+/*
+  ----------------------------------------------------------------------------
+  Mise à jour du texte et activation du modal 'bourse_aux_paniers'
+  selon le nombre de paniers proposés
+  ----------------------------------------------------------------------------
+ */
+  $modal = \Drupal::entityTypeManager()
+    ->getStorage('modal')
+    ->load('bourse_aux_paniers');
 
-  // ----------------------------------------------------------------------------
-  // Gestion du modal bourse_aux_paniers
-  // ----------------------------------------------------------------------------
-  $modalStorage = \Drupal::entityTypeManager()->getStorage('modal');
-  $ids = $modalStorage->getQuery()
-    ->accessCheck(TRUE)
-    ->execute();
-  $modals = $modalStorage->loadMultiple($ids);
-
-  foreach ($modals as $modal) {
-    if ($modal->id() == 'bourse_aux_paniers') {
-      $today = DrupalDateTime::createFromTimestamp(strtotime("now"), new \DateTimeZone('Europe/Paris'))
-        ->format('Y-m-d');
-      $query = \Drupal::database()->select('basket', 'ba');
-      $query->leftJoin('distribution_date', 'dd', 'dd.id = ba.distributiondate');
-      $query->fields('dd', ['distributiondate']);
-      $query->orderBy('distributiondate', 'ASC');
-      $query->condition('dd.distributiondate', $today, '>=');
-      $numberofbaskets = (int) $query->countQuery()->execute()->fetchField();
-      switch ($numberofbaskets) {
-        case 0:
-          $modal->setBody([
-            'value' => 'Aucun panier n\'est disponible dans la Bourse aux paniers !',
-            'format' => 'full_html',
-          ]);
-          $modal->setPublished(FALSE);
-          break;
-        case 1:
-          $modal->setBody([
-            'value' => 'Un panier est disponible dans la Bourse aux paniers !',
-            'format' => 'full_html',
-          ]);
-          $modal->setPublished(TRUE);
-          break;
-        default:
-          $modal->setBody([
-            'value' => 'Des paniers sont disponibles dans la Bourse aux paniers !',
-            'format' => 'full_html',
-          ]);
-          $modal->setPublished(TRUE);
-          break;
-      }
-      $modal->save();
-      Cache::invalidateTags(['modal_page:' . $modal->id()]);
-    }
+  $today = DrupalDateTime::createFromTimestamp(strtotime("now"), new \DateTimeZone('Europe/Paris'))
+    ->format('Y-m-d');
+  $query = \Drupal::database()->select('basket', 'ba');
+  $query->leftJoin('distribution_date', 'dd', 'dd.id = ba.distributiondate');
+  $query->fields('dd', ['distributiondate']);
+  $query->orderBy('distributiondate', 'ASC');
+  $query->condition('dd.distributiondate', $today, '>=');
+  $numberofbaskets = (int) $query->countQuery()->execute()->fetchField();
+  switch ($numberofbaskets) {
+    case 0:
+      $modal->setBody([
+        'value' => 'Aucun panier n\'est disponible dans la Bourse aux paniers !',
+        'format' => 'full_html',
+      ]);
+      $modal->setPublished(FALSE);
+      break;
+    case 1:
+      $modal->setBody([
+        'value' => 'Un panier est disponible dans la Bourse aux paniers !',
+        'format' => 'full_html',
+      ]);
+      $modal->setPublished(TRUE);
+      break;
+    default:
+      $modal->setBody([
+        'value' => 'Des paniers sont disponibles dans la Bourse aux paniers !',
+        'format' => 'full_html',
+      ]);
+      $modal->setPublished(TRUE);
+      break;
   }
+  $modal->save();
+  Cache::invalidateTags(['modal_page:' . $modal->id()]);
 
 }
-
