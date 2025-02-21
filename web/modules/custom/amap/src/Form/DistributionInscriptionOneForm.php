@@ -8,30 +8,27 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Class DistributionInscriptionOneForm.
  */
-class DistributionInscriptionOneForm extends FormBase
-{
+class DistributionInscriptionOneForm extends FormBase {
 
 
   /**
    * {@inheritdoc}
    */
-  public function getFormId()
-  {
+  public function getFormId() {
     return 'distribution_inscription_one_form';
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state)
-  {
+  public function buildForm(array $form, FormStateInterface $form_state) {
 
     $rows = \Drupal::service('listenrolments')->list();
 
-    $form['rows'] = array(
+    $form['rows'] = [
       '#type' => 'value',
       '#value' => $rows,
-    );
+    ];
 
     $options = [];
     foreach ($rows as $key => $row) {
@@ -40,7 +37,8 @@ class DistributionInscriptionOneForm extends FormBase
     $date = $form_state->getValue('distributiondate');
     if ($date !== NULL) {
       $key = $date;
-    } else {
+    }
+    else {
       $key = 1;
     }
     $row = $rows[$key];
@@ -52,105 +50,113 @@ class DistributionInscriptionOneForm extends FormBase
       $bDisabledD = TRUE;
       $bDisabledR = TRUE;
       $bDisabledX = TRUE;
-    } else {
+    }
+    else {
       $bDisabledD = (($row[1] == AMAP_AMAPIEN_PER_DISTRIBUTION && !$row[4])) || $row[6] || $row[7];
       $bDisabledR = (($row[2] == AMAP_RESERVE_PER_DISTRIBUTION && !$row[4])) || $row[5] || $row[7];
       $bDisabledX = !$bReferentDistrib || ($row[3] == AMAP_REFERENT_PER_DISTRIBUTION && !$row[4]) || $row[5] || $row[6];
     }
 
-    $form['distributiondate'] = array(
+    $form['distributiondate'] = [
       '#type' => 'select',
       '#options' => $options,
       '#title' => $this->t('Distribution Date'),
-      '#required' => true,
+      '#required' => TRUE,
       '#default_value' => $key,
       '#ajax' => [
         'callback' => '::dateCallback',
         'wrapper' => 'inscriptions',
       ],
-    );
+    ];
 
     $form['inscriptions'] = [
       '#type' => 'container',
       '#attributes' => ['id' => 'inscriptions'],
     ];
 
-    $form['inscriptions']['distributiondate_id'] = array(
+    $form['inscriptions']['distributiondate_id'] = [
       '#type' => 'hidden',
-      '#value' => $row[11]
-    );
+      '#value' => $row[11],
+    ];
 
-    $form['inscriptions']['D'] = array(
+    $form['inscriptions']['D'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Distribution'),
       '#title_display' => 'before',
       '#value' => $row[5],
-      '#attributes' => array(
+      '#attributes' => [
         'onchange' => 'hasChanged(this)',
         'id' => 'inscriptions[' . $key . '][' . 'd]',
-      ),
-      '#disabled' => $bDisabledD
-    );
-    $form['inscriptions']['D2'] = array(
+      ],
+      '#disabled' => $bDisabledD,
+    ];
+    $form['inscriptions']['D2'] = [
       '#type' => 'textfield',
       '#size' => 2,
-      '#disabled' => true,
+      '#disabled' => TRUE,
       '#value' => $row[1],
-      '#attributes' => array(
+      '#attributes' => [
         'id' => 'inscriptions[' . $key . '][' . 'd2]',
-      ),
-      '#suffix' => $row[8]
-    );
-    $form['inscriptions']['R'] = array(
-      '#type' => 'checkbox',
-      '#title' => $this->t('Reserve'),
-      '#title_display' => 'before',
-      '#value' => $row[6],
-      '#attributes' => array(
-        'onchange' => 'hasChanged(this)',
-        'id' => 'inscriptions[' . $key . '][' . 'r]',
-      ),
-      '#disabled' => $bDisabledR
-    );
-    $form['inscriptions']['R2'] = array(
-      '#type' => 'textfield',
-      '#size' => 2,
-      '#disabled' => true,
-      '#value' => $row[2],
-      '#attributes' => array(
-        'id' => 'inscriptions[' . $key . '][' . 'r2]',
-      ),
-      '#suffix' => $row[9]
-    );
-    $form['inscriptions']['X'] = array(
+      ],
+      '#suffix' => $row[8],
+    ];
+    $availableSlots = AMAP_AMAPIEN_PER_DISTRIBUTION - $row[1] + $row[12];
+    $options = [];
+    switch ($availableSlots) {
+      case 5:
+        $options[4] = $this->t('I will come with four people');
+      case 4:
+        $options[3] = $this->t('I will come with three people');
+      case 3:
+        $options[2] = $this->t('I will come with two people');
+      case 2:
+        $options[1] = $this->t('I will come with one people');
+      case 1:
+        $options[0] = $this->t('I will come alone');
+        break;
+      default:
+        break;
+    }
+    ksort($options);
+    $form['inscriptions']['D3'] = [
+      '#type' => 'select',
+      '#options' => $options,
+      '#default_value' => $row[12] - 1,
+      '#attributes' => [
+        'id' => 'inscriptions[' . $key . '][' . 'd3]',
+        'style' => ['display: none;'],
+      ],
+    ];
+
+    $form['inscriptions']['X'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Referent'),
       '#title_display' => 'before',
       '#value' => $row[7],
-      '#attributes' => array(
+      '#attributes' => [
         'onchange' => 'hasChanged(this)',
         'id' => 'inscriptions[' . $key . '][' . 'x]',
-      ),
-      '#disabled' => $bDisabledX
-    );
-    $form['inscriptions']['X2'] = array(
+      ],
+      '#disabled' => $bDisabledX,
+    ];
+    $form['inscriptions']['X2'] = [
       '#type' => 'textfield',
       '#size' => 2,
-      '#disabled' => true,
+      '#disabled' => TRUE,
       '#value' => $row[3],
-      '#attributes' => array(
+      '#attributes' => [
         'id' => 'inscriptions[' . $key . '][' . 'x2]',
-      ),
-      '#suffix' => $row[10]
-    );
+      ],
+      '#suffix' => $row[10],
+    ];
 
-    $form['referent'] = array(
+    $form['referent'] = [
       '#type' => 'hidden',
       '#default_value' => ($bReferentDistrib) ? "Y" : "N",
-      '#attributes' => array(
+      '#attributes' => [
         'id' => 'breferentdistrib',
-      ),
-    );
+      ],
+    ];
 
     $form['submit'] = [
       '#type' => 'submit',
@@ -169,24 +175,21 @@ class DistributionInscriptionOneForm extends FormBase
 
   }
 
-  public function dateCallback($form, FormStateInterface $form_state)
-  {
+  public function dateCallback($form, FormStateInterface $form_state) {
     return $form['inscriptions'];
   }
 
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state)
-  {
+  public function validateForm(array &$form, FormStateInterface $form_state) {
     parent::validateForm($form, $form_state);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state)
-  {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
 
     $iCurrentUserId = \Drupal::currentUser()->id();
     $distributiondate_id = $form_state->getUserInput()['distributiondate_id'];
@@ -200,21 +203,22 @@ class DistributionInscriptionOneForm extends FormBase
     foreach ($form_state->getUserInput() as $key => $value) {
       switch ($key) {
         case 'distributiondate_id':
-//        $distributiondate_id = $value; Nothing to do: already set
+          //        $distributiondate_id = $value; Nothing to do: already set
           break;
         case 'D':
-        case 'R':
         case 'X':
           if ($value == 1) {
-            $data = array(
+            $data = [
               'distributiondate_id' => $distributiondate_id,
               'amapien_id' => $iCurrentUserId,
-              'role' => $key
-            );
-            $entity =  \Drupal::entityTypeManager()
-              ->getStorage('distribution_inscription')
-              ->create($data);
-            $entity->save();
+              'role' => $key,
+            ];
+            for ($i = 0; $i < $form_state->getValue('D3') + 1; $i++) {
+              $entity = \Drupal::entityTypeManager()
+                ->getStorage('distribution_inscription')
+                ->create($data);
+              $entity->save();
+            }
           }
           break;
         default:

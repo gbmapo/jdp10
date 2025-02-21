@@ -7,30 +7,27 @@ use Drupal\Core\Datetime\DrupalDateTime;
 /**
  * Class ListEnrolments.
  */
-class ListEnrolments
-{
+class ListEnrolments {
 
   private $filter;
 
   /**
    * Constructs a new ListEnrolments object.
    */
-  public function __construct()
-  {
+  public function __construct() {
   }
 
-  public function setFilter($value)
-  {
+  public function setFilter($value) {
     $this->filter = $value;
     return $this;
   }
 
-  public function list()
-  {
+  public function list() {
 
     $iCurrentUserId = \Drupal::currentUser()->id();
 
-    $sNextWed = ($this->filter == 'all') ? '' :  DrupalDateTime::createFromTimestamp(strtotime("last Wednesday"), new \DateTimeZone('Europe/Paris'), )->format('Y-m-d');
+    $sNextWed = ($this->filter == 'all') ? '' : DrupalDateTime::createFromTimestamp(strtotime("last Wednesday"), new \DateTimeZone('Europe/Paris'))
+      ->format('Y-m-d');
     $database = \Drupal::database();
     $query = $database->select('distribution_date', 'amdd');
     $query->leftJoin('distribution_inscription', 'amdi', 'amdi.distributiondate_id = amdd.id');
@@ -52,7 +49,9 @@ class ListEnrolments
       $sNomPrenom = "";
       $amapienid = $result->amapien_id;
       if ($amapienid) {
-        $amapien = \Drupal::entityTypeManager()->getStorage('person')->load($amapienid);
+        $amapien = \Drupal::entityTypeManager()
+          ->getStorage('person')
+          ->load($amapienid);
         $sNomPrenom = (!is_null($amapien)) ? $amapien->label() : $amapienid;
       }
       if ($sDate != $sDateSav) {
@@ -67,8 +66,9 @@ class ListEnrolments
         $row[7] = FALSE;        // L'utilisateur actif est inscrit Référent
         $row[8] = '';           // 'Nom Prénom' des inscrits
         $row[9] = '';           // 'Nom Prénom' des inscrits
-        $row[10] = '';           // 'Nom Prénom' des inscrits
-        $row[11] = $result->id;  // id de la date dans la table
+        $row[10] = '';          // 'Nom Prénom' des inscrits
+        $row[11] = $result->id; // id de la date dans la table
+        $row[12] = 0;           // Nombre d'inscriptions de l'utilisateur actif en Distribution
         $rows[] = $row;
         $sDateSav = $sDate;
       }
@@ -79,6 +79,7 @@ class ListEnrolments
           if ($amapienid == $iCurrentUserId) {
             $rows[$iRow][4] = TRUE;
             $rows[$iRow][5] = TRUE;
+            $rows[$iRow][12]++;
           }
           $rows[$iRow][8] .= $sNomPrenom . "<BR>";
           break;
