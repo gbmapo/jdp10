@@ -512,6 +512,12 @@ function amap_cron() {
       ->info('email for next distribution: nothing to do.');
   }
 
+  // ----------------------------------------------------------------------------
+  // Pour désactiver le modal 'bourse_aux_paniers' si aucun panier n'est
+  // disponible à cause de dates de distribution dépassées
+  // ----------------------------------------------------------------------------
+  _publishModalBourseauxpaniers();
+
 }
 
 function _setAmapien() {
