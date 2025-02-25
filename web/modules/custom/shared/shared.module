@@ -151,7 +151,7 @@ function shared_views_plugins_field_alter(array &$plugins)
 function shared_form_alter(&$form, FormStateInterface $form_state, $form_id)
 {
 
-  if ($form_id == 'views_form_association_persons_page_2' || $form_id == 'views_form_association_persons_page_4') {
+  if ($form_id == 'views_form_association_sendemails_page_1' || $form_id == 'views_form_association_persons_page_4') {
     $views_send_to_name = 'nothing_pos_2';
   } elseif (substr($form_id, 0, 47) == 'views_form_amap_contracts_subscriptions_page_1_') {
     $views_send_to_name = 'designation_pos_3';
@@ -161,7 +161,7 @@ function shared_form_alter(&$form, FormStateInterface $form_state, $form_id)
 
   switch ($form_id) {
     case 'views_form_amap_contracts_subscriptions_page_1_':
-    case 'views_form_association_persons_page_2':
+    case 'views_form_association_sendemails_page_1':
     case 'views_form_association_persons_page_4':
 
       switch ($form_state->get('step')) {
@@ -226,7 +226,7 @@ function shared_form_alter(&$form, FormStateInterface $form_state, $form_id)
           ];
           $form['to']['#type'] = 'hidden';
           $form['to']['views_send_to_name']['#default_value'] = $views_send_to_name;
-          $form['to']['views_send_to_mail']['#default_value'] = 'email_pos_4';
+          $form['to']['views_send_to_mail']['#default_value'] = 'email_pos_3';
           $form['mail']['views_send_subject'] = [
             '#type' => 'textfield',
             '#maxlength' => 255,
