@@ -33,7 +33,6 @@
         "drupal/honeypot": "^2.2",
         "drupal/imce": "^3.0",
         "drupal/kint-kint": "^2.0",
-        "drupal/mail_safety": "^2.0",
         "drupal/mailsystem": "^4.2",
         "drupal/mimemail": "^1.0@alpha",
         "drupal/modal_page": "^5.1",

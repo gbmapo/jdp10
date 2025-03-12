@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "908272495938f306e4891ea5ef750e61",
+    "content-hash": "5d0b5480b3b08bd73a2e1d5dd1f47325",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4004,78 +4004,6 @@
             "homepage": "https://www.drupal.org/project/kint",
             "support": {
                 "source": "https://git.drupalcode.org/project/kint"
-            }
-        },
-        {
-            "name": "drupal/mail_safety",
-            "version": "2.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/mail_safety.git",
-                "reference": "2.1.0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/mail_safety-2.1.0.zip",
-                "reference": "2.1.0",
-                "shasum": "e1c801ba9ad09ed003d2bde9dbf053e94e1c78e4"
-            },
-            "require": {
-                "drupal/core": "^9.4 || ^10 || ^11"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "2.1.0",
-                    "datestamp": "1725963100",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "barthje",
-                    "homepage": "https://www.drupal.org/user/1942906"
-                },
-                {
-                    "name": "jefuri",
-                    "homepage": "https://www.drupal.org/user/2733365"
-                },
-                {
-                    "name": "Krilo_89",
-                    "homepage": "https://www.drupal.org/user/3005277"
-                },
-                {
-                    "name": "Nitebreed",
-                    "homepage": "https://www.drupal.org/user/419423"
-                },
-                {
-                    "name": "rogierbom",
-                    "homepage": "https://www.drupal.org/user/1352176"
-                },
-                {
-                    "name": "sjerdo",
-                    "homepage": "https://www.drupal.org/user/3495403"
-                },
-                {
-                    "name": "steven buteneers",
-                    "homepage": "https://www.drupal.org/user/3301055"
-                },
-                {
-                    "name": "thomasdik",
-                    "homepage": "https://www.drupal.org/user/1718070"
-                }
-            ],
-            "description": "A simple and safe way to test and debug outgoing emails without having to worry that all your users will get unwanted emails.",
-            "homepage": "https://www.drupal.org/project/mail_safety",
-            "support": {
-                "source": "https://git.drupalcode.org/project/mail_safety"
             }
         },
         {
