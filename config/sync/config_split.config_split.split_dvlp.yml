@@ -12,11 +12,11 @@ storage: folder
 folder: ../config/split_dvlp
 module:
   devel: 0
-  mail_safety: 0
   potx: 0
   upgrade_status: 0
 theme: {  }
 complete_list:
+  - mailsystem.settings
   - system.logging
   - system.performance
 partial_list: {  }
