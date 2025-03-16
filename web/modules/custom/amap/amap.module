@@ -783,12 +783,12 @@ function template_preprocess_basket(array &$variables) {
 }
 
 function _publishModalBourseauxpaniers() {
-/*
-  ----------------------------------------------------------------------------
-  Mise à jour du texte et activation du modal 'bourse_aux_paniers'
-  selon le nombre de paniers proposés
-  ----------------------------------------------------------------------------
- */
+  /*
+    ----------------------------------------------------------------------------
+    Mise à jour du texte et activation du modal 'bourse_aux_paniers'
+    selon le nombre de paniers proposés
+    ----------------------------------------------------------------------------
+   */
   $modal = \Drupal::entityTypeManager()
     ->getStorage('modal')
     ->load('bourse_aux_paniers');
@@ -826,5 +826,55 @@ function _publishModalBourseauxpaniers() {
   }
   $modal->save();
   Cache::invalidateTags(['modal_page:' . $modal->id()]);
+
+}
+
+function _update_sos_distrib() {
+  /*
+    ----------------------------------------------------------------------------
+    Mise à jour du contenu de la page SOS Distrib
+    ----------------------------------------------------------------------------
+   */
+  $alias = '/sosdistrib';
+  $path = \Drupal::service('path_alias.manager')->getPathByAlias($alias);
+  if (strpos($path, '/node/') === 0) {
+    $nid = str_replace('/node/', '', $path);
+    $node = \Drupal\node\Entity\Node::load($nid);
+    if ($node) {
+      $oNextWednesday = DrupalDateTime::createFromTimestamp(strtotime("next Wednesday", strtotime("Yesterday")), new \DateTimeZone('Europe/Paris'));
+
+      $sNextWednesday = $oNextWednesday->format('Y-m-d');
+      $database = \Drupal::database();
+      $query = $database->select('distribution_date', 'amdd');
+      $query->leftJoin('distribution_inscription', 'amdi', 'amdi.distributiondate_id = amdd.id');
+      $query->leftJoin('person', 'ap', 'ap.id = amdi.amapien_id');
+      $query->fields('amdd', ['id', 'distributiondate', 'numberofproducts'])
+        ->fields('amdi', ['id', 'distributiondate_id', 'amapien_id', 'role'])
+        ->fields('ap', ['id', 'lastname', 'firstname', 'cellphone', 'email'])
+        ->condition('numberofproducts', 0, '>')
+        ->condition('distributiondate', $sNextWednesday, '=')
+        ->condition('role', 'X', '=');
+      $results = $query->execute()->fetchAssoc();
+
+      $sNextWednesday = $oNextWednesday->format('j F');
+      $body = '<div class="text-align-center"><p>Distribution du ' . $sNextWednesday . '</p>';
+
+      if ($results == FALSE) {
+        $body .= '<p>Aucun référent n\'est inscrit !</p>';
+      }
+      else {
+        $body .= '<p>Le référent est&nbsp;<br>';
+        $body .= $results['firstname'] . ' ' . $results['lastname'] . '<br>';
+        $body .= '<a href="mailto:' . $results['email'] . '">' . $results['email'] . '</a><br>';
+        $body .= '<a href="tel:' . $results['cellphone'] . '">' . $results['cellphone'] . '</a></p>';
+      }
+      $body .= '<p>Et n\'oubliez pas !<br>Vous pouvez toujours solliciter un de vos voisins AMAPiens.<br>Ils habitent <a href="https://www.google.com/maps/d/embed?mid=15gqRpt0QExfFmmd2cpuxiQZxLXLFsRUd" target="_blank"> ici </a> .</p></div>';
+      $node->body->value = $body;
+      $node->save();
+    }
+    else {
+      \Drupal::logger('amap')->alert('Node SOS Distrib not found.');
+    }
+  }
 
 }
