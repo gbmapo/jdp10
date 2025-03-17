@@ -33,7 +33,6 @@
         "drupal/honeypot": "^2.2",
         "drupal/imce": "^3.0",
         "drupal/kint-kint": "^2.0",
-        "drupal/mail_safety": "^2.0",
         "drupal/mailsystem": "^4.2",
         "drupal/mimemail": "^1.0@alpha",
         "drupal/modal_page": "^5.1",
@@ -111,5 +110,8 @@
             "web/themes/contrib/{$name}": ["type:drupal-theme"],
             "drush/Commands/contrib/{$name}": ["type:drupal-drush"]
         }
+    },
+    "require-dev": {
+        "palantirnet/drupal-rector": "^0.20.3"
     }
 }
