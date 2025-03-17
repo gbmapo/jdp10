@@ -549,6 +549,7 @@ display:
           entity_field: amapien_id
           plugin_id: standard
           required: false
+      use_ajax: false
       group_by: true
       header:
         area:
@@ -575,167 +576,11 @@ display:
       tags: {  }
   page_1:
     id: page_1
-    display_title: Page
+    display_title: PlanningDM
     display_plugin: page
     position: 1
     display_options:
-      defaults:
-        header: false
-      header:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: text
-          empty: true
-          content:
-            value: '<h5 style="text-align: center;">AMAPiens inscrits aux distributions depuis un an</h5>'
-            format: full_html
-          tokenize: false
-      display_extenders: {  }
-      path: amap---planning-D
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - user.roles
-      tags: {  }
-  page_2:
-    id: page_2
-    display_title: Page
-    display_plugin: page
-    position: 1
-    display_options:
-      filters:
-        distributiondate:
-          id: distributiondate
-          table: distribution_date
-          field: distributiondate
-          relationship: distributiondate_id
-          group_type: group
-          admin_label: ''
-          entity_type: distribution_date
-          entity_field: distributiondate
-          plugin_id: datetime
-          operator: between
-          value:
-            min: '-1 year'
-            max: now
-            value: '-1 year'
-            type: offset
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            min_placeholder: ''
-            max_placeholder: ''
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-        role:
-          id: role
-          table: distribution_inscription
-          field: role
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: distribution_inscription
-          entity_field: role
-          plugin_id: string
-          operator: '='
-          value: X
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
-      defaults:
-        filters: false
-        filter_groups: false
-        header: false
-      header:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: text
-          empty: true
-          content:
-            value: '<h5 style="text-align: center;">Référents inscrits aux distributions depuis un an</h5>'
-            format: full_html
-          tokenize: false
-      display_extenders: {  }
-      path: amap---planning-X
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - user.roles
-      tags: {  }
-  page_3:
-    id: page_3
-    display_title: Page
-    display_plugin: page
-    position: 1
-    display_options:
+      title: ''
       fields:
         created:
           id: created
@@ -1081,6 +926,7 @@ display:
         groups:
           1: AND
       defaults:
+        title: false
         group_by: false
         relationships: false
         fields: false
@@ -1123,6 +969,7 @@ display:
           plugin_id: standard
           required: false
       group_by: true
+      display_description: ''
       header:
         area:
           id: area
@@ -1134,11 +981,140 @@ display:
           plugin_id: text
           empty: true
           content:
-            value: '<h5 style="text-align: center;">AMAPiens inscrits aux distributions depuis un an</h5>'
-            format: full_html
+            value: "<h5 style=\"text-align: center;\">AMAPiens inscrits aux distributions depuis un an</h5>\r\n<div style=\"text-align: center;\"><a class=\"use-ajax button-round\" href=\"/amap---planning-X\" data-dialog-options=\"{&quot;width&quot;:400}\" data-dialog-type=\"modal\" id=\"modal-dialog\">Voir les Référents</a></div>\r\n"
+            format: without_restriction_html
           tokenize: false
       display_extenders: {  }
       path: amap---planning-D-M
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - user.roles
+      tags: {  }
+  page_2:
+    id: page_2
+    display_title: PlanningX
+    display_plugin: page
+    position: 1
+    display_options:
+      title: ''
+      filters:
+        distributiondate:
+          id: distributiondate
+          table: distribution_date
+          field: distributiondate
+          relationship: distributiondate_id
+          group_type: group
+          admin_label: ''
+          entity_type: distribution_date
+          entity_field: distributiondate
+          plugin_id: datetime
+          operator: between
+          value:
+            min: '-1 year'
+            max: now
+            value: '-1 year'
+            type: offset
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        role:
+          id: role
+          table: distribution_inscription
+          field: role
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: distribution_inscription
+          entity_field: role
+          plugin_id: string
+          operator: '='
+          value: X
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        title: false
+        filters: false
+        filter_groups: false
+        header: false
+      display_description: ''
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: "<h5 style=\"text-align: center;\">Référents inscrits aux distributions depuis un an</h5>\r\n<div style=\"text-align: center;\"><a class=\"use-ajax button-round\" href=\"/amap---planning-D-M\" data-dialog-options=\"{&quot;width&quot;:400}\" data-dialog-type=\"modal\" id=\"modal-dialog\">Voir les AMAPiens</a></div>\r\n"
+            format: full_html
+          tokenize: false
+      display_extenders: {  }
+      path: amap---planning-X
     cache_metadata:
       max-age: -1
       contexts:
