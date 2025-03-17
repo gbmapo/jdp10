@@ -97,7 +97,7 @@ entity.distribution_date.delete_form:
   title: Delete
   weight: 10
 
-#amap.???: created by Views
+#view.amap_distributions.page_1: created by Views
 #  title: 'Calendrier des distributions'
 #  route_name: view.amap_distributions.page_1
 #  base_route: view.amap_distributions.page_1
@@ -111,6 +111,16 @@ amap.distribution_inscription_many_form:
   route_name: amap.distribution_inscription_many_form
   base_route: view.amap_distributions.page_1
   weight: 20
+amap.statistics_of_planning:
+  title: 'Statistics of Planning'
+  route_name: view.amap_planning.page_1
+  base_route: view.amap_distributions.page_1
+  options:
+    attributes:
+      class: ['use-ajax']
+      data-dialog-type: 'modal'
+      data-dialog-options: '{"width":400, "height":600}'
+  weight: 30
 
 # ---------------------------------------------------------
 # Distribution inscription routing definition
