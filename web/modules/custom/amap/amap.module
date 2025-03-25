@@ -834,12 +834,12 @@ function _update_sos_distrib() {
     Mise à jour du contenu de la page SOS Distrib
     ----------------------------------------------------------------------------
    */
-  $alias = '/sosdistrib';
-  $path = \Drupal::service('path_alias.manager')->getPathByAlias($alias);
+  $path = \Drupal::service('path_alias.manager')->getPathByAlias('/sos', 'fr');
   if (strpos($path, '/node/') === 0) {
     $nid = str_replace('/node/', '', $path);
     $node = \Drupal\node\Entity\Node::load($nid);
     if ($node) {
+
       $oNextWednesday = DrupalDateTime::createFromTimestamp(strtotime("next Wednesday", strtotime("Yesterday")), new \DateTimeZone('Europe/Paris'));
 
       $sNextWednesday = $oNextWednesday->format('Y-m-d');
@@ -855,7 +855,7 @@ function _update_sos_distrib() {
         ->condition('role', 'X', '=');
       $results = $query->execute()->fetchAssoc();
 
-      $sNextWednesday = $oNextWednesday->format('j F');
+      $sNextWednesday = $oNextWednesday->format('j F', ['langcode' => 'fr']);
       $body = '<div class="text-align-center"><p>Distribution du ' . $sNextWednesday . '</p>';
 
       if ($results == FALSE) {
