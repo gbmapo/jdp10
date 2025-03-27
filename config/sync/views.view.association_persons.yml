@@ -4,14 +4,8 @@ status: true
 dependencies:
   config:
     - user.role.administrator
-    - user.role.amapien
     - user.role.authenticated
-    - user.role.contact_for_member
-    - user.role.extended_ca
-    - user.role.referent_of_contract
-    - user.role.referent_of_distribution
     - user.role.secretary
-    - user.role.seliste
   module:
     - association
     - csv_serialization
@@ -21,7 +15,6 @@ dependencies:
     - telephone
     - user
     - views_data_export
-    - views_send
 _core:
   default_config_hash: Qy2EvoTity2apqVaVnW8lQjcA5u9Anez5DBBRqjOwl0
 id: association_persons
@@ -2756,6 +2749,108 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: false
+        roles_target_id:
+          id: roles_target_id
+          table: user__roles
+          field: roles_target_id
+          relationship: user_id
+          group_type: group
+          admin_label: ''
+          entity_type: user
+          entity_field: roles
+          plugin_id: user_roles
+          label: Roles
+          exclude: true
+          alter:
+            alter_text: true
+            text: '{{ roles_target_id__rid }}'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          type: ul
+          separator: ', '
+        nothing_2:
+          id: nothing_2
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: custom
+          label: AMAPien
+          exclude: false
+          alter:
+            alter_text: true
+            text: "{% set result = roles_target_id ~ 'aa' %}\r\n{% if 'amapien' in result %}\r\n{{'Oui'}}\r\n{% else %}\r\n{{'Non'}}\r\n{% endif %}\r\n"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
       pager:
         type: none
         options:
@@ -2908,6 +3003,17 @@ display:
           admin_label: Adhérent
           entity_type: person
           entity_field: member_id
+          plugin_id: standard
+          required: false
+        user_id:
+          id: user_id
+          table: person
+          field: user_id
+          relationship: none
+          group_type: group
+          admin_label: User
+          entity_type: person
+          entity_field: user_id
           plugin_id: standard
           required: false
       display_description: ''

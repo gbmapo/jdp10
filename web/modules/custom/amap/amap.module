@@ -840,7 +840,13 @@ function _update_sos_distrib() {
     $node = \Drupal\node\Entity\Node::load($nid);
     if ($node) {
 
-      $oNextWednesday = DrupalDateTime::createFromTimestamp(strtotime("next Wednesday", strtotime("Yesterday")), new \DateTimeZone('Europe/Paris'));
+      $oNow = DrupalDateTime::createFromTimestamp(strtotime("now"), new \DateTimeZone('Europe/Paris'));
+      if ($oNow->format('w') == 3) { // Today is Wednesday
+        $oNextWednesday = $oNow->modify('+7 days');
+      }
+      else {
+        $oNextWednesday = $oNow->modify('next Wednesday');
+      }
 
       $sNextWednesday = $oNextWednesday->format('Y-m-d');
       $database = \Drupal::database();
@@ -870,6 +876,8 @@ function _update_sos_distrib() {
       $body .= '<p>Et n\'oubliez pas !<br>Vous pouvez toujours solliciter un de vos voisins AMAPiens.<br>Ils habitent <a href="https://www.google.com/maps/d/embed?mid=15gqRpt0QExfFmmd2cpuxiQZxLXLFsRUd" target="_blank"> ici </a> .</p></div>';
       $node->body->value = $body;
       $node->save();
+
+      \Drupal::logger('amap')->info('Node SOS Distrib updated.');
     }
     else {
       \Drupal::logger('amap')->alert('Node SOS Distrib not found.');
