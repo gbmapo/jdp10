@@ -956,7 +956,7 @@ display:
           entity_type: distribution_inscription
           entity_field: amapien_id
           plugin_id: standard
-          required: false
+          required: true
         member_id:
           id: member_id
           table: person
@@ -1095,9 +1095,33 @@ display:
           1: AND
       defaults:
         title: false
+        relationships: false
         filters: false
         filter_groups: false
         header: false
+      relationships:
+        distributiondate_id:
+          id: distributiondate_id
+          table: distribution_inscription
+          field: distributiondate_id
+          relationship: none
+          group_type: group
+          admin_label: 'Date de distribution'
+          entity_type: distribution_inscription
+          entity_field: distributiondate_id
+          plugin_id: standard
+          required: false
+        amapien_id:
+          id: amapien_id
+          table: distribution_inscription
+          field: amapien_id
+          relationship: none
+          group_type: group
+          admin_label: Personne
+          entity_type: distribution_inscription
+          entity_field: amapien_id
+          plugin_id: standard
+          required: true
       display_description: ''
       header:
         area:
