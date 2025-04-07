@@ -19,7 +19,7 @@
 /web/.eslintignore
 /web/.eslintrc.json
 /web/.gitattributes
-/web/.htaccess
+### /web/.htaccess
 /web/.ht.router.php
 /web/autoload.php
 /web/composer.json
