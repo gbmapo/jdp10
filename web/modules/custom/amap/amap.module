@@ -164,6 +164,7 @@ function amap_file_download($uri) {
 
 
 function amap_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
+
   switch ($view->id()) {
     case 'amap_contracts_subscriptions':
       switch ($display_id) {
@@ -224,6 +225,7 @@ function amap_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
       break;
     default:
   }
+
 }
 
 function amap_views_pre_render(ViewExecutable $view) {
@@ -248,39 +250,36 @@ function amap_views_pre_render(ViewExecutable $view) {
       break;
     default:
   }
+
 }
 
 function amap_views_post_execute(ViewExecutable $view) {
   switch ($view->id()) {
-
     case 'amap_planning':
       switch ($view->current_display) {
         case 'page_1':
         case 'page_2':
-          $database = \Drupal::database();
           $rank = 0;
           $numberofinscriptions = 0;
-          foreach ($view->result as $value) {
-            if ($value->distribution_inscription_id == $numberofinscriptions) {
-              $value->distribution_inscription_created = 0;
+          foreach ($view->result as &$row) {
+            if ($row->distribution_inscription_id == $numberofinscriptions) {
+              $row->distribution_inscription_created = 0;
             }
             else {
               $rank++;
-              $numberofinscriptions = $value->distribution_inscription_id;
-              $value->distribution_inscription_created = $rank;
+              $numberofinscriptions = $row->distribution_inscription_id;
+              $row->distribution_inscription_created = $rank;
             }
           }
           break;
-
         default:
           break;
       }
       break;
-
     default:
       break;
-
   }
+
 }
 
 function _detail_contract_type($sContractType) {
