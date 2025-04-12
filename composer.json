@@ -90,7 +90,10 @@
         ],
         "post-update-cmd": [
             "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
-        ]
+        ],
+        "post-drupal-scaffold-cmd": [
+            "cd web && git apply -v ../patches/my-htaccess-tweaks.patch"
+    ]
     },
     "extra": {
         "composer-exit-on-patch-failure": true,
