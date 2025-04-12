@@ -16,3 +16,27 @@
 #9 /home/wghm7504/jdp9/web/core/lib/Drupal/Core/DrupalKernel.php(708): Stack\StackedHttpKernel->handle(Object(Symfony\Component\HttpFoundation\Request), 1, true)
 #10 /home/wghm7504/jdp9/web/index.php(19): Drupal\Core\DrupalKernel->handle(Object(Symfony\Component\HttpFoundation\Request))
 #11 {main}
+[12-Apr-2025 10:33:15 Europe/Paris] Drupal\Core\Database\DatabaseExceptionWrapper: SQLSTATE[HY000]: General error: 2006 MySQL server has gone away: SELECT 1 FROM information_schema.tables WHERE ("table_schema" = :db_condition_placeholder_4) AND ("table_name" = :db_condition_placeholder_5); Array
+(
+    [:db_condition_placeholder_4] => wghm7504_jdp10
+    [:db_condition_placeholder_5] => d10_config
+)
+ in /home/wghm7504/jdp10/web/core/lib/Drupal/Core/Config/DatabaseStorage.php on line 121 #0 /home/wghm7504/jdp10/web/core/lib/Drupal/Core/Database/Connection.php(883): Drupal\mysql\Driver\Database\mysql\ExceptionHandler->handleExecutionException()
+#1 /home/wghm7504/jdp10/web/core/lib/Drupal/Core/Database/Schema.php(178): Drupal\Core\Database\Connection->query()
+#2 /home/wghm7504/jdp10/web/core/lib/Drupal/Core/Config/DatabaseStorage.php(121): Drupal\Core\Database\Schema->tableExists()
+#3 /home/wghm7504/jdp10/web/core/lib/Drupal/Core/Config/CachedStorage.php(95): Drupal\Core\Config\DatabaseStorage->readMultiple()
+#4 /home/wghm7504/jdp10/web/core/lib/Drupal/Core/Config/ConfigFactory.php(165): Drupal\Core\Config\CachedStorage->readMultiple()
+#5 /home/wghm7504/jdp10/web/core/lib/Drupal/Core/Config/ConfigFactory.php(104): Drupal\Core\Config\ConfigFactory->doLoadMultiple()
+#6 /home/wghm7504/jdp10/web/core/lib/Drupal/Core/Config/ConfigFactory.php(89): Drupal\Core\Config\ConfigFactory->doGet()
+#7 /home/wghm7504/jdp10/web/core/modules/automated_cron/src/EventSubscriber/AutomatedCron.php(50): Drupal\Core\Config\ConfigFactory->get()
+#8 [internal function]: Drupal\automated_cron\EventSubscriber\AutomatedCron->__construct()
+#9 /home/wghm7504/jdp10/vendor/symfony/dependency-injection/ContainerBuilder.php(1140): ReflectionClass->newInstanceArgs()
+#10 /home/wghm7504/jdp10/vendor/symfony/dependency-injection/ContainerBuilder.php(586): Symfony\Component\DependencyInjection\ContainerBuilder->createService()
+#11 /home/wghm7504/jdp10/vendor/symfony/dependency-injection/ContainerBuilder.php(531): Symfony\Component\DependencyInjection\ContainerBuilder->doGet()
+#12 /home/wghm7504/jdp10/web/core/lib/Drupal/Component/EventDispatcher/ContainerAwareEventDispatcher.php(105): Symfony\Component\DependencyInjection\ContainerBuilder->get()
+#13 /home/wghm7504/jdp10/vendor/symfony/http-kernel/HttpKernel.php(115): Drupal\Component\EventDispatcher\ContainerAwareEventDispatcher->dispatch()
+#14 /home/wghm7504/jdp10/web/core/lib/Drupal/Core/StackMiddleware/StackedHttpKernel.php(66): Symfony\Component\HttpKernel\HttpKernel->terminate()
+#15 /home/wghm7504/jdp10/web/core/lib/Drupal/Core/DrupalKernel.php(715): Drupal\Core\StackMiddleware\StackedHttpKernel->terminate()
+#16 /home/wghm7504/jdp10/vendor/drush/drush/src/Boot/DrupalBoot8.php(326): Drupal\Core\DrupalKernel->terminate()
+#17 [internal function]: Drush\Boot\DrupalBoot8->terminate()
+#18 {main}
