@@ -261,7 +261,7 @@ function amap_views_post_execute(ViewExecutable $view) {
         case 'page_2':
           $rank = 0;
           $numberofinscriptions = 0;
-          foreach ($view->result as &$row) {
+          foreach ($view->result as $row) {
             if ($row->distribution_inscription_id == $numberofinscriptions) {
               $row->distribution_inscription_created = 0;
             }
