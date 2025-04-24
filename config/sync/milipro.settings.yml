@@ -55,8 +55,8 @@ cookie_message: 1
 cookie_message_custom: 'Ce site utilise des cookies. En poursuivant votre navigation sur le site, vous acceptez notre utilisation de ces cookies.'
 styling: 1
 styling_code: "img, picture, svg { display: inline-block;}\r\ntr:nth-child(even) {background-color: #f4fce6;}\r\n#myLogo {background: url(/sites/default/files/images/logo.jpg) no-repeat left; height: 107px;}\r\n.form-item {margin-bottom: 0;}\r\n.field-item:first-child { clear: left; }\r\n.image-field { float: left; margin: 0 10px 5px 0; }\r\n@media (max-width: 767px) {\r\n  .home-slider-classic .slider-container {\r\n    flex-direction: column;\r\n    height: 100vh;\r\n  }\r\n  .home-slider-classic .slider-text,\r\n  .home-slider-classic .slider-section {\r\n    height: 50vh;\r\n  }\r\n}"
-insert_head: 0
-head_code: ''
+insert_head: 1
+head_code: "<script src=\"https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js\" defer></script>\r\n<script>\r\n  window.OneSignalDeferred = window.OneSignalDeferred || [];\r\n  OneSignalDeferred.push(async function(OneSignal) {\r\n    await OneSignal.init({\r\n      appId: \"de1410e9-fe66-44fd-bded-b4bb825d357c\",\r\n    });\r\n  });\r\n</script>"
 insert_body_start: 1
 body_start_code: "<script>\r\nwindow.addEventListener(\"load\", function ()\r\n{try {\r\ndocument.querySelector('.header-main-container').insertAdjacentHTML('beforebegin', '<div id=\"myLogo\"></div>');\r\n} catch (error) {\r\n}});\r\n</script>"
 insert_body_end: 0
