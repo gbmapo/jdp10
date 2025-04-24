@@ -164,6 +164,7 @@ function amap_file_download($uri) {
 
 
 function amap_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
+
   switch ($view->id()) {
     case 'amap_contracts_subscriptions':
       switch ($display_id) {
@@ -224,6 +225,7 @@ function amap_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
       break;
     default:
   }
+
 }
 
 function amap_views_pre_render(ViewExecutable $view) {
@@ -248,39 +250,36 @@ function amap_views_pre_render(ViewExecutable $view) {
       break;
     default:
   }
+
 }
 
 function amap_views_post_execute(ViewExecutable $view) {
   switch ($view->id()) {
-
     case 'amap_planning':
       switch ($view->current_display) {
         case 'page_1':
         case 'page_2':
-          $database = \Drupal::database();
           $rank = 0;
           $numberofinscriptions = 0;
-          foreach ($view->result as $value) {
-            if ($value->distribution_inscription_id == $numberofinscriptions) {
-              $value->distribution_inscription_created = 0;
+          foreach ($view->result as $row) {
+            if ($row->distribution_inscription_id == $numberofinscriptions) {
+              $row->distribution_inscription_created = 0;
             }
             else {
               $rank++;
-              $numberofinscriptions = $value->distribution_inscription_id;
-              $value->distribution_inscription_created = $rank;
+              $numberofinscriptions = $row->distribution_inscription_id;
+              $row->distribution_inscription_created = $rank;
             }
           }
           break;
-
         default:
           break;
       }
       break;
-
     default:
       break;
-
   }
+
 }
 
 function _detail_contract_type($sContractType) {
@@ -583,27 +582,43 @@ function _sendEmailForStupids() {
   $results = $query->execute();
   foreach ($results as $key => $result) {
     $sCellphone = $result->cellphone;
-    $sTemp = $result->firstname . " " . $result->lastname . " (" . $sCellphone;
+    $sTemp = $result->firstname . " " . $result->lastname . " - " . $sCellphone;
     switch ($result->role) {
       case "D":
-        $aD[] = $sTemp . ")";
+        $aD[] = $sTemp;
         break;
       case "R":
-        $aR[] = $sTemp . ")";
+        $aR[] = $sTemp;
         break;
       case "X":
-        $aX[] = $sTemp . ")";
+        $aX[] = $sTemp;
         break;
       default:
     }
-    $sTo .= $result->email . ", ";
+    if (strpos($sTo, $result->email) === FALSE) {
+      $sTo .= $result->email . ", ";
+    }
   }
-  $sD = implode(", ", $aD);
-  $sR = implode(", ", $aR);
+  $sTo = substr($sTo, 0, strlen($sTo) - 2);
+  $aD2 = array_count_values($aD);
+  $sD = "";
+  foreach ($aD2 as $key => $value) {
+    switch ($value) {
+      case 1:
+        $sD .= $key;
+        break;
+      default:
+        $sD .= $key . " (" . $value . " personnes)";
+        break;
+    }
+    $sD .= ", ";
+  }
+  $sD = substr($sD, 0, strlen($sD) - 2);
   $sX = implode(", ", $aX);
   setlocale(LC_TIME, "fr_FR.UTF-8");
   $sNextWednesday = DrupalDateTime::createFromTimestamp(strtotime("next Wednesday", strtotime("Yesterday")), new \DateTimeZone('Europe/Paris'))
     ->format('l j F Y');
+
   $aParams = [$sNextWednesday, $sD, $sR, $sX];
 
   $message = [
@@ -834,13 +849,20 @@ function _update_sos_distrib() {
     Mise à jour du contenu de la page SOS Distrib
     ----------------------------------------------------------------------------
    */
-  $alias = '/sosdistrib';
-  $path = \Drupal::service('path_alias.manager')->getPathByAlias($alias);
+  $path = \Drupal::service('path_alias.manager')
+    ->getPathByAlias('/sos', 'fr');
   if (strpos($path, '/node/') === 0) {
     $nid = str_replace('/node/', '', $path);
     $node = \Drupal\node\Entity\Node::load($nid);
     if ($node) {
-      $oNextWednesday = DrupalDateTime::createFromTimestamp(strtotime("next Wednesday", strtotime("Yesterday")), new \DateTimeZone('Europe/Paris'));
+
+      $oNow = DrupalDateTime::createFromTimestamp(strtotime("now"), new \DateTimeZone('Europe/Paris'));
+      if ($oNow->format('w') == 3) { // Today is Wednesday
+        $oNextWednesday = $oNow->modify('+7 days');
+      }
+      else {
+        $oNextWednesday = $oNow->modify('next Wednesday');
+      }
 
       $sNextWednesday = $oNextWednesday->format('Y-m-d');
       $database = \Drupal::database();
@@ -855,7 +877,7 @@ function _update_sos_distrib() {
         ->condition('role', 'X', '=');
       $results = $query->execute()->fetchAssoc();
 
-      $sNextWednesday = $oNextWednesday->format('j F');
+      $sNextWednesday = $oNextWednesday->format('j F', ['langcode' => 'fr']);
       $body = '<div class="text-align-center"><p>Distribution du ' . $sNextWednesday . '</p>';
 
       if ($results == FALSE) {
@@ -870,6 +892,8 @@ function _update_sos_distrib() {
       $body .= '<p>Et n\'oubliez pas !<br>Vous pouvez toujours solliciter un de vos voisins AMAPiens.<br>Ils habitent <a href="https://www.google.com/maps/d/embed?mid=15gqRpt0QExfFmmd2cpuxiQZxLXLFsRUd" target="_blank"> ici </a> .</p></div>';
       $node->body->value = $body;
       $node->save();
+
+      \Drupal::logger('amap')->info('Node SOS Distrib updated.');
     }
     else {
       \Drupal::logger('amap')->alert('Node SOS Distrib not found.');

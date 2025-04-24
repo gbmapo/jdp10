@@ -8,6 +8,7 @@ dependencies:
     - comment
     - contact
     - file
+    - poll
     - search
     - sel
     - shortcut
@@ -21,13 +22,16 @@ is_admin: false
 permissions:
   - 'access comments'
   - 'access content'
+  - 'access polls'
   - 'access shortcuts'
   - 'access site-wide contact form'
   - 'access user contact forms'
   - 'add distribution inscription entities'
+  - 'cancel own vote'
   - 'delete distribution inscription entities'
   - 'delete own files'
   - 'edit distribution inscription entities'
+  - 'edit own polls'
   - 'post comments'
   - 'search content'
   - 'skip comment approval'
