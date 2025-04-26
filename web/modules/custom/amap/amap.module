@@ -239,10 +239,10 @@ function amap_views_pre_render(ViewExecutable $view) {
         default:
       }
     case 'amap_contracts':
-      $view->element['#attached']['library'][] = 'amap/list-of-contracts';
       switch ($view->current_display) {
         case 'page_1':
         case 'page_2':
+          $view->element['#attached']['library'][] = 'amap/list-of-contracts';
           $view->element['#attached']['library'][] = 'core/drupal.dialog.ajax';
           break;
         default:
