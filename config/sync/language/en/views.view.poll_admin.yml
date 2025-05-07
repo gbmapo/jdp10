@@ -8,18 +8,21 @@ display:
         question:
           label: Question
           separator: ', '
+        votes:
+          label: 'Total votes'
         status:
-          label: Published
+          label: Status
+          settings:
+            format_custom_false: Unpublished
+            format_custom_true: Published
           separator: ', '
         status_with_runtime:
-          label: Active
+          label: 'Voting active'
         anonymous_vote_allow:
           label: 'Allow anonymous votes'
           separator: ', '
         created:
           label: Created
-        votes:
-          label: 'Total votes'
         operations:
           label: 'Operations links'
       pager:
@@ -35,7 +38,7 @@ display:
             offset_label: Offset
       exposed_form:
         options:
-          submit_button: Apply
+          submit_button: Filter
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
           sort_asc_label: Asc
@@ -51,21 +54,21 @@ display:
           expose:
             label: 'True'
           group_info:
-            label: Published
+            label: Status
             group_items:
               1:
-                title: 'Yes'
+                title: Published
               2:
-                title: 'No'
+                title: Unpublished
         active:
           expose:
             label: Active
           group_info:
-            label: Active
+            label: 'Voting active'
             group_items:
               1:
-                title: 'Yes'
+                title: Active
               2:
-                title: 'No'
+                title: Inactive
   poll_admin:
     display_title: Page
