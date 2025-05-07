@@ -143,8 +143,8 @@ display:
           type: boolean
           settings:
             format: yes-no
-            format_custom_false: ''
-            format_custom_true: ''
+            format_custom_false: Non
+            format_custom_true: Oui
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -585,7 +585,7 @@ display:
           exposed: true
           expose:
             operator_id: ''
-            label: Actif
+            label: Oui
             description: null
             use_operator: false
             operator: active_op

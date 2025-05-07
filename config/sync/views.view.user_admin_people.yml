@@ -134,7 +134,7 @@ display:
           entity_type: user
           entity_field: status
           plugin_id: field
-          label: État
+          label: Publié
           exclude: false
           alter:
             alter_text: false
@@ -179,7 +179,7 @@ display:
           settings:
             format: custom
             format_custom_false: Bloqué
-            format_custom_true: Actif
+            format_custom_true: Oui
         roles_target_id:
           id: roles_target_id
           table: user__roles
@@ -483,7 +483,7 @@ display:
       exposed_form:
         type: basic
         options:
-          submit_button: Filtrer
+          submit_button: Appliquer
           reset_button: true
           reset_button_label: Réinitialiser
           exposed_sorts_label: 'Trier par'
@@ -601,7 +601,7 @@ display:
               administrator: '0'
           is_grouped: true
           group_info:
-            label: État
+            label: Publié
             description: ''
             identifier: status
             optional: true
@@ -612,7 +612,7 @@ display:
             default_group_multiple: {  }
             group_items:
               1:
-                title: Actif
+                title: Oui
                 operator: '='
                 value: '1'
               2:

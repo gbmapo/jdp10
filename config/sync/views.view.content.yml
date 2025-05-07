@@ -150,7 +150,7 @@ display:
           entity_type: node
           entity_field: status
           plugin_id: field
-          label: État
+          label: Publié
           exclude: false
           alter:
             alter_text: false
@@ -163,8 +163,8 @@ display:
           type: boolean
           settings:
             format: custom
-            format_custom_false: 'Non publié'
-            format_custom_true: Publié
+            format_custom_false: Non
+            format_custom_true: Oui
         changed:
           id: changed
           table: node_field_data
@@ -259,7 +259,7 @@ display:
       exposed_form:
         type: basic
         options:
-          submit_button: Filtrer
+          submit_button: Appliquer
           reset_button: true
           reset_button_label: Réinitialiser
           exposed_sorts_label: 'Trier par'
@@ -384,7 +384,7 @@ display:
           exposed: true
           expose:
             operator_id: ''
-            label: État
+            label: Publié
             description: ''
             use_operator: false
             operator: status_op
@@ -409,11 +409,11 @@ display:
             default_group_multiple: {  }
             group_items:
               1:
-                title: Publié
+                title: Oui
                 operator: '='
                 value: '1'
               2:
-                title: 'Non publié'
+                title: Non
                 operator: '='
                 value: '0'
         langcode:
