@@ -47,6 +47,7 @@ class ContractSubscriptionTableForm extends FormBase {
       '#responsive' => TRUE,
       '#id' => 'subscriptions',
       '#quantities' => $iNumberOfQuantities,
+      '#attributes' => ['style' => 'margin-left: calc(-100vw / 2 + 1170px / 2);',],
     ];
 
     $form['subscriptions']['#header'] = ['member' => t('Member'),];
