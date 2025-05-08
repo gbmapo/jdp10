@@ -619,7 +619,7 @@ function _sendEmailForStupids() {
   $sNextWednesday = DrupalDateTime::createFromTimestamp(strtotime("next Wednesday", strtotime("Yesterday")), new \DateTimeZone('Europe/Paris'))
     ->format('l j F Y');
 
-  $aParams = [$sNextWednesday, $sD, $sR, $sX];
+  $aParams = [$sNextWednesday, $sD, $sX];
 
   $message = [
     'module' => 'amap',
@@ -742,7 +742,7 @@ function amap_mail($key, &$message, $params) {
       $message['subject'] = '[L\'AMAP du Jardin de Poissy] Distribution du ' . $params[0] . ' - Rappel pour les étourdis';
       $sBody = "<b>" . $params[0] . "</b>.";
       $sBody .= "<br><br>Sont charg&eacute;s de la <i>Distribution</i> : " . $params[1];
-      $sBody .= "<br><i>est R&eacute;f&eacute;rent</i> : " . $params[3];
+      $sBody .= "<br><i>est R&eacute;f&eacute;rent</i> : " . $params[2];
       $sBody .= "<br><br>En cas d'indisponibilit&eacute; de derni&eacute;re minute, vous devez pr&eacute;venir le « R&eacute;f&eacute;rent ».";
       if (date("W") % 2 == 1) {
         $sBody .= "<br><br><span style=\"color:red;\">N'oubliez pas de sortir la grande poubelle &agrave; couvercle jaune en fin de distribution.</span>";
