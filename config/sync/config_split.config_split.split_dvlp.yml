@@ -16,6 +16,7 @@ module:
   upgrade_status: 0
 theme: {  }
 complete_list:
+  - mailsystem.settings
   - system.logging
   - system.performance
 partial_list: {  }
