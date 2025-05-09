@@ -48,8 +48,17 @@ amap.contract_subcription_one_form:
     _permission: 'add contract subscription entities'
 
 # -------------------------------------------------------------------
-amap.export_subscriptions:
+amap.export_subscriptions_csv:
   path: '/amap/contract/export/{contract}'
+  defaults:
+    _controller: '\Drupal\amap\Controller\ContractsController::export_subscriptions'
+    _title: 'Export Subscriptions'
+  requirements:
+    _permission: 'add contract subscription entities'
+
+# -------------------------------------------------------------------
+amap.export_subscriptions_xls:
+  path: '/amap/contract/export/{contract}/{type}'
   defaults:
     _controller: '\Drupal\amap\Controller\ContractsController::export_subscriptions'
     _title: 'Export Subscriptions'
