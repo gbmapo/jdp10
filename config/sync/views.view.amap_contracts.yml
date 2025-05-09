@@ -1152,6 +1152,55 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: false
+        nothing_8:
+          id: nothing_8
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: custom
+          label: 'Export as Excel'
+          exclude: false
+          alter:
+            alter_text: true
+            text: '<img src="/sites/default/files/images/table.svg" title="Exporter les souscriptions en Excel">'
+            make_link: true
+            path: '/amap/contract/export/{{ id }}/xls'
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
         nothing_6:
           id: nothing_6
           table: views
@@ -1266,10 +1315,10 @@ display:
             name: name
             startdate: startdate
             enddate: enddate
+            isopenforsubscription: isopenforsubscription
             referent_id: referent_id
             referent_id_1: referent_id_1
             isvisible: isvisible
-            isopenforsubscription: isopenforsubscription
             nothing: nothing
             nothing_1: nothing
             nothing_2: nothing
@@ -1277,6 +1326,7 @@ display:
             nothing_3: nothing
             nothing_4: nothing
             nothing_5: nothing
+            nothing_8: nothing
             nothing_6: nothing
           default: '-1'
           info:
@@ -1322,6 +1372,13 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
+            isopenforsubscription:
+              sortable: false
+              default_sort_order: asc
+              align: views-align-center
+              separator: ''
+              empty_column: false
+              responsive: ''
             referent_id:
               sortable: false
               default_sort_order: asc
@@ -1337,13 +1394,6 @@ display:
               empty_column: false
               responsive: ''
             isvisible:
-              sortable: false
-              default_sort_order: asc
-              align: views-align-center
-              separator: ''
-              empty_column: false
-              responsive: ''
-            isopenforsubscription:
               sortable: false
               default_sort_order: asc
               align: views-align-center
@@ -1381,6 +1431,11 @@ display:
               empty_column: false
               responsive: ''
             nothing_5:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            nothing_8:
               align: ''
               separator: ''
               empty_column: false

@@ -36,7 +36,6 @@ function amap_help($route_name, RouteMatchInterface $route_match) {
       $output .= '<h3>' . t('About') . '</h3>';
       $output .= '<p>' . t('To manage the AMAP of the Jardin de Poissy.') . '</p>';
       return $output;
-
     default:
   }
 }
@@ -114,7 +113,6 @@ function amap_entity_update(EntityInterface $entity) {
     case "basket":
       _publishModalBourseauxpaniers();
       break;
-
     default:
   }
 }
@@ -143,14 +141,12 @@ function amap_entity_delete(EntityInterface $entity) {
     case "basket":
       _publishModalBourseauxpaniers();
       break;
-
     default:
   }
 }
 
 /*
 function amap_file_download($uri) {
-
   $pathinfo = pathinfo($uri);
   if ($pathinfo['extension'] != 'pdf') {
     $sFileName = \Drupal::service('file_system')->basename($uri);
@@ -158,7 +154,6 @@ function amap_file_download($uri) {
       'Content-disposition' => 'attachment; filename="' . $sFileName . '"',
     ];
   }
-
 }
  */
 
@@ -166,9 +161,11 @@ function amap_file_download($uri) {
 function amap_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
 
   switch ($view->id()) {
+
     case 'amap_contracts_subscriptions':
       switch ($display_id) {
         case 'rest_export_1':
+        case 'rest_export_2':
           $sContract = $view->args['0'];
           $oContract = \Drupal::entityTypeManager()
             ->getStorage('contract')
@@ -200,6 +197,7 @@ function amap_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
         default:
       }
       break;
+
     case 'amap_distributions':
       switch ($display_id) {
         case 'page_1':
@@ -223,6 +221,7 @@ function amap_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
         default:
       }
       break;
+
     default:
   }
 
@@ -231,6 +230,7 @@ function amap_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
 function amap_views_pre_render(ViewExecutable $view) {
 
   switch ($view->id()) {
+
     case 'amap_distributions':
       switch ($view->current_display) {
         case 'page_1':
@@ -238,6 +238,7 @@ function amap_views_pre_render(ViewExecutable $view) {
           break;
         default:
       }
+
     case 'amap_contracts':
       switch ($view->current_display) {
         case 'page_1':
@@ -248,13 +249,16 @@ function amap_views_pre_render(ViewExecutable $view) {
         default:
       }
       break;
+
     default:
   }
 
 }
 
 function amap_views_post_execute(ViewExecutable $view) {
+
   switch ($view->id()) {
+
     case 'amap_planning':
       switch ($view->current_display) {
         case 'page_1':
@@ -276,6 +280,7 @@ function amap_views_post_execute(ViewExecutable $view) {
           break;
       }
       break;
+
     default:
       break;
   }
@@ -315,6 +320,7 @@ function _detail_contract_type($sContractType) {
 }
 
 function _export_amap_CSV($view, $page, $contract) {
+
   $view = \Drupal\views\Views::getView($view);
   $view->setDisplay($page);
   $path = $view->getPath();
@@ -325,11 +331,14 @@ function _export_amap_CSV($view, $page, $contract) {
   $data = $view->preview($page)['#markup'];
   \Drupal::service('file_system')
     ->saveData($data, 'private://contracts/' . $sFileName, FileSystemInterface::EXISTS_REPLACE);
+
 }
 
 function _handleContractFiles(EntityInterface $entity, $mode) {
+
   _deleteUnusedFiles();
   switch ($mode) {
+
     case 'insert':
     case 'update':
       $sTemp = 'Contract-' . $entity->id() . '-' . str_replace("-", "", $entity->startdate->value);
@@ -360,13 +369,17 @@ function _handleContractFiles(EntityInterface $entity, $mode) {
         rename($uri2, $uri2new);
       }
       break;
+
     case 'delete':
       break;
+
     default:
   }
+
 }
 
 function _deleteUnusedFiles() {
+
   $query = \Drupal::database()->select('file_managed', 'fm')
     ->fields('fm', ['fid'])
     ->condition('fm.status', 0);
@@ -378,10 +391,13 @@ function _deleteUnusedFiles() {
       $file->delete();
     }
   }
+
 }
 
 function _handleContractSubscriptionFiles(EntityInterface $entity, $mode) {
+
   switch ($mode) {
+
     case 'insert':
     case 'update':
       $fileId = $entity->get('file')->target_id;
@@ -401,14 +417,17 @@ function _handleContractSubscriptionFiles(EntityInterface $entity, $mode) {
         $file->save();
       }
       break;
+
     case 'delete':
       break;
+
     default:
   }
 
 }
 
 function _setReferentOfContract() {
+
   $prefix = '2. AMAP';
   $fieldStorage = \Drupal\field\Entity\FieldStorageConfig::loadByName('contact_message', 'field_recipient');
   $allowedValues = $fieldStorage->getSetting('allowed_values');
@@ -465,10 +484,12 @@ function _setReferentOfContract() {
 }
 
 function _list_distribution_products(&$aProducts, &$sMin, &$sMax) {
+
   \Drupal::moduleHandler()->loadInclude('amap', 'inc', 'amap.allowed.values');
   $aProducts = amap_distribution_products();
   $sMin = 'product01';
   $sMax = 'product' . sprintf("%02d", count($aProducts));
+
 }
 
 function amap_cron() {
@@ -561,7 +582,6 @@ function _setAmapien() {
 function _sendEmailForStupids() {
 
   $aD = [];
-  $aR = [];
   $aX = [];
   $sTo = "";
 
@@ -586,9 +606,6 @@ function _sendEmailForStupids() {
     switch ($result->role) {
       case "D":
         $aD[] = $sTemp;
-        break;
-      case "R":
-        $aR[] = $sTemp;
         break;
       case "X":
         $aX[] = $sTemp;
@@ -634,6 +651,7 @@ function _sendEmailForStupids() {
     ->format('Y-m-d H-i-s');
   \Drupal::state()->set('amap.NextEmailForStupids', $sNextMonday);
   \Drupal::logger('amap')->info('email \'Rappel pour les étourdis\': sent.');
+
 }
 
 function _sendEmailsForNextDistribution() {
@@ -695,6 +713,7 @@ function _sendEmailsForNextDistribution() {
 }
 
 function _sendEmailsForNextDistributionPerRole($role, $key, $info, $D, $X) {
+
   setlocale(LC_TIME, "fr_FR.UTF-8");
   $sNextWednesday = DrupalDateTime::createFromTimestamp(strtotime("next Wednesday"), new \DateTimeZone('Europe/Paris'))
     ->format(' j F Y');
@@ -726,6 +745,7 @@ function _sendEmailsForNextDistributionPerRole($role, $key, $info, $D, $X) {
       '@number' => isset($aResults['OK']) ? count($aResults['OK']) : 0,
       '@number2' => isset($aResults['KO']) ? count($aResults['KO']) : 0,
     ]);
+
 }
 
 function amap_mail($key, &$message, $params) {
@@ -737,6 +757,7 @@ function amap_mail($key, &$message, $params) {
     'Return-Path' => $sFrom,
   ];
   switch ($key) {
+
     case 'emailforstupids':
       $message['headers']['bcc'] = $sFrom;
       $message['subject'] = '[L\'AMAP du Jardin de Poissy] Distribution du ' . $params[0] . ' - Rappel pour les étourdis';
@@ -749,6 +770,7 @@ function amap_mail($key, &$message, $params) {
       }
       $message['body'][] = check_markup(nl2br($sBody), 'full_html');
       break;
+
     case 'emailfordistributiond':
       $message['subject'] = '[L\'AMAP du Jardin de Poissy] La distribution du ' . $params[1] . ' manque de bras';
       $sBody = "<b>" . $params[1] . "</b>, ";
@@ -765,17 +787,20 @@ function amap_mail($key, &$message, $params) {
       }
       $message['body'][] = check_markup(nl2br($sBody), 'full_html');
       break;
+
     case 'emailfordistributionx':
       $message['subject'] = '[L\'AMAP du Jardin de Poissy] La distribution du ' . $params[1] . ' manque de référent';
       $sBody = "<b>" . $params[1] . "</b>, aucun référent de distribution n'est inscrit.";
       $message['body'][] = check_markup(nl2br($sBody), 'full_html');
       break;
+
     case 'emailforbasket':
       $message['subject'] = '[L\'AMAP du Jardin de Poissy] Bourse aux paniers';
       $sBody = $params[1]['firstname'] . " " . $params[1]['lastname'] . " (" . $params[1]['cellphone'] . " - " . $params[1]['email'] . "), l'« Acheteur », déclare être intéressé(e) par le panier #" . $params[2] . " proposé par le « Vendeur ».<br>";
       $message['body'][] = check_markup(nl2br($sBody), 'full_html');
       break;
   }
+
 }
 
 /**
@@ -797,6 +822,7 @@ function template_preprocess_basket(array &$variables) {
 }
 
 function _publishModalBourseauxpaniers() {
+
   /*
     ----------------------------------------------------------------------------
     Mise à jour du texte et activation du modal 'bourse_aux_paniers'
@@ -816,6 +842,7 @@ function _publishModalBourseauxpaniers() {
   $query->condition('dd.distributiondate', $today, '>=');
   $numberofbaskets = (int) $query->countQuery()->execute()->fetchField();
   switch ($numberofbaskets) {
+
     case 0:
       $modal->setBody([
         'value' => 'Aucun panier n\'est disponible dans la Bourse aux paniers !',
@@ -823,6 +850,7 @@ function _publishModalBourseauxpaniers() {
       ]);
       $modal->setPublished(FALSE);
       break;
+
     case 1:
       $modal->setBody([
         'value' => 'Un panier est disponible dans la Bourse aux paniers !',
@@ -830,6 +858,7 @@ function _publishModalBourseauxpaniers() {
       ]);
       $modal->setPublished(TRUE);
       break;
+
     default:
       $modal->setBody([
         'value' => 'Des paniers sont disponibles dans la Bourse aux paniers !',
@@ -844,6 +873,7 @@ function _publishModalBourseauxpaniers() {
 }
 
 function _update_sos_distrib() {
+
   /*
     ----------------------------------------------------------------------------
     Mise à jour du contenu de la page SOS Distrib
