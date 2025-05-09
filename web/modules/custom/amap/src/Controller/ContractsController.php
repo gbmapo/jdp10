@@ -16,22 +16,38 @@ class ContractsController extends ControllerBase {
     $oCurrentUser = $this->currentUser();
 
     switch (TRUE) {
+
       case ($oCurrentUser->isAnonymous()):
         return $this->redirect('view.amap_contracts.page_3');
         break;
+
       case ($oCurrentUser->hasPermission('add contract entities')):
         return $this->redirect('view.amap_contracts.page_1');
         break;
+
       default:
         return $this->redirect('view.amap_contracts.page_2');
     }
   }
 
-  public function export_subscriptions($contract) {
+  public function export_subscriptions($contract, $type = 'csv') {
 
-    _export_amap_CSV('amap_contracts_subscriptions', 'rest_export_1', $contract);
+    switch ($type) {
 
-    $sFileName = 'Contract-' . $contract . '-export.csv';
+      case 'csv':
+        _export_amap_CSV('amap_contracts_subscriptions', 'rest_export_1', $contract);
+        $sFileName = 'Contract-' . $contract . '-export.csv';
+        break;
+
+      case 'xls':
+        _export_amap_CSV('amap_contracts_subscriptions', 'rest_export_2', $contract);
+        $sFileName = 'Contract-' . $contract . '-export.xlsx';
+        break;
+
+      default:
+        break;
+    }
+
     $sFileNameWithPath = 'sites/default/files/_private/contracts/' . $sFileName;
     $response = new BinaryFileResponse($sFileNameWithPath);
     $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $sFileName);
@@ -60,10 +76,11 @@ class ContractsController extends ControllerBase {
       }
     }
     else {
-  /* TODO by zonfal
-   *
-   */
-      \Drupal::logger('amap')->error('Enter subscriptions: Contract @number not found.', ['@number' => $contract]);
+      /* TODO by zonfal
+       *
+       */
+      \Drupal::logger('amap')
+        ->error('Enter subscriptions: Contract @number not found.', ['@number' => $contract]);
     }
   }
 
