@@ -18,8 +18,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 /**
  * Implements hook_help().
  */
-function shared_help($route_name, RouteMatchInterface $route_match)
-{
+function shared_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
     // Main module help for the shared module.
     case 'help.page.shared':
@@ -35,8 +34,7 @@ function shared_help($route_name, RouteMatchInterface $route_match)
 /**
  * Implements hook_theme().
  */
-function shared_theme()
-{
+function shared_theme() {
   return [
     'shared' => [
       'render element' => 'children',
@@ -55,8 +53,7 @@ function shared_theme()
  *   allowed_values: {  }
  *   allowed_values_function: 'mymodule_allowed_values_function'
  */
-function shared_allowed_values_function(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL, $cacheable)
-{
+function shared_allowed_values_function(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL, $cacheable) {
 
   // ----------------------------------------------------------------------------
   // Ajout de l'adresse de l'association au formulaire de contact
@@ -72,8 +69,7 @@ function shared_allowed_values_function(FieldStorageConfig $definition, ContentE
 
 }
 
-function shared_form_contact_message_feedback_form_alter(&$form, FormStateInterface $form_state)
-{
+function shared_form_contact_message_feedback_form_alter(&$form, FormStateInterface $form_state) {
 
   $markup = '<p style="border:2px; border-style:solid; border-color:#FF0000; padding: 1em;">';
   $markup .= t('Before sending your question, are you sure that the answer is not in our Frequently Asked Questions (see Frequently Asked Questions in the footer)?');
@@ -86,14 +82,16 @@ function shared_form_contact_message_feedback_form_alter(&$form, FormStateInterf
   $form['field_recipient']['widget']['#prefix'] = t('Recipient') . ' <a class="use-ajax" data-dialog-options="{&quot;width&quot;:440}" data-dialog-type="modal" href="/node/135" id="modal-dialog"><img src="/sites/default/files/images/info.svg"></a>';
   $form['field_recipient']['widget']['#attached'] = ['library' => ['core/drupal.dialog.ajax']];
   $form['field_recipient']['widget']['#sort_options'] = TRUE;
-//$form['field_recipient']['#validated'] = TRUE;
+  if (isset($_REQUEST["contract"])) {
+    $contractId = $_REQUEST["contract"];
+    $form["field_recipient"]["widget"]["#default_value"] = $contractId;
+  }
   $form['actions']['preview']['#access'] = FALSE;
 
 }
 
 
-function shared_mail_alter(&$message)
-{
+function shared_mail_alter(&$message) {
 
   switch ($message['id']) {
 
@@ -141,29 +139,27 @@ function shared_mail_alter(&$message)
 
 }
 
-function shared_views_plugins_field_alter(array &$plugins)
-{
+function shared_views_plugins_field_alter(array &$plugins) {
 
   $plugins['custom']['class'] = 'Drupal\shared\Plugin\views\field\CustomToken';
 
 }
 
-function shared_form_alter(&$form, FormStateInterface $form_state, $form_id)
-{
+function shared_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   switch (TRUE) {
-      case $form_id == 'views_form_association_sendemails_page_1':
-      case $form_id == 'views_form_association_sendemails_page_2':
-      case $form_id == 'views_form_association_sendemails_page_3':
-          $views_send_to_name = 'nothing_pos_2';
-          $views_send_to_mail = 'email_pos_3';
-          break;
-      case substr($form_id, 0, 47) == 'views_form_amap_contracts_subscriptions_page_1_':
-          $views_send_to_name = 'nothing_pos_2';
-          $views_send_to_mail = 'email_pos_4';
-          $form_id = 'views_form_amap_contracts_subscriptions_page_1_';
-          break;
-      default:
-          break;
+    case $form_id == 'views_form_association_sendemails_page_1':
+    case $form_id == 'views_form_association_sendemails_page_2':
+    case $form_id == 'views_form_association_sendemails_page_3':
+      $views_send_to_name = 'nothing_pos_2';
+      $views_send_to_mail = 'email_pos_3';
+      break;
+    case substr($form_id, 0, 47) == 'views_form_amap_contracts_subscriptions_page_1_':
+      $views_send_to_name = 'nothing_pos_2';
+      $views_send_to_mail = 'email_pos_4';
+      $form_id = 'views_form_amap_contracts_subscriptions_page_1_';
+      break;
+    default:
+      break;
   }
 
   switch ($form_id) {
@@ -273,8 +269,7 @@ function shared_form_alter(&$form, FormStateInterface $form_state, $form_id)
 
 }
 
-function shared_node_access(NodeInterface $node, $op, AccountInterface $account)
-{
+function shared_node_access(NodeInterface $node, $op, AccountInterface $account) {
 
   switch ($node->type->target_id) {
     case 'article':
@@ -289,7 +284,8 @@ function shared_node_access(NodeInterface $node, $op, AccountInterface $account)
           if ($tag->tid->value == 7) { // 7=Privé
             if ($account->isAnonymous()) {
               return \Drupal\Core\Access\AccessResult::forbidden();
-            } else {
+            }
+            else {
               return \Drupal\Core\Access\AccessResult::allowed();
             }
           }
@@ -319,8 +315,7 @@ function shared_node_access(NodeInterface $node, $op, AccountInterface $account)
  * }
  */
 
-function shared_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id)
-{
+function shared_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $currentUrl = \Drupal::service('path.current')->getPath();
   if ($currentUrl && (substr($currentUrl, 0, 12) == '/user/reset/')) {
     return;
@@ -328,28 +323,25 @@ function shared_form_user_login_form_alter(&$form, FormStateInterface $form_stat
   $form['#submit'][] = 'shared_user_login_form_submit';
 }
 
-function shared_user_login_form_submit($form, FormStateInterface $form_state)
-{
+function shared_user_login_form_submit($form, FormStateInterface $form_state) {
   $url = Url::fromRoute('<front>');
   $form_state->setRedirectUrl($url);
 }
 
-function shared_preprocess_node__page(array &$variables)
-{
+function shared_preprocess_node__page(array &$variables) {
 
-/*
- * Replaced by a script in /node/25
- * Update 4.27
- *
-  if ($variables['node']->nid->value == 25) {
-    $variables['#attached']['library'][] = 'shared/modal';
-  }
- */
+  /*
+   * Replaced by a script in /node/25
+   * Update 4.27
+   *
+    if ($variables['node']->nid->value == 25) {
+      $variables['#attached']['library'][] = 'shared/modal';
+    }
+   */
 
 }
 
-function shared_send_email($message)
-{
+function shared_send_email($message) {
 
   $sModule = $message['module'];
   $sKey = $message['key'];
@@ -368,7 +360,8 @@ function shared_send_email($message)
     }
     $iMax = $i;
     $aParams[0] = NULL;
-  } else {
+  }
+  else {
     $aTo[0] = $sTo;
     $iMax = 1;
   }
@@ -377,7 +370,8 @@ function shared_send_email($message)
       ->mail($sModule, $sKey, $aTo[$i], $sLangcode, $aParams, $sReply, $bSend);
     if ($result) {
       $aResults['OK'][] = $aTo[$i];
-    } else {
+    }
+    else {
       $aResults['KO'][] = $aTo[$i];
     }
   }

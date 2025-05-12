@@ -1,6 +1,6 @@
 jQuery(document).ready(function ($) {
 
-  $('#listofcontracts').DataTable({
+  $('#listofcontractsforauthenticated').DataTable({
 
     language: {
         url: 'https://cdn.datatables.net/plug-ins/2.1.8/i18n/fr-FR.json',
@@ -19,7 +19,7 @@ jQuery(document).ready(function ($) {
       {targets: [1,2,3], className: 'dt-head-center'},
     ],
     initComplete: function () {
-      this.api().columns([3, 4, 5]).every(function (i) {
+      this.api().columns([3, 4]).every(function (i) {
         var column = this;
         var select = $('<select><option value=""></option></select>')
           .appendTo($(column.header()))
@@ -34,7 +34,6 @@ jQuery(document).ready(function ($) {
 
         switch (i) {
           case 3:
-          case 5:
             column.data().unique().sort().each(function (d, j) {
               select.append('<option value="' + d + '">' + d + '</option>');
             });
