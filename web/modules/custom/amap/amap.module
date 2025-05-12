@@ -23,7 +23,6 @@ use Drupal\Core\Render\Element;
 use Drupal\Core\Cache\Cache;
 
 const AMAP_AMAPIEN_PER_DISTRIBUTION = 5;
-const AMAP_RESERVE_PER_DISTRIBUTION = 1;
 const AMAP_REFERENT_PER_DISTRIBUTION = 1;
 const AMAP_AMAPIEN_PER_DISTRIBUTION_MIN = 3;
 const AMAP_REFERENT_PER_DISTRIBUTION_MIN = 1;
@@ -174,7 +173,6 @@ function amap_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
           $aContractType = _detail_contract_type($sContractType);
           $iNumberOfQuantities = $aContractType[1];
           $aContractExportHeader = $aContractType[3];
-
           $fields = $view->display_handler->getOption('fields');
           $s01 = 'quantity01';
           $sMin = 'quantity' . sprintf("%02d", $iNumberOfQuantities + 1);
@@ -227,34 +225,6 @@ function amap_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
 
 }
 
-function amap_views_pre_render(ViewExecutable $view) {
-
-  switch ($view->id()) {
-
-    case 'amap_distributions':
-      switch ($view->current_display) {
-        case 'page_1':
-          $view->element['#attached']['library'][] = 'amap/list-of-distributions';
-          break;
-        default:
-      }
-
-    case 'amap_contracts':
-      switch ($view->current_display) {
-        case 'page_1':
-        case 'page_2':
-          $view->element['#attached']['library'][] = 'amap/list-of-contracts';
-          $view->element['#attached']['library'][] = 'core/drupal.dialog.ajax';
-          break;
-        default:
-      }
-      break;
-
-    default:
-  }
-
-}
-
 function amap_views_post_execute(ViewExecutable $view) {
 
   switch ($view->id()) {
@@ -281,9 +251,86 @@ function amap_views_post_execute(ViewExecutable $view) {
       }
       break;
 
+    case 'amap_contracts':
+      switch ($view->current_display) {
+        case 'page_1':
+          $numberofsubcriptions = 0;
+          foreach ($view->result as $row) {
+            $numberofsubcriptions = \Drupal::entityQuery('contract_subscription')
+              ->accessCheck(FALSE)
+              ->condition('contract_id', $row->id, '=')
+              ->count()->execute();
+            $row->_entity->created = $numberofsubcriptions;
+          }
+          break;
+        default:
+          break;
+      }
+      break;
+
     default:
       break;
   }
+
+}
+
+function amap_views_pre_render(ViewExecutable $view) {
+
+  switch ($view->id()) {
+
+    case 'amap_distributions':
+      switch ($view->current_display) {
+        case 'page_1':
+          $view->element['#attached']['library'][] = 'amap/list-of-distributions';
+          break;
+        default:
+      }
+
+    case 'amap_contracts':
+      switch ($view->current_display) {
+        case 'page_1':
+          $view->element['#attached']['library'][] = 'amap/listofcontractsforreferent';
+          $view->element['#attached']['library'][] = 'core/drupal.dialog.ajax';
+          break;
+        case 'page_2':
+          $view->element['#attached']['library'][] = 'amap/listofcontractsforauthenticated';
+          $view->element['#attached']['library'][] = 'core/drupal.dialog.ajax';
+          break;
+        default:
+      }
+      break;
+
+    default:
+  }
+
+}
+
+function amap_preprocess_views_view_table(&$variables) {
+
+  $view = $variables['view'];
+  switch ($view->id()) {
+    case 'amap_contracts':
+      switch ($view->current_display) {
+        case 'page_1':
+          $variables['attributes']['id'] = 'listofcontractsforreferent';
+          $variables['attributes']['style'] = 'width:100%';
+          break;
+        case 'page_2':
+          $variables['attributes']['id'] = 'listofcontractsforauthenticated';
+          $variables['attributes']['style'] = 'width:100%';
+          break;
+        case 'page_3':
+          $variables['attributes']['id'] = 'listofcontractsforanonymous';
+          $variables['attributes']['style'] = 'width:100%';
+          break;
+        default:
+      }
+      break;
+
+    default:
+      break;
+  }
+
 
 }
 

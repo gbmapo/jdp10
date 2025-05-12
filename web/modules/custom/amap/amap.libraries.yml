@@ -37,14 +37,26 @@ subscriptions:
     theme:
       css/subscriptions.css: { }
 
-list-of-contracts:
+listofcontractsforreferent:
   version: 1.x
   header: true
   css:
     theme:
       css/datatable.css: {}
   js:
-    js/list-of-contracts.js: {}
+    js/listofcontractsforreferent.js: {}
+  dependencies:
+#   - core/jquery
+    - shared/shared
+
+listofcontractsforauthenticated:
+  version: 1.x
+  header: true
+  css:
+    theme:
+      css/datatable.css: {}
+  js:
+    js/listofcontractsforauthenticated.js: {}
   dependencies:
 #   - core/jquery
     - shared/shared

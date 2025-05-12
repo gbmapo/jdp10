@@ -809,6 +809,83 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        created:
+          id: created
+          table: contract
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: contract
+          entity_field: created
+          plugin_id: field
+          label: Souscripteurs
+          exclude: false
+          alter:
+            alter_text: true
+            text: '{{ created__value }}'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: timestamp
+          settings:
+            date_format: medium
+            custom_date_format: ''
+            timezone: ''
+            tooltip:
+              date_format: long
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
+              description: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         nothing:
           id: nothing
           table: views
@@ -1316,6 +1393,7 @@ display:
             startdate: startdate
             enddate: enddate
             isopenforsubscription: isopenforsubscription
+            created: created
             referent_id: referent_id
             referent_id_1: referent_id_1
             isvisible: isvisible
@@ -1373,6 +1451,13 @@ display:
               empty_column: false
               responsive: ''
             isopenforsubscription:
+              sortable: false
+              default_sort_order: asc
+              align: views-align-center
+              separator: ''
+              empty_column: false
+              responsive: ''
+            created:
               sortable: false
               default_sort_order: asc
               align: views-align-center
@@ -1494,7 +1579,7 @@ display:
       tags: {  }
   page_2:
     id: page_2
-    display_title: Contracts
+    display_title: ContractsforAuthenticated
     display_plugin: page
     position: 1
     display_options:
@@ -2230,7 +2315,20 @@ display:
           plugin_id: standard
           required: false
       display_description: ''
-      header: {  }
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: false
+          content:
+            value: '<button class="open-help-list-of-contracts-for-authenticated button-round">Aide</button>'
+            format: full_html
+          tokenize: false
       display_extenders: {  }
       path: amap/contracts2
     cache_metadata:
@@ -2654,7 +2752,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="/contact" target="_blank">Contact</a>'
+            text: '<a href="/contact?contract={{ id }}" target="_blank">Contact</a>'
             make_link: false
             path: ''
             absolute: false
@@ -2885,7 +2983,20 @@ display:
           plugin_id: standard
           required: false
       display_description: ''
-      header: {  }
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: false
+          content:
+            value: '<button class="open-help-list-of-contracts-for-anonymous button-round">Aide</button>'
+            format: full_html
+          tokenize: false
       display_extenders: {  }
       path: amap/contracts3
     cache_metadata:
