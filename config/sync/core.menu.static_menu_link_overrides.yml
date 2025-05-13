@@ -8,7 +8,7 @@ definitions:
     expanded: false
     enabled: false
   user__logout:
-    weight: 50
+    weight: 40
     menu_name: main
     parent: ''
     expanded: false
