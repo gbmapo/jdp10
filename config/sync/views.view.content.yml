@@ -163,8 +163,8 @@ display:
           type: boolean
           settings:
             format: custom
-            format_custom_false: Non
-            format_custom_true: Oui
+            format_custom_false: 'Non publié'
+            format_custom_true: Publié
         changed:
           id: changed
           table: node_field_data
@@ -409,11 +409,11 @@ display:
             default_group_multiple: {  }
             group_items:
               1:
-                title: Oui
+                title: Publié
                 operator: '='
                 value: '1'
               2:
-                title: Non
+                title: 'Non publié'
                 operator: '='
                 value: '0'
         langcode:
