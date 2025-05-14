@@ -179,7 +179,7 @@ display:
           settings:
             format: custom
             format_custom_false: Bloqué
-            format_custom_true: Oui
+            format_custom_true: Actif
         roles_target_id:
           id: roles_target_id
           table: user__roles
@@ -612,7 +612,7 @@ display:
             default_group_multiple: {  }
             group_items:
               1:
-                title: Oui
+                title: Actif
                 operator: '='
                 value: '1'
               2:
