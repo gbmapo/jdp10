@@ -143,8 +143,8 @@ display:
           type: boolean
           settings:
             format: yes-no
-            format_custom_false: Non
-            format_custom_true: Oui
+            format_custom_false: 'Non publié'
+            format_custom_true: Publié
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -562,11 +562,11 @@ display:
             default_group_multiple: {  }
             group_items:
               1:
-                title: Oui
+                title: Publié
                 operator: '='
                 value: '1'
               2:
-                title: Non
+                title: 'Non publié'
                 operator: '='
                 value: '0'
         active:
@@ -585,7 +585,7 @@ display:
           exposed: true
           expose:
             operator_id: ''
-            label: Oui
+            label: Actif
             description: null
             use_operator: false
             operator: active_op
@@ -610,11 +610,11 @@ display:
             default_group_multiple: {  }
             group_items:
               1:
-                title: Oui
+                title: Actif
                 operator: '='
                 value: '1'
               2:
-                title: Non
+                title: Inactif
                 operator: '='
                 value: '0'
       style:
