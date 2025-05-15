@@ -70,12 +70,10 @@ class DistributionInscriptionManyForm extends FormBase {
 
       if ($row[0] < $currentDay) {
         $bDisabledD = TRUE;
-        $bDisabledR = TRUE;
         $bDisabledX = TRUE;
       }
       else {
         $bDisabledD = (($row[1] == AMAP_AMAPIEN_PER_DISTRIBUTION && !$row[4])) || $row[6] || $row[7];
-        $bDisabledR = (($row[2] == AMAP_RESERVE_PER_DISTRIBUTION && !$row[4])) || $row[5] || $row[7];
         $bDisabledX = !$bReferentDistrib || ($row[3] == AMAP_REFERENT_PER_DISTRIBUTION && !$row[4]) || $row[5] || $row[6];
       }
       setlocale(LC_TIME, "fr_FR.UTF8");
@@ -173,7 +171,6 @@ class DistributionInscriptionManyForm extends FormBase {
 
     $form['#attached']['drupalSettings']['myConstants'] = [
       'nbmaxD' => AMAP_AMAPIEN_PER_DISTRIBUTION,
-      'nbmaxR' => AMAP_RESERVE_PER_DISTRIBUTION,
       'nbmaxX' => AMAP_REFERENT_PER_DISTRIBUTION,
     ];
 
