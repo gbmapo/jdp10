@@ -41,16 +41,35 @@ class ContractSubscriptionTableForm extends FormBase {
     $upload_max = min($upload_max_filesize, $post_max_size, $myMax);
     $upload_max_inMB = $upload_max / 1024 / 1024;
 
+    if (isset($form_state->getStorage()['align'])) {
+      $image = '/sites/default/files/images/' . $form_state->getStorage()['image'] . '.svg';
+      $style = $form_state->getStorage()['align'];
+    }
+    else {
+      $image = '/sites/default/files/images/align-left.svg';
+      $form_state->set('image', 'align-left');
+      $style = '';
+      $form_state->set('align', $style);
+    }
+
     $form['subscriptions'] = [
       '#type' => 'table',
       '#sticky' => TRUE,
       '#responsive' => TRUE,
       '#id' => 'subscriptions',
       '#quantities' => $iNumberOfQuantities,
-      '#attributes' => ['style' => 'margin-left: calc(-100vw / 2 + 1170px / 2);',],
+      '#attributes' => ['style' => $style,],
     ];
 
-    $form['subscriptions']['#header'] = ['member' => t('Member'),];
+    $data = [
+      '#type' => 'inline_template',
+      '#template' => '{{ text }} <input type="image" name="alignButton" src="{{ image }}" class="image-button">',
+      '#context' => [
+        'text' => $this->t('Member'),
+        'image' => $image,
+      ],
+    ];
+    $form['subscriptions']['#header'] = [['data' => $data]];
     $form['subscriptions']['#header'] = array_merge($form['subscriptions']['#header'], $aContractTypeHeader);
     $aContractStandardHeader = [
       'sharedwith' => t('Shared with'),
@@ -236,7 +255,17 @@ class ContractSubscriptionTableForm extends FormBase {
   }
 
   public function validateForm(array &$form, FormStateInterface $form_state) {
+
     if ($form_state->getTriggeringElement()['#name'] == 'cancel') {
+      return;
+    }
+    $input = $form_state->getUserInput();
+    if (isset($input['alignButton_x'])) {
+      $image = ($form_state->getStorage()['image'] == 'align-left') ? 'align-center' : 'align-left';
+      $form_state->set('image', $image);
+      $align = ($form_state->getStorage()['align'] == '') ? 'margin-left: calc(-100vw / 2 + 1170px / 2);' : '';
+      $form_state->set('align', $align);
+      $form_state->setRebuild();
       return;
     }
     parent::validateForm($form, $form_state);
@@ -244,6 +273,7 @@ class ContractSubscriptionTableForm extends FormBase {
   }
 
   public function ajaxAddRow(array &$form, FormStateInterface $form_state) {
+
     $myKey = $form_state->getTriggeringElement()['#name'];
     $formBis = [];
     foreach ($form as $key => $value) {
@@ -296,13 +326,16 @@ class ContractSubscriptionTableForm extends FormBase {
   }
 
   public function ajaxSubmit(array &$form, FormStateInterface $form_state) {
+
     $response = new AjaxResponse();
     $response->addCommand(new \Drupal\Core\Ajax\RedirectCommand(Url::fromRoute('amap.contracts')
       ->toString()));
     return $response;
+
   }
 
   public function submitForm(array &$form, FormStateInterface $form_state) {
+
     if ($form_state->getTriggeringElement()['#name'] == 'submit') {
 
       $args = $form_state->getBuildInfo()['args'];
