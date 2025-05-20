@@ -44,7 +44,6 @@
         "drupal/superfish": "^1.8",
         "drupal/token": "^1.13",
         "drupal/ultimate_cron": "^2.0@alpha",
-        "drupal/views_accordion": "^2.0",
         "drupal/views_data_export": "^1.4",
         "drupal/views_send": "^2.0@RC",
         "drupal/xls_serialization": "^2.0",

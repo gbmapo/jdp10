@@ -1,4 +1,4 @@
-uuid: 25d2e54f-2988-49be-a97b-a15a1093a8af
+uuid: 6e6a1894-131f-4b01-9895-1ba1ea34f11a
 langcode: fr
 status: true
 dependencies:
@@ -10,7 +10,7 @@ dependencies:
   module:
     - node
     - text
-    - views_accordion
+    - user
 id: faq
 label: FAQ
 module: views
@@ -21,11 +21,11 @@ base_field: nid
 display:
   default:
     id: default
-    display_title: Master
+    display_title: Default
     display_plugin: default
     position: 0
     display_options:
-      title: 'Foire aux Questions'
+      title: FAQ
       fields:
         field_faq:
           id: field_faq
@@ -97,59 +97,12 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          entity_field: title
           plugin_id: field
           label: ''
           exclude: false
           alter:
-            alter_text: false
-            make_link: false
-            absolute: false
-            word_boundary: false
-            ellipsis: false
-            strip_tags: false
-            trim: false
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: true
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        body:
-          id: body
-          table: node__body
-          field: body
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '<h5 class="accordion-title">{{ title }}</h5>'
             make_link: false
             path: ''
             absolute: false
@@ -181,7 +134,70 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        body:
+          id: body
+          table: node__body
+          field: body
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: '<div class="accordion-content">{{ body }}</div>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -203,6 +219,7 @@ display:
         type: none
         options:
           offset: 0
+          items_per_page: 0
       exposed_form:
         type: basic
         options:
@@ -214,8 +231,9 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: none
-        options: {  }
+        type: perm
+        options:
+          perm: 'access content'
       cache:
         type: tag
         options: {  }
@@ -232,7 +250,7 @@ display:
           order: ASC
           expose:
             label: ''
-            field_identifier: field_faq_target_id
+            field_identifier: ''
           exposed: false
         field_rank_value:
           id: field_rank_value
@@ -245,10 +263,21 @@ display:
           order: ASC
           expose:
             label: ''
-            field_identifier: field_rank_value
+            field_identifier: ''
           exposed: false
       arguments: {  }
       filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
         type:
           id: type
           table: node_field_data
@@ -258,34 +287,20 @@ display:
           plugin_id: bundle
           value:
             faq: faq
-          expose:
-            operator_limit_selection: false
-            operator_list: {  }
       style:
-        type: views_accordion
+        type: default
         options:
           grouping:
             -
               field: field_faq
-              rendered: true
-              rendered_strip: false
-              use-grouping-header: 0
+              rendered: false
+              rendered_strip: true
           row_class: ''
-          default_row_class: true
-          disableifone: 0
-          row-start-open: none
-          collapsible: 1
-          animated: none
-          animation_time: '300'
-          heightStyle: content
-          event: click
-          use_header_icons: 1
-          icon_header: ui-icon-triangle-1-e
-          icon_active_header: ui-icon-triangle-1-s
+          default_row_class: false
       row:
         type: fields
         options:
-          default_field_elements: true
+          default_field_elements: false
           inline: {  }
           separator: ''
           hide_empty: false
@@ -298,6 +313,7 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
+      css_class: accordion
       header: {  }
       footer: {  }
       display_extenders: {  }
@@ -307,6 +323,7 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - 'user.node_grants:view'
+        - user.permissions
       tags:
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_faq'
@@ -387,14 +404,12 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          entity_field: title
           plugin_id: field
           label: Titre
           exclude: false
           alter:
             alter_text: false
-            text: ''
+            text: '<h5 class="accordion-title">{{ title }}</h5>'
             make_link: false
             path: ''
             absolute: false
@@ -410,8 +425,8 @@ display:
             target: ''
             nl2br: false
             max_length: 0
-            word_boundary: false
-            ellipsis: false
+            word_boundary: true
+            ellipsis: true
             more_link: false
             more_link_text: ''
             more_link_path: ''
@@ -423,10 +438,10 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -514,11 +529,11 @@ display:
         options:
           grouping: {  }
           row_class: ''
-          default_row_class: true
+          default_row_class: false
           columns:
             field_faq: field_faq
             title: title
-            body: body
+            field_rank: field_rank
           default: '-1'
           info:
             field_faq:
@@ -535,7 +550,7 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            body:
+            field_rank:
               sortable: false
               default_sort_order: asc
               align: ''
@@ -556,9 +571,11 @@ display:
           separator: ''
           hide_empty: false
       defaults:
+        css_class: false
         style: false
         row: false
         fields: false
+      css_class: ''
       display_extenders: {  }
     cache_metadata:
       max-age: -1
@@ -566,6 +583,7 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - 'user.node_grants:view'
+        - user.permissions
       tags:
         - 'config:field.storage.node.field_faq'
         - 'config:field.storage.node.field_rank'
@@ -583,6 +601,7 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - 'user.node_grants:view'
+        - user.permissions
       tags:
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_faq'
