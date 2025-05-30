@@ -183,6 +183,8 @@ function shared_form_alter(&$form, FormStateInterface $form_state, $form_id) {
             ->getString();
           $currentUserRoles = $oCurrentUser->getRoles();
           $bReferentDistrib = (in_array("referent_of_distribution", $currentUserRoles)) ? TRUE : FALSE;
+          $views_send_from_name_bis_default_value = 0;
+          $views_send_from_mail_default_value = '';
           $aFromName = [
             0 => '<Veuillez choisir une valeur dans la liste>',
             1 => $sNomPrenom,
@@ -192,6 +194,8 @@ function shared_form_alter(&$form, FormStateInterface $form_state, $form_id) {
           }
           if (in_array("referent_of_contract", $currentUserRoles)) {
             $aFromName[3] = 'L\'AMAP du Jardin de Poissy';
+            $views_send_from_name_bis_default_value = 1;
+            $views_send_from_mail_default_value = $sMail;
           }
           if (in_array("referent_of_meeting", $currentUserRoles)) {
             $aFromName[4] = 'Le Grenier à SÉL';
@@ -203,7 +207,7 @@ function shared_form_alter(&$form, FormStateInterface $form_state, $form_id) {
             ],
             '#type' => 'select',
             '#options' => $aFromName,
-            '#default_value' => 0,
+            '#default_value' => $views_send_from_name_bis_default_value,
             '#required' => TRUE,
             '#weight' => -99,
           ];
@@ -218,7 +222,7 @@ function shared_form_alter(&$form, FormStateInterface $form_state, $form_id) {
               'readonly' => 'readonly',
             ],
             '#type' => 'textfield',
-            '#default_value' => '',
+            '#default_value' => $views_send_from_mail_default_value,
           ];
           $form['from']['views_send_from_mail_currentuser'] = [
             '#attributes' => [
