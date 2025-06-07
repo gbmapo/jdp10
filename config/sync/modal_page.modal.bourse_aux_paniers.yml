@@ -5,7 +5,7 @@ dependencies: {  }
 id: bourse_aux_paniers
 label: 'Bourse aux paniers'
 body:
-  value: 'Un panier est disponible dans la Bourse aux paniers !'
+  value: 'Des paniers sont disponibles dans la Bourse aux paniers !'
   format: full_html
 pages: "/node/1\r\n/node/25"
 auto_open: true
