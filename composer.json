@@ -28,11 +28,9 @@
         "drupal/core-project-message": "^10.2",
         "drupal/core-recommended": "^10.2",
         "drupal/csv_serialization": "^4.0",
-        "drupal/devel": "^5.0",
         "drupal/fullcalendar_view": "^5.1",
         "drupal/honeypot": "^2.2",
         "drupal/imce": "^3.0",
-        "drupal/kint-kint": "^2.0",
         "drupal/mailsystem": "^4.2",
         "drupal/mimemail": "^1.0@alpha",
         "drupal/modal_page": "^5.1",
@@ -114,7 +112,9 @@
         }
     },
     "require-dev": {
+        "drupal/devel": "^5.3",
         "drupal/upgrade_status": "^4.3",
+        "kint-php/kint": "^6.0",
         "palantirnet/drupal-rector": "^0.20.3"
     }
 }
