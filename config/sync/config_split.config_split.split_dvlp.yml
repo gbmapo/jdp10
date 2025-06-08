@@ -11,9 +11,7 @@ no_patching: false
 storage: folder
 folder: ../config/split_dvlp
 module:
-  devel: 0
   potx: 0
-  upgrade_status: 0
 theme: {  }
 complete_list:
   - mailsystem.settings
