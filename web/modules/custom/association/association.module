@@ -219,7 +219,6 @@ function association_entity_update(EntityInterface $entity) {
           $entity->delete();
           break;
         case 0:
-        case 1:
           // List all Persons for this Member
           $id = $entity->id->value;
           $database = Drupal::database();
