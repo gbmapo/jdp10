@@ -216,7 +216,7 @@ class MemberAndPerson extends FormBase
       'telephone'         => $values['telephone'],
       'status'            => 2,
       'startdate'         => date('Y-m-d'),
-      'enddate'           => '2037-12-30',
+      'enddate'           => '2037-12-31',
       'contact_id'        => $uid,
       'comment'           => NULL,
       'owner_id'          => $currentUser,

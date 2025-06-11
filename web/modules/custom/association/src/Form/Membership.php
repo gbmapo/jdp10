@@ -52,6 +52,16 @@ final class Membership extends FormBase {
     $form_state->set('step', 0);
 
     if ($this->currentUser()->isAnonymous()) {
+
+      $url = Url::fromUri('base:/user/login', ['query' => ['destination' => '/association/membership?mode=online']]);
+      $link = \Drupal\Core\Link::fromTextAndUrl(t('here'), $url)->toString();
+      $output =
+        $this->t('If you are a member, please log in %link.', [
+          '%link' => $link,
+        ]);
+      $form['warning'] = [
+        '#markup' => $this->t("This form is only for those who are not member of the association.") . ' ' . $output . '<br><br>',
+      ];
       $form['didyouread'] = [
         '#type' => 'radios',
         '#title' => $this->t('Did you read Frequently Asked Questions?'),
@@ -1136,9 +1146,13 @@ final class Membership extends FormBase {
 
     if ($form_state->get('step') == 0) {
 
+      $now = date('Y-m-d');
       Drupal::database()->update('member')
         ->condition('id', $form_state->getStorage()['am_id'])
-        ->fields(['status' => $form_state->getStorage()['status']])
+        ->fields([
+          'status' => $form_state->getStorage()['status'],
+          'enddate' => $now,
+        ])
         ->execute();
 
     }
@@ -1183,11 +1197,12 @@ final class Membership extends FormBase {
 
       if ($anon) {
         $member = $storage->create();
-        $comment = ($form_state->getStorage()['contracts'] ? $form_state->getStorage()['contracts'] . ' ' : '') . ($form_state->getStorage()['how'] ? $form_state->getStorage()['how'] . ' ' : '') . $form_state->getStorage()['payment'];
+        $contracts = isset($form_state->getStorage()['contracts']) ? $form_state->getStorage()['contracts'] . ' ' : '';
+        $comment = $contracts . ($form_state->getStorage()['how'] ? $form_state->getStorage()['how'] . ' ' : '') . $form_state->getStorage()['payment'];
         $member->comment = $comment;
         $member->contact_id = $uid['1'];
         $member->created = $now;
-        $member->enddate = '2037-12-30';
+        $member->enddate = '2037-12-31';
         $member->owner_id = $uid['1'];
         $member->startdate = date('Y-m-d');
         $form_state->set('status', 5);
@@ -1205,6 +1220,8 @@ final class Membership extends FormBase {
       $member->street = $form_state->getStorage()['street'];
       $member->telephone = $form_state->getStorage()['telephone'];
       $member->status = $form_state->getStorage()['status'];
+      $member->enddate = '2037-12-31';
+      $member->comment = $form_state->getStorage()['payment'];
       $member->save();
       if ($anon) {
         $idM = $member->id();

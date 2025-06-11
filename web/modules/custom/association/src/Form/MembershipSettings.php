@@ -36,7 +36,7 @@ class MembershipSettings extends FormBase {
     $rpReminder = $config->get('reminder');
 
     if ($rpStep == 0) {
-      $iY1 = (int) DrupalDateTime::createFromTimestamp(strtotime("now"), new \DateTimeZone('Europe/Paris'), )
+      $iY1 = (int) DrupalDateTime::createFromTimestamp(strtotime("now"), new \DateTimeZone('Europe/Paris'))
         ->format('Y');
       $iY2 = $iY1 + 1;
       $form['actions']['1B'] = [
@@ -164,9 +164,13 @@ class MembershipSettings extends FormBase {
         }
 
         // Mettre le statut de tous les adhérents actifs à 'Adhésion en attente'
+        // et enlever les commentaires éventuels
         $database = Drupal::database();
         $number_updated = $database->update('member')
-          ->fields(['status' => 2,])
+          ->fields([
+            'status' => 2,
+            'comment' => '',
+          ])
           ->condition('status', 4, '=')
           ->execute();
 
@@ -181,10 +185,10 @@ class MembershipSettings extends FormBase {
 
         $sMessage = $this->t('Renew membership: Period has been opened.');
         Drupal::logger('association')
-          ->info('Renew membership: Period has been opened. @text', [
-            '@text' => Drupal::translation()
-              ->formatPlural($number_updated, 'One member updated.', '@count members updated.'),
-          ]);
+          ->info($sMessage . ' ' . Drupal::translation()
+              ->formatPlural($number_updated,
+                'One member updated.',
+                '@count members updated.'));
         break;
 
       case 1:
@@ -203,9 +207,9 @@ class MembershipSettings extends FormBase {
           $config->set('step', 2);
           $config->set('firstemail', TRUE);
           $config->save();
-          Drupal::logger('association')
-            ->info('Renew membership: First email has been sent.');
           $sMessage = $this->t('Renew membership: First email has been sent.');
+          Drupal::logger('association')
+            ->info($sMessage);
         }
         break;
 
@@ -227,9 +231,9 @@ class MembershipSettings extends FormBase {
           ];
           $aResults = shared_send_email($message);
           $config->save();
-          Drupal::logger('association')
-            ->info('Renew membership: Reminder email @number has been sent.', ['@number' => $rpReminder]);
           $sMessage = $this->t('Renew membership: Reminder email @number has been sent.', ['@number' => $rpReminder]);
+          Drupal::logger('association')
+            ->info($sMessage);
         }
         break;
 
@@ -253,7 +257,7 @@ class MembershipSettings extends FormBase {
 
       $sMessage = $this->t('Renew membership: Period has been closed.');
       Drupal::logger('association')
-        ->info('Renew membership: Period has been closed.');
+        ->info($sMessage);
 
       drupal_flush_all_caches();
 
