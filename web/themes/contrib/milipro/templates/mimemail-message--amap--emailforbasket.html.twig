@@ -16,7 +16,7 @@
 				<p>
 					{{ body|raw }}<br>
 					Le « Vendeur » contactera l'« Acheteur » dès que possible.<br>
-  				En cas de besoin, le « Vendeur » peut retrouver les coordonnées des personnes intéressées par son panier en consultant la bourse aux paniers <a href="{{ url('view.amap_baskets.page_1') }}">{{ 'ici'|t }}</a>.<br>
+  				En cas de besoin, le « Vendeur » peut retrouver les coordonnées des personnes intéressées par son panier en consultant la bourse aux paniers <a href="{{ url('user.login', {'destination': '/amap/baskets'}) }}">{{ 'ici'|t }}</a>.<br>
 					--<br>
 					L'AMAP du Jardin de Poissy
 				</p>
