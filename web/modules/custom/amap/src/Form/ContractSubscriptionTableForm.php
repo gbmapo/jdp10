@@ -178,6 +178,14 @@ class ContractSubscriptionTableForm extends FormBase {
         '#type' => 'select',
         '#options' => $results_am,
         '#default_value' => $iKey,
+        '#ajax' => [
+          'callback' => '::ajaxSharedwith',
+          'wrapper' => $wrapper,
+          'progress' => [
+            'type' => 'throbber',
+            'message' => NULL,
+          ],
+        ],
       ];
       $form['subscriptions'][$myKey]['comment'] = [
         '#type' => 'textarea',
@@ -325,6 +333,37 @@ class ContractSubscriptionTableForm extends FormBase {
 
   }
 
+  public function ajaxSharedwith(array &$form, FormStateInterface $form_state) {
+
+    $TriggeringElement = $form_state->getTriggeringElement()['#name'];
+    $start = strpos($TriggeringElement, '[') + 1;
+    $end = strpos($TriggeringElement, ']');
+    $currentRow = (int) substr($TriggeringElement, $start, $end - $start);
+
+    $memberOfCurrentRow = (int) $form['subscriptions'][$currentRow]['am_id']['#value'];
+    $memberToBeSharedWith = (int) $form_state->getUserInput()['subscriptions'][$currentRow]['sharedwith'];
+
+    foreach ($form['subscriptions'] as $key => $value) {
+      if (is_numeric($key)) {
+        if ($key != $currentRow) {
+          switch (TRUE) {
+            case ($form['subscriptions'][$key]['am_id']['#value'] == $memberToBeSharedWith):
+              $form['subscriptions'][$key]['sharedwith']['#value'] = $memberOfCurrentRow;
+              break;
+            case ($form['subscriptions'][$key]['sharedwith']['#value'] == $memberOfCurrentRow):
+            case ($form['subscriptions'][$key]['sharedwith']['#value'] == $memberToBeSharedWith):
+              $form['subscriptions'][$key]['sharedwith']['#value'] = 0;
+              break;
+            default:
+              break;
+          }
+        }
+      }
+    }
+    return $form;
+
+  }
+
   public function ajaxSubmit(array &$form, FormStateInterface $form_state) {
 
     $response = new AjaxResponse();
@@ -334,7 +373,8 @@ class ContractSubscriptionTableForm extends FormBase {
 
   }
 
-  public function submitForm(array &$form, FormStateInterface $form_state) {
+  public
+  function submitForm(array &$form, FormStateInterface $form_state) {
 
     if ($form_state->getTriggeringElement()['#name'] == 'submit') {
 
