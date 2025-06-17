@@ -24,22 +24,19 @@ settings:
       value: '260'
       label: '2. AMAP Agneau'
     -
-      value: '262'
-      label: '2. AMAP Brioche'
-    -
-      value: '267'
+      value: '280'
       label: '2. AMAP Bœuf'
     -
       value: '252'
       label: '2. AMAP Champignons'
     -
-      value: '243'
+      value: '273'
       label: '2. AMAP Cidre'
     -
       value: '266'
       label: '2. AMAP Farine et Huile'
     -
-      value: '244'
+      value: '274'
       label: '2. AMAP Fruits rouges'
     -
       value: '263'
@@ -63,20 +60,14 @@ settings:
       value: '257'
       label: '2. AMAP Pommes de terre'
     -
-      value: '251'
-      label: '2. AMAP Pommes-Poires'
-    -
       value: '254'
       label: '2. AMAP Porc'
     -
-      value: '249'
+      value: '270'
+      label: '2. AMAP Produits laitiers (Brebis)'
+    -
+      value: '271'
       label: '2. AMAP Produits laitiers (Vache)'
-    -
-      value: '236'
-      label: '2. AMAP Produits transformés'
-    -
-      value: '247'
-      label: '2. AMAP Prunes'
     -
       value: '258'
       label: '2. AMAP Terrines'

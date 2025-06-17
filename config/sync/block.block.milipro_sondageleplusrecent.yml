@@ -1,6 +1,6 @@
 uuid: 68642099-121a-4610-9acb-66475f9c1853
 langcode: fr
-status: true
+status: false
 dependencies:
   module:
     - poll
