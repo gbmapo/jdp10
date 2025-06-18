@@ -913,7 +913,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<img src="/sites/default/files/images/magnifyingglass.gif" title="Afficher les échanges">'
+            text: '<img src="/sites/default/files/images/search.svg" title="Afficher les échanges">'
             make_link: true
             path: '/sel/exchanges/myexchanges/{{ id }}/{{ id }}'
             absolute: false
