@@ -11,11 +11,9 @@ use Drupal\Core\Url;
  *
  * @ingroup sel
  */
-class ServiceDeleteForm extends ContentEntityDeleteForm
-{
+class ServiceDeleteForm extends ContentEntityDeleteForm {
 
-  public function submitForm(array &$form, FormStateInterface $form_state)
-  {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
     $entity = $this->getEntity();
     $entity->delete();
 
@@ -24,14 +22,14 @@ class ServiceDeleteForm extends ContentEntityDeleteForm
   }
 
   public function setUrl() {
+    $id = \Drupal::currentUser()->id();
     switch ($_GET['origin']) {
       case 1:
-        $url = \Drupal\Core\Url::fromRoute('view.sel_services.page_1');
+        $url = Url::fromRoute('view.sel_services.page_1');
         break;
       case 2:
-        $url = \Drupal\Core\Url::fromRoute('view.sel_services.page_2', [
-          'arg_0' => \Drupal::currentUser()
-            ->id(),
+        $url = Url::fromRoute('view.sel_services.page_2', [
+          'arg_0' => $id,
         ]);
         break;
       default:
@@ -40,23 +38,22 @@ class ServiceDeleteForm extends ContentEntityDeleteForm
     return $url;
   }
 
-  public function getQuestion()
-  {
-    return $this->t('Are you sure you want to delete service « @label »?', array(
-      '@label' => $this->getEntity()->label()
-    ));
+  public function getQuestion() {
+    return $this->t('Are you sure you want to delete service « @label »?', [
+      '@label' => $this->getEntity()->label(),
+    ]);
   }
 
-  public function getCancelUrl()
-  {
+  public function getCancelUrl() {
     return $this->setUrl();
   }
 
-  protected function getDeletionMessage()
-  {
+  protected function getDeletionMessage() {
     $entity = $this->getEntity();
-    \Drupal::messenger()->addMessage($this->t('Service « @label » has been deleted.', array(
-      '@label' => $entity->label()
-    )));
+    \Drupal::messenger()
+      ->addMessage($this->t('Service « @label » has been deleted.', [
+        '@label' => $entity->label(),
+      ]));
   }
+
 }
