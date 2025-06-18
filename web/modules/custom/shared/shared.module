@@ -72,7 +72,7 @@ function shared_allowed_values_function(FieldStorageConfig $definition, ContentE
 function shared_form_contact_message_feedback_form_alter(&$form, FormStateInterface $form_state) {
 
   $markup = '<p style="border:2px; border-style:solid; border-color:#FF0000; padding: 1em;">';
-  $markup .= t('Before sending your question, are you sure that the answer is not in our Frequently Asked Questions (see Frequently Asked Questions in the footer)?');
+  $markup .= t('Before sending your question, are you sure that the answer is not in our Frequently Asked Questions (see menu in the footer)?');
   $markup .= '</p>';
   $form['warning'] = [
     '#markup' => check_markup($markup, 'full_html'),
