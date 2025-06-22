@@ -18,7 +18,10 @@ class ServiceDeleteForm extends ContentEntityDeleteForm {
     $entity->delete();
 
     $form_state->setRedirectUrl($this->setUrl());
-    \Drupal::messenger()->addMessage($this->getDeletionMessage());
+    \Drupal::messenger()
+      ->addMessage($this->t('Service « @label » has been deleted.', [
+        '@label' => $entity->label(),
+      ]));
   }
 
   public function setUrl() {
@@ -46,14 +49,6 @@ class ServiceDeleteForm extends ContentEntityDeleteForm {
 
   public function getCancelUrl() {
     return $this->setUrl();
-  }
-
-  protected function getDeletionMessage() {
-    $entity = $this->getEntity();
-    \Drupal::messenger()
-      ->addMessage($this->t('Service « @label » has been deleted.', [
-        '@label' => $entity->label(),
-      ]));
   }
 
 }

@@ -14,6 +14,7 @@ use Drupal\Core\Url;
 class ExchangeDeleteForm extends ContentEntityDeleteForm {
 
   public function submitForm(array &$form, FormStateInterface $form_state) {
+
     $entity = $this->getEntity();
 
     $sSeliste = $entity->from_seliste_id->target_id;
@@ -31,8 +32,10 @@ class ExchangeDeleteForm extends ContentEntityDeleteForm {
     $entity->delete();
 
     $form_state->setRedirectUrl($this->setUrl());
-
-    \Drupal::messenger()->addMessage($this->getDeletionMessage());
+    \Drupal::messenger()
+      ->addMessage($this->t('Exchange « @label » has been deleted.', [
+        '@label' => $entity->label(),
+      ]));
 
   }
 
@@ -62,16 +65,6 @@ class ExchangeDeleteForm extends ContentEntityDeleteForm {
 
   public function getCancelUrl() {
     return $this->setUrl();
-  }
-
-  protected function getDeletionMessage() {
-
-    $entity = $this->getEntity();
-    \Drupal::messenger()
-      ->addMessage($this->t('Exchange « @label » has been deleted.', [
-        '@label' => $entity->label(),
-      ]));
-
   }
 
 }

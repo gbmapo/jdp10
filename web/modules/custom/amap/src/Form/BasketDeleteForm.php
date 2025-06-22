@@ -19,7 +19,8 @@ class BasketDeleteForm extends ContentEntityDeleteForm {
     $entity->delete();
 
     $form_state->setRedirect('view.amap_baskets.page_1');
-    \Drupal::messenger()->addMessage($this->getDeletionMessage());
+    \Drupal::messenger()
+      ->addMessage($this->t('The basket « @id » has been deleted.', ['@id' => $entity->id()]));
 
   }
 
@@ -29,12 +30,6 @@ class BasketDeleteForm extends ContentEntityDeleteForm {
 
   public function getCancelUrl() {
     return Url::fromRoute('view.amap_baskets.page_1');
-  }
-
-  protected function getDeletionMessage() {
-    $entity = $this->getEntity();
-    \Drupal::messenger()
-      ->addMessage($this->t('The basket « @id » has been deleted.', ['@id' => $entity->id()]));
   }
 
 }
