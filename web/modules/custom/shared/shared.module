@@ -267,6 +267,10 @@ function shared_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       }
       break;
 
+    case 'views_exposed_form':
+      $form["actions"]["submit"]["#value"] = t("Apply");
+      break;
+
     default:
 
   }
