@@ -543,7 +543,7 @@ final class Membership extends FormBase {
     if ($this->currentUser()->isAnonymous()) {
       $temp = _existsEmail($email1, $_SERVER["REQUEST_URI"]);
       if ($temp) {
-        if ($temp[1] == 4) {
+        if ($temp[1] >= 4) {
           $form_state->setErrorByName('email1', $temp[0]);
         }
       }
@@ -559,7 +559,7 @@ final class Membership extends FormBase {
             ->isAnonymous() || (is_null($form_state->getStorage()['ap_id2']))) {
           $temp = _existsEmail($email2, $_SERVER["REQUEST_URI"]);
           if ($temp) {
-            if ($temp[1] == 4) {
+            if ($temp[1] >= 4) {
               $form_state->setErrorByName('email2', $temp[0]);
             }
           }
@@ -802,21 +802,15 @@ final class Membership extends FormBase {
       '#type' => 'checkbox',
       '#prefix' => '<br>',
       '#title' => $this->t('Je m’engage à respecter les statuts disponibles sur le site de l’association.'),
-      '#required' => TRUE,
-      '#required_error' => t('You must commit to observe the statuses of the association.'),
     ];
 
     $form['authorisation'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('J’autorise l’association à utiliser mes informations personnelles à des fins de communication interne.'),
-      '#required' => TRUE,
-      '#required_error' => t('You must authorise the association to use your personal information.'),
     ];
     $form['commitment2'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Je m’engage à ne pas utiliser les informations personnelles des autres adhérents à des fins privées, notamment commerciales, ou dans un but qui serait contraire aux statuts de l’association.'),
-      '#required' => TRUE,
-      '#required_error' => t('You must commit not to use the information of other members for personal purposes.'),
     ];
 
     if ($this->currentUser()->isAnonymous()) {
@@ -885,17 +879,12 @@ final class Membership extends FormBase {
           'how_pageinstagram' => 'page instagram',
           'how_autre' => 'autre...',
         ],
-        '#required' => TRUE,
-        '#required_error' => t('Please, tell us how you knew <b>Le Jardin de Poissy</b>.'),
       ];
       $form['how_autre'] = [
         '#type' => 'textfield',
         '#size' => 64,
         '#states' => [
           'visible' => [
-            ':input[name="how[how_autre]"]' => ['checked' => TRUE],
-          ],
-          'required' => [
             ':input[name="how[how_autre]"]' => ['checked' => TRUE],
           ],
         ],
@@ -945,8 +934,6 @@ final class Membership extends FormBase {
         1 => $this->t('by bank transfer'),
         2 => $this->t('by card'),
       ],
-      '#required' => TRUE,
-      '#required_error' => t('You must choose a subscription payment method.'),
     ];
 
     $markup = '<br>Votre chèque doit être envoyé à :<br>Le Jardin de Poissy<br>28 bis boulevard Victor Hugo<br>78300 Poissy<br>Ne pas oublier d’indiquer votre désignation d’adhérent (<span style="color: #0000ff;">' . $form_state->getStorage()['designation'] . '</span>) au verso.<br><br>';
@@ -1013,10 +1000,39 @@ final class Membership extends FormBase {
 
   public function step3Validate(array &$form, FormStateInterface $form_state) {
 
+    if ($form_state->getValue('commitment1') == '0') {
+      $form_state->setErrorByName('commitment1', $this->t('You must commit to observe the statuses of the association.'));
+    }
+    if ($form_state->getValue('authorisation') == '0') {
+      $form_state->setErrorByName('authorisation', $this->t('You must authorise the association to use your personal information.'));
+    }
+    if ($form_state->getValue('commitment2') == '0') {
+      $form_state->setErrorByName('commitment2', $this->t('You must commit not to use the information of other members for personal purposes.'));
+    }
     if ($form_state->getValue('amap') == '1') {
       if ($form_state->getValue('commitment3')['dist'] == 0 || $form_state->getValue('commitment3')['work'] == 0) {
         $form_state->setErrorByName('commitment3', $this->t('You must commit to distributions and educational workshops.'));
       }
+    }
+    $zeros = TRUE;
+    foreach ($form_state->getValue('how') as $value) {
+      if ($value != '0') {
+        $zeros = FALSE;
+        break;
+      }
+    }
+    if ($zeros) {
+      $form_state->setErrorByName('how', $this->t('Please, tell us how you knew <b>Le Jardin de Poissy</b>.'));
+    }
+    else {
+      if ($form_state->getValue('how')['how_autre'] == 'how_autre') {
+        if ($form_state->getValue('how_autre') == '') {
+          $form_state->setErrorByName('how_autre', $this->t('You must tell us by what other mean you knew <b>Le Jardin de Poissy</b>.'));
+        }
+      }
+    }
+    if (is_null($form_state->getValue('payment'))) {
+      $form_state->setErrorByName('payment', $this->t('You must choose a subscription payment method.'));
     }
 
   }
@@ -1042,7 +1058,7 @@ final class Membership extends FormBase {
           }
         }
         $contracts = substr($contracts, 0, strlen($contracts) - 2);
-        $contracts = ($contracts) ? 'AMAP : ' . $contracts . '.' : '';
+        $contracts = 'AMAP : ' . (($contracts) ? $contracts . '.' : '.');
         $aCleanValues['contracts'] = $contracts;
       }
     }
@@ -1210,6 +1226,7 @@ final class Membership extends FormBase {
       else {
         $idM = $form_state->getStorage()['am_id'];
         $member = $storage->load($idM);
+        $member->comment = $form_state->getStorage()['payment'];
       }
       $member->addresssupplement = $form_state->getStorage()['addresssupplement'];
       $member->changed = $now;
@@ -1221,7 +1238,6 @@ final class Membership extends FormBase {
       $member->telephone = $form_state->getStorage()['telephone'];
       $member->status = $form_state->getStorage()['status'];
       $member->enddate = '2037-12-31';
-      $member->comment = $form_state->getStorage()['payment'];
       $member->save();
       if ($anon) {
         $idM = $member->id();
