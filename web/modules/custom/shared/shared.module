@@ -290,16 +290,20 @@ function _getUploadMaxSize() {
 
 function _validate_file_size($element, &$form_state, $form) {
 
-  $maxsize = _getUploadMaxSize();
   if (isset($_FILES["files"])) {
-    if (is_uploaded_file($_FILES['files']['tmp_name']['views_send_attachments'])) {
-      if ($_FILES["files"]["size"]["views_send_attachments"] > $maxsize * 1024 * 1024) {
-        $form_state->setErrorByName('mail',
-          t('The uploaded file is bigger than the allowed size of @size MB.', ['@size' => $maxsize]));
+    if ($_FILES["files"]["tmp_name"]["views_send_attachments"] <> "") {
+      if (is_uploaded_file($_FILES['files']['tmp_name']['views_send_attachments'])) {
+        $maxsize = _getUploadMaxSize();
+        if ($_FILES["files"]["size"]["views_send_attachments"] > $maxsize * 1024 * 1024) {
+          $form_state->setErrorByName('mail',
+            t('The uploaded file is bigger than the allowed size of @size MB.', ['@size' => $maxsize]));
+        }
+/*
+        else {
+          $form_state->setErrorByName('mail', t('The file could not be uploaded.'));
+        }
+ */
       }
-    }
-    else {
-      $form_state->setErrorByName('mail', t('The file could not be uploaded.'));
     }
   }
 
