@@ -16,6 +16,7 @@ use Drupal\Component\Render\FormattableMarkup;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 use Drupal\Component\Utility\Environment;
+use Drupal\file\Entity\File;
 
 /**
  * Implements hook_help().
@@ -166,6 +167,11 @@ function shared_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   }
 
   switch ($form_id) {
+
+    case 'views_exposed_form':
+      $form["actions"]["submit"]["#value"] = t("Apply");
+      break;
+
     case 'views_form_amap_contracts_subscriptions_page_1_':
     case 'views_form_association_sendemails_page_1':
     case 'views_form_association_sendemails_page_2':
@@ -254,9 +260,20 @@ function shared_form_alter(&$form, FormStateInterface $form_state, $form_id) {
             '#required' => TRUE,
           ];
           $form['mail']['token']['#type'] = 'hidden';
-          $maxsize = _getUploadMaxSize();
-          $form['mail']['views_send_attachments']['#description'] = t('Limited to @size MB.', ['@size' => $maxsize]);
-          $form['mail']['views_send_attachments']['#element_validate'] = ['_validate_file_size'];
+          $uploadMaxSize = Environment::getUploadMaxSize();
+          $uploadMaxSizeInMB = $uploadMaxSize / (1024 * 1024);
+          unset($form['mail']['views_send_attachments']);
+          $form['mail']['views_send_attachments'] = [
+            '#type' => 'managed_file',
+            '#title' => t('Attachment'),
+            '#upload_location' => 'public://views_send_attachments/',
+            '#description' => t('Limited to @size MB.', ['@size' => $uploadMaxSizeInMB]) . ' ' . t('Allowed types: pdf doc docx xls xlsx png jpg jpeg.'),
+            '#upload_validators' => [
+              'file_validate_extensions' => ['pdf doc docx xls xlsx png jpg jpeg'],
+              'file_validate_size' => [$uploadMaxSize],
+            ],
+          ];
+          $form['mail']['views_send_attachments']['#element_validate'] = ['_validate_attachment'];
           $form['additional']['#type'] = 'hidden';
           $form['views_send_remember']['#type'] = 'hidden';
           $form['views_send_direct']['#default_value'] = 0;
@@ -272,42 +289,36 @@ function shared_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       }
       break;
 
-    case 'views_exposed_form':
-      $form["actions"]["submit"]["#value"] = t("Apply");
-      break;
-
     default:
 
   }
 
 }
 
-function _getUploadMaxSize() {
-  $uploadMaxSize = Environment::getUploadMaxSize();
-  $uploadMaxSizeInMB = $uploadMaxSize / (1024 * 1024);
-  return $uploadMaxSizeInMB;
-}
+function _validate_attachment($element, &$form_state, $form) {
 
-function _validate_file_size($element, &$form_state, $form) {
-
-  if (isset($_FILES["files"])) {
-    if ($_FILES["files"]["tmp_name"]["views_send_attachments"] <> "") {
-      if (is_uploaded_file($_FILES['files']['tmp_name']['views_send_attachments'])) {
-        $maxsize = _getUploadMaxSize();
-        if ($_FILES["files"]["size"]["views_send_attachments"] > $maxsize * 1024 * 1024) {
-          $form_state->setErrorByName('mail',
-            t('The uploaded file is bigger than the allowed size of @size MB.', ['@size' => $maxsize]));
-        }
-/*
-        else {
-          $form_state->setErrorByName('mail', t('The file could not be uploaded.'));
-        }
- */
+  if (isset($_FILES['files'])) {
+    $fid = $form_state->getValue('views_send_attachments')['fids'][0];
+    $file = File::load($fid);
+    if (!$file) {
+      $form_state->setErrorByName('mail', t('Error uploading file.'));
+    }
+    else {
+      $form_state->set(['views_send_attachments_hack'], [$file]);
+    }
+  }
+  else {
+    if ($form_state->get('views_send_attachments_hack') != NULL) {
+      if ($form_state->get('views_send_attachments_hack')[0] instanceof \Drupal\file\Entity\File) {
       }
+    }
+    else {
+      $form_state->set(['views_send_attachments_hack'], "");
     }
   }
 
 }
+
 
 function shared_node_access(NodeInterface $node, $op, AccountInterface $account) {
 
