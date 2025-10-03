@@ -1,17 +1,16 @@
-uuid: 68642099-121a-4610-9acb-66475f9c1853
+uuid: bc980767-9698-47e6-97dd-c51d5077f2a0
 langcode: fr
-status: false
+status: true
 dependencies:
   module:
     - poll
-    - system
     - user
   theme:
     - milipro
 id: milipro_sondageleplusrecent
 theme: milipro
-region: sidebar_first
-weight: 0
+region: hidden_blocks
+weight: -7
 provider: null
 plugin: poll_recent_block
 settings:
@@ -20,10 +19,6 @@ settings:
   label_display: visible
   provider: poll
 visibility:
-  request_path:
-    id: request_path
-    negate: false
-    pages: "<front>\r\n/node/25"
   user_role:
     id: user_role
     negate: false
