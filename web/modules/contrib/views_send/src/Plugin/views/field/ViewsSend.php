@@ -124,6 +124,8 @@ class ViewsSend extends BulkForm {
         $form_state->set('configuration', $form_state_values);
 
         // If a file was uploaded, process it.
+/* TODO by zonfal
+ *
         if (VIEWS_SEND_MIMEMAIL && \Drupal::currentUser()->hasPermission('attachments with views_send') &&
             isset($_FILES['files']) && is_uploaded_file($_FILES['files']['tmp_name']['views_send_attachments'])) {
           // attempt to save the uploaded file
@@ -138,6 +140,16 @@ class ViewsSend extends BulkForm {
             // set files to form_state, to process when form is submitted
             // @todo: when we add a multifile formfield then loop through to add each file to attachments array
             $form_state->set(array('configuration', 'views_send_attachments'), $files);
+          }
+        }
+ */
+        if (isset($form_state_values["views_send_attachments"][0])) {
+          $file = \Drupal\file\Entity\File::load($form_state_values["views_send_attachments"][0]);
+          if (!$file) {
+            $form_state->setErrorByName('mail', t('Error uploading file.'));
+          }
+          else {
+            $form_state->set(array('configuration', 'views_send_attachments'), [$file]);
           }
         }
 

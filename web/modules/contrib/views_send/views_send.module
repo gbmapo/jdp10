@@ -195,12 +195,27 @@ function views_send_config_form(&$form, &$form_state, $view) {
     // set the form encoding type
     $form['#attributes']['enctype'] = "multipart/form-data";
 
+/* TODO by zonfal
+ *
     // add a file upload file
     $form['mail']['views_send_attachments'] = array(
       '#type' => 'file',
       '#title' => t('Attachment'),
       '#description' => t('NB! The attached file is stored once per recipient in the database if you aren\'t sending the message directly.'),
     );
+ */
+    $uploadMaxSize = \Drupal\Component\Utility\Environment::getUploadMaxSize();
+    $uploadMaxSizeInMB = $uploadMaxSize / (1024 * 1024);
+    $form['mail']['views_send_attachments'] = [
+      '#type' => 'managed_file',
+      '#title' => t('Attachment'),
+      '#upload_location' => 'public://views_send_attachments/',
+      '#description' => t('Allowed types: pdf, doc, docx, xls, xlsx, png, jpg, jpeg.') . ' ' . t('Limited to @size MB.', ['@size' => $uploadMaxSizeInMB]),
+      '#upload_validators' => [
+        'file_validate_extensions' => ['pdf doc docx xls xlsx png jpg jpeg'],
+        'file_validate_size' => [$uploadMaxSize],
+      ],
+    ];
   }
 
   $form['additional'] = array(
@@ -1121,8 +1136,8 @@ function _views_send_email_message_property_info() {
  * Returns the textual content from a HTML string after
  * stripping tags, trimming and decoding HTML entities.
  *
- * Typically used when handling data from getField that 
- * returns HTML (with entities). We have to sanitize the 
+ * Typically used when handling data from getField that
+ * returns HTML (with entities). We have to sanitize the
  * data before using it in headers.
  */
 function _views_send_strip_html($html) {
