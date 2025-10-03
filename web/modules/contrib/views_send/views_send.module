@@ -210,7 +210,7 @@ function views_send_config_form(&$form, &$form_state, $view) {
       '#type' => 'managed_file',
       '#title' => t('Attachment'),
       '#upload_location' => 'public://views_send_attachments/',
-      '#description' => t('Allowed types: pdf, doc, docx, xls, xlsx, png, jpg, jpeg.') . ' ' . t('Limited to @size MB.', ['@size' => $uploadMaxSizeInMB]),
+      '#description' => t('Allowed types: @extensions.', ['@extensions' => 'pdf, doc, docx, xls, xlsx, png, jpg, jpeg']) . ' ' . t('Limited to @size MB.', ['@size' => $uploadMaxSizeInMB]),
       '#upload_validators' => [
         'file_validate_extensions' => ['pdf doc docx xls xlsx png jpg jpeg'],
         'file_validate_size' => [$uploadMaxSize],
