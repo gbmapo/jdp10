@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "13087bf1547d4aa02e562a2df729988f",
+    "content-hash": "c402bb4b530ced7f94bc9d6f1621f4e7",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3274,33 +3274,33 @@
         },
         {
             "name": "drupal/mimemail",
-            "version": "1.0.0-alpha6",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/mimemail.git",
-                "reference": "8.x-1.0-alpha6"
+                "reference": "2.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/mimemail-8.x-1.0-alpha6.zip",
-                "reference": "8.x-1.0-alpha6",
-                "shasum": "c25246747dac4372c7d5a5a5fd0f276d9e468eff"
+                "url": "https://ftp.drupal.org/files/projects/mimemail-2.0.0.zip",
+                "reference": "2.0.0",
+                "shasum": "787bc90afec9e34d3ba848fb646b7585fdbe70be"
             },
             "require": {
-                "drupal/core": "^9.3 || ^10",
+                "drupal/core": "^10.3 || ^11",
                 "drupal/mailsystem": "^4"
             },
             "require-dev": {
-                "drupal/rules": "^3"
+                "drupal/rules": "^4.0"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.0-alpha6",
-                    "datestamp": "1697143284",
+                    "version": "2.0.0",
+                    "datestamp": "1758909753",
                     "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Alpha releases are not covered by Drupal security advisories."
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
                     }
                 }
             },
@@ -3310,7 +3310,11 @@
             ],
             "authors": [
                 {
-                    "name": "TR",
+                    "name": "mark_fullmer",
+                    "homepage": "https://www.drupal.org/user/2612816"
+                },
+                {
+                    "name": "tr",
                     "homepage": "https://www.drupal.org/user/202830"
                 }
             ],
@@ -14820,7 +14824,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "drupal/mimemail": 15,
         "drupal/poll": 15,
         "drupal/potx": 15,
         "drupal/ultimate_cron": 15,
@@ -14831,6 +14834,6 @@
     "platform": {
         "php": ">=7.0.8"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
