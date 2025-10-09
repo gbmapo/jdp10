@@ -1,0 +1,73 @@
+uuid: 81919c97-26a0-4422-9216-1c269612d4ad
+langcode: fr
+status: true
+dependencies: {  }
+id: compte_a_rebours_ago
+label: 'Compte à rebours AGO'
+body:
+  value: '<!--20251017--><p class="text-align-center" style="font-size:400%;"><span>J-8</span></p><p class="text-align-center">L''Assemblée Générale Ordinaire pour 2025,<br>c''est le vendredi 17 octobre à partir de 19 h 30.<br><br>Tous les détails <a href="/node/249">ici</a>.</p>'
+  format: full_html
+pages: ''
+auto_open: true
+open_modal_on_element_click: ''
+ok_label_button: OK
+top_right_button_label: x
+left_label_button: Rejeter
+enable_dont_show_again_option: false
+dont_show_again_label: "Don't show again"
+modal_size: modal-md
+modal_video_link: ''
+close_modal_esc_key: true
+close_modal_clicking_outside: true
+roles:
+  anonymous: '0'
+  authenticated: '0'
+  seliste: '0'
+  amapien: '0'
+  contact_for_member: '0'
+  referent_of_distribution: '0'
+  referent_of_contract: '0'
+  referent_of_meeting: '0'
+  community_manager: '0'
+  producteur: '0'
+  ca: '0'
+  sponsor: '0'
+  extended_ca: '0'
+  secretary: '0'
+  administrator: '0'
+type: page
+delay_display: '0'
+enable_custom_cookie_expiration: false
+custom_cookie_expiration_time: 10000
+enable_show_on_height: false
+height_offset: ''
+height_offset_touch: '0'
+published: true
+insert_horizontal_line_header: false
+insert_horizontal_line_footer: false
+enable_modal_header: true
+enable_modal_footer: false
+display_title: false
+display_button_x_close: true
+top_right_button_class: ''
+modal_class: ''
+header_class: ''
+footer_class: ''
+enable_left_button: false
+ok_button_class: ''
+left_button_class: ''
+parameters: ''
+enable_right_button: true
+languages_to_show:
+  fr: '0'
+  en: '0'
+redirect_link: ''
+enable_redirect_link: false
+modal_page_auto_hide: false
+modal_page_auto_hide_delay: '5'
+modal_page_show_once: false
+publish_on: 0
+unpublish_on: 0
+prevent_default: 0
+enable_maximize_button: 0
+maximize_button_class: ''
