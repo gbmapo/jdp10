@@ -16,6 +16,7 @@ use Drupal\user\Entity\User;
 use Drupal\views\Plugin\views\query\QueryPluginBase;
 use Drupal\views\ViewExecutable;
 use Drupal\views\Views;
+use Drupal\Core\Datetime\DrupalDateTime;
 
 function association_help($route_name, RouteMatchInterface $route_match) {
 
@@ -126,6 +127,29 @@ function association_cron() {
     ]);
     \Drupal::logger('association')
       ->error($message);
+  }
+
+  /*
+    Mise à jour du compte à rebours pour l'AGO
+   */
+  $modal = \Drupal::entityTypeManager()
+    ->getStorage('modal')
+    ->load('compte_a_rebours_ago');
+
+  if ($modal->getPublished()) {
+    $today = DrupalDateTime::createFromTimestamp(strtotime("now"), new \DateTimeZone('Europe/Paris'))
+      ->format('Ymd');
+    $body = $modal->getBody()['value'];
+    $delay = substr($body, 4, 8) - $today;
+    $start= strpos($body, '<span>')+6;
+    $end = strpos($body, '</span>');
+    $body = substr_replace($body, 'J-' . $delay, $start, $end - $start);
+    $modal->setBody([
+      'value' => $body,
+      'format' => 'full_html',
+    ]);
+    $modal->save();
+    Cache::invalidateTags(['modal_page:' . $modal->id()]);
   }
 
 }
@@ -485,7 +509,8 @@ function _existsEmail($email, $destination) {
         ];
         break;
       default:
-        \Drupal::logger('association')->notice('<pre>'.print_r($results, TRUE).'</pre>');
+        \Drupal::logger('association')
+          ->notice('<pre>' . print_r($results, TRUE) . '</pre>');
         break;
     }
   }
