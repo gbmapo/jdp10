@@ -19,7 +19,6 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 use Drupal\Core\Render\Element;
-
 use Drupal\Core\Cache\Cache;
 
 const AMAP_AMAPIEN_PER_DISTRIBUTION = 5;
@@ -891,32 +890,26 @@ function _publishModalBourseauxpaniers() {
   $query->orderBy('distributiondate', 'ASC');
   $query->condition('dd.distributiondate', $today, '>=');
   $numberofbaskets = (int) $query->countQuery()->execute()->fetchField();
-  switch ($numberofbaskets) {
 
-    case 0:
-      $modal->setBody([
-        'value' => 'Aucun panier n\'est disponible dans la Bourse aux paniers !',
-        'format' => 'full_html',
-      ]);
-      $modal->setPublished(FALSE);
-      break;
-
-    case 1:
-      $modal->setBody([
-        'value' => 'Un panier est disponible dans la Bourse aux paniers !',
-        'format' => 'full_html',
-      ]);
-      $modal->setPublished(TRUE);
-      break;
-
-    default:
-      $modal->setBody([
-        'value' => 'Des paniers sont disponibles dans la Bourse aux paniers !',
-        'format' => 'full_html',
-      ]);
-      $modal->setPublished(TRUE);
-      break;
+  if ($numberofbaskets == 0) {
+    $value = 'Aucun panier n\'est disponible dans la Bourse aux paniers.';
+    $modal->setPublished(FALSE);
   }
+  else {
+    if ($numberofbaskets == 1) {
+      $value = 'Un panier est disponible dans la Bourse aux paniers.';
+    }
+    else {
+      $value = 'Des paniers sont disponibles dans la Bourse aux paniers.';
+    }
+    $value .= '  <a class="button-round" href="/amap/reserveBasket">J\'y vais !</a>';
+    $modal->setPublished(TRUE);
+  }
+  $modal->setBody([
+    'value' => $value,
+    'format' => 'full_html',
+  ]);
+
   $modal->save();
   Cache::invalidateTags(['modal_page:' . $modal->id()]);
 

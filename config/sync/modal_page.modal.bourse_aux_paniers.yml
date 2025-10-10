@@ -5,12 +5,12 @@ dependencies: {  }
 id: bourse_aux_paniers
 label: 'Bourse aux paniers'
 body:
-  value: 'Des paniers sont disponibles dans la Bourse aux paniers !'
+  value: 'Un panier est disponible dans la Bourse aux paniers ! <a class="button-round" href="/amap/reserveBasket">J''y vais !</a>'
   format: full_html
 pages: "/node/1\r\n/node/25"
 auto_open: true
 open_modal_on_element_click: ''
-ok_label_button: "J'y vais !"
+ok_label_button: OK
 top_right_button_label: x
 left_label_button: Effacer
 enable_dont_show_again_option: true
@@ -62,7 +62,7 @@ languages_to_show:
   fr: '0'
   en: '0'
 redirect_link: /amap/reserveBasket
-enable_redirect_link: true
+enable_redirect_link: false
 modal_page_auto_hide: false
 modal_page_auto_hide_delay: '5'
 modal_page_show_once: false
