@@ -919,7 +919,8 @@ final class Membership extends FormBase {
         <td>Déc : 2 €</td>
       </tr>
       </tbody>
-    </table>';
+    </table> Pour faire face aux difficultés qui impactent notre équilibre financier, nous proposons aux adhérents qui le souhaitent d\'ajouter à cette cotisation (dont le montant est inchangé depuis 2017) un don d\'une valeur laissée à leur appréciation.
+    <br><br>';
     $markup = new FormattableMarkup($markup, []);
     $form['markup2'] = [
       '#type' => 'item',
@@ -1014,20 +1015,22 @@ final class Membership extends FormBase {
         $form_state->setErrorByName('commitment3', $this->t('You must commit to distributions and educational workshops.'));
       }
     }
-    $zeros = TRUE;
-    foreach ($form_state->getValue('how') as $value) {
-      if ($value != '0') {
-        $zeros = FALSE;
-        break;
+    if ($this->currentUser()->isAnonymous()) {
+      $zeros = TRUE;
+      foreach ($form_state->getValue('how') as $value) {
+        if ($value != '0') {
+          $zeros = FALSE;
+          break;
+        }
       }
-    }
-    if ($zeros) {
-      $form_state->setErrorByName('how', $this->t('Please, tell us how you knew <b>Le Jardin de Poissy</b>.'));
-    }
-    else {
-      if ($form_state->getValue('how')['how_autre'] == 'how_autre') {
-        if ($form_state->getValue('how_autre') == '') {
-          $form_state->setErrorByName('how_autre', $this->t('You must tell us by what other mean you knew <b>Le Jardin de Poissy</b>.'));
+      if ($zeros) {
+        $form_state->setErrorByName('how', $this->t('Please, tell us how you knew <b>Le Jardin de Poissy</b>.'));
+      }
+      else {
+        if ($form_state->getValue('how')['how_autre'] == 'how_autre') {
+          if ($form_state->getValue('how_autre') == '') {
+            $form_state->setErrorByName('how_autre', $this->t('You must tell us by what other mean you knew <b>Le Jardin de Poissy</b>.'));
+          }
         }
       }
     }
