@@ -1,0 +1,14 @@
+uuid: 3982afa0-d351-47aa-97eb-cd9a6d8c2c07
+langcode: fr
+status: true
+dependencies:
+  config:
+    - user.role.member
+  module:
+    - user
+id: user_add_role_action.member
+label: 'Ajouter le rôle Adhérent aux utilisateurs sélectionnés'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: member

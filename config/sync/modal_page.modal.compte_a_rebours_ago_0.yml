@@ -1,19 +1,19 @@
-uuid: 81919c97-26a0-4422-9216-1c269612d4ad
+uuid: e55763c9-716f-49b4-965d-718454ca00d5
 langcode: fr
 status: true
 dependencies: {  }
-id: compte_a_rebours_ago
-label: 'Compte à rebours AGO'
+id: compte_a_rebours_ago_0
+label: 'Compte à rebours AGO : 0'
 body:
-  value: '<!--20251017--><p class="text-align-center" style="font-size:400%;"><span>J-1</span></p><p class="text-align-center">L''Assemblée Générale Ordinaire pour 2025,<br>c''est le vendredi 17 octobre à partir de 19 h 30.<br><br>Tous les détails <a href="/node/249">ici</a>.</p>'
+  value: '<p class="text-align-center">L''Assemblée Générale Ordinaire pour 2025,<br>c''est <span class="text-huge" style="color:hsl(0, 75%, 60%);"><strong>aujourd''hui</strong></span> à partir de 19 h 30.<br><br>Tous les détails <a href="/node/249">ici</a>.</p>'
   format: full_html
-pages: "/node/1\r\n/node/25"
+pages: ''
 auto_open: true
 open_modal_on_element_click: ''
 ok_label_button: OK
 top_right_button_label: x
 left_label_button: Rejeter
-enable_dont_show_again_option: false
+enable_dont_show_again_option: true
 dont_show_again_label: "Don't show again"
 modal_size: modal-md
 modal_video_link: ''
@@ -44,9 +44,9 @@ height_offset: ''
 height_offset_touch: '0'
 published: false
 insert_horizontal_line_header: false
-insert_horizontal_line_footer: false
+insert_horizontal_line_footer: true
 enable_modal_header: true
-enable_modal_footer: true
+enable_modal_footer: false
 display_title: false
 display_button_x_close: true
 top_right_button_class: ''

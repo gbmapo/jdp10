@@ -21,7 +21,7 @@ settings:
       value: sel@lejardindepoissy.org
       label: '3. SÉL'
     -
-      value: '260'
+      value: '294'
       label: '2. AMAP Agneau'
     -
       value: '280'
@@ -63,7 +63,7 @@ settings:
       value: '286'
       label: '2. AMAP Pommes-Poires'
     -
-      value: '254'
+      value: '296'
       label: '2. AMAP Porc'
     -
       value: '270'
