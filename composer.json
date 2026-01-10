@@ -45,7 +45,7 @@
         "drupal/views_data_export": "^1.4",
         "drupal/views_send": "^2.0@RC",
         "drupal/xls_serialization": "^2.0",
-        "drush/drush": "^13.6",
+        "drush/drush": "^13.7",
         "vlucas/phpdotenv": "^4.0",
         "webflo/drupal-finder": "^1.0.0",
         "zaporylie/composer-drupal-optimizations": "^1.0"
@@ -112,7 +112,7 @@
         }
     },
     "require-dev": {
-        "drupal/devel": "^5.3",
+        "drupal/devel": "^5.5",
         "drupal/upgrade_status": "^4.3",
         "kint-php/kint": "^6.0",
         "palantirnet/drupal-rector": "^0.20.3"
