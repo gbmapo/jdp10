@@ -488,7 +488,7 @@ final class Membership extends FormBase {
       $temp = isset($form_state->getStorage()['newcontact']) ? $form_state->getStorage()['newcontact'] : 0;
       $form['person2']['newcontact'] = [
         '#type' => 'checkbox',
-        '#title' => $this->t('I wish to be contact for member'),
+        '#title' => $this->t('I wish Person 2 to be contact for member'),
         '#default_value' => $temp,
         '#weight' => $weight,
       ];
