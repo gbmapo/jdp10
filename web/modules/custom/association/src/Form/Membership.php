@@ -482,17 +482,25 @@ final class Membership extends FormBase {
       '#title' => $this->t('I wish to be SÉListe'),
       '#default_value' => $temp,
       '#weight' => $weight,
+      '#states' => [
+        'visible' => [
+          ':input[name="lastname2"]' => ['filled' => TRUE],
+        ],
+      ],
     ];
-    if (!$this->currentUser()->isAnonymous()) {
-      $weight++;
-      $temp = isset($form_state->getStorage()['newcontact']) ? $form_state->getStorage()['newcontact'] : 0;
-      $form['person2']['newcontact'] = [
-        '#type' => 'checkbox',
-        '#title' => $this->t('I wish Person 2 to be contact for member'),
-        '#default_value' => $temp,
-        '#weight' => $weight,
-      ];
-    }
+    $weight++;
+    $temp = isset($form_state->getStorage()['newcontact']) ? $form_state->getStorage()['newcontact'] : 0;
+    $form['person2']['newcontact'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('I wish Person 2 to be contact for member'),
+      '#default_value' => $temp,
+      '#weight' => $weight,
+      '#states' => [
+        'visible' => [
+          ':input[name="lastname2"]' => ['filled' => TRUE],
+        ],
+      ],
+    ];
 
     $form['actions'] = [
       '#type' => 'actions',
@@ -1130,9 +1138,26 @@ final class Membership extends FormBase {
       ->getEditable('association.renewalperiod');
     $rpYear = $config->get('year');
     $thisMonth = $this->currentUser()->isAnonymous() ? date('Y-m') : $rpYear;
+    /*
+        $form['hello'] = [
+          '#type' => 'inline_template',
+          '#template' => '<iframe id="haWidget" allowtransparency="true" src="https://www.helloasso.com/associations/le-jardin-de-poissy/adhesions/adhesion-' . $thisMonth . '/widget-bouton" style="width: 100%; height: 70px; border: none;" onload="window.addEventListener( \'message\', function(e) { const dataHeight = e.data.height; const haWidgetElement = document.getElementById(\'haWidget\'); haWidgetElement.height = dataHeight + \'px\'; } )" ></iframe>',
+        ];
+        $markup = new FormattableMarkup('<p style="width: 100%;text-align: center">
+            Cliquer sur le bouton « Adhérer » pour passer au paiement avec HelloAsso dans une autre fenêtre
+        </p>', []);
+        $form['footer0'] = [
+          '#type' => 'item',
+          '#markup' => $markup,
+        ];
+     */
+
     $form['hello'] = [
       '#type' => 'inline_template',
-      '#template' => '<iframe id="haWidget" allowtransparency="true" scrolling="auto" src="https://www.helloasso.com/associations/le-jardin-de-poissy/adhesions/adhesion-' . $thisMonth . '/widget" style="width:100%;height:750px;border:none;" onload="window.scroll(0, this.offsetTop)"></iframe>',
+      '#template' => '<iframe id="haWidget" allowtransparency="true" src="https://www.helloasso.com/associations/le-jardin-de-poissy/adhesions/adhesion-' . $thisMonth . '/widget-bouton" style="width: 100%; height: 70px; border: none;" onload="window.addEventListener( \'message\', function(e) { const dataHeight = e.data.height; const haWidgetElement = document.getElementById(\'haWidget\'); haWidgetElement.height = dataHeight + \'px\'; } )" ></iframe>
+      <p style="width: 100%; text-align: center">
+      Cliquer sur le bouton « Adhérer » pour passer au paiement avec HelloAsso dans une autre fenêtre
+      </p><br>',
     ];
 
     $markup = new FormattableMarkup('Nota : Vous pouvez trouvez les autres modes de paiement de la cotisation dans la Foire aux Questions.', []);
