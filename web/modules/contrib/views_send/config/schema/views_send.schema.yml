@@ -1,5 +1,5 @@
 views_send.settings:
-  type: mapping
+  type: config_object
   label: 'Views Send Settings'
   mapping:
     throttle:

@@ -3,7 +3,6 @@
 namespace Drupal\views_send\Event;
 
 use Drupal\Component\EventDispatcher\Event;
-use Drupal\Core\TypedData\Plugin\DataType\Map;
 
 /**
  * Event that is fired when an e-mail has been added to the spool.
@@ -13,24 +12,31 @@ class MailAddedEvent extends Event {
   const EVENT_NAME = 'views_send_email_added_to_spool';
 
   /**
-   * The message.
+   * Mail subject.
    *
-   * @var \Drupal\Core\TypedData\Plugin\DataType\Map
+   * @var string
    */
-  public $message;
+  protected $subject;
 
   /**
-   * Constructs the object.
+   * Constructs the mail object.
    *
-   * @param array $message
-   *   The message.
+   * @param $message
    */
   public function __construct($message) {
-    /*
-    FIXME
-    $this->message = new Map();
-    $this->message->setValue($message);
-    */
+    if (is_array($message)) {
+      $message = (object) $message;
+    }
+    $this->subject = $message->subject;
+  }
+
+  /**
+   * Gets the subject of the mail.
+   *
+   * @return string
+   */
+  public function getSubject() {
+    return $this->subject;
   }
 
 }

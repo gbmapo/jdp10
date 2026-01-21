@@ -45,22 +45,6 @@ define('VIEWS_SEND_TOKEN_PREFIX', '[');
 define('VIEWS_SEND_TOKEN_POSTFIX', ']');
 
 /**
- * Detect if there is MIME support (through modules like Mime Mail or Swift Mailer).
- */
-switch (TRUE) {
-  case \Drupal::moduleHandler()->moduleExists('mailgun'):
-  case \Drupal::moduleHandler()->moduleExists('mandrill'):
-  case \Drupal::moduleHandler()->moduleExists('mimemail'):
-  case \Drupal::moduleHandler()->moduleExists('sendgrid_integration'):
-  case \Drupal::moduleHandler()->moduleExists('swiftmailer'):
-    define('VIEWS_SEND_MIMEMAIL', TRUE);
-    break;
-
-  default:
-    define('VIEWS_SEND_MIMEMAIL', FALSE);
-}
-
-/**
  * Gets the selector field if it exists on the passed-in view.
  *
  * @return
@@ -191,31 +175,16 @@ function views_send_config_form(&$form, &$form_state, $view) {
       '#token_types' => $token_types,
     );
   }
-  if (VIEWS_SEND_MIMEMAIL && Drupal::currentUser()->hasPermission('attachments with views_send')) {
+  if (\Drupal::service('views_send.mime')->isAvailable() && Drupal::currentUser()->hasPermission('attachments with views_send')) {
     // set the form encoding type
     $form['#attributes']['enctype'] = "multipart/form-data";
 
-/* TODO by zonfal
- *
     // add a file upload file
     $form['mail']['views_send_attachments'] = array(
       '#type' => 'file',
       '#title' => t('Attachment'),
       '#description' => t('NB! The attached file is stored once per recipient in the database if you aren\'t sending the message directly.'),
     );
- */
-    $uploadMaxSize = \Drupal\Component\Utility\Environment::getUploadMaxSize();
-    $uploadMaxSizeInMB = $uploadMaxSize / (1024 * 1024);
-    $form['mail']['views_send_attachments'] = [
-      '#type' => 'managed_file',
-      '#title' => t('Attachment'),
-      '#upload_location' => 'public://views_send_attachments/',
-      '#description' => t('Allowed types: @extensions.', ['@extensions' => 'pdf, doc, docx, xls, xlsx, png, jpg, jpeg']) . ' ' . t('Limited to @size MB.', ['@size' => $uploadMaxSizeInMB]),
-      '#upload_validators' => [
-        'file_validate_extensions' => ['pdf doc docx xls xlsx png jpg jpeg'],
-        'file_validate_size' => [$uploadMaxSize],
-      ],
-    ];
   }
 
   $form['additional'] = array(
@@ -362,9 +331,9 @@ function views_send_confirm_form(&$form, &$form_state, $view) {
 
   $selection = $form_state->get('selection');
 
-  if (!VIEWS_SEND_MIMEMAIL && ($configuration['views_send_message']['format'] != 'plain_text')) {
-    \Drupal::messenger()->addMessage(t("Only plain text is supported in the message. Any HTML will be converted to text. If you want to format the message with HTML, you'll have to install and enable the <a href=':url'>Mime Mail</a> module.",
-      array(':url' => 'http://drupal.org/project/mimemail'))
+  if (!\Drupal::service('views_send.mime')->isAvailable() && ($configuration['views_send_message']['format'] != 'plain_text')) {
+    \Drupal::messenger()->addMessage(t("Only plain text is supported in the message. Any HTML will be converted to text. If you want to format the message with HTML, you need MIME support - for example using the <a href=':url'>Mime Mail</a> module.",
+      array(':url' => 'https://drupal.org/project/mimemail'))
     );
   }
 
@@ -419,7 +388,7 @@ function views_send_confirm_form(&$form, &$form_state, $view) {
     '#title' => t('Headers'),
     '#markup' => '<div id="views-send-preview-headers" class="views-send-preview-value">' . implode('<br />', $headers) . '</div>',
   );
-  if (VIEWS_SEND_MIMEMAIL && !empty($configuration['views_send_attachments']) && Drupal::currentUser()->hasPermission('attachments with views_send')) {
+  if (\Drupal::service('views_send.mime')->isAvailable() && !empty($configuration['views_send_attachments']) && Drupal::currentUser()->hasPermission('attachments with views_send')) {
     foreach ($configuration['views_send_attachments'] as $attachment) {
       $attachments[] = Html::escape($attachment->getFilename());
     }
@@ -508,19 +477,31 @@ function views_send_queue_mail($params, $selected_rows, $view) {
     $body = str_replace($token_keys, $token_values, $body);
 
     // Global token replacement, and node/user token replacements
-    // if a nid/uid is found in the views result row.
+    // if a nid/uid is found in the views result row or is base table.
     $data = array();
     if (property_exists($view->result[$row_id], 'uid')) {
-      $data['user'] = User::load($view->result[$row_id]->uid);
+      $uid = $view->result[$row_id]->uid;
+    }
+    else {
+      $uid = (string) $view->style_plugin->getField($row_id, 'uid');
+    }
+    if ($uid) {
+      $data['user'] = User::load($uid);
     }
     if (property_exists($view->result[$row_id], 'nid')) {
-      $data['node'] = Node::load($view->result[$row_id]->nid);
+      $nid = $view->result[$row_id]->nid;
+    }
+    else {
+      $nid = (string) $view->style_plugin->getField($row_id, 'nid');
+    }
+    if ($nid) {
+      $data['node'] = Node::load($nid);
     }
     $token_service = \Drupal::service('token');
     $subject = $token_service->replace($subject, $data);
     $body = $token_service->replace($body, $data);
 
-    if (!VIEWS_SEND_MIMEMAIL || (\Drupal::config('mimemail.settings')->get('format') == 'plain_text')) {
+    if (!\Drupal::service('views_send.mime')->isAvailable() || (\Drupal::config('mimemail.settings')->get('format') == 'plain_text')) {
       $body = MailFormatHelper::htmlToText($body);
     }
     else {
@@ -559,9 +540,8 @@ function views_send_queue_mail($params, $selected_rows, $view) {
     else {
       _views_send_prepare_mail($message, $plain_format, $attachments);
 
-      // Removing stuff added because Swift Mailer and Mandrill doesn't
-      // handle attachments in the format function.
-      if (\Drupal::moduleHandler()->moduleExists('swiftmailer') || \Drupal::moduleHandler()->moduleExists('mandrill')) {
+      // Removing stuff added because some modules don't handle attachments in the format function.
+      if (\Drupal::service('views_send.mime')->attachMail()) {
         unset($message['params']);
       }
 
@@ -616,20 +596,6 @@ function views_send_queue_mail($params, $selected_rows, $view) {
 // === Hook implementations ====================================================
 
 /**
- * Implements hook_menu().
- */
-function views_send_menu() {
-  $items = array();
-  $items['admin/config/system/views_send'] = array(
-    'type' => MENU_NORMAL_ITEM,
-    'title' => 'Views Send',
-    'description' => 'Configure Views Send general options.',
-    'route_name' => 'views_send.configure',
-  );
-  return $items;
-}
-
-/**
  * Implements hook_theme().
  */
 function views_send_theme($existing, $type, $theme, $path) {
@@ -645,7 +611,7 @@ function views_send_theme($existing, $type, $theme, $path) {
  */
 function views_send_cron() {
   // Load cron functions.
-  module_load_include('cron.inc', 'views_send');
+  \Drupal::moduleHandler()->loadInclude('views_send', 'cron.inc');
 
   // Send pending messages from spool.
   views_send_send_from_spool();
@@ -791,9 +757,6 @@ function _views_send_format_address($mail, $name, $encode = TRUE) {
  *   An array with file information objects (as returned by file_save_upload).
  */
 function _views_send_prepare_mail(&$message, $plain_format=TRUE, $attachments=array()) {
-  // Extract all variables/keys from the message.
-  extract($message);
-
   /**
    * TODO: In the future, this module will be able to send an existing node.
    * $key will have to make the difference. A value when we pickup a node, other
@@ -803,23 +766,11 @@ function _views_send_prepare_mail(&$message, $plain_format=TRUE, $attachments=ar
 
   // Build message parameters.
   $params = array();
+  $params['subject'] = $message['subject'];
+  $params['body'] = $message['body'];
+  $params['headers'] = $message['headers'];
 
-  $params['from_name'] = $from_name;
-  $params['from_mail'] = $from_mail;
-  $params['from_formatted'] = _views_send_format_address($from_mail, $from_name);
-
-  $params['to_name'] = $to_name;
-  $params['to_mail'] = $to_mail;
-  $to_mail_formatted = array();
-  foreach (explode(',', $to_mail) as $addr) {
-    $to_mail_formatted[] = _views_send_format_address($addr, $to_name);
-  }
-  $params['to_formatted']  = implode(', ', $to_mail_formatted);
-  $params['subject'] = $subject;
-  $params['body'] = $body;
-  $params['headers'] = $headers;
-
-  if (VIEWS_SEND_MIMEMAIL) {
+  if (\Drupal::service('views_send.mime')->isAvailable()) {
     $params['attachments'] = [];
     foreach ($attachments as $attachment) {
       $params['attachments'][] = [
@@ -834,21 +785,21 @@ function _views_send_prepare_mail(&$message, $plain_format=TRUE, $attachments=ar
     }
   }
 
+  $from_formatted = _views_send_format_address($message['from_mail'], $message['from_name']);
+
   // Call Drupal standard mail function, but without sending.
-  $mail = \Drupal::service('plugin.manager.mail')->mail('views_send', $key, $params['to_formatted'], \Drupal::languageManager()->getDefaultLanguage()->getId(), $params, $params['from_formatted'], FALSE);
+  $mail = \Drupal::service('plugin.manager.mail')->mail('views_send', $key,
+    $message['to_mail'], \Drupal::languageManager()->getDefaultLanguage()->getId(), $params, $from_formatted, FALSE);
 
   // Updating message with data from generated mail
-  $message['to_mail'] = $mail['to'];
-  $message['from_mail'] = $mail['from'];
   $message['subject'] = $mail['subject'];
   $message['body'] = $mail['body'];
   $message['headers'] = serialize($mail['headers']);
 
-  // Preserving attachments because Swift Mailer and Mandrill doesn't
-  // handle attachments in the format function.
-  if (!empty($params['attachments']) && (\Drupal::moduleHandler()->moduleExists('mandrill') || \Drupal::moduleHandler()->moduleExists('swiftmailer'))) {
+  // Preserving attachments because some modules don't handle attachments in the format function.
+  if (!empty($params['attachments']) && \Drupal::service('views_send.mime')->attachMail()) {
     $attachments = array();
-    if (\Drupal::moduleHandler()->moduleExists('mandrill')) {
+    if (\Drupal::moduleHandler()->moduleExists('mailchimp_transactional')) {
       foreach ($params['attachments'] as $attachment) {
         $attachments[] = [
           'uri' => $attachment['filepath'],
@@ -873,25 +824,30 @@ function views_send_deliver($message) {
     $message = (object) $message;
   }
 
+  $module = 'views_send';
   $key = 'direct';
   $headers = unserialize($message->headers);
 
-  $mail = array(
-    'to' => $message->to_mail,
-    'from' => $message->from_mail,
+  $to_formatted_arr = array();
+  foreach (explode(',', $message->to_mail) as $to_mail) {
+    $to_formatted_arr[] = _views_send_format_address($to_mail, $message->to_name);
+  }
+  $to_formatted = implode(', ', $to_formatted_arr);
+  $from_formatted = _views_send_format_address($message->from_mail, $message->from_name);
+  $params = [
     'subject' => $message->subject,
     'body' => $message->body,
     'headers' => $headers,
-  );
+  ];
 
-  // Adding attachments explicitly because Swift Mailer and Mandrill doesn't
-  // handle attachments in the format function. Only works for batch delivery of mail.
-  if (!empty($message->params) && (\Drupal::moduleHandler()->moduleExists('swiftmailer') || \Drupal::moduleHandler()->moduleExists('mandrill'))) {
-    $mail['params'] = $message->params;
+  // Adding attachments explicitly because some modules don't handle attachments in the format function.
+  // NB! Only works for batch delivery of mail.
+  if (!empty($message->params['attachments']) && \Drupal::service('views_send.mime')->attachMail()) {
+    $params['attachments'] = $message->params['attachments'];
   }
 
-  $system =  $mail_backend = \Drupal::service('plugin.manager.mail')->getInstance(array('module' => 'views_send', 'key' => $key));
-  return $system->mail($mail);
+  return \Drupal::service('plugin.manager.mail')->mail($module, $key,
+    $to_formatted, \Drupal::languageManager()->getDefaultLanguage()->getId(), $params, $from_formatted, TRUE);
 }
 
 /**
@@ -973,64 +929,62 @@ function views_send_token_help($fields) {
   return $output;
 }
 
-if (\Drupal::moduleHandler()->moduleExists('token')) {
-  /**
-   * Implements hook_token_info().
-   */
-  function views_send_token_info() {
-    $data = array();
-    $fields_name_text = _views_send_get_fields_and_tokens(NULL, 'fields_name_text');
-    if ($fields_name_text) {
-      // We are in the Views form config
-      foreach ($fields_name_text as $field => $title) {
-        $data[$field] = array(
-          'name' => $title,
-          'description' => ''
-        );
-      }
-      $type = array(
-        'name' => t('Views Send'),
-        'description' => t('Tokens for Views Send.'),
-        'needs-data' => 'views-send',
-      );
-      return array(
-        'types' => array('views-send' => $type),
-        'tokens' => array('views-send' => $data),
+/**
+ * Implements hook_token_info().
+ */
+function views_send_token_info() {
+  $data = array();
+  $fields_name_text = _views_send_get_fields_and_tokens(NULL, 'fields_name_text');
+  if ($fields_name_text) {
+    // We are in the Views form config
+    foreach ($fields_name_text as $field => $title) {
+      $data[$field] = array(
+        'name' => $title,
+        'description' => ''
       );
     }
-    else {
-      foreach (_views_send_email_message_property_info() as $key => $info) {
-        $data[$key] = array(
-          'name' => $info['label'],
-          'description' => ''
-        );
-      }
-      $type = array(
-        'name' => t('Views Send e-mail message'),
-        'description' => t('Tokens for Views Send e-mail message.'),
-        'needs-data' => 'views_send_email_message',
-      );
-      return array(
-        'types' => array('views_send_email_message' => $type),
-        'tokens' => array('views_send_email_message' => $data),
-      );
-    }
+    $type = array(
+      'name' => t('Views Send'),
+      'description' => t('Tokens for Views Send.'),
+      'needs-data' => 'views-send',
+    );
+    return array(
+      'types' => array('views-send' => $type),
+      'tokens' => array('views-send' => $data),
+    );
   }
+  else {
+    foreach (_views_send_email_message_property_info() as $key => $info) {
+      $data[$key] = array(
+        'name' => $info['label'],
+        'description' => ''
+      );
+    }
+    $type = array(
+      'name' => t('Views Send e-mail message'),
+      'description' => t('Tokens for Views Send e-mail message.'),
+      'needs-data' => 'views_send_email_message',
+    );
+    return array(
+      'types' => array('views_send_email_message' => $type),
+      'tokens' => array('views_send_email_message' => $data),
+    );
+  }
+}
 
-  /**
-   * Implementation hook_tokens().
-   *
-   * These token replacements are used by Rules and not in the Views form.
-   */
-  function views_send_tokens($type, $tokens, array $data = array(), array $options = array()) {
-    $replacements = array();
-    if ($type == 'views_send_email_message' && !empty($data['views_send_email_message'])) {
-      foreach ($tokens as $name => $original) {
-        $replacements[$original] = $data['views_send_email_message']->{$name};
-      }
+/**
+ * Implementation hook_tokens().
+ *
+ * These token replacements are used by Rules and not in the Views form.
+ */
+function views_send_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $replacements = array();
+  if ($type == 'views_send_email_message' && !empty($data['views_send_email_message'])) {
+    foreach ($tokens as $name => $original) {
+      $replacements[$original] = $data['views_send_email_message']->{$name};
     }
-    return $replacements;
   }
+  return $replacements;
 }
 
 /**
@@ -1144,4 +1098,3 @@ function _views_send_strip_html($html) {
   return html_entity_decode(
     trim(strip_tags($html)), ENT_QUOTES);
 }
-
