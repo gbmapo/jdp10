@@ -1,0 +1,4 @@
+services:
+  views_send.mime:
+    class: Drupal\views_send\Service\ViewsSendMime
+    arguments: ['@module_handler']

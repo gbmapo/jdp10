@@ -36,10 +36,6 @@ function views_send_send_from_spool() {
 
       $event = new MailSentEvent($message);
       $event_dispatcher = \Drupal::service('event_dispatcher');
-/* TODO by zonfal
- *
-      $event_dispatcher->dispatch(MailSentEvent::EVENT_NAME, $event);
- */
       $event_dispatcher->dispatch($event, MailSentEvent::EVENT_NAME);
 
       $ok++;
