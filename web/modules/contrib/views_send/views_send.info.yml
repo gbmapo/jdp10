@@ -2,7 +2,7 @@ name: 'Views Send'
 type: module
 description: 'Provides a way to send e-mails from a list created with Views'
 package: Views
-core_version_requirement: ^9.1 || ^10
+core_version_requirement: ^9.1 || ^10 || ^11
 configure: views_send.configure
 dependencies:
   - drupal:views
@@ -10,7 +10,7 @@ dependencies:
 files:
   - views_send.rules.inc
 
-# Information added by Drupal.org packaging script on 2022-12-16
-version: '2.0.0-rc1'
+# Information added by Drupal.org packaging script on 2026-01-21
+version: '2.0.0'
 project: 'views_send'
-datestamp: 1671197650
+datestamp: 1768983442
