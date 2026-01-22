@@ -3,8 +3,9 @@
 namespace Drupal\amap\Form;
 
 use Drupal\Core\Form\ConfirmFormBase;
-use \Drupal\Core\Form\FormStateInterface;
-use \Drupal\Core\Url;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+use Drupal\Core\Utility\Error;
 
 /**
  * Class ContractDuplicateForm.
@@ -81,7 +82,7 @@ class ContractDuplicateForm extends ConfirmFormBase
 
       } catch (\Exception $e) {
         $transaction->rollBack();
-        watchdog_exception('amap', $e);
+        Error::logException('amap', $e);
       }
     }
 
