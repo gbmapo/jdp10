@@ -3,7 +3,7 @@ type: theme
 base theme: stable9
 description: 'MiliPro is a light weight and modern looking Drupal 9 and 10 theme by <a href="https://www.drupar.com" target="_blank">Drupar.com</a>'
 package: Drupar
-core_version_requirement: ^9 || ^10
+core_version_requirement: ^9 || ^10 || ^11
 version: 10.1.2
 # Libraries
 libraries:

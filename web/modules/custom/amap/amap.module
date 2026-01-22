@@ -17,9 +17,9 @@ use Drupal\views\Plugin\views\query\QueryPluginBase;
 use Drupal\views\ViewExecutable;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
-
 use Drupal\Core\Render\Element;
 use Drupal\Core\Cache\Cache;
+use Drupal\Core\File\FileExists;
 
 const AMAP_AMAPIEN_PER_DISTRIBUTION = 5;
 const AMAP_REFERENT_PER_DISTRIBUTION = 1;
@@ -376,7 +376,7 @@ function _export_amap_CSV($view, $page, $contract) {
 
   $data = $view->preview($page)['#markup'];
   \Drupal::service('file_system')
-    ->saveData($data, 'private://contracts/' . $sFileName, FileSystemInterface::EXISTS_REPLACE);
+    ->saveData($data, 'private://contracts/' . $sFileName, FileExists::Replace);
 
 }
 
