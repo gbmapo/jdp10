@@ -213,7 +213,7 @@ function _sendEmailForServicesExtraction($sCase) {
           ->getStorage('service_category')
           ->load($iCategory)->name->value;
         $view = views_embed_view('sel_services', 'embed_1', $iCategory);
-        $view = \Drupal::service('renderer')->renderPlain($view);
+        $view = \Drupal::service('renderer')->renderInIsolation($view);
       } while (strpos($view, "ThisCategoryIsEmpty") !== FALSE);
       $aParams = [
         $sRecipients,
@@ -226,7 +226,7 @@ function _sendEmailForServicesExtraction($sCase) {
     case 'emailfornewservices':
       $dLastExtractionDate = DrupalDateTime::createFromTimestamp(strtotime("- 1 week", strtotime(\Drupal::state()->get('sel.NextEmailForNewServices'))), new \DateTimeZone('Europe/Paris'), )->format('Y-m-d');
       $view = views_embed_view('sel_services', 'embed_2', $dLastExtractionDate);
-      $view = \Drupal::service('renderer')->renderPlain($view);
+      $view = \Drupal::service('renderer')->renderInIsolation($view);
       $aParams = [
         $sRecipients,
         $view,
