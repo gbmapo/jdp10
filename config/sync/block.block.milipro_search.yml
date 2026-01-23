@@ -19,5 +19,5 @@ settings:
   label: Rechercher
   label_display: visible
   provider: search
-  page_id: ''
+  page_id: null
 visibility: {  }
