@@ -5,6 +5,7 @@ dependencies:
   config:
     - user.role.amapien
     - user.role.contact_for_member
+    - user.role.extended_ca
     - user.role.referent_of_contract
     - user.role.referent_of_distribution
     - user.role.seliste
@@ -698,21 +699,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              seliste: '0'
-              amapien: '0'
-              contact_for_member: '0'
-              referent_of_distribution: '0'
-              referent_of_contract: '0'
-              referent_of_meeting: '0'
-              community_manager: '0'
-              producteur: '0'
-              ca: '0'
-              sponsor: '0'
-              extended_ca: '0'
-              secretary: '0'
-              administrator: '0'
-              member: '0'
             reduce: true
           is_grouped: false
           group_info:
@@ -762,6 +748,7 @@ display:
           empty_table: false
           caption: ''
           description: ''
+          class: ''
       row:
         type: fields
         options:
@@ -1222,17 +1209,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              seliste: '0'
-              amapien: '0'
-              contact_for_member: '0'
-              referent_of_distribution: '0'
-              referent_de_rencontre: '0'
-              referent_of_contract: '0'
-              producteur: '0'
-              secretary: '0'
-              administrator: '0'
-              member: '0'
             min_placeholder: ''
             max_placeholder: ''
             placeholder: ''
@@ -1353,6 +1329,7 @@ display:
           empty_table: false
           caption: ''
           description: ''
+          class: ''
       row:
         type: fields
         options:
@@ -1809,14 +1786,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              seliste: '0'
-              amapien: '0'
-              contact_for_member: '0'
-              referent_of_distribution: '0'
-              referent_of_contract: '0'
-              secretary: '0'
-              administrator: '0'
             min_placeholder: ''
             max_placeholder: ''
             placeholder: ''
@@ -1906,18 +1875,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              seliste: '0'
-              amapien: '0'
-              contact_for_member: '0'
-              referent_of_distribution: '0'
-              referent_de_rencontre: '0'
-              referent_of_contract: '0'
-              producteur: '0'
-              ca: '0'
-              extended_ca: '0'
-              secretary: '0'
-              administrator: '0'
             reduce: true
           is_grouped: false
           group_info:
@@ -1972,20 +1929,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              seliste: '0'
-              amapien: '0'
-              contact_for_member: '0'
-              referent_of_distribution: '0'
-              referent_of_contract: '0'
-              referent_of_meeting: '0'
-              community_manager: '0'
-              producteur: '0'
-              ca: '0'
-              sponsor: '0'
-              extended_ca: '0'
-              secretary: '0'
-              administrator: '0'
             placeholder: ''
           is_grouped: false
           group_info:
@@ -2062,6 +2005,7 @@ display:
           empty_table: false
           caption: ''
           description: ''
+          class: ''
       row:
         type: fields
         options:
