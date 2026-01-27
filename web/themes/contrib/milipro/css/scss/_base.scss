@@ -1,19 +1,20 @@
 /**
  * Variables
  */
- :root {
+:root {
   --color-primary: #d1392b;
-  --color-secondary: #FFA800;
+  --color-secondary: #ffa800;
+  --theme-color: #d1392b;
   --bg-body: #fcfbf8;
   --sidebar-bg: #ffffff;
   --text-color: #404040;
   --bold-color: #191919;
   --light: #f5f2ed;
-  --dark: #4E100B;
+  --dark: #4e100b;
   --border-color: #d6d6d6;
   --shadow: 0 0 1rem #dddddd;
-  --font-text: "Heebo", sans-serif;
-  --font-heading: "Poppins", sans-serif;
+  --font-text: "heebo", sans-serif;
+  --font-heading: "poppins", sans-serif;
 }
 /* Default Box sizing */
 *,
@@ -176,10 +177,6 @@ strong {
   font-weight: bolder;
   color: var(--bold-color);
 }
-em {
-  font-style: normal;
-  color: var(--color-primary);
-}
 dfn,
 cite {
   font-style: italic;
@@ -264,7 +261,7 @@ img,
 picture,
 svg {
   max-width: 100%;
-  display: block;
+  display: inline-block;
 }
 img,
 a img {

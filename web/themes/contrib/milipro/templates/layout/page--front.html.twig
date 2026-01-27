@@ -33,31 +33,3 @@
   {% include '@milipro/template-parts/sidebar_sliding.html.twig' %}
 {% endif %}
 {% include '@milipro/template-parts/footer.html.twig' %}
-{% if slider_show %}
-  <script>
-  jQuery(document).ready(function ($) {
-    $(".home-slider").owlCarousel({
-      items: 1,
-      loop: true,
-      autoplay: true,
-      autoplayTimeout: {{ slider_time }},
-      nav: false,
-      dots: {{ slider_dots }},
-      animateOut: '{{ slider_animateout }}',
-      animateIn: '{{ slider_animatein }}',
-    });
-    var windowwidth = $(window).width();
-    var headermainheight = $('.header-main').outerHeight();
-    // $('#slider').css('margin-top', -headermainheight);
-    var sliderheight = $('#slider').height();
-    $('.home-slider .owl-item').css('height', sliderheight);
-    $('.slider-text-container .container').css('height', sliderheight);
-    // slider height adjustment in tab devices
-    if ( windowwidth < 992) {
-      $('.slider-text-container').css('top', headermainheight);
-      var slidercontainer = sliderheight - headermainheight;
-      $('.slider-text-container .container').css('height', slidercontainer);
-    }
-  });
-  </script>
-{% endif %}

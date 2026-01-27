@@ -1,0 +1,23 @@
+uuid: 4cb5b934-f19b-4d22-b3d5-43620b1bc7e3
+langcode: fr
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:260b4b91-79b3-4259-a9de-c58d4fbe5808'
+  module:
+    - block_content
+  theme:
+    - milipro
+id: milipro_mycookieconsent
+theme: milipro
+region: cookie_text
+weight: 0
+provider: null
+plugin: 'block_content:260b4b91-79b3-4259-a9de-c58d4fbe5808'
+settings:
+  id: 'block_content:260b4b91-79b3-4259-a9de-c58d4fbe5808'
+  label: 'My Cookie Consent'
+  label_display: '0'
+  provider: block_content
+  view_mode: full
+visibility: {  }

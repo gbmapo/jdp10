@@ -19,3 +19,65 @@ Version 10.1.2
 24 Oct 2023
 +===============================+
 # Fixed minor known bugs.
+
+
+
++===============================+
+Version 11.0.0
+06 Aug 2024
++===============================+
+# Initial release of 11.x.x series.
+# Drupal 11 compatible.
+
+
++===============================+
+Version 11.0.1
+22 Aug, 2024
++===============================+
+# Fixed slider issue in Drupal 11
+# Removed Owl Carousel by tiny slider.
+# Requires new slider code on old websites.
+# Added new slider styles: Basic, Basic with image, Classic, Layered
+# Unlimited number of sliders can now be created.
+# Slider can now be displayed on multiple pages.
+
+
++===============================+
+Version 11.0.2
+27 Sep, 2024
++===============================+
+# Dropped support for Drupal 8
+# Updated fontawesome5 to ver 5.15.4
+# Added fontawesome6 ver 6.6.0 This can be enabled from theme settings.
+# Added bootstrap icons. This can be enabled from theme settings.
+# New option to add social icons from theme settings.
+# Added more Google material font icons styles.
+# Added option to highlight node author comments.
+# New block region 'copyright' and 'Cookie Consent Message'.
+# Custom copyright text can be added via block region.
+# Cookie consent message can be added via block region.
+# Added styling for view mini pager.
+# Fixed Status Messages styling issue in Drupal 11.
+# Added styling for info message.
+
++===============================+
+Version 11.0.3
+05 Nov, 2024
++===============================+
+# Fixed minor known bugs.
+
+
++===============================+
+Version 11.0.4
+25 Nov, 2024
++===============================+
+# Updated to fontAwesome v6.7.1
+# Fixed minor known bugs.
+
+
++===============================+
+Version 11.1.0
+09 Sep, 2025
++===============================+
+# Deleted template file: field--entity-reference.html.twig
+# Fixed compatibility issue with Média-Gallery and Photoswipe modules.

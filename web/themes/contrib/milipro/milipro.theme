@@ -33,15 +33,6 @@ function milipro_preprocess_page(array &$variables) {
 	$variables['site_name'] = $config->get('name');
 	$variables['site_slogan'] = $config->get('slogan');
   $variables['preloader_option'] = theme_get_setting('preloader_option', 'milipro');
-	$variables['slider_show'] = theme_get_setting('slider_show');
-	$variables['slider_type'] = theme_get_setting('slider_type');
-	$variables['slider_time'] = theme_get_setting('slider_time', 'milipro');
-  $variables['slider_animateout'] = theme_get_setting('slider_animateout', 'milipro');
-  $variables['slider_animatein'] = theme_get_setting('slider_animatein', 'milipro');
-  $variables['slider_dots'] = theme_get_setting('slider_dots', 'milipro');
-	$variables['slider_code'] = theme_get_setting('slider_code', 'milipro');
-	$variables['slider_classic_code'] = theme_get_setting('slider_classic_code');
-	$variables['slider_single_code'] = theme_get_setting('slider_single_code');
 	$variables['all_icons_show'] = theme_get_setting('all_icons_show', 'milipro');
 	$variables['facebook_url'] = santise_val_url(theme_get_setting('facebook_url', 'milipro'));
 	$variables['twitter_url'] = santise_val_url(theme_get_setting('twitter_url', 'milipro'));
@@ -53,6 +44,7 @@ function milipro_preprocess_page(array &$variables) {
   $variables['whatsapp_url'] = santise_val_url(theme_get_setting('whatsapp_url', 'milipro'));
 	$variables['github_url'] = santise_val_url(theme_get_setting('github_url', 'milipro'));
 	$variables['vk_url'] = santise_val_url(theme_get_setting('vk_url', 'milipro'));
+	$variables['social_new_code'] = theme_get_setting('social_new_code', 'milipro');
   $variables['sticky_header_option'] = theme_get_setting('sticky_header_option', 'milipro');
 
 	// sidebar
@@ -60,26 +52,22 @@ function milipro_preprocess_page(array &$variables) {
   $variables['animated_sidebar_option'] = theme_get_setting('animated_sidebar_option', 'milipro');
 	$variables['scrolltotop_on'] = theme_get_setting('scrolltotop_on', 'milipro');
 	$variables['copyright_text'] = theme_get_setting('copyright_text', 'milipro');
-  $variables['copyright_text_custom'] = theme_get_setting('copyright_text_custom', 'milipro');
+  $variables['copyright_custom'] = theme_get_setting('copyright_custom', 'milipro');
   $variables['cookie_message'] = theme_get_setting('cookie_message', 'milipro');
-  $variables['cookie_message_custom'] = theme_get_setting('cookie_message_custom', 'milipro');
-  $variables['material_icon'] = theme_get_setting('material_icon', 'milipro');
-	$variables['fontawesome'] = theme_get_setting('fontawesome', 'milipro');
+  $variables['cookie_custom'] = theme_get_setting('cookie_custom', 'milipro');
+	$variables['material_icon_outlined'] = theme_get_setting('material_icon_outlined', 'milipro');
+	$variables['material_icon_filled'] = theme_get_setting('material_icon_filled', 'milipro');
+	$variables['material_icon_round'] = theme_get_setting('material_icon_round', 'milipro');
+	$variables['material_icon_sharp'] = theme_get_setting('material_icon_sharp', 'milipro');
+	$variables['material_icon_tone'] = theme_get_setting('material_icon_tone', 'milipro');
+	$variables['fontawesome_four'] = theme_get_setting('fontawesome_four', 'milipro');
 	$variables['fontawesome_five'] = theme_get_setting('fontawesome_five', 'milipro');
+	$variables['fontawesome_six'] = theme_get_setting('fontawesome_six', 'milipro');
+	$variables['bootstrapicons'] = theme_get_setting('bootstrapicons', 'milipro');
   $variables['iconmonstr'] = theme_get_setting('iconmonstr', 'milipro');
-	// classic slider image
-	$slider_classic_image_id = theme_get_setting('slider_classic_image', 'milipro');
-	if(!empty($slider_classic_image_id)) {
-		$slider_classic_image_file = File::load($slider_classic_image_id[0]);
-		$slider_classic_image_file->setPermanent();
-		$slider_classic_image_file->save();
-		$slider_classic_image_file_usage = \Drupal::service('file.usage');
-		$slider_classic_image_file_usage->add($slider_classic_image_file, 'milipro', 'theme', $slider_classic_image_id[0]);
-	};
-	if(!empty($slider_classic_image_file)) {
-    $imageuri = $slider_classic_image_file->getFileUri();
-    $variables['slider_classic_image_path'] = \Drupal::service('file_url_generator')->generateAbsoluteString($imageuri);
-	};
+
+	// comment
+	$variables['highlight_author_comment'] = theme_get_setting('highlight_author_comment', 'milipro');
 }
 
 /* *
@@ -87,7 +75,6 @@ function milipro_preprocess_page(array &$variables) {
  */
 function milipro_preprocess_node(array &$variables) {
   $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
-	$variables['node_author_pic'] = theme_get_setting('node_author_pic', 'milipro');
 	$variables['node_tags'] = theme_get_setting('node_tags', 'milipro');
   $variables['node_share_page'] = theme_get_setting('node_share_page', 'milipro');
   $variables['node_share_article'] = theme_get_setting('node_share_article', 'milipro');
@@ -107,6 +94,7 @@ function milipro_preprocess_comment(array &$variables) {
   * Used for creating different page layout.
   */
 function milipro_preprocess_html(&$variables) {
+	$variables['base_path'] = base_path();
 	$variables['insert_head'] = theme_get_setting('insert_head');
 	$variables['head_code'] = theme_get_setting('head_code');
 	$variables['insert_body_start'] = theme_get_setting('insert_body_start');
@@ -115,18 +103,7 @@ function milipro_preprocess_html(&$variables) {
 	$variables['body_end_code'] = theme_get_setting('body_end_code');
   $variables['styling'] = theme_get_setting('styling', 'milipro');
   $variables['styling_code'] = theme_get_setting('styling_code', 'milipro');
-  $slider_home = theme_get_setting('slider_show', 'milipro');
-	$slider_type = theme_get_setting('slider_type');
   $is_front = \Drupal::service('path.matcher')->isFrontPage();
-  if ($slider_home == 1 and $is_front == 1) {
-		if($slider_type == 'slider-classic') {
-			$variables['attributes']['class'][] = 'home-slider-classic';
-		} elseif($slider_type == 'slider-layered') {
-			$variables['attributes']['class'][] = 'frontpage';
-		} elseif($slider_type == 'slider-single') {
-			$variables['attributes']['class'][] = 'home-slider-single';
-		}
-  }
 
 	// color
   $variables['color_scheme'] = theme_get_setting('color_scheme', 'milipro');
@@ -156,4 +133,16 @@ function milipro_preprocess_breadcrumb(&$variables) {
 		// Add cache context based on url.
 		$variables['#cache']['contexts'][] = 'url';
 	}
+}
+/**
+ * Implements THEME_preprocess_HOOK() for system messages block.
+ * 10.3 upgrade now missing status-message theme suggestions
+ * and outputs multiple messages on page load.
+ * see https://www.drupal.org/project/drupal/issues/3456176
+ */
+use Drupal\Core\Render\Element\StatusMessages;
+
+function milipro_preprocess_block__system_messages_block(&$variables) {
+  $variables['content'] = StatusMessages::renderMessages();
+	$variables['#cache']['max-age'] = 0;
 }

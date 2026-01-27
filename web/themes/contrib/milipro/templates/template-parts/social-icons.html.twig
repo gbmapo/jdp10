@@ -31,5 +31,8 @@
   {% if vk_url != '' %}
     <li><a href="{{ vk_url }}" target="_blank"><i class="icon-vk" aria-hidden="true"></i></a></li>
   {% endif %}
+  {% if social_new_code != '' %}
+    {{ social_new_code | striptags('<li>,<a>,<i>') | raw }}
+  {% endif %}
 </ul>
 {% endif %}

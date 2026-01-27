@@ -64,8 +64,17 @@
  * @see template_preprocess_comment()
  */
 #}
-
-<article{{ attributes.addClass('js-comment single-comment') }}>
+{%
+  set classes = [
+    'comment',
+    'single-comment',
+    'js-comment',
+    status != 'published' ? status,
+    comment.owner.anonymous ? 'comment-by-anonymous',
+    author_id and author_id == commented_entity.getOwnerId() ? 'comment-by-author',
+  ]
+%}
+<article {{ attributes.addClass(classes).setAttribute('role', 'article').setAttribute('data-drupal-selector', 'comment') }}>
   {#
     Hide the "new" indicator by default, let a piece of JavaScript ask the
     server which comments are new for the user. Rendering the final "new"

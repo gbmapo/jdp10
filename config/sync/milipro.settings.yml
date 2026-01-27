@@ -54,7 +54,7 @@ scrolltotop_on: 1
 cookie_message: 1
 cookie_message_custom: 'Ce site utilise des cookies. En poursuivant votre navigation sur le site, vous acceptez notre utilisation de ces cookies.'
 styling: 1
-styling_code: "img, picture, svg { display: inline-block;}\r\ntr:nth-child(even) {background-color: #f4fce6;}\r\n#myLogo {background: url(/sites/default/files/images/logo.jpg) no-repeat left; height: 107px;}\r\n.form-item {margin-bottom: 0;}\r\n.field-item:first-child { clear: left; }\r\n.image-field { float: left; margin: 0 10px 5px 0; }\r\n@media (max-width: 767px) {\r\n  .home-slider-classic .slider-container {\r\n    flex-direction: column;\r\n    height: 100vh;\r\n  }\r\n  .home-slider-classic .slider-text,\r\n  .home-slider-classic .slider-section {\r\n    height: 50vh;\r\n  }\r\n}"
+styling_code: "img, picture, svg { display: inline-block;}\r\ntr:nth-child(even) {background-color: #e3f2c8;}\r\n#myLogo {background: url(/sites/default/files/images/logo.jpg) no-repeat left; height: 107px;}\r\n.form-item {margin-bottom: 0;}\r\n.field-item:first-child { clear: left; }\r\n.image-field { float: left; margin: 0 10px 5px 0; }\r\n@media (max-width: 767px) {\r\n  .home-slider-classic .slider-container {\r\n    flex-direction: column;\r\n    height: 100vh;\r\n  }\r\n  .home-slider-classic .slider-text,\r\n  .home-slider-classic .slider-section {\r\n    height: 50vh;\r\n  }\r\n}"
 insert_head: 0
 head_code: ''
 insert_body_start: 1
@@ -62,7 +62,7 @@ body_start_code: "<script>\r\nwindow.addEventListener(\"load\", function ()\r\n{
 insert_body_end: 0
 body_end_code: ''
 color_scheme: color_custom
-color_primary: '#9ba983'
+color_primary: '#829b59'
 color_secondary: '#3b6124'
 bg_body: '#fcfbf8'
 block_bg: '#ffffff'
@@ -72,3 +72,15 @@ color_light: '#f5f2ed'
 color_dark: '#4e100b'
 color_border: '#d6d6d6'
 bg_header: '#232323'
+copyright_custom: 0
+cookie_custom: 1
+highlight_author_comment: 0
+social_new_code: ''
+fontawesome_four: 1
+fontawesome_six: 0
+bootstrapicons: 0
+material_icon_outlined: 0
+material_icon_filled: 0
+material_icon_round: 0
+material_icon_sharp: 0
+material_icon_tone: 0

@@ -1,6 +1,16 @@
-/*
- * Clearing
- */
+/* Fix for Media Gallery module */
+.photoswipe-gallery.field-items {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.photoswipe-gallery .field-item {
+  flex: 0 0 300px;
+} 
+.photoswipe-gallery .field-item .image-field {
+  margin: 0;
+}
  
 /* Clearing -> home */
 .home-content .block::before,

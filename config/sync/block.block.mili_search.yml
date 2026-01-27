@@ -1,0 +1,23 @@
+uuid: 3db33c5a-3e54-489f-be23-b59ba30b8524
+langcode: en
+status: true
+dependencies:
+  module:
+    - search
+  theme:
+    - mili
+_core:
+  default_config_hash: '-i2Nw3cjdS3OEh8tkUT-SVBNgfd827cgDW5DcHGyfYw'
+id: mili_search
+theme: mili
+region: hidden_blocks
+weight: -8
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: Search
+  label_display: visible
+  provider: search
+  page_id: ''
+visibility: {  }

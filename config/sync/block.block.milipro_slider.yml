@@ -1,0 +1,28 @@
+uuid: e7d25b40-b035-4892-a918-2da5bf0d4722
+langcode: fr
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:c620f2f4-1f2d-43fb-89dd-c8c4d9e00661'
+  module:
+    - block_content
+    - system
+  theme:
+    - milipro
+id: milipro_slider
+theme: milipro
+region: slider
+weight: 0
+provider: null
+plugin: 'block_content:c620f2f4-1f2d-43fb-89dd-c8c4d9e00661'
+settings:
+  id: 'block_content:c620f2f4-1f2d-43fb-89dd-c8c4d9e00661'
+  label: Slider
+  label_display: '0'
+  provider: block_content
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/node/1\r\n/node/25"
