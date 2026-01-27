@@ -1,6 +1,6 @@
 jQuery(document).ready(function ($) {
 
-  $.fn.dataTable.moment('MM/YYYY');
+  DataTable.datetime('MM/YYYY');
 
   $('#listofmembers').DataTable({
     "language": {
