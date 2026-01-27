@@ -1,47 +1,22 @@
 # Global stylings, css. These will be loaded on every pages.
 global-styling:
-  version: 1.1
+  version: VERSION
   css:
     theme:
+      css/tiny-slider.css: {}
       css/style.css: {}
-
-# Global Javascripts. These will be loaded on every pages.
-global-scripts:
-  version: 1.1
   js:
-    js/slider.js: {}
     js/viewportchecker.js: {}
-    js/cookiealert.js: {}
+    js/tiny-slider.js: {}
     js/milipro.js: {}
   dependencies:
     - core/drupal
     - core/jquery
 
-# Slider classic
-slider-classic:
-  version: 2.1.1
-  css:
-    component:
-      css/slider-classic.css: {}
-  js:
-    js/slider-classic.js: {}
-  dependencies:
-    - core/jquery
-
-# Slider layered
-slider-layered:
-  version: 2.1.1
-  css:
-    component:
-      css/slider.css: {}
-  js:
-    js/slider.js: {}
-  dependencies:
-    - core/jquery
 
 # cookiealert script
 cookiealert-scripts:
-  version: 1.0
+  version: VERSION
   js:
     js/cookiealert.js: {}
 
@@ -63,31 +38,66 @@ book:
 
 # maintenance page
 maintenance:
-  version: 1.0
+  version: VERSION
   css:
     theme:
       css/maintenance.css: {}
 
-# Google Material Icons
-material:
+# Google Material font Icons
+material-outlined:
   version: 4.0.0
   css:
     component:
-      css/material.css: {}
+      css/material-outlined.css: {}
 
-# FontAwesome 4 font icons
-fontawesome:
+# Google Material font Icons
+material-filled:
+  version: 4.0.0
+  css:
+    component:
+      css/material-filled.css: {}
+
+# Google Material font Icons
+material-round:
+  version: 4.0.0
+  css:
+    component:
+      css/material-round.css: {}
+
+# Google Material font Icons
+material-sharp:
+  version: 4.0.0
+  css:
+    component:
+      css/material-sharp.css: {}
+
+# Google Material font Icons
+material-tone:
+  version: 4.0.0
+  css:
+    component:
+      css/material-tone.css: {}
+
+# FontAwesome 4
+fontawesome4:
   version: 4.7.0
   css:
     component:
-      css/font-awesome.css: {}
+      css/fontawesome4.css: {}
 
 # FontAwesome 5
 fontawesome5:
-  version: 5.15.1
+  version: 5.15.4
   css:
     component:
-      css/font-awesome.min.css: {}
+      css/fontawesome5.css: {weight: -10}
+
+# FontAwesome 6
+fontawesome6:
+  version: 6.7.1
+  css:
+    component:
+      css/fontawesome6.css: {weight: -10}
 
 # iconmonstr font icons
 iconmonstr:
@@ -95,6 +105,20 @@ iconmonstr:
   css:
     component:
       css/iconmonstr.css: {}
+
+# Bootstrap Icons
+bootstrap-icons:
+  version: 1.11.3
+  css:
+    component:
+      css/bootstrap-icons.css: {}
+
+# Theme settings
+theme-settings:
+  version: VERSION
+  css:
+    theme:
+      css/theme-settings.css: {}
 
 # Blank
 jq_head:

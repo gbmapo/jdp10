@@ -13,36 +13,24 @@ telegram_url: 'https://telegram.org/'
 whatsapp_url: 'https://web.whatsapp.com/'
 github_url: 'https://github.com/'
 vk_url: ''
-
-#slider
-slider_show: 1
-slider_type: 'slider-layered'
-
-# Slider -> classic and single slide
-slider_classic_image: ''
-slider_classic_image_path: ''
-slider_classic_code: ''
-slider_single_code: ''
-
-# Slider -> layered
-slider_time: 10000
-slider_animateout: 'slideOutDown'
-slider_animatein: 'flipInX'
-slider_dots: 'true'
-slider_code: ''
+social_new_code: ''
 
 # Content
 preloader_option: 1
-comment_user_pic: 1
-node_author_pic: 0
 node_tags: 1
 node_share_page: 1
 node_share_article: 1
 node_share_other: 1
 node_share_front: 1
-material_icon: 0
-fontawesome: 0
+material_icon_outlined: 0
+material_icon_filled: 0
+material_icon_round: 0
+material_icon_sharp: 0
+material_icon_tone: 0
+fontawesome_four: 0
 fontawesome_five: 0
+fontawesome_six: 0
+bootstrapicons: 0
 iconmonstr: 0
 
 # Sidebar
@@ -51,10 +39,14 @@ animated_sidebar_option: 1
 
 # Footer
 copyright_text: 1
-copyright_text_custom: ''
+copyright_custom: 0
 scrolltotop_on: 1
 cookie_message: 1
-cookie_message_custom: ''
+cookie_custom: 0
+
+# comment
+comment_user_pic: 1
+highlight_author_comment: 0
 
 # Custom styling
 styling: 0

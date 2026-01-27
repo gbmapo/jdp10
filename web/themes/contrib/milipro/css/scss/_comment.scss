@@ -95,20 +95,16 @@ h3.single-comment-title {
 #node-comment .indented {
   margin-left: 60px;
 }
-.comment-reply a,
-.comment-delete a,
-.comment-edit a {
+.single-comment-content ul.links.inline {
+  display: flex;
+  gap: 8px;
+}
+.single-comment-content .links a {
   padding: 2px 6px;
   border: 1px dashed var(--color-primary);
   border-radius: 4px;
 }
-.comment-reply a:hover,
-.comment-delete a:hover,
-.comment-edit a:hover {
+.single-comment-content .links a:hover {
   background: var(--color-primary);
   color: #ffffff;
-}
-.comment-delete,
-.comment-edit {
-  margin-right: 4px;
 }

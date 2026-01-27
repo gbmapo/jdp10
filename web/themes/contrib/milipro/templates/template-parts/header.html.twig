@@ -16,7 +16,9 @@
         <div class="header-right">
           {% if animated_sidebar_option %}
             <div class="sliding-panel-icon">
-              <i class="icon-align-left"></i>
+              <span></span>
+              <span></span>
+              <span></span>
             </div>
           {% endif %}
           {% if page.search_box %}
@@ -24,12 +26,13 @@
           {% endif %}
           {% if page.primary_menu %}
             <div class="mobile-menu">
-              <div class="mobile-menu-icon"><span></span></div>
-              {# <i class="icon-bars"></i> #}
+              <span></span>
+              <span></span>
+              <span></span>
             </div>
             <div class="primary-menu-wrapper">
               <div class="menu-wrap">
-                <div class="close-mobile-menu">x</div>
+                <div class="close-mobile-menu"><i class="icon-close" aria-label="Close menu"></i></div>
                 {{ page.primary_menu }}
               </div>
             </div>
@@ -39,13 +42,14 @@
       </div> <!-- /.header-main-container -->
     </div> <!-- /.container -->
   </div> <!-- /.header-main -->
-  {% if is_front and slider_show %}
-    {% include '@milipro/template-parts/slider/' ~ slider_type ~ '.html.twig' %}
-  {% elseif is_front and not slider_show %}
+  {% if sticky_header_option %}
     <div class="sticky-header-height"></div>
-  {% elseif not is_front %}
-    <div class="sticky-header-height"></div>
+  {% endif %}
+  {% if not is_front %}
     {% include '@milipro/template-parts/page_header.html.twig' %}
+  {% endif %}
+  {% if page.slider %}
+    {% include '@milipro/template-parts/slider.html.twig' %}
   {% endif %}
 </header>
 <!-- End: Header -->

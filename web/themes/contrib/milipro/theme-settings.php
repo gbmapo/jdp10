@@ -6,11 +6,12 @@ use Drupal\Core\Form\FormStateInterface;
  */
 
 function milipro_form_system_theme_settings_alter(&$form, FormStateInterface $form_state) {
-  $ver = "10.1.2";
+  $ver = "11.1.0";
+  $form['#attached']['library'][] = 'milipro/theme-settings';
   $theme_update_info = file_get_contents("https://drupar.com/theme-update-info/milipro.txt");
   $form['milipro'] = [
     '#type'       => 'vertical_tabs',
-    '#title'      => '<h3>' . t('MiliPro Theme Settings') . '</h3>',
+    '#title'      => '<h3 class="settings-form-title"></h3>',
     '#default_tab' => 'general',
   ];
 
@@ -18,7 +19,7 @@ function milipro_form_system_theme_settings_alter(&$form, FormStateInterface $fo
   $form['general'] = [
     '#type'  => 'details',
     '#title' => t('General'),
-    '#description' => t('<h3>Thanks for using MiliPro Theme</h3>MiliPro is a premium Drupal 9, 10 theme designed and developed by <a href="https://drupar.com" target="_blank">Drupar.com</a>'),
+    '#description' => t('<h3>Thanks for using MiliPro Theme</h3>MiliPro is a premium Drupal 9, 10, 11 theme designed and developed by <a href="https://drupar.com" target="_blank">Drupar.com</a>'),
     '#group' => 'milipro',
   ];
   // Main Tabs -> color
@@ -27,18 +28,10 @@ function milipro_form_system_theme_settings_alter(&$form, FormStateInterface $fo
     '#title' => t('Theme Color'),
     '#group' => 'milipro',
   ];
-  // Social tab.
-  $form['social'] = [
-    '#type'  => 'details',
-    '#title' => t('Social'),
-    '#description' => t('Social icons settings. These icons appear in footer region.'),
-    '#group' => 'milipro',
-  ];
-
   // Slider tab.
   $form['slider'] = [
     '#type'  => 'details',
-    '#title' => t('Homepage Slider'),
+    '#title' => t('Slider'),
     '#group' => 'milipro',
   ];
 
@@ -67,6 +60,16 @@ function milipro_form_system_theme_settings_alter(&$form, FormStateInterface $fo
   $form['footer'] = [
     '#type'  => 'details',
     '#title' => t('Footer'),
+    '#group' => 'milipro',
+  ];
+  $form['comment'] = [
+    '#type'  => 'details',
+    '#title' => t('Comment'),
+    '#group' => 'milipro',
+  ];
+  $form['components'] = [
+    '#type'  => 'details',
+    '#title' => t('Components'),
     '#group' => 'milipro',
   ];
   // Main Tabs ->Insert codes
@@ -113,302 +116,38 @@ function milipro_form_system_theme_settings_alter(&$form, FormStateInterface $fo
     '#title'       => t('Theme Info'),
     '#description' => t('<a href="https://drupar.com/theme/milipro" target="_blank">Theme Homepage</a> || <a href="https://demo2.drupar.com/milipro/" target="_blank">Theme Demo</a> || <a href="https://drupar.com/milipro-documentation" target="_blank">Theme Documentation</a> || <a href="https://drupar.com/support" target="_blank">Theme Support</a>'),
   ];
-
-  // Settings under social tab.
-  // Show or hide all icons.
-  $form['social']['all_icons'] = [
+  // Slider
+  $form['slider']['slider_type'] = [
     '#type'        => 'fieldset',
-    '#title'       => t('Show Social Icons'),
+    '#title'       => t('Slider Types'),
+    '#description'   => t('<ul><li>Basic Slider (text only)</li><li>Basic Slider (text and image)</li><li>Classic Slider</li><li>Layered Slider</li></ul>'),
   ];
-
-  $form['social']['all_icons']['all_icons_show'] = [
-    '#type'          => 'checkbox',
-    '#title'         => t('Show social icons in footer'),
-    '#default_value' => theme_get_setting('all_icons_show', 'milipro'),
-    '#description'   => t("Check this option to show social icons in footer. Uncheck to hide."),
-  ];
-
-  // Facebook.
-    $form['social']['facebook'] = [
-    '#type'        => 'details',
-    '#title'       => t("Facebook"),
-  ];
-
-  $form['social']['facebook']['facebook_url'] = [
-    '#type'          => 'textfield',
-    '#title'         => t('Facebook Url'),
-    '#description'   => t("Enter yours facebook profile or page url. Leave the url field blank to hide this icon."),
-    '#default_value' => theme_get_setting('facebook_url', 'milipro'),
-  ];
-
-  // Twitter.
-  $form['social']['twitter'] = [
-    '#type'        => 'details',
-    '#title'       => t("Twitter"),
-  ];
-
-  $form['social']['twitter']['twitter_url'] = [
-    '#type'          => 'textfield',
-    '#title'         => t('Twitter Url'),
-    '#description'   => t("Enter yours twitter page url. Leave the url field blank to hide this icon."),
-    '#default_value' => theme_get_setting('twitter_url', 'milipro'),
-  ];
-
-  // Instagram.
-  $form['social']['instagram'] = [
-    '#type'        => 'details',
-    '#title'       => t("Instagram"),
-  ];
-
-  $form['social']['instagram']['instagram_url'] = [
-    '#type'          => 'textfield',
-    '#title'         => t('Instagram Url'),
-    '#description'   => t("Enter yours instagram page url. Leave the url field blank to hide this icon."),
-    '#default_value' => theme_get_setting('instagram_url', 'milipro'),
-  ];
-
-  // Linkedin.
-  $form['social']['linkedin'] = [
-    '#type'        => 'details',
-    '#title'       => t("Linkedin"),
-  ];
-
-  $form['social']['linkedin']['linkedin_url'] = [
-    '#type'          => 'textfield',
-    '#title'         => t('Linkedin Url'),
-    '#description'   => t("Enter yours linkedin page url. Leave the url field blank to hide this icon."),
-    '#default_value' => theme_get_setting('linkedin_url', 'milipro'),
-  ];
-
-  // YouTube.
-  $form['social']['youtube'] = [
-    '#type'        => 'details',
-    '#title'       => t("YouTube"),
-  ];
-
-  $form['social']['youtube']['youtube_url'] = [
-    '#type'          => 'textfield',
-    '#title'         => t('YouTube Url'),
-    '#description'   => t("Enter yours youtube.com page url. Leave the url field blank to hide this icon."),
-    '#default_value' => theme_get_setting('youtube_url', 'milipro'),
-  ];
-
-  // Vimeo
-  $form['social']['vimeo'] = [
-    '#type'        => 'details',
-    '#title'       => t("Vimeo"),
-  ];
-
-  $form['social']['vimeo']['vimeo_url'] = [
-    '#type'          => 'textfield',
-    '#title'         => t('Vimeo Url'),
-    '#description'   => t("Enter yours vimeo.com page url. Leave the url field blank to hide this icon."),
-    '#default_value' => theme_get_setting('vimeo_url', 'milipro'),
-  ];
-
-  // telegram.
-    $form['social']['telegram'] = [
-    '#type'        => 'details',
-    '#title'       => t("Telegram"),
-  ];
-
-  $form['social']['telegram']['telegram_url'] = [
-    '#type'          => 'textfield',
-    '#title'         => t('Telegram Url'),
-    '#description'   => t("Enter yours Telegram profile or page url. Leave the url field blank to hide this icon."),
-    '#default_value' => theme_get_setting('telegram_url', 'milipro'),
-  ];
-
-  // WhatsApp.
-    $form['social']['whatsapp'] = [
-    '#type'        => 'details',
-    '#title'       => t("WhatsApp"),
-  ];
-
-  $form['social']['whatsapp']['whatsapp_url'] = [
-    '#type'          => 'textfield',
-    '#title'         => t('WhatsApp Url'),
-    '#description'   => t("Enter yours whatsapp message url. Leave the url field blank to hide this icon."),
-    '#default_value' => theme_get_setting('whatsapp_url', 'milipro'),
-  ];
-
-  // Github.
-    $form['social']['github'] = [
-    '#type'        => 'details',
-    '#title'       => t("GitHub"),
-  ];
-
-  $form['social']['github']['github_url'] = [
-    '#type'          => 'textfield',
-    '#title'         => t('GitHub Url'),
-    '#description'   => t("Enter yours github page url. Leave the url field blank to hide this icon."),
-    '#default_value' => theme_get_setting('github_url', 'milipro'),
-  ];
-
-    // Social -> vk.com url.
-    $form['social']['vk'] = [
-      '#type'        => 'details',
-      '#title'       => t("vk.com"),
-    ];
-    $form['social']['vk']['vk_url'] = [
-        '#type'          => 'textfield',
-        '#title'         => t('vk.com'),
-        '#description'   => t("Enter yours vk.com page url. Leave the url field blank to hide this icon."),
-        '#default_value' => theme_get_setting('vk_url', 'milipro'),
-    ];
-
-  // Slider sub-vertical tab
-  $form['slider']['slider_tab'] = [
-    '#type'  => 'vertical_tabs',
-  ];
-  // Slider -> Main tab
-  $form['slider']['slider_main_tab'] = [
-    '#type'        => 'details',
-    '#title'       => t('Slider Options'),
-    '#description' => t('Please refer to <a href="https://drupar.com/node/673" target="_blank">slider documentation page</a> for detailed information.'),
-    '#group' => 'slider_tab',
-  ];
-  // Slider -> Classic tab
-  $form['slider']['slider_classic_tab'] = [
-    '#type'        => 'details',
-    '#title'       => t('Classic Slider'),
-    '#group' => 'slider_tab',
-    '#description'   => t("Classic slider is the free mili slider. This is the same slider that is available in the free Mili theme."),
-  ];
-  // Slider -> Single slide tab
-  $form['slider']['slider_single_tab'] = [
-    '#type'        => 'details',
-    '#title'       => t('Single Slide'),
-    '#group' => 'slider_tab',
-  ];
-  // Slider -> Layered slider tab
-  $form['slider']['slider_layered_tab'] = [
-    '#type'        => 'details',
-    '#title'       => t('Layered Slider'),
-    '#group' => 'slider_tab',
-  ];
-  // Slider -> Main tab -> options
-  $form['slider']['slider_main_tab']['slider_enable_option'] = [
+  $form['slider']['slider_faq'] = [
     '#type'        => 'fieldset',
-    '#title'       => t('Enable Slider'),
+    '#title'       => t('Frequently Asked Questions'),
+    '#description'   => t('<h6>Can I create more than one slider?</h6>
+    <p>Yes</p>
+    <hr />
+    <h6>Can I create slider in inner pages?</h6>
+    <p>Yes</p>
+    <hr />
+    <h6>Does the slider support Drupal multilingual?</h6>
+    <p>Yes</p>'),
   ];
-  $form['slider']['slider_main_tab']['slider_enable_option']['slider_show'] = [
-    '#type'          => 'checkbox',
-    '#title'         => t('Show Slider on Homepage'),
-    '#default_value' => theme_get_setting('slider_show'),
-    '#description'   => t("Check this option to show slider on homepage. Uncheck to hide."),
-  ];
-  // Slider -> Select slider type
-  $form['slider']['slider_main_tab']['slider_type_section'] = [
+  $form['slider']['slider_code'] = [
     '#type'        => 'fieldset',
-    '#title'       => t('Slider Style'),
+    '#title'       => t('Slider Code'),
+    '#description'   => t('<p>Please refer to below links for slider codes.<ul>
+    <li><a href="https://drupar.com/node/3413" target="_blank">Slider Basic</a></li>
+    <li><a href="https://drupar.com/node/3414" target="_blank">Slider Basic With Image</a></li>
+    <li><a href="https://drupar.com/node/3415" target="_blank">Slider Style - Classic</a></li>
+    <li><a href="https://drupar.com/node/3416" target="_blank">Slider Style - Layered</a></li>
+    </ul>'),
   ];
-  $form['slider']['slider_main_tab']['slider_type_section']['slider_type'] = [
-    '#type'        => 'radios',
-    '#title'       => t('Select Slider Style'),
-    '#options' => array(
-      'slider-classic' => t('Classic'),
-      'slider-single' => t('Single Slide'),
-      'slider-layered' => t('Layered'),
-    ),
-    '#default_value' => theme_get_setting('slider_type'),
-    '#description'   => t('You can customize each slider type in their respective tab.'),
-  ];
-  // Slider -> Slider classic
-  $form['slider']['slider_classic_tab']['slider_classic_image_section'] = [
+  $form['slider']['slider_doc'] = [
     '#type'        => 'fieldset',
-    '#title'       => t('Slider Image'),
-  ];
-  $form['slider']['slider_classic_tab']['slider_classic_image_section']['slider_classic_image'] = [
-    '#type'          => 'managed_file',
-    '#upload_location' => 'public://',
-    '#upload_validators' => array(
-      'file_validate_extensions' => array('gif png jpg jpeg svg'),
-    ),
-    '#title'  => t('<p>Upload Slider Image</p>'),
-    '#default_value'  => theme_get_setting('slider_classic_image', 'milipro'),
-    '#description'   => t('Supported image formats are: gif, png, jpg, jpeg, svg'),
-  ];
-  $form['slider']['slider_classic_tab']['slider_classic_code'] = [
-    '#type'          => 'textarea',
-    '#title'         => t('Classic Slider Code'),
-    '#default_value' => theme_get_setting('slider_classic_code'),
-    '#description'   => t('Leave slider code box empty to show default classic slider.<br />Please refer to this <a href="https://drupar.com/mili-documentation/homepage-slider" target="_blank">documentation page</a> for slider code tutorial.'),
-  ];
-  // Slider -> Single slide
-  $form['slider']['slider_single_tab']['slider_single_code'] = [
-    '#type'          => 'textarea',
-    '#title'         => t('Single Slide Code'),
-    '#default_value' => theme_get_setting('slider_single_code'),
-    '#description'   => t('Leave slider code box empty to show default classic slider.<br />Use HTML tags for slider code.'),
-  ];
-  // Slider -> Slider layered
-  $form['slider']['slider_layered_tab']['time'] = [
-    '#type'          => 'fieldset',
-    '#title'         => t('Slider Interval Time'),
-  ];
-  $form['slider']['slider_layered_tab']['time']['slider_time'] = [
-    '#type'          => 'number',
-    '#title'         => t('Autoplay Interval Time'),
-    '#default_value' => theme_get_setting('slider_time', 'milipro'),
-    '#description'   => t('Default value is 10000, this means 10 seconds.'),
-  ];
-  $form['slider']['slider_layered_tab']['Slider_animation'] = [
-    '#type'          => 'fieldset',
-    '#title'         => t('Slider Animation'),
-  ];
-  $form['slider']['slider_layered_tab']['Slider_animation']['slider_animatein'] = [
-    '#type'          => 'select',
-    '#title'         => t('SlideIn Animation'),
-    '#options' => array(
-    	'bounceIn' => t('BounceIn'),
-    	'fadeIn' => t('FadeIn'),
-    	'flip' => t('Flip'),
-    	'flipInX' => t('FlipInX'),
-    	'flipInY' => t('FlipInY'),
-    	'slideInDown' => t('SlideInDown'),
-    	'slideInLeft' => t('SlideInLeft'),
-    	'slideInRight' => t('SlideInRight'),
-    	'slideInUp' => t('SlideInUp'),
-    	'zoomIn' => t('ZoomIn'),),
-    '#default_value' => theme_get_setting('slider_animatein', 'milipro'),
-    '#description'   => t('Default value is <strong>slideInDown</strong>.'),
-  ];
-
-  $form['slider']['slider_layered_tab']['Slider_animation']['slider_animateout'] = [
-    '#type'          => 'select',
-    '#title'         => t('SlideOut Animation'),
-    '#options' => array(
-    	'bounceOut' => t('BounceOut'),
-    	'fadeOut' => t('FadeOut'),
-    	'flipOutX' => t('FlipOutX'),
-    	'flipOutY' => t('FlipOutY'),
-    	'slideOutDown' => t('SlideOutDown'),
-    	'slideOutLeft' => t('SlideOutLeft'),
-    	'slideOutRight' => t('SlideOutRight'),
-    	'slideOutUp' => t('SlideOutUp'),
-    	'zoomOut' => t('ZoomOut'),),
-    '#default_value' => theme_get_setting('slider_animateout', 'milipro'),
-    '#description'   => t('Default value is <strong>SlideOutDown</strong>.'),
-  ];
-  $form['slider']['slider_layered_tab']['slider_dots_field'] = [
-    '#type'          => 'fieldset',
-    '#title'         => t('Slider Dots Navigation'),
-  ];
-  $form['slider']['slider_layered_tab']['slider_dots_field']['slider_dots'] = [
-    '#type'          => 'select',
-    '#title'         => t('Show or Hide Slider Dots Navigation'),
-    '#options' => array(
-      'true' => t('Show'),
-      'false' => t('Hide'),),
-    '#default_value' => theme_get_setting('slider_dots', 'milipro'),
-    '#description'   => t('Show or hide slider dots navigation that appears at the bottom of slider.'),
-  ];
-  $form['slider']['slider_layered_tab']['slider_code'] = [
-    '#type'          => 'textarea',
-    '#title'         => t('Slider Code'),
-    '#default_value' => theme_get_setting('slider_code', 'milipro'),
-    '#description'   => t('Leave slider code box empty to show default slider.<br />Please refer to this <a href="https://drupar.com/milipro-documentation/homepage-slider" target="_blank">documentation page</a> for slider code tutorial.'),
+    '#title'       => t('Slider Documentation'),
+    '#description'   => t('Please refer to <a href="https://drupar.com/node/673/" target="_blank">slider documentation page</a> for detailed information.'),
   ];
 
   /**
@@ -426,11 +165,14 @@ function milipro_form_system_theme_settings_alter(&$form, FormStateInterface $fo
     '#default_value' => theme_get_setting('sticky_header_option', 'milipro'),
     '#description'   => t("Check this option to enable sticky header. Uncheck to disable."),
   ];
-
+  $form['header']['header_links'] = [
+    '#type'        => 'fieldset',
+    '#title'       => t('Header Links'),
+    '#description'   => t('<a href="https://drupar.com/node/749/" target="_blank">Change Logo</a> || <a href="https://drupar.com/node/739/" target="_blank">Change Favicon Icon</a> || <a href="https://drupar.com/node/740/" target="_blank">Manage Main Menu</a> || <a href="https://drupar.com/node/741/" target="_blank">Sliding Search Form</a>'),
+  ];
   /**
-   * Settings under sidebar tab.
+   * Sidebar
    */
-  // Settings under sidebar.
   $form['sidebar']['front_sidebar_section'] = [
     '#type'        => 'fieldset',
     '#title'       => t('Homepage Sidebar'),
@@ -454,149 +196,62 @@ function milipro_form_system_theme_settings_alter(&$form, FormStateInterface $fo
   ];
 
   /**
-   * Settings under content tab.
+   * Content
    */
-  // Content -> Page Loading.
-  $form['content']['preloader'] = [
-    '#type'        => 'fieldset',
-    '#title'       => t('Pre Page Loader'),
+  $form['content']['content_tab'] = [
+    '#type'  => 'vertical_tabs',
   ];
-  $form['content']['preloader']['preloader_option'] = [
-    '#type'          => 'checkbox',
-    '#title'         => t('Show a loading icon before page loads.'),
-    '#default_value' => theme_get_setting('preloader_option', 'milipro'),
-    '#description'   => t("Check this option to show a cool animated image until your website is loading. Uncheck to disable this feature."),
-  ];
-
-  // Settings under content tab -> Homepage.
+  // Content -> Homepage.
   $form['content']['homepage'] = [
-    '#type'        => 'fieldset',
+    '#type'        => 'details',
     '#title'       => t('Homepage Content'),
-    '#description'   => t('Please follow this tutorial to add content on homepage. <a href="https://drupar.com/milipro-documentation/how-add-content-homepage" target="_blank">How to add content on homepage</a>'),
+    '#description'   => t('Please follow this tutorials to add content on homepage.</p><ul>
+    <li><a href="https://drupar.com/node/752/" target="_blank">How To Create Homepage</a></li>
+    <li><a href="https://drupar.com/node/753/" target="_blank">How to add content on homepage</a></li>
+  </ul>'),
+    '#group' => 'content_tab',
   ];
-
-  // Settings under content tab -> Animated Content.
-  $form['content']['animated_content'] = [
+  // Content -> demo site
+  $form['content']['demo_site'] = [
+    '#type'        => 'details',
+    '#title'       => t('Demo Site Content'),
+    '#description'   => t('<p>Please find sample content of theme demo site here:</p><p><a href="https://drupar.com/node/882" target="_blank">MiliPro Demo Content</a></p>'),
+    '#group' => 'content_tab',
+  ];
+  // content -> Shortcodes
+  $form['content']['shortcodes'] = [
+    '#type'          => 'details',
+    '#title'         => t('Shortcodes'),
+    '#description'   => t('<p>MiliPro theme has many custom shortcodes which you can use for creating contents. Please visit this page for list of all available shortcodes and how to use these shortcodes.</p><ul><li><a href="https://drupar.com/node/766/" target="_blank">MiliPro Shortcodes</a></li></ul>'),
+    '#group' => 'content_tab',
+  ];
+  // Content -> Animated Content.
+  $form['content']['animated_content_tab'] = [
+    '#type'        => 'details',
+    '#title'       => t('Animated Page Content'),
+    '#group' => 'content_tab',
+  ];
+  $form['content']['animated_content_tab']['animated_content'] = [
     '#type'        => 'fieldset',
     '#title'       => t('Animated Page Content'),
-    '#description'   => t('Please visit this tutorial page for details. <a href="https://drupar.com/milipro-documentation/how-create-animated-content" target="_blank">How to create animated content</a>.'),
+    '#description'   => t('Please visit this tutorial page for details. <a href="https://drupar.com/node/734/" target="_blank">How to create animated content</a>.'),
   ];
-
-  // Settings under content tab -> Material font icons.
-  $form['content']['material_icons'] = [
+  // Content-> Submitted Details
+  $form['content']['submitted_details'] = [
+    '#type'  => 'details',
+    '#title' => t('Submitted Details'),
+    '#group' => 'content_tab',
+  ];
+  $form['content']['submitted_details']['node_tags_section'] = [
     '#type'        => 'fieldset',
-    '#title'       => t('Google Material Font Icons'),
-    '#description'   => t('MiliPro theme has included Google material font icons. You can create any Google material icon with MiliPro theme.<br />Please visit this tutorial page for details. <a href="https://drupar.com/milipro-documentation/font-icons" target="_blank">How To Use Google Material Font Icons</a>.'),
+    '#title'       => t('Node Tags'),
   ];
-
-  $form['content']['material_icons']['material_icon'] = [
+  $form['content']['submitted_details']['node_tags_section']['node_tags'] = [
     '#type'          => 'checkbox',
-    '#title'         => t('Enable Google Material Font Icons'),
-    '#default_value' => theme_get_setting('material_icon', 'milipro'),
-    '#description'   => t("Check this option to enable Google Material Font Icons. Uncheck to disable."),
-  ];
-  // Settings under content tab -> FontAwesome
-  $form['content']['fontawesome_icons'] = [
-    '#type'        => 'fieldset',
-    '#title'       => t('FontAwesome Font Icons'),
-    '#description'   => t('<br /><hr /><br />MiliPro theme has included FontAwesome v4.7.0 and FontAwesome v5. You can create thousands of icons with FontAwesome font icons.<br />Please visit this tutorial page for details. <a href="https://drupar.com/custom-shortcodes-set-two/fontawesome-font-icons" target="_blank">How To Use FontAwesome Font Icons</a>.'),
-  ];
-
-  $form['content']['fontawesome_icons']['fontawesome'] = [
-    '#type'          => 'checkbox',
-    '#title'         => t('Enable FontAwesome 4 Font Icons'),
-    '#default_value' => theme_get_setting('fontawesome', 'milipro'),
-    '#description'   => t("Check this option to enable FontAwesome Font Icons. Uncheck to disable."),
-  ];
-  $form['content']['fontawesome_icons']['fontawesome_five'] = [
-    '#type'          => 'checkbox',
-    '#title'         => t('Enable FontAwesome 5 Font Icons'),
-    '#default_value' => theme_get_setting('fontawesome_five', 'milipro'),
-    '#description'   => t("Check this option to enable FontAwesome 5 Font Icons. Uncheck to disable."),
-  ];
-  // Content -> iconmonstr font icons.
-  $form['content']['font_icons_iconmonstr'] = [
-    '#type'        => 'fieldset',
-    '#title'       => t('Iconmonstr Font Icons'),
-    '#description'   => t('<br /><hr /><br />MiliPro theme has included iconmonstr font icons v1.3.0. You can create 300+ icons with iconmonstr font icons.<br />Please visit this tutorial page for details. <a href="https://drupar.com/custom-shortcodes-set-two/iconmonstr-font-icons" target="_blank">How To Use Iconmonstr Icons</a>.<br /><strong>Please Note:</strong> This will increase page load by about 50 KB.'),
-  ];
-  $form['content']['font_icons_iconmonstr']['iconmonstr'] = [
-    '#type'          => 'checkbox',
-    '#title'         => t('Enable Iconmonstr Font Icons'),
-    '#default_value' => theme_get_setting('iconmonstr', 'milipro'),
-    '#description'   => t("Check this option to enable Iconmonstr Font Icons. Uncheck to disable."),
-  ];
-
-  // Node author picture.
-  $form['content']['node'] = [
-    '#type'        => 'fieldset',
-    '#title'       => t('Node'),
-  ];
-
-  $form['content']['node']['node_author_pic'] = [
-    '#type'          => 'checkbox',
-    '#title'         => t('Node Author Picture'),
-    '#default_value' => theme_get_setting('node_author_pic', 'milipro'),
-    '#description'   => t("Check this option to show node author picture in submitted details. Uncheck to hide."),
-  ];
-
-  // Content -> Node -> Node sharing option.
-  // Content tab -> Node.
-  $form['content']['node_share'] = [
-    '#type'        => 'fieldset',
-    '#title'       => t('Node Sharing on Social Media'),
-  ];
-
-  $form['content']['node_share']['node_share_page'] = [
-    '#type'          => 'checkbox',
-    '#title'         => t('Share Page Content Type'),
-    '#default_value' => theme_get_setting('node_share_page', 'milipro'),
-    '#description'   => t("Check this option to show social sharing buttons (facebook, twitter, Instagram etc) on <strong>Basic page</strong> content type nodes. Uncheck to hide."),
-  ];
-
-  $form['content']['node_share']['node_share_article'] = [
-    '#type'          => 'checkbox',
-    '#title'         => t('Share Article Content Type'),
-    '#default_value' => theme_get_setting('node_share_article', 'milipro'),
-    '#description'   => t("Check this option to show social sharing buttons (facebook, twitter, Instagram etc) on <strong>Article</strong> content type nodes. Uncheck to hide."),
-  ];
-
-  $form['content']['node_share']['node_share_other'] = [
-    '#type'          => 'checkbox',
-    '#title'         => t('Share Other Content Types'),
-    '#default_value' => theme_get_setting('node_share_other', 'milipro'),
-    '#description'   => t("Check this option to show social sharing buttons (facebook, twitter, Instagram etc) on other content type nodes. Uncheck to hide."),
-  ];
-
-  $form['content']['node_share']['node_share_front'] = [
-    '#type'          => 'checkbox',
-    '#title'         => t('Share Homepage'),
-    '#default_value' => theme_get_setting('node_share_front', 'milipro'),
-    '#description'   => t("Check this option to show social sharing buttons (facebook, twitter, Instagram etc) on <strong>Homepage</strong>. Uncheck to hide."),
-  ];
-
-  // Show tags in node submitted.
-  $form['content']['node']['node_tags'] = [
-    '#type'          => 'checkbox',
-    '#title'         => t('Node Tags'),
+    '#title'         => t('Show Node Tags in Submitted Details.'),
     '#default_value' => theme_get_setting('node_tags', 'milipro'),
     '#description'   => t("Check this option to show node tags (if any) in submitted details. Uncheck to hide."),
   ];
-
-  // Show user picture in comment.
-  $form['content']['comment'] = [
-    '#type'        => 'fieldset',
-    '#title'       => t('Comment'),
-  ];
-
-  $form['content']['comment']['comment_user_pic'] = [
-    '#type'          => 'checkbox',
-    '#title'         => t('User Picture in comments'),
-    '#default_value' => theme_get_setting('comment_user_pic', 'milipro'),
-    '#description'   => t("Check this option to show user picture in comment. Uncheck to hide."),
-  ];
-
-  // Settings under footer tab.
   // Scroll to top.
   $form['footer']['scrolltotop'] = [
     '#type'        => 'fieldset',
@@ -609,29 +264,24 @@ function milipro_form_system_theme_settings_alter(&$form, FormStateInterface $fo
     '#default_value' => theme_get_setting('scrolltotop_on', 'milipro'),
     '#description'   => t("Check this option to enable scroll to top feature. Uncheck to disable this feature and hide scroll to top icon."),
   ];
-
-  // Footer -> Copyright.
+  // Footer -> copyright
   $form['footer']['copyright'] = [
     '#type'        => 'fieldset',
     '#title'       => t('Website Copyright Text'),
   ];
-
   $form['footer']['copyright']['copyright_text'] = [
     '#type'          => 'checkbox',
     '#title'         => t('Show website copyright text in footer.'),
     '#default_value' => theme_get_setting('copyright_text', 'milipro'),
     '#description'   => t("Check this option to show website copyright text in footer. Uncheck to hide."),
   ];
-
-  // Footer -> copyright -> custom copyright text
-  $form['footer']['copyright']['copyright_text_custom'] = [
-    '#type'          => 'textarea',
-    '#title'         => t('Custom Copyright Text'),
-    '#default_value' => theme_get_setting('copyright_text_custom', 'milipro'),
-    '#description'   => t("Enter custom copyright text. Leave it blank to show default copyright text."),
+  $form['footer']['copyright']['copyright_custom'] = [
+    '#type'          => 'checkbox',
+    '#title'         => t('Show custom copyright text from copyright block region.'),
+    '#default_value' => theme_get_setting('copyright_custom', 'milipro'),
+    '#description'   => t('<p>Check this option to show custom copyright text. Create a new block and place the block in copyright region. Uncheck this option to show default copyright text.</p><p>For more details, please refer to the <a href="https://drupar.com/node/760/" target="_blank">documentation page</a></p>'),
   ];
-
-  // Footer -> Cookie.
+  // Footer -> Cookie
   $form['footer']['cookie'] = [
     '#type'        => 'fieldset',
     '#title'       => t('Cookie Consent message'),
@@ -642,20 +292,356 @@ function milipro_form_system_theme_settings_alter(&$form, FormStateInterface $fo
     '#default_value' => theme_get_setting('cookie_message', 'milipro'),
     '#description'   => t('Required to place a Cookie Consent message on your site, as per the EU cookie law? Make your website EU Cookie Law Compliant.<br />According to EU cookies law, websites need to get consent from visitors to store or retrieve cookies.'),
   ];
-
-  // Footer -> Cookie -> custom cookie message.
-  $form['footer']['cookie']['cookie_message_custom'] = [
-    '#type'          => 'textarea',
-    '#title'         => t('Custom Cookie Consent Message'),
-    '#default_value' => theme_get_setting('cookie_message_custom', 'milipro'),
-    '#description'   => t("Enter Cookie Consent Message. Leave it blank to show default message text."),
+  $form['footer']['cookie']['cookie_custom'] = [
+    '#type'          => 'checkbox',
+    '#title'       => t('Show Custom Cookie Consent Message'),
+    '#default_value' => theme_get_setting('cookie_custom', 'milipro'),
+    '#description'   => t('<p>Check this option to show custom cookie consent message. Create a new block and place the block in Cookie Consent Message region. Uncheck this option to show default message text.</p><p>For more details, please refer to the <a href="https://drupar.com/node/3477/" target="_blank">documentation page</a></p>'),
   ];
 
+  // Show user picture in comment.
+  $form['comment']['comment_photo'] = [
+    '#type'        => 'fieldset',
+    '#title'       => t('Comment User Picture'),
+  ];
+
+  $form['comment']['comment_photo']['comment_user_pic'] = [
+    '#type'          => 'checkbox',
+    '#title'         => t('User Picture in comments'),
+    '#default_value' => theme_get_setting('comment_user_pic', 'milipro'),
+    '#description'   => t("Check this option to show user picture in comment. Uncheck to hide."),
+  ];
+  // Hightlight Node author comment.
+  $form['comment']['comment_author'] = [
+    '#type'        => 'fieldset',
+    '#title'       => t('Author Comment'),
+  ];
+
+  $form['comment']['comment_author']['highlight_author_comment'] = [
+    '#type'          => 'checkbox',
+    '#title'         => t('Highlight Author Comments'),
+    '#default_value' => theme_get_setting('highlight_author_comment', 'milipro'),
+    '#description'   => t("Check this option to highlight node author comments."),
+  ];
+  /*
+   * Components
+   */
+  $form['components']['components_tab'] = [
+    '#type'  => 'vertical_tabs',
+  ];
+  // Social tab.
+  $form['components']['social'] = [
+    '#type'  => 'details',
+    '#title' => t('Social'),
+    '#description' => t('Social icons settings. These icons appear in footer region.'),
+    '#group' => 'components_tab',
+  ];
+  $form['components']['social']['all_icons'] = [
+    '#type'        => 'fieldset',
+    '#title'       => t('Show Social Icons'),
+  ];
+
+  $form['components']['social']['all_icons']['all_icons_show'] = [
+    '#type'          => 'checkbox',
+    '#title'         => t('Show social icons in footer'),
+    '#default_value' => theme_get_setting('all_icons_show', 'milipro'),
+    '#description'   => t("Check this option to show social icons in footer. Uncheck to hide."),
+  ];
+  // Facebook.
+  $form['components']['social']['facebook'] = [
+    '#type'        => 'details',
+    '#title'       => t("Facebook"),
+  ];
+
+  $form['components']['social']['facebook']['facebook_url'] = [
+    '#type'          => 'textfield',
+    '#title'         => t('Facebook Url'),
+    '#description'   => t("Enter yours facebook profile or page url. Leave the url field blank to hide this icon."),
+    '#default_value' => theme_get_setting('facebook_url', 'milipro'),
+  ];
+
+  // Twitter.
+  $form['components']['social']['twitter'] = [
+    '#type'        => 'details',
+    '#title'       => t("Twitter"),
+  ];
+  $form['components']['social']['twitter']['twitter_url'] = [
+    '#type'          => 'textfield',
+    '#title'         => t('Twitter Url'),
+    '#description'   => t("Enter yours twitter page url. Leave the url field blank to hide this icon."),
+    '#default_value' => theme_get_setting('twitter_url', 'milipro'),
+  ];
+  // Instagram.
+  $form['components']['social']['instagram'] = [
+    '#type'        => 'details',
+    '#title'       => t("Instagram"),
+  ];
+
+  $form['components']['social']['instagram']['instagram_url'] = [
+    '#type'          => 'textfield',
+    '#title'         => t('Instagram Url'),
+    '#description'   => t("Enter yours instagram page url. Leave the url field blank to hide this icon."),
+    '#default_value' => theme_get_setting('instagram_url', 'milipro'),
+  ];
+  // Linkedin.
+  $form['components']['social']['linkedin'] = [
+    '#type'        => 'details',
+    '#title'       => t("Linkedin"),
+  ];
+  $form['components']['social']['linkedin']['linkedin_url'] = [
+    '#type'          => 'textfield',
+    '#title'         => t('Linkedin Url'),
+    '#description'   => t("Enter yours linkedin page url. Leave the url field blank to hide this icon."),
+    '#default_value' => theme_get_setting('linkedin_url', 'milipro'),
+  ];
+
+  // YouTube.
+  $form['components']['social']['youtube'] = [
+    '#type'        => 'details',
+    '#title'       => t("YouTube"),
+  ];
+
+  $form['components']['social']['youtube']['youtube_url'] = [
+    '#type'          => 'textfield',
+    '#title'         => t('YouTube Url'),
+    '#description'   => t("Enter yours youtube.com page url. Leave the url field blank to hide this icon."),
+    '#default_value' => theme_get_setting('youtube_url', 'milipro'),
+  ];
+
+  // Vimeo
+  $form['components']['social']['vimeo'] = [
+    '#type'        => 'details',
+    '#title'       => t("Vimeo"),
+  ];
+
+  $form['components']['social']['vimeo']['vimeo_url'] = [
+    '#type'          => 'textfield',
+    '#title'         => t('Vimeo Url'),
+    '#description'   => t("Enter yours vimeo.com page url. Leave the url field blank to hide this icon."),
+    '#default_value' => theme_get_setting('vimeo_url', 'milipro'),
+  ];
+
+  // telegram.
+    $form['components']['social']['telegram'] = [
+    '#type'        => 'details',
+    '#title'       => t("Telegram"),
+  ];
+
+  $form['components']['social']['telegram']['telegram_url'] = [
+    '#type'          => 'textfield',
+    '#title'         => t('Telegram Url'),
+    '#description'   => t("Enter yours Telegram profile or page url. Leave the url field blank to hide this icon."),
+    '#default_value' => theme_get_setting('telegram_url', 'milipro'),
+  ];
+
+  // WhatsApp.
+    $form['components']['social']['whatsapp'] = [
+    '#type'        => 'details',
+    '#title'       => t("WhatsApp"),
+  ];
+
+  $form['components']['social']['whatsapp']['whatsapp_url'] = [
+    '#type'          => 'textfield',
+    '#title'         => t('WhatsApp Url'),
+    '#description'   => t("Enter yours whatsapp message url. Leave the url field blank to hide this icon."),
+    '#default_value' => theme_get_setting('whatsapp_url', 'milipro'),
+  ];
+
+  // Github.
+    $form['components']['social']['github'] = [
+    '#type'        => 'details',
+    '#title'       => t("GitHub"),
+  ];
+
+  $form['components']['social']['github']['github_url'] = [
+    '#type'          => 'textfield',
+    '#title'         => t('GitHub Url'),
+    '#description'   => t("Enter yours github page url. Leave the url field blank to hide this icon."),
+    '#default_value' => theme_get_setting('github_url', 'milipro'),
+  ];
+
+  // Social -> vk.com url.
+  $form['components']['social']['vk'] = [
+    '#type'        => 'details',
+    '#title'       => t("vk.com"),
+  ];
+  $form['components']['social']['vk']['vk_url'] = [
+      '#type'          => 'textfield',
+      '#title'         => t('vk.com'),
+      '#description'   => t("Enter yours vk.com page url. Leave the url field blank to hide this icon."),
+      '#default_value' => theme_get_setting('vk_url', 'milipro'),
+  ];
+  $form['components']['social']['social_new'] = [
+    '#type'        => 'fieldset',
+    '#title'       => t('Add More Social Icons'),
+    '#description' => t('<p>Please refer to the documentation page for social icon code: <a href="https://drupar.com/node/761/" target="_blank">Add new social icon</a>.'),
+  ];
+  $form['components']['social']['social_new']['social_new_code'] = [
+    '#type'          => 'textarea',
+    '#title'         => t('New Social Icons Code'),
+    '#default_value' => theme_get_setting('social_new_code', 'milipro'),
+  ];
+  // Node share
+  $form['components']['node_share'] = [
+    '#type'        => 'details',
+    '#title'       => t('Share Page'),
+    '#group' => 'components_tab',
+  ];
+  $form['components']['node_share']['page_share'] = [
+    '#type'        => 'fieldset',
+    '#title'       => t('Node Sharing on Social Networking Websites'),
+  ];
+  $form['components']['node_share']['page_share']['node_share_page'] = [
+    '#type'          => 'checkbox',
+    '#title'         => t('Share Page Content Type'),
+    '#default_value' => theme_get_setting('node_share_page', 'milipro'),
+    '#description'   => t("Check this option to show social sharing buttons (facebook, twitter, Instagram etc) on <strong>Basic page</strong> content type nodes. Uncheck to hide."),
+  ];
+
+  $form['components']['node_share']['page_share']['node_share_article'] = [
+    '#type'          => 'checkbox',
+    '#title'         => t('Share Article Content Type'),
+    '#default_value' => theme_get_setting('node_share_article', 'milipro'),
+    '#description'   => t("Check this option to show social sharing buttons (facebook, twitter, Instagram etc) on <strong>Article</strong> content type nodes. Uncheck to hide."),
+  ];
+
+  $form['components']['node_share']['page_share']['node_share_other'] = [
+    '#type'          => 'checkbox',
+    '#title'         => t('Share Other Content Types'),
+    '#default_value' => theme_get_setting('node_share_other', 'milipro'),
+    '#description'   => t("Check this option to show social sharing buttons (facebook, twitter, Instagram etc) on other content type nodes. Uncheck to hide."),
+  ];
+
+  $form['components']['node_share']['page_share']['node_share_front'] = [
+    '#type'          => 'checkbox',
+    '#title'         => t('Share Homepage'),
+    '#default_value' => theme_get_setting('node_share_front', 'milipro'),
+    '#description'   => t("Check this option to show social sharing buttons (facebook, twitter, Instagram etc) on <strong>Homepage</strong>. Uncheck to hide."),
+  ];
+  // Components -> Font icons
+  $form['components']['font_icons'] = [
+    '#type'  => 'details',
+    '#title' => t('Font Icons'),
+    '#group' => 'components_tab',
+    '#description'   => t('Following fonts icons libraries are included in the theme. For more details, please refer to the documentation page: <a href="https://drupar.com/node/674/" target="_blank">Font Icons</a>'),
+  ];
+  $form['components']['font_icons']['fontawesome4'] = [
+    '#type'          => 'fieldset',
+    '#title'         => t('FontAwesome 4'),
+  ];
+  $form['components']['font_icons']['fontawesome4']['fontawesome_four'] = [
+    '#type'          => 'checkbox',
+    '#title'         => t('Enable FontAwesome 4 Font Icons'),
+    '#default_value' => theme_get_setting('fontawesome_four', 'milipro'),
+    '#description'   => t('<p>Check this option to enable fontawesome version 4 font icons.</p><p><a href="https://drupar.com/node/2861/">How to use FontAwesome 4</a></p>'),
+  ];
+  $form['components']['font_icons']['fontawesome5'] = [
+    '#type'          => 'fieldset',
+    '#title'         => t('FontAwesome 5'),
+    '#description'   => t("<mark>Do not enable both FontAwesome 5 and FontAwesome 6</mark>")
+  ];
+  $form['components']['font_icons']['fontawesome5']['fontawesome_five'] = [
+    '#type'          => 'checkbox',
+    '#title'         => t('Enable FontAwesome 5 Font Icons'),
+    '#default_value' => theme_get_setting('fontawesome_five', 'milipro'),
+    '#description'   => t('<p>Check this option to enable fontawesome version 5 font icons.</p><p><a href="https://drupar.com/node/674/">How to use FontAwesome 5</a></p>'),
+  ];
+  $form['components']['font_icons']['fontawesome6'] = [
+    '#type'          => 'fieldset',
+    '#title'         => t('FontAwesome 6'),
+    '#description'   => t("<mark>Do not enable both FontAwesome 5 and FontAwesome 6</mark>")
+  ];
+  $form['components']['font_icons']['fontawesome6']['fontawesome_six'] = [
+    '#type'          => 'checkbox',
+    '#title'         => t('Enable FontAwesome 6 Font Icons'),
+    '#default_value' => theme_get_setting('fontawesome_six', 'milipro'),
+    '#description'   => t('<p>Check this option to enable fontawesome version 6 font icons.</p><p><a href="https://drupar.com/node/674/">How to use FontAwesome 6</a></p>'),
+  ];
+	$form['components']['font_icons']['bootstrap_icons'] = [
+    '#type'          => 'fieldset',
+    '#title'         => t('Bootstrap Font Icons'),
+  ];
+  $form['components']['font_icons']['bootstrap_icons']['bootstrapicons'] = [
+    '#type'          => 'checkbox',
+    '#title'         => t('Enable Bootstrap Icons'),
+    '#default_value' => theme_get_setting('bootstrapicons', 'milipro'),
+    '#description'   => t('<p>Check this option to enable Bootstrap Font Icons.</p><p><a href="https://drupar.com/node/674/">How to use Bootstrap Font Icons</a></p>'),
+  ];
+  $form['components']['font_icons']['material'] = [
+    '#type'          => 'fieldset',
+    '#title'         => t('Google Material Font Icons'),
+    '#description'   => t('<a href="https://drupar.com/node/2865" target="_blank">How to use Google Material font icons</a>'),
+  ];
+  $form['components']['font_icons']['material']['material_icon_outlined'] = [
+    '#type'          => 'checkbox',
+    '#title'         => t('Enable Google Material Font Icons - Outlined'),
+    '#default_value' => theme_get_setting('material_icon_outlined'),
+    '#description'   => t('Check this option to enable Google Material Outlined Font Icons. Uncheck to disable.'),
+  ];
+  $form['components']['font_icons']['material']['material_icon_filled'] = [
+    '#type'          => 'checkbox',
+    '#title'         => t('Enable Google Material Font Icons - Filled'),
+    '#default_value' => theme_get_setting('material_icon_filled'),
+    '#description'   => t('Check this option to enable Google Material Filled Font Icons. Uncheck to disable.'),
+  ];
+  $form['components']['font_icons']['material']['material_icon_round'] = [
+    '#type'          => 'checkbox',
+    '#title'         => t('Enable Google Material Font Icons - Round'),
+    '#default_value' => theme_get_setting('material_icon_round'),
+    '#description'   => t('Check this option to enable Google Material Round Font Icons. Uncheck to disable.'),
+  ];
+  $form['components']['font_icons']['material']['material_icon_sharp'] = [
+    '#type'          => 'checkbox',
+    '#title'         => t('Enable Google Material Font Icons - Sharp'),
+    '#default_value' => theme_get_setting('material_icon_sharp'),
+    '#description'   => t('Check this option to enable Google Material Sharp Font Icons. Uncheck to disable.'),
+  ];
+  $form['components']['font_icons']['material']['material_icon_tone'] = [
+    '#type'          => 'checkbox',
+    '#title'         => t('Enable Google Material Font Icons - Two Tone'),
+    '#default_value' => theme_get_setting('material_icon_tone'),
+    '#description'   => t('Check this option to enable Google Material Two Tone Font Icons. Uncheck to disable.'),
+  ];
+  // Content -> font icons - iconmonstr
+  $form['components']['font_icons']['font_icons_iconmonstr'] = [
+    '#type'        => 'fieldset',
+    '#title'       => t('Iconmonstr Font Icons'),
+    '#description'   => t('<br /><hr /><br />MiliPro theme has included iconmonstr font icons v1.3.0. You can create 300+ icons with iconmonstr font icons.<br />Please visit this tutorial page for details. <a href="https://drupar.com/custom-shortcodes-set-two/iconmonstr-font-icons" target="_blank">How To Use Iconmonstr Icons</a>.<br /><strong>Please Note:</strong> This will increase page load by about 50 KB.'),
+  ];
+  $form['components']['font_icons']['font_icons_iconmonstr']['iconmonstr'] = [
+    '#type'          => 'checkbox',
+    '#title'         => t('Enable Iconmonstr Font Icons'),
+    '#default_value' => theme_get_setting('iconmonstr', 'milipro'),
+    '#description'   => t("Check this option to enable Iconmonstr Font Icons. Uncheck to disable."),
+  ];
+  // Components -> Page loader.
+  $form['components']['preloader'] = [
+    '#type'        => 'details',
+    '#title'       => t('Pre Page Loader'),
+    '#group' => 'components_tab',
+  ];
+  $form['components']['preloader']['preloader_section'] = [
+    '#type'        => 'fieldset',
+    '#title'       => t('Pre Page Loader'),
+    '#open' => true,
+  ];
+  $form['components']['preloader']['preloader_section']['preloader_option'] = [
+    '#type'          => 'checkbox',
+    '#title'         => t('Show a loading icon before page loads.'),
+    '#default_value' => theme_get_setting('preloader_option', 'milipro'),
+    '#description'   => t('Check this option to show a cool animated image until your website is loading. Uncheck to disable this feature. For more details, please refer to the <a href="#" target="_blank">documentation page</a>.'),
+  ];
   /**
    * Settings under Custom Styling tab.
    */
   $form['insert_codes']['insert_codes_tab'] = [
     '#type'  => 'vertical_tabs',
+  ];
+  // Insert Codes -> CSS
+  $form['insert_codes']['css'] = [
+    '#type'        => 'details',
+    '#title'       => t('CSS Codes'),
+    '#group'       => 'insert_codes_tab',
   ];
   // Insert Codes -> Head
   $form['insert_codes']['head'] = [
@@ -670,11 +656,24 @@ function milipro_form_system_theme_settings_alter(&$form, FormStateInterface $fo
     '#title'       => t('Body'),
     '#group' => 'insert_codes_tab',
   ];
-  // Insert Codes -> CSS
-  $form['insert_codes']['css'] = [
-    '#type'        => 'details',
-    '#title'       => t('CSS Codes'),
-    '#group'       => 'insert_codes_tab',
+  // Insert Codes -> css
+  $form['insert_codes']['css']['css_custom'] = [
+    '#type'        => 'fieldset',
+    '#title'       => t('Addtional CSS'),
+  ];
+
+  $form['insert_codes']['css']['css_custom']['styling'] = [
+    '#type'          => 'checkbox',
+    '#title'         => t('Enable custom css'),
+    '#default_value' => theme_get_setting('styling', 'milipro'),
+    '#description'   => t("Check this option to enable custom styling. Uncheck to disable this feature.<br />Please refer to this tutorial page. <a href='https://drupar.com/milipro-documentation/custom-css' target='_blank'>How To Use Custom Styling</a>"),
+  ];
+
+  $form['insert_codes']['css']['css_custom']['styling_code'] = [
+    '#type'          => 'textarea',
+    '#title'         => t('Custom CSS Codes'),
+    '#default_value' => theme_get_setting('styling_code', 'milipro'),
+    '#description'   => t('Please enter your custom css codes in this text box. You can use it to customize the appearance of your site.<br />Please refer to this tutorial for detail: <a href="https://drupar.com/milipro-documentation/custom-css" target="_blank">Custom CSS</a>'),
   ];
   // Insert Codes -> Head -> Head codes
   $form['insert_codes']['head']['insert_head'] = [
@@ -723,25 +722,6 @@ function milipro_form_system_theme_settings_alter(&$form, FormStateInterface $fo
     '#default_value' => theme_get_setting('body_end_code'),
     '#description'   => t("Please enter your custom codes before &lt;/body&gt; tag. These codes will be inserted just before <strong>&lt;/body&gt;</strong>."),
   ];
-  // Insert Codes -> css
-  $form['insert_codes']['css']['css_custom'] = [
-    '#type'        => 'fieldset',
-    '#title'       => t('Addtional CSS'),
-  ];
-
-  $form['insert_codes']['css']['custom']['styling'] = [
-    '#type'          => 'checkbox',
-    '#title'         => t('Enable custom css'),
-    '#default_value' => theme_get_setting('styling', 'milipro'),
-    '#description'   => t("Check this option to enable custom styling. Uncheck to disable this feature.<br />Please refer to this tutorial page. <a href='https://drupar.com/milipro-documentation/custom-css' target='_blank'>How To Use Custom Styling</a>"),
-  ];
-
-  $form['insert_codes']['css']['custom']['styling_code'] = [
-    '#type'          => 'textarea',
-    '#title'         => t('Custom CSS Codes'),
-    '#default_value' => theme_get_setting('styling_code', 'milipro'),
-    '#description'   => t('Please enter your custom css codes in this text box. You can use it to customize the appearance of your site.<br />Please refer to this tutorial for detail: <a href="https://drupar.com/milipro-documentation/custom-css" target="_blank">Custom CSS</a>'),
-  ];
 
   /**
    * Settings under License tab.
@@ -753,7 +733,11 @@ function milipro_form_system_theme_settings_alter(&$form, FormStateInterface $fo
     <p>You are allowed to use this theme on a single website.</p>
     <hr /><br /><a href="https://drupar.com/upgrade/milipro" target="_blank">Upgrade to unlimited domain license</a>. Upgrade fee is $30 only.'),
   ];
-
+  $form['license']['upgrade'] = [
+    '#type'        => 'fieldset',
+    '#title'       => t('Upgrade'),
+    '#description' => t('<p>You can upgrade to unlimited domain license. Upgrade price is $30 only.</p><p><hr /></p><p><a href="https://drupar.com/upgrade/milipro" target="_blank">Upgrade to unlimited domain license</a>.</p>'),
+  ];
   /**
    * Settings under update tab.
    */

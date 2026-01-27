@@ -1,9 +1,6 @@
-/*
- * Main
- */
-
 /* Main -> Admin Tabs */
 .page-tabs {
+  font-size: 1rem;
   list-style: none;
   display: flex;
   gap: 4px;
@@ -56,35 +53,26 @@ ul.page-tabs li.active-page-tab a {
 .node-view-mode-full .node-taxonomy-container {
   margin: 0;
 }
-/* Main -> Node -> author and submitted details */
+/* Main -> node -> submitted details */
 .node-header {
-  position: relative;
-  display: flex;
-  align-items: center;
   width: 100%;
-  margin: 0 0 14px 0;
+  margin: 0 0 0.5rem 0;
   padding-bottom: 4px;
   border-bottom: 1px solid var(--border-color);
 }
-.author-picture img {
-  width: auto;
-  height: 24px;
-  margin-right: 6px;
+.node-submitted-details {
+  display: flex;
+  gap: 1rem;
 }
 .node-submitted-details,
 .node-submitted-details a {
   color: #757575;
 }
 .node-submitted-details a:hover {
-  border-bottom: 1px dotted var(--color-primary);
+  color: var(--color-primary);
 }
 .node-submitted-details i {
   color: var(--color-primary);
-  margin: 0 0 0 14px;
-  vertical-align: middle;
-}
-.node-submitted-details i.user-icon {
-  margin-left: 0px;
 }
 
 /* Main -> Node -> node taxonomy and links */
@@ -154,19 +142,6 @@ ul.inline li {
   margin-left: 0;
   float: right;
 }
-.node-links-container .comment-comments::before,
-.node-links-container .comment-add::before {
-  padding-right: 2px;
-  font-family: "milicon";
-}
-.node-links-container .comment-comments::before {
-  content: "\f0e6";
-}
-.node-links-container .comment-add::before {
-  content: "\f0e5";
-  vertical-align: 1px;
-  color: var(--color-primary);
-}
 .node-readmore {
   float: left;
 }
@@ -182,42 +157,8 @@ li.node-readmore a:hover {
   background: var(--color-secondary);
   color: #ffffff;
 }
-li.node-readmore a::after {
-  content: "\f178";
-  padding-left: 10px;
-  font-family: "milicon";
-}
+
 .node-view-mode-teaser li.comment-add,
 .node-view-mode-teaser li.comment-forbidden {
   text-align: right;
-}
-
-/* Main -> Node -> pager */
-nav.pager {
-  position: relative;
-}
-.pager ul.pager__items {
-  position: relative;
-  list-style: none;
-  margin: 0;
-  padding: 1rem 0;
-}
-.pager__items {
-  clear: both;
-  text-align: center;
-}
-.pager__item {
-  display: inline-block;
-  padding: 12px 0;
-}
-.pager__item a {
-  background: #ffffff;
-  padding: 8px 14px;
-  border: 1px dashed var(--color-primary);
-  border-radius: 4px;
-}
-.pager__item a:hover,
-.pager__item.is-active a {
-  background: var(--color-primary);
-  color: #ffffff;
 }

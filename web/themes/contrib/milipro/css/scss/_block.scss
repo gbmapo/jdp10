@@ -17,3 +17,8 @@
 .region-highlighted .block {
   margin-bottom: 1rem;
 }
+/* Primary menu region */
+.region-primary-menu {
+  display: flex;
+  flex-direction: column;
+}

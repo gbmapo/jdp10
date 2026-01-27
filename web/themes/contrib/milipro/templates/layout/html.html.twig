@@ -27,12 +27,14 @@
 {# Add class to body #}
 {%
   set body_classes = [
-    not root_path ? 'homepage' : 'site-page',
+    not root_path ? 'homepage' : 'site-page path-' ~ root_path|clean_class,
+    page.slider ? 'slider-page',
     node_type ? 'page-type-' ~ node_type|clean_class,
     not page.sidebar_first and not page.sidebar_second ? 'no-sidebar',
     page.sidebar_first and not page.sidebar_second ? 'one-sidebar sidebar-left',
     page.sidebar_second and not page.sidebar_first ? 'one-sidebar sidebar-right',
-    page.sidebar_first and page.sidebar_second ? 'two-sidebar'
+    page.sidebar_first and page.sidebar_second ? 'two-sidebar',
+    logged_in ? 'user-logged-in' : 'user-guest',
   ]
 %}
 <!DOCTYPE html>
@@ -40,6 +42,8 @@
   <head>
     <head-placeholder token="{{ placeholder_token|raw }}">
     <title>{{ head_title|safe_join(' | ') }}</title>
+    <link rel="preload" as="font" href="{{ base_path ~ directory }}/fonts/heebo.woff2" type="font/woff2" crossorigin>
+    <link rel="preload" as="font" href="{{ base_path ~ directory }}/fonts/poppins.woff2" type="font/woff2" crossorigin>
     <css-placeholder token="{{ placeholder_token|raw }}">
     <js-placeholder token="{{ placeholder_token|raw }}">
 {% if color_scheme == 'color_custom' %}

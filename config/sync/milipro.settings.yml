@@ -62,7 +62,7 @@ body_start_code: "<script>\r\nwindow.addEventListener(\"load\", function ()\r\n{
 insert_body_end: 0
 body_end_code: ''
 color_scheme: color_custom
-color_primary: '#9ba983'
+color_primary: '#829b59'
 color_secondary: '#3b6124'
 bg_body: '#fcfbf8'
 block_bg: '#ffffff'
@@ -72,3 +72,15 @@ color_light: '#f5f2ed'
 color_dark: '#4e100b'
 color_border: '#d6d6d6'
 bg_header: '#232323'
+copyright_custom: 0
+cookie_custom: 1
+highlight_author_comment: 0
+social_new_code: ''
+fontawesome_four: 1
+fontawesome_six: 0
+bootstrapicons: 0
+material_icon_outlined: 0
+material_icon_filled: 0
+material_icon_round: 0
+material_icon_sharp: 0
+material_icon_tone: 0

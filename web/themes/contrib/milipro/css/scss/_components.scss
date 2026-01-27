@@ -1,110 +1,110 @@
 /*
  * Drupal message and message box.
  */
- .message,
- .message-success,
- .message-info,
- .message-error,
- .message-warning,
- .message-announcement,
- .message-notice {
-   position: relative;
-   color: #ffffff;
-   margin: 10px 0 20px 0;
-   padding: 14px 14px 14px 64px;
- }
- .message em,
- .message-success em,
- .message-info em,
- .message-error em,
- .message-warning em,
- .message-announcement em,
- .message-notice em {
-   color: #ffffff;
-   font-style: italic;
- }
- .message p,
- .message-success p,
- .message-info p,
- .message-error p,
- .message-warning p,
- .message-announcement p,
- .message-notice p {
-   margin: 0;
- }
- .message a,
- .message-success a,
- .message-info a,
- .message-error a,
- .message-warning a,
- .message-announcement a,
- .message-notice a {
-   color: #ffffff;
-   text-decoration: underline;
- }
- .message-status,
- .message-success {
-   background: #89ad32;
- }
- .message-status::before,
- .message-success::before {
-   content: "\f046";
-   background-color: #759625;
- }
- .message-error {
-   background: #c94d1c;
- }
- .message-error::before {
-   content: "\f06a";
-   background-color: #b3461b;
- }
- .message-warning {
-   background: #cd5a0a;
- }
- .message-warning::before {
-   content: "\f071";
-   background-color: #a44707;
- }
- .message-info {
-   background: #5a82a1;
- }
- .message-info::before {
-   content: "\f05a";
-   background-color: #3e6584;
- }
- .message-announcement {
-   background: #46c280;
- }
- .message-announcement::before {
-   content: "\f0a1";
-   background-color: #34a268;
- }
- .message-notice {
-   background: #afa82e;
- }
- .message-notice::before {
-   content: "\f0a2";
-   background-color: #9b941b;
- }
- .message-status::before,
- .message-success::before,
- .message-error::before,
- .message-warning::before,
- .message-info::before,
- .message-announcement::before,
- .message-notice::before {
-   position: absolute;
-   top: 0;
-   left: 0;
-   width: 53px;
-   height: 100%;
-   font-family: "milicon";
-   font-size: 2em;
-   line-height: 53px;
-   text-align: center;
- }
+.message,
+.message-success,
+.message-info,
+.message-error,
+.message-warning,
+.message-announcement,
+.message-notice {
+  position: relative;
+  color: #ffffff;
+  margin: 10px 0 20px 0;
+  padding: 14px 14px 14px 64px;
+}
+.message em,
+.message-success em,
+.message-info em,
+.message-error em,
+.message-warning em,
+.message-announcement em,
+.message-notice em {
+  color: #ffffff;
+  font-style: italic;
+}
+.message p:last-of-type,
+.message-success p:last-of-type,
+.message-info p:last-of-type,
+.message-error p:last-of-type,
+.message-warning p:last-of-type,
+.message-announcement p:last-of-type,
+.message-notice p:last-of-type {
+  margin: 0;
+}
+.message a,
+.message-success a,
+.message-info a,
+.message-error a,
+.message-warning a,
+.message-announcement a,
+.message-notice a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+.message-status,
+.message-success {
+  background: #89ad32;
+}
+.message-status::before,
+.message-success::before {
+content: "\e022";
+background-color: #759625;
+}
+.message-error {
+  background: #c94d1c;
+}
+.message-error::before {
+  content: "\e020";
+  background-color: #b3461b;
+}
+.message-warning {
+  background: #cd5a0a;
+}
+.message-warning::before {
+  content: "\e021";
+  background-color: #a44707;
+}
+.message-info {
+  background: #5a82a1;
+}
+.message-info::before {
+  content: "\e018";
+  background-color: #3e6584;
+}
+.message-announcement {
+  background: #46c280;
+}
+.message-announcement::before {
+  content: "\e017";
+  background-color: #34a268;
+}
+.message-notice {
+  background: #afa82e;
+}
+.message-notice::before {
+  content: "\e009";
+  background-color: #9b941b;
+}
+.message-status::before,
+.message-success::before,
+.message-error::before,
+.message-warning::before,
+.message-info::before,
+.message-announcement::before,
+.message-notice::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 53px;
+  height: 100%;
+  font-family: "thex";
+  font-size: 2em;
+  line-height: 53px;
+  text-align: center;
+}
 
- /* Page Loader
+/* Page Loader
 -------------------------------------------- */
 .loader {
   position: fixed;
@@ -184,4 +184,60 @@ ul.share-node-icons {
 }
 .cookiealert button {
   background: var(--color-primary);
+}
+/* Pager
+------------------------*/
+.pager {
+  width: 100%;
+  margin-top: 1rem;
+}
+.pager-items {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  width: 100%;
+  list-style: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.pager-item {
+  display: grid;
+  place-content: center;
+  color: var(--bold-color);
+  height: 44px;
+  min-width: 44px;
+  border-radius: 4px;
+  padding: 0;
+  line-height: 1;
+}
+.pager-item a {
+  display: grid;
+  place-content: center;
+  background-color: #ffffff;
+  border-radius: 4px;
+  height: 44px;
+  min-width: 44px;
+  border: 1px dashed var(--color-primary);
+}
+.pager-item a:hover,
+.pager-item-active {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border: 1px solid var(--color-primary);
+}
+/* pager full */
+.pager__item a {
+  background-color: #ffffff;
+  color: var(--bold-color);
+  padding: 0 2px;
+}
+.pager .is-active {
+  border-color: var(--color-primary);
+}
+.pager__item a:hover,
+.pager__item.is-active a {
+  background-color: var(--color-primary);
+  color: #ffffff;
 }

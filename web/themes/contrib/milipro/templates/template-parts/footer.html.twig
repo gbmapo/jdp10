@@ -35,8 +35,8 @@
 <section class="footer-bottom-section">
   {% if copyright_text %}
     <div class="copyright">
-      {% if copyright_text_custom != '' %}
-        {{ copyright_text_custom | striptags('<p>,<div>,<span>,<a>,<img>,<h1>,<h2>,<h3>,<h4>,<h5>,<h6>,<em>,<strong><br><hr><i>') | raw }}
+      {% if copyright_custom and page.copyright %}
+        {{ page.copyright }}
       {% else %}
         &copy; {{ "now"|date("Y") }} {{ site_name }}, All rights reserved.
       {% endif %}
@@ -54,7 +54,7 @@
 {% endif %}
   </div><!-- /.container -->
 </footer>
-</div> <!-- end page-wrapper, started in header -->
+</div><!-- end page-wrapper, started in header -->
 {% if sticky_header_option %}
   {{ attach_library('milipro/sticky') }}
 {% endif %}
@@ -63,20 +63,14 @@
   {% include '@milipro/template-parts/cookie.html.twig' %}
 {% endif %}
 {% if scrolltotop_on %}
-<div class="scrolltop"><i class="icon-angle-up"></i></div>
+<div class="scrolltop"><i class="icon-arrow-up" aria-hidden="true"></i></div>
 {% endif %}
-<!-- End: Footer -->
-{% if fontawesome %}
-{{ attach_library('milipro/fontawesome') }}
-{% else %}
-<style>
-.fa {
-  display: none;
-}
-</style>
+{% include '@milipro/template-parts/style.html.twig' %}
+{% if fontawesome_four %}
+  {{ attach_library('milipro/fontawesome4') }}
 {% endif %}
 {% if fontawesome_five %}
-{{ attach_library('milipro/fontawesome5') }}
+  {{ attach_library('milipro/fontawesome5') }}
 {% else %}
 <style>
 .fab {
@@ -84,8 +78,11 @@
 }
 </style>
 {% endif %}
+{% if fontawesome_six %}
+  {{ attach_library('milipro/fontawesome6') }}
+{% endif %}
 {% if iconmonstr %}
-{{ attach_library('milipro/iconmonstr') }}
+  {{ attach_library('milipro/iconmonstr') }}
 {% else %}
 <style>
 .im {
@@ -93,6 +90,21 @@
 }
 </style>
 {% endif %}
-{% if material_icon %}
-{{ attach_library('milipro/material') }}
+{% if material_icon_outlined %}
+  {{ attach_library('milipro/material-outlined') }}
+{% endif %}
+{% if material_icon_filled %}
+  {{ attach_library('milipro/material-filled') }}
+{% endif %}
+{% if material_icon_round %}
+  {{ attach_library('milipro/material-round') }}
+{% endif %}
+{% if material_icon_sharp %}
+  {{ attach_library('milipro/material-sharp') }}
+{% endif %}
+{% if material_icon_tone %}
+  {{ attach_library('milipro/material-tone') }}
+{% endif %}
+{% if bootstrapicons %}
+  {{ attach_library('milipro/bootstrap-icons') }}
 {% endif %}
