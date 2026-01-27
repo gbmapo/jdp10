@@ -1,7 +1,5 @@
 jQuery(document).ready(function ($) {
 
-//  $.fn.dataTable.moment('MM/YYYY');
-
   $('#listofpersons').DataTable({
     "language": {
       "sProcessing": "Traitement en cours...",

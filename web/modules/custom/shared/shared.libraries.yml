@@ -5,8 +5,6 @@ shared:
       /libraries/DataTables/datatables.css: {}
   js:
     /libraries/DataTables/datatables.min.js: {}
-    /libraries/DataTables/moment.min.js: {}
-    /libraries/DataTables/datetime-moment.js: {}
   dependencies:
     - core/jquery
 
