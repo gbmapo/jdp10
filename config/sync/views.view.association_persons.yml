@@ -2750,7 +2750,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "{% set result = roles_target_id ~ 'aa' %}\r\n{% if 'amapien' in result %}\r\n{{'Oui'}}\r\n{% else %}\r\n{{'Non'}}\r\n{% endif %}\r\n"
+            text: "{% set result = roles_target_id ~ 'aa' %}\r\n{% if 'amapien' in result %}\r\n{{'AMAPien'}}\r\n{% else %}\r\n{{'Non AMAPien'}}\r\n{% endif %}\r\n"
             make_link: false
             path: ''
             absolute: false
