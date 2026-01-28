@@ -30,10 +30,10 @@ jQuery(document).ready(function ($) {
     "info": true,
     "order": [],
     "paging": false,
-    "columnDefs": [{
-      "targets": [2, 4, 8, 9],
-      "orderable": false
-    }],
+    "columnDefs": [
+    {"targets": [2, 4, 8, 9], "orderable": false},
+    {targets: [6,7,8], className: 'dt-head-center'},
+    ],
     orderCellsTop: true,
     "dom": '<"top"if>',
     /* Results in:
