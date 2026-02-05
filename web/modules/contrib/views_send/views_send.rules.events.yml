@@ -8,7 +8,7 @@ views_send_email_sent:
       description: 'All information about the message.'
 
 views_send_all_email_added_to_spool:
-  label: 'After adding all e-mails to the spool'
+  label: 'After adding all email messages to the spool'
   category: 'Views Send'
   context_definitions:
     count:
@@ -17,7 +17,7 @@ views_send_all_email_added_to_spool:
       description: 'The number of messages added to the spool.'
 
 views_send_email_added_to_spool:
-  label: 'After adding an individual e-mail to the spool'
+  label: 'After adding an individual email message to the spool'
   category: 'Views Send'
   context_definitions:
     message:

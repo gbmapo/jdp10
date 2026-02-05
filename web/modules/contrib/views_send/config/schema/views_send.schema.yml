@@ -10,7 +10,7 @@ views_send.settings:
       label: 'How many retries before a message in the spool is discarded'
     spool_expire:
       type: integer
-      label: 'How many days messages are retained in the spool after successfull sending'
+      label: 'How many days messages are retained in the spool after successful sending'
     debug:
       type: boolean
-      label: 'Log all outgoing messages in the system log'
+      label: 'Log all outgoing email messages in the system log'
