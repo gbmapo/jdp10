@@ -1,9 +1,9 @@
-uuid: e7d25b40-b035-4892-a918-2da5bf0d4722
+uuid: 68458eba-4a4c-465d-ae03-c7cda58b654f
 langcode: fr
 status: true
 dependencies:
   content:
-    - 'block_content:basic:c620f2f4-1f2d-43fb-89dd-c8c4d9e00661'
+    - 'block_content:basic:cd7b6ea5-3706-4f92-b5fa-b2a0a35f684a'
   module:
     - block_content
     - system
@@ -14,9 +14,9 @@ theme: milipro
 region: slider
 weight: 0
 provider: null
-plugin: 'block_content:c620f2f4-1f2d-43fb-89dd-c8c4d9e00661'
+plugin: 'block_content:cd7b6ea5-3706-4f92-b5fa-b2a0a35f684a'
 settings:
-  id: 'block_content:c620f2f4-1f2d-43fb-89dd-c8c4d9e00661'
+  id: 'block_content:cd7b6ea5-3706-4f92-b5fa-b2a0a35f684a'
   label: Slider
   label_display: '0'
   provider: block_content
