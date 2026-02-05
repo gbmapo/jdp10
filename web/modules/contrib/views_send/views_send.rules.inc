@@ -1,56 +1,61 @@
 <?php
 
 /**
-* Implementation of hook_rules_event_info().
-*/
+ * @file
+ * Rules hooks for the Views Send module.
+ */
+
+/**
+ * Implements hook_rules_event_info().
+ */
 function views_send_rules_event_info() {
-  $defaults = array(
+  $defaults = [
     'group' => t('Views Send'),
-  );
-  return array(
-    'views_send_email_sent' => $defaults + array(
+  ];
+  return [
+    'views_send_email_sent' => $defaults + [
       'label' => t('After sending an individual email'),
-      'variables' => array(
-        'views_send_email_message' => array(
+      'variables' => [
+        'views_send_email_message' => [
           'type' => 'views_send_email_message',
-          'label' => t('e-mail message'),
-          'description' => t('All information about the message.')
-        ),
-      ),
-    ),
-    'views_send_all_email_added_to_spool' => $defaults + array(
-      'label' => t('After adding all e-mails to the spool'),
-      'variables' => array(
-        'views_send_email_count' => array(
+          'label' => t('email message'),
+          'description' => t('All information about the message.'),
+        ],
+      ],
+    ],
+    'views_send_all_email_added_to_spool' => $defaults + [
+      'label' => t('After adding all email messages to the spool'),
+      'variables' => [
+        'views_send_email_count' => [
           'type' => 'integer',
           'label' => t('message count'),
-          'description' => t('The number of messages added to the spool.')
-        ),
-      ),
-    ),
-    'views_send_email_added_to_spool' => $defaults + array(
-      'label' => t('After adding an individual e-mail to the spool'),
-      'variables' => array(
-        'views_send_email_message' => array(
+          'description' => t('The number of messages added to the spool.'),
+        ],
+      ],
+    ],
+    'views_send_email_added_to_spool' => $defaults + [
+      'label' => t('After adding an individual email to the spool'),
+      'variables' => [
+        'views_send_email_message' => [
           'type' => 'views_send_email_message',
-          'label' => t('e-mail message'),
-          'description' => t('All information about the message.')
-        ),
-      ),
-    ),
-  );
+          'label' => t('email message'),
+          'description' => t('All information about the message.'),
+        ],
+      ],
+    ],
+  ];
 }
 
 /**
-* Implementation of hook_rules_data_info().
-*/
+ * Implements hook_rules_data_info().
+ */
 function views_send_rules_data_info() {
-  return array(
-    'views_send_email_message' => array(
-      'label' => t('Views Send e-mail message'), 
-      'group' => t('Views Send'), 
-      'wrap' => TRUE, 
+  return [
+    'views_send_email_message' => [
+      'label' => t('Views Send email message'),
+      'group' => t('Views Send'),
+      'wrap' => TRUE,
       'property info' => _views_send_email_message_property_info(),
-    ),
-  );
+    ],
+  ];
 }

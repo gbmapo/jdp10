@@ -2,7 +2,7 @@
 
 /**
  * @file
- *   Views Send cron rotuines.
+ * Views Send cron rotuines.
  *
  * @ingroup views_send
  */
@@ -22,16 +22,18 @@ function views_send_send_from_spool() {
 
   // Retrieve messages to be send.
   $query = "SELECT * FROM {views_send_spool} WHERE status = :status ORDER BY tentatives ASC, timestamp ASC";
-  $result = $limit ? \Drupal::database()->queryRange($query, 0, $limit, array(':status' => 0)) : \Drupal::database()->query($query, array(':status' => 0));
+  $result = $limit ? \Drupal::database()->queryRange($query, 0, $limit, [':status' => 0]) :
+    \Drupal::database()->query($query, [':status' => 0]);
   foreach ($result as $message) {
     // Send the message.
     $status = views_send_deliver($message);
 
     if ($status) {
       // Update the spool status.
-      \Drupal::database()->query("UPDATE {views_send_spool} SET status = :status WHERE eid = :eid", array(':status' => 1, ':eid' => $message->eid));
+      \Drupal::database()->query("UPDATE {views_send_spool} SET status = :status WHERE eid = :eid",
+        [':status' => 1, ':eid' => $message->eid]);
       if (\Drupal::config('views_send.settings')->get('debug')) {
-        \Drupal::logger('views_send')->notice(t('Message sent to %mail.', array('%mail' => $message->to_mail)));
+        \Drupal::logger('views_send')->notice(t('Message sent to %mail.', ['%mail' => $message->to_mail]));
       }
 
       $event = new MailSentEvent($message);
@@ -43,7 +45,8 @@ function views_send_send_from_spool() {
     else {
       // Increment tentatives so that next time this message
       // will be scheduled with low priority.
-      \Drupal::database()->query("UPDATE {views_send_spool} SET tentatives = tentatives + 1 WHERE eid = :eid", array(':eid' => $message->eid));
+      \Drupal::database()->query("UPDATE {views_send_spool} SET tentatives = tentatives + 1 WHERE eid = :eid",
+        [':eid' => $message->eid]);
       $fail++;
     }
 
@@ -55,7 +58,7 @@ function views_send_send_from_spool() {
 
       // Break if exceded.
       if (Timer::read('views_send') / 1000 > .8 * ini_get('max_execution_time')) {
-        \Drupal::logger('views_send')->notice(t('PHP maximum execution time almost exceeded. Remaining e-mail messages will be sent during the next cron run. If this warning occurs regularly you should reduce the cron throttle setting.'));
+        \Drupal::logger('views_send')->notice(t('PHP maximum execution time almost exceeded. Remaining email messages will be sent during the next cron run. If this warning occurs regularly you should reduce the cron throttle setting.'));
         break;
       }
     }
@@ -64,7 +67,7 @@ function views_send_send_from_spool() {
   if ($ok + $fail > 0) {
     // Log results and exit.
     \Drupal::logger('views_send')->notice(t('%ok messages sent in %sec seconds, %fail failed sending.',
-      array('%ok' => $ok, '%sec' => Timer::read('views_send') / 1000, '%fail' => $fail)
+      ['%ok' => $ok, '%sec' => Timer::read('views_send') / 1000, '%fail' => $fail]
     ));
   }
 }
@@ -75,8 +78,10 @@ function views_send_send_from_spool() {
 function views_send_clear_spool() {
   // Remove expired sent messages.
   $expiration_time = time() - \Drupal::config('views_send.settings')->get('spool_expire') * 86400;
-  \Drupal::database()->query("DELETE FROM {views_send_spool} WHERE status = :status AND timestamp <= :expiry", array(':status' => 1, 'expiry' => $expiration_time));
+  \Drupal::database()->query("DELETE FROM {views_send_spool} WHERE status = :status AND timestamp <= :expiry",
+    [':status' => 1, 'expiry' => $expiration_time]);
   // Remove unsent messages which have failed more times than the retry limit.
   $retry_limit = \Drupal::config('views_send.settings')->get('retry');
-  \Drupal::database()->query("DELETE FROM {views_send_spool} WHERE status = :status AND tentatives > :retry", array(':status' => 0, 'retry' => $retry_limit));
+  \Drupal::database()->query("DELETE FROM {views_send_spool} WHERE status = :status AND tentatives > :retry",
+    [':status' => 0, 'retry' => $retry_limit]);
 }

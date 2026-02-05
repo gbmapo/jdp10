@@ -41,8 +41,8 @@ RECOMMENDED MODULES
   subject or body of the message. Note that row-based tokens are available even
   if Tokens module is disabled.
 * Rules - https://www.drupal.org/project/rules
-  When the Rules module is enabled, the user can define actions for when emails
-  are sent and/or placed in the spool.
+  When the Rules module is enabled, the user can define actions for when email
+  messages are sent and/or placed in the spool.
 
 Similar modules:
 
@@ -67,17 +67,17 @@ Administration > Configuration > System > Views Send
 To actually use the module you have to create a view:
 
  1. Create a view with a page (or block) display
-    and add at least one column containing e-mail addresses.
+    and add at least one column containing email addresses.
  2. [Optional] Expose filters to let the user easily build list of
     recipients using UI.
- 3. Add the "Global: Send e-mail" field to your view. This field provides the
+ 3. Add the "Global: Send email" field to your view. This field provides the
     checkboxes that allow the user to select multiple rows.
  4. [Optional] Add a field that contains recipient names, which can be used to
-    generate display names in the "To" field when sending e-mails.
+    generate display names in the "To" field when sending email messages.
  4. Save the view, load the page (or a page with the block), use any exposed
-    filters to build the list, select all or some rows and choose "Send e-mail".
- 5. Fill the message form to configure the e-mail. Use tokens to personalize
-    the e-mail.
+    filters to build the list, select all or some rows and choose "Send email".
+ 5. Fill the message form to configure the email. Use tokens to personalize
+    the email.
  6. Preview and send the message.
 
 
