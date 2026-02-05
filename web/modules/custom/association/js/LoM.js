@@ -32,7 +32,8 @@ jQuery(document).ready(function ($) {
     "paging": false,
     "columnDefs": [
     {"targets": [2, 4, 8, 9], "orderable": false},
-    {targets: [6,7,8], className: 'dt-head-center'},
+    {targets: [6,7,8], type: 'string'},
+    {targets: [6,7,8], className: 'dt-center'},
     ],
     orderCellsTop: true,
     "dom": '<"top"if>',

@@ -5,7 +5,7 @@ namespace Drupal\views_send\Event;
 use Drupal\Component\EventDispatcher\Event;
 
 /**
- * Event that is fired when all e-mails have been added to the spool.
+ * Event that is fired when all email messages have been added to the spool.
  */
 class AllMailAddedEvent extends Event {
 

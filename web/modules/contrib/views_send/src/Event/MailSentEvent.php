@@ -5,7 +5,7 @@ namespace Drupal\views_send\Event;
 use Drupal\Component\EventDispatcher\Event;
 
 /**
- * Event that is fired when an e-mail has been sent.
+ * Event that is fired when an email message has been sent.
  */
 class MailSentEvent extends Event {
 
@@ -21,7 +21,8 @@ class MailSentEvent extends Event {
   /**
    * Constructs the mail object.
    *
-   * @param $message
+   * @param array|object $message
+   *   The mail message.
    */
   public function __construct($message) {
     if (is_array($message)) {
@@ -34,6 +35,7 @@ class MailSentEvent extends Event {
    * Gets the subject of the mail.
    *
    * @return string
+   *   The mail subject.
    */
   public function getSubject() {
     return $this->subject;

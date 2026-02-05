@@ -9,7 +9,7 @@ use Drupal\Tests\BrowserTestBase;
 use PHPUnit\Framework\Attributes\Group;
 
 /**
- * Test Views Send
+ * Test Views Send.
  */
 #[Group('views_send')]
 final class ViewsSendTest extends BrowserTestBase {
@@ -23,7 +23,6 @@ final class ViewsSendTest extends BrowserTestBase {
    * {@inheritdoc}
    */
   protected static $modules = ['views_send'];
-
 
   /**
    * Test callback.

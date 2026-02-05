@@ -3,10 +3,11 @@
 namespace Drupal\views_send\Plugin\views\field;
 
 use Drupal\Component\Utility\UrlHelper;
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\views\Plugin\views\field\BulkForm;
-use Drupal\Core\File\FileSystemInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Defines a simple send mass mail form element.
@@ -15,6 +16,58 @@ use Drupal\Core\File\FileSystemInterface;
  */
 class ViewsSend extends BulkForm {
 
+  /**
+   * The config factory.
+   *
+   * @var \Drupal\Core\Extension\ConfigFactoryInterface
+   */
+  protected $configFactory;
+
+  /**
+   * The current path stack.
+   *
+   * @var \Drupal\Core\Path\CurrentPathStack
+   */
+  protected $currentPathStack;
+
+  /**
+   * The current user service.
+   *
+   * @var \Drupal\Core\Session\AccountProxyInterface
+   */
+  protected $currentUser;
+
+  /**
+   * The file system service.
+   *
+   * @var \Drupal\Core\File\FileSystemInterface
+   */
+  protected $fileSystem;
+
+  /**
+   * The file system service.
+   *
+   * @var \Drupal\views_send\Service\ViewsSendMime
+   */
+  protected $viewsSendMime;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    $instance = parent::create($container, $configuration, $plugin_id, $plugin_definition);
+    $instance->configFactory = $container->get('config.factory');
+    $instance->currentPathStack = $container->get('path.current');
+    $instance->currentUser = $container->get('current_user');
+    $instance->fileSystem = $container->get('file_system');
+    $instance->viewsSendMime = $container->get('views_send.mime');
+
+    return $instance;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   protected function defineOptions() {
     $options = parent::defineOptions();
     $options['enable_excluded_fields'] = [
@@ -25,7 +78,7 @@ class ViewsSend extends BulkForm {
   }
 
   /**
-   * Overrides \Drupal\system\Plugin\views\field\BulkForm::buildOptionsForm().
+   * {@inheritdoc}
    */
   public function buildOptionsForm(&$form, FormStateInterface $form_state) {
     parent::buildOptionsForm($form, $form_state);
@@ -34,7 +87,8 @@ class ViewsSend extends BulkForm {
     $form['exclude']['#access'] = FALSE;
     $form['alter']['#access'] = FALSE;
     $form['empty_field_behavior']['#access'] = FALSE;
-    // Hide the available actions configuration as we haven't defined a bulk action to select from.
+    // Hide the available actions configuration as we haven't defined
+    // a bulk action to select from.
     $form['action_title']['#access'] = FALSE;
     $form['include_exclude']['#access'] = FALSE;
     $form['selected_actions']['#access'] = FALSE;
@@ -46,9 +100,9 @@ class ViewsSend extends BulkForm {
   }
 
   /**
-   * Overrides \Drupal\system\Plugin\views\field\BulkForm::viewsForm().
+   * {@inheritdoc}
    */
-  function viewsForm(&$form, FormStateInterface $form_state) {
+  public function viewsForm(&$form, FormStateInterface $form_state) {
     parent::viewsForm($form, $form_state);
 
     // The view is empty, abort.
@@ -59,7 +113,7 @@ class ViewsSend extends BulkForm {
     // Add the custom CSS for all steps of the form.
     $form['#attached']['library'][] = 'views_send/views_send.form';
 
-    // Remove standard header which is used to select action
+    // Remove standard header which is used to select action.
     unset($form['header']);
 
     $step = $form_state->get('step');
@@ -69,23 +123,23 @@ class ViewsSend extends BulkForm {
       $form['#suffix'] = '</div>';
     }
     else {
-      // Hide the normal output from the view
+      // Hide the normal output from the view.
       $form['output'] = [];
       $step($form, $form_state, $this->view);
     }
   }
 
   /**
-   * Overrides \Drupal\system\Plugin\views\field\BulkForm::getBulkOptions().
+   * {@inheritdoc}
    */
   protected function getBulkOptions($filtered = TRUE) {
     return [];
   }
 
   /**
-   * Overrides \Drupal\system\Plugin\views\field\BulkForm::viewsFormSubmit().
+   * {@inheritdoc}
    */
-  function viewsFormSubmit(&$form, FormStateInterface $form_state) {
+  public function viewsFormSubmit(&$form, FormStateInterface $form_state) {
     switch ($form_state->get('step')) {
       case 'views_form_views_form':
         $field_name = $this->options['id'];
@@ -95,49 +149,51 @@ class ViewsSend extends BulkForm {
         // Preserve the URL as it gets lost if block display and batch API.
         if ($this->view->hasUrl()) {
           $url = $this->view->getUrl();
-        } else {
-          // For some reason Url::fromRoute('<current>') doesn't work.
-          $url = Url::fromUserInput(\Drupal::service('path.current')->getPath());
         }
-        $query = UrlHelper::filterQueryParameters($_GET, array('q'));
+        else {
+          // For some reason Url::fromRoute('<current>') doesn't work.
+          $url = Url::fromUserInput($this->currentPathStack->getPath());
+        }
+        $query = UrlHelper::filterQueryParameters($_GET, ['q']);
         $form_state->set('url', $url->setOption('query', $query));
         $form_state->setRebuild(TRUE);
         break;
 
       case 'views_send_config_form':
         $display = $form['display']['#value'];
-        $config = \Drupal::configFactory()->getEditable('views_send.user_settings');
-        $config_basekey = $display . '.uid:' . \Drupal::currentUser()->id();
+        $config = $this->configFactory->getEditable('views_send.user_settings');
+        $config_basekey = $display . '.uid:' . $this->currentUser->id();
         $form_state_values = $form_state->getValues();
         if ($form_state->getValue('views_send_remember')) {
           foreach ($form_state_values as $key => $value) {
             $key = ($key == 'format') ? 'views_send_message_format' : $key;
             if (substr($key, 0, 11) == 'views_send_') {
-              $config->set($config_basekey . '.' . substr($key,11), $value);
+              $config->set($config_basekey . '.' . substr($key, 11), $value);
             }
           }
           $config->save();
-        } else {
+        }
+        else {
           $config->clear($config_basekey);
           $config->save();
         }
         $form_state->set('configuration', $form_state_values);
 
         // If a file was uploaded, process it.
-        if (\Drupal::service('views_send.mime')->isAvailable() && \Drupal::currentUser()->hasPermission('attachments with views_send') &&
+        if ($this->viewsSendMime->isAvailable() && $this->currentUser->hasPermission('attachments with views_send') &&
             isset($_FILES['files']) && is_uploaded_file($_FILES['files']['tmp_name']['views_send_attachments'])) {
-          // attempt to save the uploaded file
-          $dir = \Drupal::config('system.file')->get('default_scheme') . '://views_send_attachments';
-          \Drupal::service('file_system')->prepareDirectory($dir, FileSystemInterface::CREATE_DIRECTORY);
+          // Attempt to save the uploaded file.
+          $dir = $this->configFactory->get('system.file')->get('default_scheme') . '://views_send_attachments';
+          $this->fileSystem->prepareDirectory($dir, FileSystemInterface::CREATE_DIRECTORY);
           $files = file_save_upload('views_send_attachments', [], $dir);
-          // set error if file was not uploaded
+          // Set error if file was not uploaded.
           if (!$files) {
             $form_state->setErrorByName('views_send_attachment', $this->t('Error uploading file.'));
           }
           else {
-            // set files to form_state, to process when form is submitted
-            // @todo: when we add a multifile formfield then loop through to add each file to attachments array
-            $form_state->set(array('configuration', 'views_send_attachments'), $files);
+            // Set files to form_state, to process when form is submitted.
+            // @todo when we add a multifile formfield then loop through to add each file to attachments array
+            $form_state->set(['configuration', 'views_send_attachments'], $files);
           }
         }
 
@@ -156,9 +212,9 @@ class ViewsSend extends BulkForm {
   }
 
   /**
-   * Overrides \Drupal\system\Plugin\views\field\BulkForm::::viewsFormValidate().
+   * {@inheritdoc}
    */
-  function viewsFormValidate(&$form, FormStateInterface $form_state) {
+  public function viewsFormValidate(&$form, FormStateInterface $form_state) {
     if ($form_state->get('step') != 'views_form_views_form') {
       return;
     }
@@ -170,4 +226,5 @@ class ViewsSend extends BulkForm {
       $form_state->setErrorByName($field_name, $this->t('Please select at least one item.'));
     }
   }
+
 }
