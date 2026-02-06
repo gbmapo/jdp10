@@ -30,7 +30,7 @@ class MemberImportStatus extends FormBase
       '#type'              => 'managed_file',
       '#upload_location'   => 'private://',
       '#upload_validators' => [
-        'file_validate_extensions' => ['csv'],
+        'FileExtension' => ['extensions' => 'csv'],
       ],
       '#title'             => $this->t('File to import'),
       '#description'       => $this->t('Select the file to import'),

@@ -203,8 +203,8 @@ class ContractSubscriptionTableForm extends FormBase {
         '#description' => $this->t('Limited to @size MB.', ['@size' => $upload_max_inMB]) . '<br>' . $this->t('Allowed types: pdf.'),
         '#upload_location' => 'private://contracts/subscriptions/',
         '#upload_validators' => [
-          'file_validate_extensions' => ['pdf'],
-          'file_validate_size' => [$upload_max],
+          'FileExtension' => ['extensions' => 'pdf'],
+          'FileSizeLimit' => ['fileLimit' => $upload_max],
         ],
         '#default_value' => [$fileId],
       ];
