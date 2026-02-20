@@ -7,7 +7,7 @@ label: 'Help List of Contracts for Authenticated'
 body:
   value: "<div class=\"text-align-justify\"><ul><li>Cliquer sur le 'Nom' affiche dans une autre fenêtre le formulaire «&nbsp;papier&nbsp;» qui décrit en détail les caractéristiques du contrat, les produits, la périodicité, les tarifs...</li><li>Les dates de début et de fin sont généralement les dates de la première et de la dernière distribution.</li><li>Quand la souscription est 'fermée', c'est trop tard ! Désolé 😢</li><li>Cliquer sur le 'Référent' affiche ses coordonnées pour vous permettre de le contacter.</li></ul><p>Nota : les listes déroulantes 'Souscription' et 'Référent' permettent de filtrer la liste.</p></div>"
   format: full_html
-pages: ''
+pages: /amap/contracts2
 auto_open: false
 open_modal_on_element_click: .open-help-list-of-contracts-for-authenticated
 ok_label_button: OK
@@ -35,6 +35,7 @@ roles:
   extended_ca: '0'
   secretary: '0'
   administrator: '0'
+  member: '0'
 type: page
 delay_display: '0'
 enable_custom_cookie_expiration: false
