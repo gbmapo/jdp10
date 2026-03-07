@@ -260,6 +260,7 @@ function shared_form_alter(&$form, FormStateInterface $form_state, $form_id) {
             '#required' => TRUE,
           ];
           $form['mail']['token']['#type'] = 'hidden';
+          $form['mail']['views_send_attachments']['#description'] = '';
           $form['additional']['#type'] = 'hidden';
           $form['views_send_remember']['#type'] = 'hidden';
           $form['views_send_direct']['#default_value'] = 0;
