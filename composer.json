@@ -112,8 +112,8 @@
     },
     "require-dev": {
         "drupal/devel": "^5.5",
+        "drupal/kint": "^2.3",
         "drupal/upgrade_status": "^4.3",
-        "kint-php/kint": "^6.0",
         "palantirnet/drupal-rector": "^0.20.3"
     }
 }
