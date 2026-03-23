@@ -792,20 +792,7 @@ display:
           plugin_id: standard
           required: false
       display_description: ''
-      header:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: text
-          empty: true
-          content:
-            value: '<a href="/sites/default/files/_private/contacter-en-masse.pdf" class="button-round" target="_blank">Aide</a>'
-            format: full_html
-          tokenize: false
+            value: '<a href="/sites/default/files/contacter-en-masse.pdf" class="button-round" target="_blank">Aide</a>'
       display_extenders: {  }
       path: association/sendemails
     cache_metadata:
