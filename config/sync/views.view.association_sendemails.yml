@@ -5,7 +5,6 @@ dependencies:
   config:
     - user.role.amapien
     - user.role.contact_for_member
-    - user.role.extended_ca
     - user.role.referent_of_contract
     - user.role.referent_of_distribution
     - user.role.seliste
@@ -807,7 +806,7 @@ display:
     id: page_2
     display_title: SendEmailsToMembers
     display_plugin: page
-    position: 2
+    position: 1
     display_options:
       title: 'Contacter en masse les adhérents'
       fields:
@@ -854,7 +853,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -919,7 +918,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -990,6 +989,70 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: false
+        email:
+          id: email
+          table: person
+          field: email
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: person
+          entity_field: email
+          plugin_id: field
+          label: 'Adresse courriel'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: basic_string
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         designation:
           id: designation
           table: member
@@ -1045,70 +1108,6 @@ display:
           type: string
           settings:
             link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        email:
-          id: email
-          table: person
-          field: email
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: person
-          entity_field: email
-          plugin_id: field
-          label: 'Adresse courriel'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: basic_string
-          settings: {  }
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -1279,54 +1278,24 @@ display:
           columns:
             lastname: lastname
             firstname: firstname
-            nothing: nothing
-            designation: designation
-            email: email
-            views_send_bulk_form: views_send_bulk_form
           default: '-1'
           info:
             lastname:
-              sortable: false
-              default_sort_order: asc
-              align: views-align-left
-              separator: ''
-              empty_column: false
-              responsive: ''
-            firstname:
-              sortable: false
-              default_sort_order: asc
-              align: views-align-left
-              separator: ''
-              empty_column: false
-              responsive: ''
-            nothing:
               sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            designation:
+            firstname:
               sortable: false
               default_sort_order: asc
-              align: views-align-left
-              separator: ''
-              empty_column: false
-              responsive: ''
-            email:
-              sortable: false
-              default_sort_order: asc
-              align: views-align-left
-              separator: ''
-              empty_column: false
-              responsive: ''
-            views_send_bulk_form:
-              align: views-align-center
+              align: ''
               separator: ''
               empty_column: false
               responsive: ''
           override: true
-          sticky: true
+          sticky: false
           summary: ''
           empty_table: false
           caption: ''
@@ -1336,8 +1305,10 @@ display:
         type: fields
         options:
           default_field_elements: true
-          inline: {  }
-          separator: ''
+          inline:
+            lastname: lastname
+            firstname: firstname
+          separator: ' '
           hide_empty: false
       defaults:
         access: false
@@ -1348,6 +1319,7 @@ display:
         fields: false
         filters: false
         filter_groups: false
+        header: false
       relationships:
         member_id:
           id: member_id
@@ -1372,6 +1344,20 @@ display:
           plugin_id: standard
           required: false
       display_description: ''
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: '<a href="/sites/default/files/contacter-en-masse.pdf" class="button-round" target="_blank">Aide</a>'
+            format: full_html
+          tokenize: false
       display_extenders: {  }
       path: association/sendemailstomembers
     cache_metadata:
@@ -1386,7 +1372,7 @@ display:
     id: page_3
     display_title: SendEmailsToPersons
     display_plugin: page
-    position: 2
+    position: 1
     display_options:
       title: 'Contacter en masse'
       fields:
@@ -1433,7 +1419,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -1498,7 +1484,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -1569,6 +1555,70 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: false
+        email:
+          id: email
+          table: person
+          field: email
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: person
+          entity_field: email
+          plugin_id: field
+          label: 'Adresse courriel'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: basic_string
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         designation:
           id: designation
           table: member
@@ -1624,70 +1674,6 @@ display:
           type: string
           settings:
             link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        email:
-          id: email
-          table: person
-          field: email
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: person
-          entity_field: email
-          plugin_id: field
-          label: 'Adresse courriel'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: basic_string
-          settings: {  }
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -1755,7 +1741,6 @@ display:
         type: perm
         options:
           perm: 'mass mailing with views_send'
-      sorts: {  }
       filters:
         status:
           id: status
@@ -1767,7 +1752,7 @@ display:
           entity_type: member
           entity_field: status
           plugin_id: numeric
-          operator: '>='
+          operator: '>'
           value:
             min: ''
             max: ''
@@ -1775,14 +1760,14 @@ display:
           group: 1
           exposed: false
           expose:
-            operator_id: status_op
-            label: État
+            operator_id: ''
+            label: ''
             description: ''
             use_operator: false
-            operator: status_op
+            operator: ''
             operator_limit_selection: false
             operator_list: {  }
-            identifier: status
+            identifier: ''
             required: false
             remember: false
             multiple: false
@@ -1860,12 +1845,11 @@ display:
             contact_for_member: contact_for_member
             referent_of_distribution: referent_of_distribution
             referent_of_contract: referent_of_contract
-            extended_ca: extended_ca
           group: 1
           exposed: true
           expose:
             operator_id: roles_target_id_op
-            label: Catégorie
+            label: Rôles
             description: ''
             use_operator: false
             operator: roles_target_id_op
@@ -1880,28 +1864,16 @@ display:
             reduce: true
           is_grouped: false
           group_info:
-            label: Rôles
+            label: ''
             description: ''
-            identifier: roles_target_id
+            identifier: ''
             optional: true
             widget: select
             multiple: false
             remember: false
             default_group: All
             default_group_multiple: {  }
-            group_items:
-              1:
-                title: ''
-                operator: or
-                value: {  }
-              2:
-                title: ''
-                operator: or
-                value: {  }
-              3:
-                title: ''
-                operator: or
-                value: {  }
+            group_items: {  }
           reduce_duplicates: false
         email:
           id: email
@@ -1957,52 +1929,24 @@ display:
           columns:
             lastname: lastname
             firstname: firstname
-            nothing: nothing
-            designation: designation
-            email: email
-            views_send_bulk_form: views_send_bulk_form
           default: '-1'
           info:
             lastname:
-              sortable: true
+              sortable: false
               default_sort_order: asc
-              align: views-align-left
+              align: ''
               separator: ''
               empty_column: false
               responsive: ''
             firstname:
               sortable: false
               default_sort_order: asc
-              align: views-align-left
-              separator: ''
-              empty_column: false
-              responsive: ''
-            nothing:
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            designation:
-              sortable: false
-              default_sort_order: asc
-              align: views-align-left
-              separator: ''
-              empty_column: false
-              responsive: ''
-            email:
-              sortable: true
-              default_sort_order: asc
-              align: views-align-left
-              separator: ''
-              empty_column: false
-              responsive: ''
-            views_send_bulk_form:
-              align: views-align-center
-              separator: ''
-              empty_column: false
-              responsive: ''
           override: true
-          sticky: true
+          sticky: false
           summary: ''
           empty_table: false
           caption: ''
@@ -2012,8 +1956,10 @@ display:
         type: fields
         options:
           default_field_elements: true
-          inline: {  }
-          separator: ''
+          inline:
+            lastname: lastname
+            firstname: firstname
+          separator: ' '
           hide_empty: false
       defaults:
         access: false
@@ -2022,9 +1968,9 @@ display:
         row: false
         relationships: false
         fields: false
-        sorts: false
         filters: false
         filter_groups: false
+        header: false
       relationships:
         member_id:
           id: member_id
@@ -2049,6 +1995,20 @@ display:
           plugin_id: standard
           required: false
       display_description: ''
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: '<a href="/sites/default/files/contacter-en-masse.pdf" class="button-round" target="_blank">Aide</a>'
+            format: full_html
+          tokenize: false
       display_extenders: {  }
       path: association/sendemailstopersons
     cache_metadata:
@@ -2057,6 +2017,5 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
-        - url.query_args
         - user.permissions
       tags: {  }
