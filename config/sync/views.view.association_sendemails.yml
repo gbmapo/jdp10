@@ -5,6 +5,7 @@ dependencies:
   config:
     - user.role.amapien
     - user.role.contact_for_member
+    - user.role.extended_ca
     - user.role.referent_of_contract
     - user.role.referent_of_distribution
     - user.role.seliste
@@ -682,6 +683,7 @@ display:
             contact_for_member: contact_for_member
             referent_of_distribution: referent_of_distribution
             referent_of_contract: referent_of_contract
+            extended_ca: extended_ca
           group: 1
           exposed: true
           expose:
@@ -791,7 +793,20 @@ display:
           plugin_id: standard
           required: false
       display_description: ''
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
             value: '<a href="/sites/default/files/contacter-en-masse.pdf" class="button-round" target="_blank">Aide</a>'
+            format: full_html
+          tokenize: false
       display_extenders: {  }
       path: association/sendemails
     cache_metadata:
