@@ -66,10 +66,10 @@ settings:
       value: '296'
       label: '2. AMAP Porc'
     -
-      value: '270'
+      value: '308'
       label: '2. AMAP Produits laitiers (Brebis)'
     -
-      value: '282'
+      value: '307'
       label: '2. AMAP Produits laitiers (Vache)'
     -
       value: '281'
