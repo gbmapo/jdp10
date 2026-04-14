@@ -597,7 +597,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "{% if created__value %}\r\n{{ created__value }}\r\n{% else %}\r\n{% endif %}"
+            text: "{% if created %}\r\n{{ created }}\r\n{% else %}\r\n{% endif %}"
             make_link: false
             path: ''
             absolute: false
@@ -1017,7 +1017,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "{% if created__value %}\r\n{{ created__value }}\r\n{% else %}\r\n{% endif %}"
+            text: "{% if created %}\r\n{{ created }}\r\n{% else %}\r\n{% endif %}"
             make_link: false
             path: ''
             absolute: false
