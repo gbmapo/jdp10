@@ -231,7 +231,37 @@ function amap_views_post_execute(ViewExecutable $view) {
     case 'amap_planning':
       switch ($view->current_display) {
         case 'page_1':
+          /**
+           * Ajoute au résultat de la vue les AMAPiens inscrits à aucune distribution
+           */
+          $enrolled = [];
+          foreach ($view->result as $row) {
+            $enrolled[] = $row->member_person_id;
+          }
+          $query = \Drupal::database()->select('person', 'pe');
+          $query->leftJoin('member', 'me', 'me.id = pe.member_id');
+          $query->leftJoin('user__roles', 'ur', 'ur.entity_id = pe.id');
+          $query->fields('me', ['id', 'designation',]);
+          $query->condition('ur.roles_target_id', 'amapien', '=');
+          $query->groupBy('id');
+          $query->orderBy('designation', 'ASC');
+          $results = $query->execute();
+          foreach ($results as $result) {
+            if (!in_array($result->id, $enrolled)) {
+              $row = clone $view->result[0];
+              $row->distribution_inscription_id = 0;
+              $row->member_person_designation = $result->designation;
+              $row->distribution_inscription_created = 0;
+              $row->id = 0;
+              $row->index = count($view->result);
+              $view->result[] = $row;
+            }
+          }
         case 'page_2':
+          /**
+           * Calcule le rang en fonction du nombre d'inscriptions
+           * Affiche 0 si rang identique à l'AMAPien précédent
+           */
           $rank = 0;
           $numberofinscriptions = 0;
           foreach ($view->result as $row) {
