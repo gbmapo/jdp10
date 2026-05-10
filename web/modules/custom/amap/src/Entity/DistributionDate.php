@@ -553,6 +553,26 @@ class DistributionDate extends ContentEntityBase implements DistributionDateInte
       ->setDisplayConfigurable('view', TRUE);
 // ----------------------------------------------------------------------------
     $weight++;
+    $fields['product21'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Product 21'))
+      ->setDefaultValue(FALSE)
+      ->setDisplayOptions('view', array(
+        'settings' => [
+          'format' => 'yes-no',
+        ],
+        'weight' => $weight,
+      ))
+      ->setDisplayOptions('form', array(
+        'settings' => [
+          'display_label' => TRUE,
+        ],
+        'type' => 'boolean_checkbox',
+        'weight' => $weight,
+      ))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+// ----------------------------------------------------------------------------
+    $weight++;
     $fields['numberofproducts'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Number of products'))
       ->setReadOnly(TRUE);

@@ -23,6 +23,7 @@ function amap_distribution_products()
     18 => 'Agneau',
     19 => 'Cidre',
     20 => 'Herbier',
+    21 => 'Cerises',
   ];
   return $values;
 }
