@@ -3,7 +3,7 @@
 use Drupal\Core\Field\BaseFieldDefinition;
 
 /**
- * Implements hook_update_N() on Module AMAP.
+ * Update definition of 'formheader' and 'exportheader' in 'ContractType' entity
  */
 function amap_update_8001(&$sandbox) {
   $entity_type_manager = \Drupal::entityTypeManager();
@@ -93,7 +93,7 @@ function amap_update_8001(&$sandbox) {
 }
 
 /**
- * Adds fields 'Quantity 29' to 'Quantity 36' to ContractSubscription
+ * Add fields 'Quantity 29' to 'Quantity 36' to 'ContractSubscription'
  */
 function amap_update_9001(&$sandbox) {
   $entity_type_manager = \Drupal::entityTypeManager();
@@ -258,7 +258,7 @@ function amap_update_9001(&$sandbox) {
 }
 
 /**
- * Add entity Basket
+ * Add entity 'Basket'
  */
 function amap_update_10001(&$sandbox) {
 
@@ -276,3 +276,46 @@ function amap_update_10001(&$sandbox) {
     ->addMessage('Module AMAP Update # 10001 was executed successfully: Entity « Basket » has been created.');
 
 }
+
+/**
+ * Add field 'product21' to 'DistributionDate'
+ */
+function amap_update_11001(&$sandbox) {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $bundle_of = 'distribution_date';
+  $definition_manager = \Drupal::entityDefinitionUpdateManager();
+
+  //Create new fields definition.
+  // ----------------------------------------------------------------------------
+  $weight = 21;
+  // ----------------------------------------------------------------------------
+  $product21 = BaseFieldDefinition::create('boolean')
+    ->setLabel(t('Product 21'))
+      ->setDefaultValue(FALSE)
+      ->setDisplayOptions('view', array(
+        'settings' => [
+          'format' => 'yes-no',
+        ],
+        'weight' => $weight,
+      ))
+      ->setDisplayOptions('form', array(
+        'settings' => [
+          'display_label' => TRUE,
+        ],
+        'type' => 'boolean_checkbox',
+        'weight' => $weight,
+      ))
+    ->setDisplayConfigurable('form', TRUE)
+    ->setDisplayConfigurable('view', TRUE);
+  // ----------------------------------------------------------------------------
+
+  //Install the new definitions.
+  $definition_manager->installFieldStorageDefinition('product21', $bundle_of, $bundle_of, $product21);
+
+  drupal_flush_all_caches();
+
+  \Drupal::messenger()
+    ->addMessage('Module AMAP Update # 11001 was executed successfully.');
+
+}
+
