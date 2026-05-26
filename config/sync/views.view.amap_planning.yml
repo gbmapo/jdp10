@@ -888,6 +888,7 @@ display:
           1: AND
       defaults:
         title: false
+        use_ajax: false
         group_by: false
         relationships: false
         fields: false
@@ -929,6 +930,7 @@ display:
           entity_field: member_id
           plugin_id: standard
           required: false
+      use_ajax: true
       group_by: true
       display_description: ''
       header:
