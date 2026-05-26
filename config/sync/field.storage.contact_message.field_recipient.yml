@@ -36,7 +36,7 @@ settings:
       value: '305'
       label: '2. AMAP Farine et Huile'
     -
-      value: '274'
+      value: '311'
       label: '2. AMAP Fruits rouges'
     -
       value: '297'
@@ -58,9 +58,6 @@ settings:
       label: '2. AMAP Pain'
     -
       value: '310'
-      label: '2. AMAP Pommes de terre'
-    -
-      value: '298'
       label: '2. AMAP Pommes de terre'
     -
       value: '286'
